@@ -11,12 +11,13 @@ playing = True  # sprawdzanie, czy pilka nadal w grze
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, type):
         self.name = name
+        self.type = type
         self.points = 0
-        self.playing = True
+        self.playing = True  # sprawdzenie czy gracz uczestniczy w rundzie
 
-    def start_round(self, deck):
+    def start_round(self, deck):  # dobranie reki na start rundy
         self.hand = Hand()
         self.hand.add_card(deck.deal())
         self.hand.add_card(deck.deal())
@@ -105,17 +106,62 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
     global playing
 
     while True:
-        ask = input("Would you like to hit or stand? Please enter 'h' or 's': ")
+        if player.type == "player":
+            ask = input("Would you like to hit or stand? Please enter 'h' or 's': ")
 
-        if ask[0].lower() == 'h':
-            hit(deck, player.hand)
-        elif ask[0].lower() == 's':
-            print("Player stands, Dealer is playing.")
-            player.playing = False
-        else:
-            print("Sorry, I didn't understand that, please try again!")
-            continue
-        break
+            if ask[0].lower() == 'h':
+                hit(deck, player.hand)
+            elif ask[0].lower() == 's':
+                print("Player stands.")
+                player.playing = False
+            else:
+                print("Sorry, I didn't understand that, please try again!")
+                continue
+            break
+
+        if player.type == "ceasy":  # easy (losowe decyzje)
+            ask = bool(random.getrandbits(1))
+            if ask is True:
+                print(player.name + " hits.")
+                hit(deck, player.hand)
+
+            else:
+                print(player.name + " stands.")
+                player.playing = False
+
+            break
+
+        if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
+            if player.hand.value <= 17:
+                print(player.name + " hits.")
+                hit(deck, player.hand)
+
+            else:
+                print(player.name + " stands.")
+                player.playing = False
+
+            break
+
+        if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
+            if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
+                if deck.deck[len(deck.deck) - 1].rank == 'Ace':
+                    if player.hand.value + 1 <= 21:
+                        print(player.name + " hits.")
+                        hit(deck, player.hand)
+
+                    else:
+                        print(player.name + " stands.")
+                        player.playing = False
+
+                else:
+                    print(player.name + " stands.")
+                    player.playing = False
+
+            else:
+                print(player.name + " hits.")
+                hit(deck, player.hand)
+
+            break
 
 
 # def show_some(player, dealer):
@@ -157,7 +203,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
 #     print("It's a push! Dealer and Player tie!")
 
 
-def check_if_round_over(players):
+def check_if_round_over(players):  # sprawdzenie czy wszyscy gracze skonczyli runde
     playing_round = False
 
     for player in players:
@@ -168,10 +214,10 @@ def check_if_round_over(players):
     return playing_round
 
 
-def add_points(players):
+def add_points(players):  # dodawanie punktow po rundzie
     players_max = []
     for player in players:
-        if player.hand.value > 21:
+        if player.hand.value > 21:  # sprawdzenie czy gracz nie spalil reki
             pass
 
         elif len(players_max) == 0 or player.hand.value == players_max[0].hand.value:
@@ -191,65 +237,73 @@ deck.shuffle_cards()
 
 number_of_players = 4
 
-player1 = Player("siema1")
-player2 = Player("siema2")
-player3 = Player("siema3")
-player4 = Player("siema4")
+player1 = Player("siema1", "player")     # gracz
+player2 = Player("siema2", "ceasy")      # komputer latwy
+player3 = Player("siema3", "cmedium")    # komputer sredni
+player4 = Player("siema4", "chard")      # komputer trudny
 
 players = [player1, player2, player3, player4]
 
 while len(deck.deck) > number_of_players * 2:
-    print("Welcome to Blackjack!")
-    playing_round = True
+    if playing:
+        print("Welcome to Blackjack!")
+        playing_round = True
 
-    player1.start_round(deck)
-    player2.start_round(deck)
-    player3.start_round(deck)
-    player4.start_round(deck)
+        player1.start_round(deck)
+        player2.start_round(deck)
+        player3.start_round(deck)
+        player4.start_round(deck)
 
-    while playing_round:
-        for player in players:
-            print("Playing: " + player.name + " value: " + str(player.hand.value))
-            if player.playing is True:
-                hit_or_stand(deck, player)
-                print(player.hand.value)
+        while playing_round:  # round loop
+            for player in players:
+                print("Playing: " + player.name + " value: " + str(player.hand.value))
+                if player.playing is True:
+                    hit_or_stand(deck, player)
+                    print("value: " + str(player.hand.value))
+                    if len(deck.deck) == 0:
+                        playing = False
+                        playing_round = False
+                        break
 
-        playing_round = check_if_round_over(players)
+            playing_round = check_if_round_over(players)
 
-    add_points(players)
+        add_points(players)
 
-    # player_hand = Hand()
-    # player_hand.add_card(deck.deal())
-    # player_hand.add_card(deck.deal())
+    else:
+        break
 
-    # dealer_hand = Hand()
-    # dealer_hand.add_card(deck.deal())
-    # dealer_hand.add_card(deck.deal())
+        # player_hand = Hand()
+        # player_hand.add_card(deck.deal())
+        # player_hand.add_card(deck.deal())
 
-    # if player_hand.value <= 21:
-    #     while dealer_hand.value < 17:
-    #         hit(deck, dealer_hand)
+        # dealer_hand = Hand()
+        # dealer_hand.add_card(deck.deal())
+        # dealer_hand.add_card(deck.deal())
 
-    #     show_all(player_hand, dealer_hand)
+        # if player_hand.value <= 21:
+        #     while dealer_hand.value < 17:
+        #         hit(deck, dealer_hand)
 
-    #     if dealer_hand.value > 21:
-    #         dealer_busts(player_hand, dealer_hand, player_chips)
+        #     show_all(player_hand, dealer_hand)
 
-    #     elif dealer_hand.value > player_hand.value:
-    #         dealer_wins(player_hand, dealer_hand, player_chips)
+        #     if dealer_hand.value > 21:
+        #         dealer_busts(player_hand, dealer_hand, player_chips)
 
-    #     elif dealer_hand.value < player_hand.value:
-    #         player_wins(player_hand, dealer_hand, player_chips)
+        #     elif dealer_hand.value > player_hand.value:
+        #         dealer_wins(player_hand, dealer_hand, player_chips)
 
-    #     elif player_hand.value > 21:
-    #         player_busts(player_hand, dealer_hand, player_chips)
+        #     elif dealer_hand.value < player_hand.value:
+        #         player_wins(player_hand, dealer_hand, player_chips)
 
-    # print("\nPlayer's winnings stand at: ", player_chips.total)
+        #     elif player_hand.value > 21:
+        #         player_busts(player_hand, dealer_hand, player_chips)
 
-    # new_game = input("Would you like to play again? Enter 'y' or 'n': ")
-    # if new_game[0].lower() == 'y':
-    #     playing = True
-    #     continue
-    # else:
-    #     print("Thanks for playing")
-    #     break
+        # print("\nPlayer's winnings stand at: ", player_chips.total)
+
+        # new_game = input("Would you like to play again? Enter 'y' or 'n': ")
+        # if new_game[0].lower() == 'y':
+        #     playing = True
+        #     continue
+        # else:
+        #     print("Thanks for playing")
+        #     break
