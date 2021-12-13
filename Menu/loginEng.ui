@@ -67,7 +67,6 @@ border-radius:10px;
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei</family>
      <pointsize>25</pointsize>
      <bold>false</bold>
     </font>
@@ -141,7 +140,7 @@ padding-bottom: 7px;</string>
     <string>PASSWORD</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="loginButton">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -214,7 +213,6 @@ QPushButton#pushButton:hover{
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
      <underline>true</underline>
     </font>
    </property>
@@ -249,6 +247,22 @@ color: rgb(48, 94, 66);</string>
    </property>
    <property name="text">
     <string>x</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>322</x>
+     <y>95</y>
+     <width>14</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { background-color: transparent; border: 0px };</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -1,5 +1,22 @@
 <RCC>
   <qresource prefix="images">
+    <file>computerFourInactive.png</file>
+    <file>computerOneInactive.png</file>
+    <file>computerThreeInactive.png</file>
+    <file>computerTwoInactive.png</file>
+    <file>playerFourInactive.png</file>
+    <file>playerOneInactive.png</file>
+    <file>playerThreeInactive.png</file>
+    <file>playerTwoInactive.png</file>
+    <file>registerButtonInactive.png</file>
+    <file>logInInactive.png</file>
+    <file>registerButtonInactive.png</file>
+    <file>easyTimingInactive.png</file>
+    <file>hardTimingInactive.png</file>
+    <file>mediumTimingInactive.png</file>
+    <file>easyInactive.png</file>
+    <file>hardInactive.png</file>
+    <file>mediumInactive.png</file>
     <file>hardTiming.png</file>
     <file>mediumTiming.png</file>
     <file>easyTiming.png</file>

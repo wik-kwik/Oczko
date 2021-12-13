@@ -13,6 +13,11 @@ import menu, res, playUsers
 
 
 class playOptionsForm(object):
+    def __init__(self):
+            self.playersNumber = 0
+            self.computersNumber = 0
+            self.betting = 0
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(740, 769)
@@ -203,17 +208,12 @@ class playOptionsForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-    def userSettings(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playUsers.usersForm()
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-
     # Paraolimpiada estetyczna - wygaszanie nieużytych opcji
 
 
     def zeroPlayers(self):
+            self.playersNumber = 0
+            print(self.playersNumber)
             self.zeroPlayersButton.setStyleSheet("image: url(:/images/zero.png);")
             self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
             self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
@@ -221,6 +221,7 @@ class playOptionsForm(object):
             self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def onePlayer(self):
+            self.playersNumber = 1
             self.onePlayerButton.setStyleSheet("image: url(:/images/one.png);")
             self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
@@ -228,6 +229,7 @@ class playOptionsForm(object):
             self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def twoPlayers(self):
+            self.playersNumber = 2
             self.twoPlayersButton.setStyleSheet("image: url(:/images/two.png);")
             self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -235,6 +237,7 @@ class playOptionsForm(object):
             self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def threePlayers(self):
+            self.playersNumber = 3
             self.threePlayersButton.setStyleSheet("image: url(:/images/three.png);")
             self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -242,6 +245,7 @@ class playOptionsForm(object):
             self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def fourPlayers(self):
+            self.playersNumber = 4
             self.fourPlayersButton.setStyleSheet("image: url(:/images/four.png);")
             self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -249,6 +253,7 @@ class playOptionsForm(object):
             self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
 
     def zeroComputers(self):
+            self.computersNumber = 0
             self.zeroComputersButton.setStyleSheet("image: url(:/images/zero.png);")
             self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
             self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
@@ -256,6 +261,7 @@ class playOptionsForm(object):
             self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def oneComputer(self):
+            self.computersNumber = 1
             self.oneComputerButton.setStyleSheet("image: url(:/images/one.png);")
             self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
@@ -263,6 +269,7 @@ class playOptionsForm(object):
             self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def twoComputers(self):
+            self.computersNumber = 2
             self.twoComputersButton.setStyleSheet("image: url(:/images/two.png);")
             self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -270,6 +277,7 @@ class playOptionsForm(object):
             self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def threeComputers(self):
+            self.computersNumber = 3
             self.threeComputersButton.setStyleSheet("image: url(:/images/three.png);")
             self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -277,6 +285,7 @@ class playOptionsForm(object):
             self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def fourComputers(self):
+            self.computersNumber = 4
             self.fourComputersButton.setStyleSheet("image: url(:/images/four.png);")
             self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
             self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
@@ -291,4 +300,9 @@ class playOptionsForm(object):
             self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
 
+    def userSettings(self):
+            self.window = QtWidgets.QMainWindow()
+            self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+            self.ui.setupUi(self.window)
+            self.window.show()
 

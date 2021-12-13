@@ -9,6 +9,7 @@ class MyWindow(QtWidgets.QMainWindow, menu.menuForm):
         super(MyWindow, self).__init__()
         self.setupUi(self)
 
+
     def close_window(self):
         self.close()
 

@@ -11,7 +11,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, loginEng, registerEng
 
+
 class usersForm(object):
+    def __init__(self, playersNumber, computersNumber, betting):
+        self.playersNumber = playersNumber
+        self.computersNumber = computersNumber
+        self.betting = betting
+        self.computerOneLevel = 0
+        self.computerTwoLevel = 0
+        self.computerThreeLevel = 0
+        self.computerFourLevel = 0
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(530, 732)
@@ -35,8 +45,8 @@ class usersForm(object):
         self.backgroundDark = QtWidgets.QLabel(Form)
         self.backgroundDark.setGeometry(QtCore.QRect(40, 20, 431, 671))
         self.backgroundDark.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
-"border-radius:10px;\n"
-"")
+                                          "border-radius:10px;\n"
+                                          "")
         self.backgroundDark.setText("")
         self.backgroundDark.setObjectName("backgroundDark")
         self.difficultyLabel = QtWidgets.QLabel(Form)
@@ -77,31 +87,31 @@ class usersForm(object):
         self.easyGameButton = QtWidgets.QPushButton(Form)
         self.easyGameButton.setGeometry(QtCore.QRect(70, 81, 91, 51))
         self.easyGameButton.setStyleSheet("image: url(:/images/easy.png);\n"
-"border: 0px;")
+                                          "border: 0px;")
         self.easyGameButton.setText("")
         self.easyGameButton.setObjectName("easyGameButton")
         self.mediumGameButton = QtWidgets.QPushButton(Form)
         self.mediumGameButton.setGeometry(QtCore.QRect(193, 84, 121, 45))
         self.mediumGameButton.setStyleSheet("image: url(:/images/medium.png);\n"
-"border: 0px;")
+                                            "border: 0px;")
         self.mediumGameButton.setText("")
         self.mediumGameButton.setObjectName("mediumGameButton")
         self.hardGameButton = QtWidgets.QPushButton(Form)
         self.hardGameButton.setGeometry(QtCore.QRect(343, 81, 91, 51))
         self.hardGameButton.setStyleSheet("image: url(:/images/hard.png);\n"
-"border: 0px;")
+                                          "border: 0px;")
         self.hardGameButton.setText("")
         self.hardGameButton.setObjectName("hardGameButton")
         self.playerOneLogin = QtWidgets.QPushButton(Form)
         self.playerOneLogin.setGeometry(QtCore.QRect(110, 221, 121, 31))
         self.playerOneLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
-"border: 0px;")
+                                          "border: 0px;")
         self.playerOneLogin.setText("")
         self.playerOneLogin.setObjectName("playerOneLogin")
         self.playerOneRegister = QtWidgets.QPushButton(Form)
         self.playerOneRegister.setGeometry(QtCore.QRect(120, 261, 101, 31))
         self.playerOneRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
-"border: 0px;")
+                                             "border: 0px;")
         self.playerOneRegister.setText("")
         self.playerOneRegister.setObjectName("playerOneRegister")
         self.compTwoLabel = QtWidgets.QLabel(Form)
@@ -134,112 +144,112 @@ class usersForm(object):
         self.hardLabel.setStyleSheet("image: url(:/images/hardTiming.png);")
         self.hardLabel.setText("")
         self.hardLabel.setObjectName("hardLabel")
-        self.easyCompOneButton = QtWidgets.QPushButton(Form)
-        self.easyCompOneButton.setGeometry(QtCore.QRect(65, 481, 51, 31))
-        self.easyCompOneButton.setStyleSheet("image: url(:/images/easy.png);\n"
-"border: 0px;")
-        self.easyCompOneButton.setText("")
-        self.easyCompOneButton.setObjectName("easyCompOneButton")
-        self.mediumCompOneButton = QtWidgets.QPushButton(Form)
-        self.mediumCompOneButton.setGeometry(QtCore.QRect(123, 481, 61, 31))
-        self.mediumCompOneButton.setStyleSheet("image: url(:/images/medium.png);\n"
-"border: 0px;")
-        self.mediumCompOneButton.setText("")
-        self.mediumCompOneButton.setObjectName("mediumCompOneButton")
-        self.hardCompOneButton = QtWidgets.QPushButton(Form)
-        self.hardCompOneButton.setGeometry(QtCore.QRect(190, 481, 51, 31))
-        self.hardCompOneButton.setStyleSheet("image: url(:/images/hard.png);\n"
-"border: 0px;")
-        self.hardCompOneButton.setText("")
-        self.hardCompOneButton.setObjectName("hardCompOneButton")
+        self.compOneEasyButton = QtWidgets.QPushButton(Form)
+        self.compOneEasyButton.setGeometry(QtCore.QRect(65, 481, 51, 31))
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compOneEasyButton.setText("")
+        self.compOneEasyButton.setObjectName("compOneEasyButton")
+        self.compOneMediumButton = QtWidgets.QPushButton(Form)
+        self.compOneMediumButton.setGeometry(QtCore.QRect(123, 481, 61, 31))
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compOneMediumButton.setText("")
+        self.compOneMediumButton.setObjectName("compOneMediumButton")
+        self.compOneHardButton = QtWidgets.QPushButton(Form)
+        self.compOneHardButton.setGeometry(QtCore.QRect(190, 481, 51, 31))
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compOneHardButton.setText("")
+        self.compOneHardButton.setObjectName("compOneHardButton")
         self.playerTwoLogin = QtWidgets.QPushButton(Form)
         self.playerTwoLogin.setGeometry(QtCore.QRect(290, 221, 121, 31))
         self.playerTwoLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
-"border: 0px;")
+                                          "border: 0px;")
         self.playerTwoLogin.setText("")
         self.playerTwoLogin.setObjectName("playerTwoLogin")
         self.playerTwoRegister = QtWidgets.QPushButton(Form)
         self.playerTwoRegister.setGeometry(QtCore.QRect(300, 261, 101, 31))
         self.playerTwoRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
-"border: 0px;")
+                                             "border: 0px;")
         self.playerTwoRegister.setText("")
         self.playerTwoRegister.setObjectName("playerTwoRegister")
         self.playerThreeRegister = QtWidgets.QPushButton(Form)
         self.playerThreeRegister.setGeometry(QtCore.QRect(120, 381, 101, 31))
         self.playerThreeRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
-"border: 0px;")
+                                               "border: 0px;")
         self.playerThreeRegister.setText("")
         self.playerThreeRegister.setObjectName("playerThreeRegister")
         self.playerThreeLogin = QtWidgets.QPushButton(Form)
         self.playerThreeLogin.setGeometry(QtCore.QRect(110, 341, 121, 31))
         self.playerThreeLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
-"border: 0px;")
+                                            "border: 0px;")
         self.playerThreeLogin.setText("")
         self.playerThreeLogin.setObjectName("playerThreeLogin")
         self.playerFourRegister = QtWidgets.QPushButton(Form)
         self.playerFourRegister.setGeometry(QtCore.QRect(300, 381, 101, 31))
         self.playerFourRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
-"border: 0px;")
+                                              "border: 0px;")
         self.playerFourRegister.setText("")
         self.playerFourRegister.setObjectName("playerFourRegister")
         self.playerFourLogin = QtWidgets.QPushButton(Form)
         self.playerFourLogin.setGeometry(QtCore.QRect(290, 341, 121, 31))
         self.playerFourLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
-"border: 0px;")
+                                           "border: 0px;")
         self.playerFourLogin.setText("")
         self.playerFourLogin.setObjectName("playerFourLogin")
-        self.mediumCompTwoButton = QtWidgets.QPushButton(Form)
-        self.mediumCompTwoButton.setGeometry(QtCore.QRect(333, 481, 61, 31))
-        self.mediumCompTwoButton.setStyleSheet("image: url(:/images/medium.png);\n"
-"border: 0px;")
-        self.mediumCompTwoButton.setText("")
-        self.mediumCompTwoButton.setObjectName("mediumCompTwoButton")
-        self.hardCompTwoButton = QtWidgets.QPushButton(Form)
-        self.hardCompTwoButton.setGeometry(QtCore.QRect(400, 481, 51, 31))
-        self.hardCompTwoButton.setStyleSheet("image: url(:/images/hard.png);\n"
-"border: 0px;")
-        self.hardCompTwoButton.setText("")
-        self.hardCompTwoButton.setObjectName("hardCompTwoButton")
-        self.easyCompTwoButton = QtWidgets.QPushButton(Form)
-        self.easyCompTwoButton.setGeometry(QtCore.QRect(275, 481, 51, 31))
-        self.easyCompTwoButton.setStyleSheet("image: url(:/images/easy.png);\n"
-"border: 0px;")
-        self.easyCompTwoButton.setText("")
-        self.easyCompTwoButton.setObjectName("easyCompTwoButton")
+        self.compTwoMediumButton = QtWidgets.QPushButton(Form)
+        self.compTwoMediumButton.setGeometry(QtCore.QRect(333, 481, 61, 31))
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compTwoMediumButton.setText("")
+        self.compTwoMediumButton.setObjectName("compTwoMediumButton")
+        self.compTwoHardButton = QtWidgets.QPushButton(Form)
+        self.compTwoHardButton.setGeometry(QtCore.QRect(400, 481, 51, 31))
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compTwoHardButton.setText("")
+        self.compTwoHardButton.setObjectName("compTwoHardButton")
+        self.compTwoEasyButton = QtWidgets.QPushButton(Form)
+        self.compTwoEasyButton.setGeometry(QtCore.QRect(275, 481, 51, 31))
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compTwoEasyButton.setText("")
+        self.compTwoEasyButton.setObjectName("compTwoEasyButton")
         self.compThreeMediumButton = QtWidgets.QPushButton(Form)
         self.compThreeMediumButton.setGeometry(QtCore.QRect(118, 571, 61, 31))
         self.compThreeMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
-"border: 0px;")
+                                                 "border: 0px;")
         self.compThreeMediumButton.setText("")
         self.compThreeMediumButton.setObjectName("compThreeMediumButton")
         self.compThreeHardButton = QtWidgets.QPushButton(Form)
         self.compThreeHardButton.setGeometry(QtCore.QRect(185, 571, 51, 31))
         self.compThreeHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
-"border: 0px;")
+                                               "border: 0px;")
         self.compThreeHardButton.setText("")
         self.compThreeHardButton.setObjectName("compThreeHardButton")
-        self.easyCompThreeButton = QtWidgets.QPushButton(Form)
-        self.easyCompThreeButton.setGeometry(QtCore.QRect(60, 571, 51, 31))
-        self.easyCompThreeButton.setStyleSheet("image: url(:/images/easy.png);\n"
-"border: 0px;")
-        self.easyCompThreeButton.setText("")
-        self.easyCompThreeButton.setObjectName("easyCompThreeButton")
+        self.compThreeEasyButton = QtWidgets.QPushButton(Form)
+        self.compThreeEasyButton.setGeometry(QtCore.QRect(60, 571, 51, 31))
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                               "border: 0px;")
+        self.compThreeEasyButton.setText("")
+        self.compThreeEasyButton.setObjectName("compThreeEasyButton")
         self.compFourHardButton = QtWidgets.QPushButton(Form)
         self.compFourHardButton.setGeometry(QtCore.QRect(397, 571, 51, 31))
         self.compFourHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
-"border: 0px;")
+                                              "border: 0px;")
         self.compFourHardButton.setText("")
         self.compFourHardButton.setObjectName("compFourHardButton")
         self.compFourEasyButton = QtWidgets.QPushButton(Form)
         self.compFourEasyButton.setGeometry(QtCore.QRect(272, 571, 51, 31))
         self.compFourEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
-"border: 0px;")
+                                              "border: 0px;")
         self.compFourEasyButton.setText("")
         self.compFourEasyButton.setObjectName("compFourEasyButton")
         self.compFourMediumButton = QtWidgets.QPushButton(Form)
         self.compFourMediumButton.setGeometry(QtCore.QRect(330, 571, 61, 31))
         self.compFourMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
-"border: 0px;")
+                                                "border: 0px;")
         self.compFourMediumButton.setText("")
         self.compFourMediumButton.setObjectName("compFourMediumButton")
         self.nextIcon = QtWidgets.QLabel(Form)
@@ -252,6 +262,27 @@ class usersForm(object):
         self.nextButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.nextButton.setText("")
         self.nextButton.setObjectName("nextButton")
+        self.playerOneNickname = QtWidgets.QLabel(Form)
+        self.playerOneNickname.setGeometry(QtCore.QRect(96, 220, 151, 31))
+        self.playerOneNickname.setText("")
+        self.playerOneNickname.setAlignment(QtCore.Qt.AlignCenter)
+        self.playerOneNickname.setObjectName("playerOneNickname")
+        self.playerTwoNickname = QtWidgets.QLabel(Form)
+        self.playerTwoNickname.setGeometry(QtCore.QRect(274, 220, 151, 31))
+        self.playerTwoNickname.setText("")
+        self.playerTwoNickname.setAlignment(QtCore.Qt.AlignCenter)
+        self.playerTwoNickname.setObjectName("playerTwoNickname")
+        self.playerThreeNickname = QtWidgets.QLabel(Form)
+        self.playerThreeNickname.setGeometry(QtCore.QRect(96, 341, 151, 31))
+        self.playerThreeNickname.setText("")
+        self.playerThreeNickname.setAlignment(QtCore.Qt.AlignCenter)
+        self.playerThreeNickname.setObjectName("playerThreeNickname")
+        self.playerFourNickname = QtWidgets.QLabel(Form)
+        self.playerFourNickname.setGeometry(QtCore.QRect(274, 341, 151, 31))
+        self.playerFourNickname.setStyleSheet("color: rgb(255, 85, 0);")
+        self.playerFourNickname.setText("")
+        self.playerFourNickname.setAlignment(QtCore.Qt.AlignCenter)
+        self.playerFourNickname.setObjectName("playerFourNickname")
         self.background.raise_()
         self.backgroundDark.raise_()
         self.difficultyLabel.raise_()
@@ -273,44 +304,73 @@ class usersForm(object):
         self.easyLabel.raise_()
         self.mediumLabel.raise_()
         self.hardLabel.raise_()
-        self.easyCompOneButton.raise_()
-        self.mediumCompOneButton.raise_()
-        self.hardCompOneButton.raise_()
+        self.compOneEasyButton.raise_()
+        self.compOneMediumButton.raise_()
+        self.compOneHardButton.raise_()
         self.playerTwoLogin.raise_()
         self.playerTwoRegister.raise_()
         self.playerThreeRegister.raise_()
         self.playerThreeLogin.raise_()
         self.playerFourRegister.raise_()
         self.playerFourLogin.raise_()
-        self.mediumCompTwoButton.raise_()
-        self.hardCompTwoButton.raise_()
-        self.easyCompTwoButton.raise_()
+        self.compTwoMediumButton.raise_()
+        self.compTwoHardButton.raise_()
+        self.compTwoEasyButton.raise_()
         self.compThreeMediumButton.raise_()
         self.compThreeHardButton.raise_()
-        self.easyCompThreeButton.raise_()
+        self.compThreeEasyButton.raise_()
         self.compFourHardButton.raise_()
         self.compFourEasyButton.raise_()
         self.compFourMediumButton.raise_()
         self.nextIcon.raise_()
         self.nextButton.raise_()
         self.returnButton.raise_()
+        self.playerOneNickname.raise_()
+        self.playerTwoNickname.raise_()
+        self.playerThreeNickname.raise_()
+        self.playerFourNickname.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+
+        if self.playersNumber == 0:
+            self.zeroPlayers()
+        if self.playersNumber == 1:
+            self.onePlayer()
+        if self.playersNumber == 2:
+            self.twoPlayers()
+        if self.playersNumber == 3:
+            self.threePlayers()
+        if self.playersNumber == 4:
+            self.fourPlayers()
+        if self.computersNumber == 0:
+            self.zeroComputers()
+        if self.computersNumber == 1:
+            self.oneComputer()
+        if self.computersNumber == 2:
+            self.twoComputers()
+        if self.computersNumber == 3:
+            self.threeComputers()
+        if self.computersNumber == 4:
+            self.fourComputers()
 
         # Obsługa przycisków
         self.returnButton.clicked.connect(self.returnToOptions)
         self.returnButton.clicked.connect(Form.close)
 
-        self.playerOneLogin.clicked.connect(self.show_login)
-        self.playerTwoLogin.clicked.connect(self.show_login)
-        self.playerThreeLogin.clicked.connect(self.show_login)
-        self.playerFourLogin.clicked.connect(self.show_login)
+        self.easyGameButton.clicked.connect(self.easyLevel)
+        self.mediumGameButton.clicked.connect(self.mediumLevel)
+        self.hardGameButton.clicked.connect(self.hardLevel)
 
-        self.playerOneRegister.clicked.connect(self.show_register)
-        self.playerTwoRegister.clicked.connect(self.show_register)
-        self.playerThreeRegister.clicked.connect(self.show_register)
-        self.playerFourRegister.clicked.connect(self.show_register)
+        # self.playerOneLogin.clicked.connect(self.show_login)
+        # self.playerTwoLogin.clicked.connect(self.show_login)
+        # self.playerThreeLogin.clicked.connect(self.show_login)
+        # self.playerFourLogin.clicked.connect(self.show_login)
+
+        # self.playerOneRegister.clicked.connect(self.show_register)
+        # self.playerTwoRegister.clicked.connect(self.show_register)
+        # self.playerThreeRegister.clicked.connect(self.show_register)
+        # self.playerFourRegister.clicked.connect(self.show_register)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -322,19 +382,266 @@ class usersForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
+    def zeroPlayers(self):
+        self.playerOneLabel.setStyleSheet("image: url(:/images/playerOneInactive.png);")
+        self.playerTwoLabel.setStyleSheet("image: url(:/images/playerTwoInactive.png);")
+        self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
+        self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
+        self.playerOneLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                          "border: 0px;")
+        self.playerOneRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                             "border: 0px;")
+        self.playerTwoLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                          "border: 0px;")
+        self.playerTwoRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                             "border: 0px;")
+        self.playerThreeLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                            "border: 0px;")
+        self.playerThreeRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                               "border: 0px;")
+        self.playerFourLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                           "border: 0px;")
+        self.playerFourRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                              "border: 0px;")
+
+    def onePlayer(self):
+        self.playerOneLogin.clicked.connect(self.show_login)
+        self.playerOneRegister.clicked.connect(self.show_register)
+
+        self.playerTwoLabel.setStyleSheet("image: url(:/images/playerTwoInactive.png);")
+        self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
+        self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
+
+        self.playerTwoLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                          "border: 0px;")
+        self.playerTwoRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                             "border: 0px;")
+        self.playerThreeLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                            "border: 0px;")
+        self.playerThreeRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                               "border: 0px;")
+        self.playerFourLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                           "border: 0px;")
+        self.playerFourRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                              "border: 0px;")
+
+    def twoPlayers(self):
+        self.playerOneLogin.clicked.connect(self.show_login)
+        self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.show_login)
+        self.playerTwoRegister.clicked.connect(self.show_register)
+
+        self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
+        self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
+
+        self.playerThreeLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                            "border: 0px;")
+        self.playerThreeRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                               "border: 0px;")
+        self.playerFourLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                           "border: 0px;")
+        self.playerFourRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                              "border: 0px;")
+
+    def threePlayers(self):
+        self.playerOneLogin.clicked.connect(self.show_login)
+        self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.show_login)
+        self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerThreeLogin.clicked.connect(self.show_login)
+        self.playerThreeRegister.clicked.connect(self.show_register)
+
+        self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
+
+        self.playerFourLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
+                                           "border: 0px;")
+        self.playerFourRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
+                                              "border: 0px;")
+
+    def fourPlayers(self):
+        self.playerOneLogin.clicked.connect(self.show_login)
+        self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.show_login)
+        self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerThreeLogin.clicked.connect(self.show_login)
+        self.playerThreeRegister.clicked.connect(self.show_register)
+        self.playerFourLogin.clicked.connect(self.show_login)
+        self.playerFourRegister.clicked.connect(self.show_register)
+
+    def zeroComputers(self):
+        self.compOneLabel.setStyleSheet("image: url(:/images/computerOneInactive.png);")
+        self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwoInactive.png);")
+        self.compThreeLabel.setStyleSheet("image: url(:/images/computerThreeInactive.png);")
+        self.compFourLabel.setStyleSheet("image: url(:/images/computerFourInactive.png);")
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                 "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def oneComputer(self):
+        # self.compOneEasyButton.clicked.connect(self.computerOneLevel=1) NIE DA SIĘ TAK:(
+
+        self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
+        self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwoInactive.png);")
+        self.compThreeLabel.setStyleSheet("image: url(:/images/computerThreeInactive.png);")
+        self.compFourLabel.setStyleSheet("image: url(:/images/computerFourInactive.png);")
+
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                 "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def twoComputers(self):
+        self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
+        self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwo.png);")
+        self.compThreeLabel.setStyleSheet("image: url(:/images/computerThreeInactive.png);")
+        self.compFourLabel.setStyleSheet("image: url(:/images/computerFourInactive.png);")
+
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                 "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                               "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def threeComputers(self):
+        self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
+        self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwo.png);")
+        self.compThreeLabel.setStyleSheet("image: url(:/images/computerThree.png);")
+        self.compFourLabel.setStyleSheet("image: url(:/images/computerFourInactive.png);")
+
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                               "border: 0px;")
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                                 "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                               "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def fourComputers(self):
+        print('elo')
+
+
+    # Wygaszanie nieużywanych opcji
+    def easyLevel(self):
+        self.easyGameButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                          "border: 0px;")
+        self.easyLabel.setStyleSheet("image: url(:/images/easyTiming.png);")
+        self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactive.png);")
+        self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                            "border: 0px;")
+        self.hardLabel.setStyleSheet("image: url(:/images/hardTimingInactive.png);")
+        self.hardGameButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                          "border: 0px;")
+
+    def mediumLevel(self):
+        self.mediumGameButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                            "border: 0px;")
+        self.mediumLabel.setStyleSheet("image: url(:/images/mediumTiming.png);")
+        self.easyLabel.setStyleSheet("image: url(:/images/easyTimingInactive.png);")
+        self.easyGameButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                          "border: 0px;")
+        self.hardLabel.setStyleSheet("image: url(:/images/hardTimingInactive.png);")
+        self.hardGameButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                          "border: 0px;")
+
+    def hardLevel(self):
+        self.hardLabel.setStyleSheet("image: url(:/images/hardTiming.png);")
+        self.hardGameButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                          "border: 0px;")
+        self.easyLabel.setStyleSheet("image: url(:/images/easyTimingInactive.png);")
+        self.easyGameButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                          "border: 0px;")
+
+        self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactive.png);")
+        self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                            "border: 0px;")
+
     def show_login(self):
+        print('XD')
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.Ui_Form()
+        self.ui = loginEng.loginForm()
         self.ui.setupUi(self.window)
         self.window.show()
 
     def show_register(self):
-            self.window = QtWidgets.QMainWindow()
-            self.ui = registerEng.registerEngForm()
-            self.ui.setupUi(self.window)
-            self.window.show()
-
-    # def windowAdjustment(self):
-    #     if (playOptions.playerNumber==0):
-    #             print('')
+        self.window = QtWidgets.QMainWindow()
+        self.ui = registerEng.registerEngForm()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
