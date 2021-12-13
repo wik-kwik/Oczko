@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>warningType3.png</file>
     <file>warningType2.png</file>
     <file>computerFourInactive.png</file>
     <file>computerOneInactive.png</file>

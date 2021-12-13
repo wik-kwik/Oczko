@@ -47,6 +47,9 @@ class warningForm(object):
         if (self.warningType==2):
             self.warningText.setStyleSheet("image: url(:/images/warningType2.png);")
 
+        if (self.warningType==3):
+            self.warningText.setStyleSheet("image: url(:/images/warningType3.png);")
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
