@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import menu, res, playUsers
+import menu, res, playUsers, warning
 
 
 class playOptionsForm(object):
@@ -300,9 +300,19 @@ class playOptionsForm(object):
             self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
 
-    def userSettings(self):
+    def tooManyPlayers(self):
             self.window = QtWidgets.QMainWindow()
-            self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+            self.ui = warning.warningDialog()
             self.ui.setupUi(self.window)
             self.window.show()
+                # Jak się zamknie to wraca do opcji
+
+    def userSettings(self):
+            if (self.playersNumber + self.computersNumber > 4):
+                    self.tooManyPlayers()
+            else:
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+                    self.ui.setupUi(self.window)
+                    self.window.show()
 

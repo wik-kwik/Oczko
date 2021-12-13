@@ -17,6 +17,7 @@ class usersForm(object):
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
+        self.gameLevel = 0
         self.computerOneLevel = 0
         self.computerTwoLevel = 0
         self.computerThreeLevel = 0
@@ -102,18 +103,6 @@ class usersForm(object):
                                           "border: 0px;")
         self.hardGameButton.setText("")
         self.hardGameButton.setObjectName("hardGameButton")
-        self.playerOneLogin = QtWidgets.QPushButton(Form)
-        self.playerOneLogin.setGeometry(QtCore.QRect(110, 221, 121, 31))
-        self.playerOneLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
-                                          "border: 0px;")
-        self.playerOneLogin.setText("")
-        self.playerOneLogin.setObjectName("playerOneLogin")
-        self.playerOneRegister = QtWidgets.QPushButton(Form)
-        self.playerOneRegister.setGeometry(QtCore.QRect(120, 261, 101, 31))
-        self.playerOneRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
-                                             "border: 0px;")
-        self.playerOneRegister.setText("")
-        self.playerOneRegister.setObjectName("playerOneRegister")
         self.compTwoLabel = QtWidgets.QLabel(Form)
         self.compTwoLabel.setGeometry(QtCore.QRect(290, 451, 151, 31))
         self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwo.png);")
@@ -162,6 +151,20 @@ class usersForm(object):
                                              "border: 0px;")
         self.compOneHardButton.setText("")
         self.compOneHardButton.setObjectName("compOneHardButton")
+
+        self.playerOneLogin = QtWidgets.QPushButton(Form)
+        self.playerOneLogin.setGeometry(QtCore.QRect(110, 221, 121, 31))
+        self.playerOneLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
+                                          "border: 0px;")
+        self.playerOneLogin.setText("")
+        self.playerOneLogin.setObjectName("playerOneLogin")
+        self.playerOneRegister = QtWidgets.QPushButton(Form)
+        self.playerOneRegister.setGeometry(QtCore.QRect(120, 261, 101, 31))
+        self.playerOneRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
+                                             "border: 0px;")
+        self.playerOneRegister.setText("")
+        self.playerOneRegister.setObjectName("playerOneRegister")
+
         self.playerTwoLogin = QtWidgets.QPushButton(Form)
         self.playerTwoLogin.setGeometry(QtCore.QRect(290, 221, 121, 31))
         self.playerTwoLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
@@ -198,6 +201,7 @@ class usersForm(object):
                                            "border: 0px;")
         self.playerFourLogin.setText("")
         self.playerFourLogin.setObjectName("playerFourLogin")
+
         self.compTwoMediumButton = QtWidgets.QPushButton(Form)
         self.compTwoMediumButton.setGeometry(QtCore.QRect(333, 481, 61, 31))
         self.compTwoMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
@@ -387,6 +391,7 @@ class usersForm(object):
         self.playerTwoLabel.setStyleSheet("image: url(:/images/playerTwoInactive.png);")
         self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
         self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
+
         self.playerOneLogin.setStyleSheet("image: url(:/images/logInInactive.png);\n"
                                           "border: 0px;")
         self.playerOneRegister.setStyleSheet("image: url(:/images/registerButtonInactive.png);\n"
@@ -499,7 +504,9 @@ class usersForm(object):
                                               "border: 0px;")
 
     def oneComputer(self):
-        # self.compOneEasyButton.clicked.connect(self.computerOneLevel=1) NIE DA SIĘ TAK:(
+        self.compOneEasyButton.clicked.connect(self.compOneEasyLevel)
+        self.compOneMediumButton.clicked.connect(self.compOneMediumLevel)
+        self.compOneHardButton.clicked.connect(self.compOneHardLevel)
 
         self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
         self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwoInactive.png);")
@@ -532,6 +539,13 @@ class usersForm(object):
                                               "border: 0px;")
 
     def twoComputers(self):
+        self.compOneEasyButton.clicked.connect(self.compOneEasyLevel)
+        self.compOneMediumButton.clicked.connect(self.compOneMediumLevel)
+        self.compOneHardButton.clicked.connect(self.compOneHardLevel)
+        self.compTwoEasyButton.clicked.connect(self.compTwoEasyLevel)
+        self.compTwoMediumButton.clicked.connect(self.compTwoMediumLevel)
+        self.compTwoHardButton.clicked.connect(self.compTwoHardLevel)
+
         self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
         self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwo.png);")
         self.compThreeLabel.setStyleSheet("image: url(:/images/computerThreeInactive.png);")
@@ -563,6 +577,16 @@ class usersForm(object):
                                               "border: 0px;")
 
     def threeComputers(self):
+        self.compOneEasyButton.clicked.connect(self.compOneEasyLevel)
+        self.compOneMediumButton.clicked.connect(self.compOneMediumLevel)
+        self.compOneHardButton.clicked.connect(self.compOneHardLevel)
+        self.compTwoEasyButton.clicked.connect(self.compTwoEasyLevel)
+        self.compTwoMediumButton.clicked.connect(self.compTwoMediumLevel)
+        self.compTwoHardButton.clicked.connect(self.compTwoHardLevel)
+        self.compThreeEasyButton.clicked.connect(self.compThreeEasyLevel)
+        self.compThreeMediumButton.clicked.connect(self.compThreeMediumLevel)
+        self.compThreeHardButton.clicked.connect(self.compThreeHardLevel)
+
         self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
         self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwo.png);")
         self.compThreeLabel.setStyleSheet("image: url(:/images/computerThree.png);")
@@ -594,11 +618,141 @@ class usersForm(object):
                                               "border: 0px;")
 
     def fourComputers(self):
-        print('elo')
+        self.compOneEasyButton.clicked.connect(self.compOneEasyLevel)
+        self.compOneMediumButton.clicked.connect(self.compOneMediumLevel)
+        self.compOneHardButton.clicked.connect(self.compOneHardLevel)
+        self.compTwoEasyButton.clicked.connect(self.compTwoEasyLevel)
+        self.compTwoMediumButton.clicked.connect(self.compTwoMediumLevel)
+        self.compTwoHardButton.clicked.connect(self.compTwoHardLevel)
+        self.compThreeEasyButton.clicked.connect(self.compThreeEasyLevel)
+        self.compThreeMediumButton.clicked.connect(self.compThreeMediumLevel)
+        self.compThreeHardButton.clicked.connect(self.compThreeHardLevel)
+        self.compFourEasyButton.clicked.connect(self.compFourEasyLevel)
+        self.compFourMediumButton.clicked.connect(self.compFourMediumLevel)
+        self.compFourHardButton.clicked.connect(self.compFourHardLevel)
 
+    # Wygaszanie nieużywanych opcji + przypisywanie poziomów do zmiennych
 
-    # Wygaszanie nieużywanych opcji
+    # Poziomy pierwszego komputera
+
+    def compOneEasyLevel(self):
+        self.computerOneLevel = 1
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+
+    def compOneMediumLevel(self):
+        self.computerOneLevel = 2
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+
+    def compOneHardLevel(self):
+        self.computerOneLevel = 3
+        self.compOneEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compOneMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compOneHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+
+        # Poziomy drugiego komputera
+
+    def compTwoEasyLevel(self):
+        self.computerTwoLevel = 1
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                             "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+
+    def compTwoMediumLevel(self):
+        self.computerTwoLevel = 2
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                               "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                             "border: 0px;")
+
+    def compTwoHardLevel(self):
+        self.computerTwoLevel = 3
+        self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                             "border: 0px;")
+        self.compTwoMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                               "border: 0px;")
+        self.compTwoHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                             "border: 0px;")
+
+        # Poziomy trzeciego komputera
+
+    def compThreeEasyLevel(self):
+        self.computerThreeLevel = 1
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                 "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                               "border: 0px;")
+
+    def compThreeMediumLevel(self):
+        self.computerThreeLevel = 2
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                                 "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                               "border: 0px;")
+
+    def compThreeHardLevel(self):
+        self.computerThreeLevel = 3
+        self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                               "border: 0px;")
+        self.compThreeMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                 "border: 0px;")
+        self.compThreeHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                               "border: 0px;")
+
+        # Poziomy czwartego komputera
+
+    def compFourEasyLevel(self):
+        self.computerFourLevel = 1
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
+                                              "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def compFourMediumLevel(self):
+        self.computerFourLevel = 2
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/medium.png);\n"
+                                                "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+    def compFourHardLevel(self):
+        self.computerFourLevel = 3
+        self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+        self.compFourMediumButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        self.compFourHardButton.setStyleSheet("image: url(:/images/hard.png);\n"
+                                              "border: 0px;")
+
+        # Wygaszanie poziomu gry
+
     def easyLevel(self):
+        self.gameLevel = 1
         self.easyGameButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                           "border: 0px;")
         self.easyLabel.setStyleSheet("image: url(:/images/easyTiming.png);")
@@ -610,6 +764,7 @@ class usersForm(object):
                                           "border: 0px;")
 
     def mediumLevel(self):
+        self.gameLevel = 2
         self.mediumGameButton.setStyleSheet("image: url(:/images/medium.png);\n"
                                             "border: 0px;")
         self.mediumLabel.setStyleSheet("image: url(:/images/mediumTiming.png);")
@@ -621,6 +776,7 @@ class usersForm(object):
                                           "border: 0px;")
 
     def hardLevel(self):
+        self.gameLevel = 3
         self.hardLabel.setStyleSheet("image: url(:/images/hardTiming.png);")
         self.hardGameButton.setStyleSheet("image: url(:/images/hard.png);\n"
                                           "border: 0px;")
@@ -632,16 +788,15 @@ class usersForm(object):
         self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
                                             "border: 0px;")
 
-    def show_login(self):
-        print('XD')
-        self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.loginForm()
-        self.ui.setupUi(self.window)
-        self.window.show()
-
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = registerEng.registerEngForm()
         self.ui.setupUi(self.window)
         self.window.show()
 
+    def show_login(self):
+        print('XD')
+        self.window = QtWidgets.QMainWindow()
+        self.ui = loginEng.loginForm()
+        self.ui.setupUi(self.window)
+        self.window.show()
