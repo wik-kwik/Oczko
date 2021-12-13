@@ -309,6 +309,7 @@ class playOptionsForm(object):
             self.window.show()
             QtCore.QTimer.singleShot(3000, self.window.close)
 
+
     def userSettings(self):
             # Kontrola zastosowanych opcji
             if (self.playersNumber + self.computersNumber > 4):
@@ -318,13 +319,20 @@ class playOptionsForm(object):
                     self.warningType = 2
                     self.warning()
             elif (self.playersNumber == 0 and self.computersNumber == 0):
-                    self.warningType = 2
-                    self.warning()
+                    if self.betting == 3:
+                            self.warningType = 2
+                            self.warning()
+                    else:
+                            self.warningType = 3
+                            self.warning()
             elif (self.playersNumber + self.computersNumber < 2):
                     self.warningType = 3
                     self.warning()
             else:
-                    self.window = QtWidgets.QMainWindow()
-                    self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
-                    self.ui.setupUi(self.window)
-                    self.window.show()
+                    self.proceed()
+
+    def proceed(self):
+            self.window = QtWidgets.QMainWindow()
+            self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+            self.ui.setupUi(self.window)
+            self.window.show()

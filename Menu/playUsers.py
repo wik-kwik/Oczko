@@ -821,3 +821,7 @@ class usersForm(object):
         self.ui = loginEng.loginForm()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    # def loginInfo(self, loginStatus, playerNickname):
+    #     self.loginStatus = loginStatus
+    #     self.playerNickname = playerNickname
