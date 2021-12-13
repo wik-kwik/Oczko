@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>warningType2.png</file>
     <file>computerFourInactive.png</file>
     <file>computerOneInactive.png</file>
     <file>computerThreeInactive.png</file>
@@ -34,8 +35,8 @@
     <file>easy.png</file>
     <file>logoCards.png</file>
     <file>difficulty.png</file>
-    <file>warningText.png</file>
     <file>warning.png</file>
+    <file>warningType1.png</file>
     <file>chipsInactive.png</file>
     <file>noChipsInactive.png</file>
     <file>noChips.png</file>

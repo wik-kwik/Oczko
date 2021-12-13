@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'warning.ui'
+# Form implementation generated from reading ui file 'tooManyWarning.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -9,41 +9,48 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import playOptions
 
+class warningForm(object):
+    def __init__(self, warningType):
+        self.warningType=warningType
 
-class warningDialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(399, 301)
-        self.background = QtWidgets.QLabel(Dialog)
-        self.background.setGeometry(QtCore.QRect(9, 10, 381, 281))
-        self.background.setStyleSheet("background-color: rgb(24, 47, 38);")
-        self.background.setText("")
-        self.background.setObjectName("background")
-        self.warningIcon = QtWidgets.QLabel(Dialog)
-        self.warningIcon.setGeometry(QtCore.QRect(154, 50, 91, 81))
-        self.warningIcon.setStyleSheet("image: url(:/images/warning.png);")
-        self.warningIcon.setText("")
-        self.warningIcon.setObjectName("warningIcon")
-        self.warningText = QtWidgets.QLabel(Dialog)
-        self.warningText.setGeometry(QtCore.QRect(50, 140, 301, 121))
-        self.warningText.setStyleSheet("image: url(:/images/warningText.png);")
-        self.warningText.setText("")
-        self.warningText.setObjectName("warningText")
-        self.orangeBackground = QtWidgets.QLabel(Dialog)
-        self.orangeBackground.setGeometry(QtCore.QRect(-1, 0, 401, 301))
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(415, 307)
+        Form.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.orangeBackground = QtWidgets.QLabel(Form)
+        self.orangeBackground.setGeometry(QtCore.QRect(0, 0, 401, 301))
         self.orangeBackground.setStyleSheet("background-color: rgb(255, 170, 0);")
         self.orangeBackground.setText("")
         self.orangeBackground.setObjectName("orangeBackground")
-        self.orangeBackground.raise_()
-        self.background.raise_()
-        self.warningIcon.raise_()
-        self.warningText.raise_()
+        self.background = QtWidgets.QLabel(Form)
+        self.background.setGeometry(QtCore.QRect(10, 10, 381, 281))
+        self.background.setStyleSheet("background-color: rgb(24, 47, 38);")
+        self.background.setText("")
+        self.background.setObjectName("background")
+        self.warningIcon = QtWidgets.QLabel(Form)
+        self.warningIcon.setGeometry(QtCore.QRect(155, 50, 91, 81))
+        self.warningIcon.setStyleSheet("image: url(:/images/warning.png);")
+        self.warningIcon.setText("")
+        self.warningIcon.setObjectName("warningIcon")
+        self.warningText = QtWidgets.QLabel(Form)
+        self.warningText.setGeometry(QtCore.QRect(50, 140, 301, 121))
+        self.warningText.setStyleSheet("image: url(:/images/warningType1.png);")
+        self.warningText.setText("")
+        self.warningText.setObjectName("warningText")
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        if (self.warningType==1):
+            self.warningText.setStyleSheet("image: url(:/images/warningType1.png);")
 
-    def retranslateUi(self, Dialog):
+        if (self.warningType==2):
+            self.warningText.setStyleSheet("image: url(:/images/warningType2.png);")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Error", "Error"))
+        Form.setWindowTitle(_translate("Form", "Form"))
 

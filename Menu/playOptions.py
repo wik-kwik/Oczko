@@ -16,7 +16,8 @@ class playOptionsForm(object):
     def __init__(self):
             self.playersNumber = 0
             self.computersNumber = 0
-            self.betting = 0
+            self.betting = 3
+            self.warningType = 0
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -194,7 +195,6 @@ class playOptionsForm(object):
         self.returnButton.clicked.connect(Form.close)
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
-        self.nextButton.clicked.connect(Form.close)
         self.nextButton.clicked.connect(self.userSettings)
 
 
@@ -293,23 +293,29 @@ class playOptionsForm(object):
             self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
 
     def bets(self):
+            self.betting = 1
             self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
 
     def noBets(self):
+            self.betting = 0
             self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
 
-    def tooManyPlayers(self):
+    def warning(self):
             self.window = QtWidgets.QMainWindow()
-            self.ui = warning.warningDialog()
+            self.ui = warning.warningForm(self.warningType)
             self.ui.setupUi(self.window)
             self.window.show()
-                # Jak się zamknie to wraca do opcji
+            QtCore.QTimer.singleShot(3000, self.window.close)
 
     def userSettings(self):
             if (self.playersNumber + self.computersNumber > 4):
-                    self.tooManyPlayers()
+                    self.warningType = 1
+                    self.warning()
+            elif (self.betting != 0 and self.betting != 1):
+                    self.warningType = 2
+                    self.warning()
             else:
                     self.window = QtWidgets.QMainWindow()
                     self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
