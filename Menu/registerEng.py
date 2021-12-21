@@ -155,7 +155,6 @@ class registerEngForm(object):
             c = db.cursor()  # dodajemy kursor
 
             # c.execute("""CREATE TABLE users (
-            #                user_id integer PRIMARY KEY,
             #                username text,
             #                password text,
             #                games_played integer,
@@ -163,12 +162,6 @@ class registerEngForm(object):
             #                time_spent integer,
             #                chips integer
             #                )""")
-
-            # c.execute("""CREATE TABLE new_players (
-            #                 username text,
-            #                 password text
-            #                 )""")
-
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
@@ -179,20 +172,13 @@ class registerEngForm(object):
             time_spent = 0
             chips = 1000
 
-            data = [
-                (username,password,games_played,
-                 win_rate,time_spent,chips)
-            ]
-
             if username == "" or password == "" or confirm == "":
                 self.statusLabel.setText("Please fill in all the required fields")
 
             elif password == confirm:
-                # c.executemany(
-                #     "INSERT INTO users VALUES ('{}','{}', {}, {}, {}, {})".format(username, password, games_played,
-                #                                                                    win_rate, time_spent, chips))
-                c.executemany(
-                    "INSERT INTO users (username,password,games_played,win_rate,time_spent,chips) VALUES (?,?,?,?,?,?)", data)
+                c.execute(
+                    "INSERT INTO users VALUES ('{}', '{}', {}, {}, {}, {})".format(username, password, games_played,
+                                                                                   win_rate, time_spent, chips))
                 db.commit()
                 print("Data has been inserted")
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")

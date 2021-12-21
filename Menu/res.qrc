@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>bettingBackground.png</file>
     <file>PRAJZ.png</file>
     <file>balance.png</file>
     <file>prize.png</file>

@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import betting
 
 
 class boardForm(object):
@@ -30,7 +31,7 @@ class boardForm(object):
         self.standButton = QtWidgets.QPushButton(boardForm)
         self.standButton.setGeometry(QtCore.QRect(1510, 520, 161, 61))
         self.standButton.setStyleSheet("image: url(:/images/stand.png);\n"
-"border: 0px;")
+                                       "border: 0px;")
         self.standButton.setText("")
         self.standButton.setObjectName("standButton")
         self.timeLeftIcon = QtWidgets.QLabel(boardForm)
@@ -41,7 +42,7 @@ class boardForm(object):
         self.hitButton = QtWidgets.QPushButton(boardForm)
         self.hitButton.setGeometry(QtCore.QRect(1510, 430, 161, 61))
         self.hitButton.setStyleSheet("image: url(:/images/hit.png);\n"
-"border: 0px;")
+                                     "border: 0px;")
         self.hitButton.setText("")
         self.hitButton.setObjectName("hitButton")
         self.playerOneCard_1 = QtWidgets.QLabel(boardForm)
@@ -57,7 +58,7 @@ class boardForm(object):
         self.playerOneLabel.setFont(font)
         self.playerOneLabel.setStyleSheet("color: rgb(255, 85, 0);")
         self.playerOneLabel.setText("")
-        self.playerOneLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.playerOneLabel.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.playerOneLabel.setObjectName("playerOneLabel")
         self.coinsIcon = QtWidgets.QLabel(boardForm)
         self.coinsIcon.setGeometry(QtCore.QRect(710, 750, 71, 81))
@@ -127,7 +128,7 @@ class boardForm(object):
         self.playerTwoLabel.setFont(font)
         self.playerTwoLabel.setStyleSheet("color: rgb(255, 85, 0);")
         self.playerTwoLabel.setText("")
-        self.playerTwoLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.playerTwoLabel.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.playerTwoLabel.setObjectName("playerTwoLabel")
         self.playerThreeCard_1 = QtWidgets.QLabel(boardForm)
         self.playerThreeCard_1.setGeometry(QtCore.QRect(830, 160, 131, 171))
@@ -142,7 +143,7 @@ class boardForm(object):
         self.playerThreeLabel.setFont(font)
         self.playerThreeLabel.setStyleSheet("color: rgb(255, 85, 0);")
         self.playerThreeLabel.setText("")
-        self.playerThreeLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.playerThreeLabel.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.playerThreeLabel.setObjectName("playerThreeLabel")
         self.playerFourLabel = QtWidgets.QLabel(boardForm)
         self.playerFourLabel.setGeometry(QtCore.QRect(840, 430, 301, 31))
@@ -152,7 +153,7 @@ class boardForm(object):
         self.playerFourLabel.setFont(font)
         self.playerFourLabel.setStyleSheet("color: rgb(255, 85, 0);")
         self.playerFourLabel.setText("")
-        self.playerFourLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.playerFourLabel.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.playerFourLabel.setObjectName("playerFourLabel")
         self.playerTwoCard_1 = QtWidgets.QLabel(boardForm)
         self.playerTwoCard_1.setGeometry(QtCore.QRect(320, 490, 131, 171))
@@ -429,6 +430,12 @@ class boardForm(object):
         self.closeLabel.raise_()
         self.closeButton.raise_()
 
+        if self.betting == 1:
+            self.window = QtWidgets.QMainWindow()
+            self.ui = betting.bettingForm()
+            self.ui.setupUi(self.window)
+            self.window.show()
+
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
 
@@ -436,4 +443,3 @@ class boardForm(object):
         _translate = QtCore.QCoreApplication.translate
         boardForm.setWindowTitle(_translate("boardForm", "Form"))
         self.closeLabel.setText(_translate("boardForm", "X"))
-
