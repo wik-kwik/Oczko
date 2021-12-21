@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import playOptions, loginEng, registerEng
+import playOptions, loginEng, registerEng, board
 
 
 class usersForm(object):
@@ -387,6 +387,8 @@ class usersForm(object):
         self.easyGameButton.clicked.connect(self.easyLevel)
         self.mediumGameButton.clicked.connect(self.mediumLevel)
         self.hardGameButton.clicked.connect(self.hardLevel)
+        self.nextButton.clicked.connect(Form.close)
+        self.nextButton.clicked.connect(self.openBoard)
 
         # self.playerOneLogin.clicked.connect(self.show_login)
         # self.playerTwoLogin.clicked.connect(self.show_login)
@@ -822,6 +824,8 @@ class usersForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-    # def loginInfo(self, loginStatus, playerNickname):
-    #     self.loginStatus = loginStatus
-    #     self.playerNickname = playerNickname
+    def openBoard(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting)
+        self.ui.setupUi(self.window)
+        self.window.show()

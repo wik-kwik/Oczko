@@ -1,50 +1,1129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>boardForm</class>
+ <widget class="QWidget" name="boardForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1838</width>
+    <height>1025</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="backgroundDark">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1920</width>
-      <height>1080</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:rgba(0, 0, 0, 100);
-border-radius:10px;
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QLabel" name="backgroundDark">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1920</width>
-     <height>22</height>
+     <width>1850</width>
+     <height>940</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(24, 47, 38);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QPushButton" name="standButton">
+   <property name="geometry">
+    <rect>
+     <x>1510</x>
+     <y>520</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/stand.png);
+border: 0px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="timeLeftIcon">
+   <property name="geometry">
+    <rect>
+     <x>1500</x>
+     <y>160</y>
+     <width>201</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/timeLeft.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="hitButton">
+   <property name="geometry">
+    <rect>
+     <x>1510</x>
+     <y>430</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/hit.png);
+border: 0px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_1">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneLabel">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>100</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 85, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="coinsIcon">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>750</y>
+     <width>71</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/coins.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="walletIcon">
+   <property name="geometry">
+    <rect>
+     <x>1490</x>
+     <y>820</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/wallet.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="menuStripe">
+   <property name="geometry">
+    <rect>
+     <x>1470</x>
+     <y>0</y>
+     <width>251</width>
+     <height>941</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(0, 0, 0, 100);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="logoLabel">
+   <property name="geometry">
+    <rect>
+     <x>1560</x>
+     <y>30</y>
+     <width>81</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/logoCards.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="balanceText">
+   <property name="geometry">
+    <rect>
+     <x>1540</x>
+     <y>830</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/balance.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="toWinLabel">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>824</y>
+     <width>191</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/PRAJZ.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="balanceLabel">
+   <property name="geometry">
+    <rect>
+     <x>1470</x>
+     <y>880</y>
+     <width>241</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(223, 175, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="timerLabel">
+   <property name="geometry">
+    <rect>
+     <x>1480</x>
+     <y>230</y>
+     <width>231</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>27</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 170, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="prizeLabel">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>860</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 60, 11);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoLabel">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>430</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 85, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_1">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeLabel">
+   <property name="geometry">
+    <rect>
+     <x>840</x>
+     <y>100</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 85, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourLabel">
+   <property name="geometry">
+    <rect>
+     <x>840</x>
+     <y>430</y>
+     <width>301</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 85, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_1">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_2">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_3">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_4">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_5">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_6">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_7">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_8">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_9">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerOneCard_10">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_2">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_3">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_4">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_5">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_6">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_7">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_8">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_9">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerTwoCard_10">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_2">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_3">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_4">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_5">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_6">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_7">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_8">
+   <property name="geometry">
+    <rect>
+     <x>1040</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_9">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerThreeCard_10">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>160</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_1">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_2">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_3">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_4">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_5">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_6">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_7">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_8">
+   <property name="geometry">
+    <rect>
+     <x>1040</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_9">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="playerFourCard_10">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>490</y>
+     <width>131</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/images/2_of_clubs.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="returnIcon">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/return.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="returnButton">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { background-color: transparent; border: 0px };</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="closeLabel">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>4</y>
+     <width>21</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 170, 0);</string>
+   </property>
+   <property name="text">
+    <string>X</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>21</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton { background-color: transparent; border: 0px };</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>backgroundDark</zorder>
+  <zorder>playerOneCard_1</zorder>
+  <zorder>playerOneLabel</zorder>
+  <zorder>menuStripe</zorder>
+  <zorder>timeLeftIcon</zorder>
+  <zorder>hitButton</zorder>
+  <zorder>standButton</zorder>
+  <zorder>walletIcon</zorder>
+  <zorder>logoLabel</zorder>
+  <zorder>balanceText</zorder>
+  <zorder>balanceLabel</zorder>
+  <zorder>timerLabel</zorder>
+  <zorder>toWinLabel</zorder>
+  <zorder>coinsIcon</zorder>
+  <zorder>prizeLabel</zorder>
+  <zorder>playerTwoLabel</zorder>
+  <zorder>playerThreeCard_1</zorder>
+  <zorder>playerThreeLabel</zorder>
+  <zorder>playerFourLabel</zorder>
+  <zorder>playerTwoCard_1</zorder>
+  <zorder>playerOneCard_2</zorder>
+  <zorder>playerOneCard_3</zorder>
+  <zorder>playerOneCard_4</zorder>
+  <zorder>playerOneCard_5</zorder>
+  <zorder>playerOneCard_6</zorder>
+  <zorder>playerOneCard_7</zorder>
+  <zorder>playerOneCard_8</zorder>
+  <zorder>playerOneCard_9</zorder>
+  <zorder>playerOneCard_10</zorder>
+  <zorder>playerTwoCard_2</zorder>
+  <zorder>playerTwoCard_3</zorder>
+  <zorder>playerTwoCard_4</zorder>
+  <zorder>playerTwoCard_5</zorder>
+  <zorder>playerTwoCard_6</zorder>
+  <zorder>playerTwoCard_7</zorder>
+  <zorder>playerTwoCard_8</zorder>
+  <zorder>playerTwoCard_9</zorder>
+  <zorder>playerTwoCard_10</zorder>
+  <zorder>playerThreeCard_2</zorder>
+  <zorder>playerThreeCard_3</zorder>
+  <zorder>playerThreeCard_4</zorder>
+  <zorder>playerThreeCard_5</zorder>
+  <zorder>playerThreeCard_6</zorder>
+  <zorder>playerThreeCard_7</zorder>
+  <zorder>playerThreeCard_8</zorder>
+  <zorder>playerThreeCard_9</zorder>
+  <zorder>playerThreeCard_10</zorder>
+  <zorder>playerFourCard_1</zorder>
+  <zorder>playerFourCard_2</zorder>
+  <zorder>playerFourCard_3</zorder>
+  <zorder>playerFourCard_4</zorder>
+  <zorder>playerFourCard_5</zorder>
+  <zorder>playerFourCard_6</zorder>
+  <zorder>playerFourCard_7</zorder>
+  <zorder>playerFourCard_8</zorder>
+  <zorder>playerFourCard_9</zorder>
+  <zorder>playerFourCard_10</zorder>
+  <zorder>returnIcon</zorder>
+  <zorder>returnButton</zorder>
+  <zorder>closeLabel</zorder>
+  <zorder>closeButton</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>
