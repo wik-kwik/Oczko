@@ -12,8 +12,8 @@ import playUsers
 
 
 class loginForm(object):
-    def __init__(self):
-        self.loginStatus = 0
+    def __init__(self, numberOfPlayer):
+        self.numberOfPlayer = numberOfPlayer
         self.playerNickname = ''
 
     def setupUi(self, Form):
@@ -154,7 +154,7 @@ class loginForm(object):
 
             # c.execute("""CREATE TABLE logged_users (
             #                 id integer,
-            #                 username text,
+            #                 username text UNIQUE,
             #                 password text
             #                 )""")
 
@@ -172,18 +172,23 @@ class loginForm(object):
             elif result == None:
                 self.statusLabel.setText("Incorrect username or password")
             else:
-                self.loginStatus = 1
                 self.playerNickname = username
                 # playUsers.usersForm.loginInfo(self.loginStatus, self.playerNickname)
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
                 self.statusLabel.setText("You are logged in")
                 self.loginButton.setEnabled(False)
-                c.execute(
-                    "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, username, password))
-                db.commit()
-                self.update_db(2)
+                try:
+                    c.execute(
+                        "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, username, password))
+                    db.commit()
+                    self.update_db(self.numberOfPlayer)
+                except sql.Error as e:
+                    self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
+                    self.statusLabel.setText("This user is already logged in")
+
 
         except sql.Error as e:
+            self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
             self.statusLabel.setText("Error")
 
     def update_db(self, user_id):

@@ -24,6 +24,7 @@ class usersForm(object):
         self.computerThreeLevel = 0
         self.computerFourLevel = 0
         self.numberOfPlayer = 0
+        self.numberOfPlayer = 0
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -363,6 +364,7 @@ class usersForm(object):
         if self.computersNumber == 4:
             self.fourComputers()
 
+
         # Obsługa przycisków
         self.returnButton.clicked.connect(self.returnToOptions)
         self.returnButton.clicked.connect(Form.close)
@@ -417,6 +419,7 @@ class usersForm(object):
                                               "border: 0px;")
 
     def onePlayer(self):
+        self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
 
@@ -438,8 +441,10 @@ class usersForm(object):
                                               "border: 0px;")
 
     def twoPlayers(self):
+        self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
 
@@ -456,10 +461,13 @@ class usersForm(object):
                                               "border: 0px;")
 
     def threePlayers(self):
+        self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerThreeLogin.clicked.connect(self.third_player)
         self.playerThreeLogin.clicked.connect(self.show_login)
         self.playerThreeRegister.clicked.connect(self.show_register)
 
@@ -471,12 +479,16 @@ class usersForm(object):
                                               "border: 0px;")
 
     def fourPlayers(self):
+        self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerThreeLogin.clicked.connect(self.third_player)
         self.playerThreeLogin.clicked.connect(self.show_login)
         self.playerThreeRegister.clicked.connect(self.show_register)
+        self.playerFourLogin.clicked.connect(self.fourth_player)
         self.playerFourLogin.clicked.connect(self.show_login)
         self.playerFourRegister.clicked.connect(self.show_register)
 
@@ -796,32 +808,36 @@ class usersForm(object):
                                             "border: 0px;")
 
     def first_player(self):
+        print("1")
         self.numberOfPlayer = 1
-        self.update_id(self.numberOfPlayer)
+     #   self.update_id(self.numberOfPlayer)
 
     def second_player(self):
+        print("2")
         self.numberOfPlayer = 2
-        self.update_id(self.numberOfPlayer)
+      #  self.update_id(self.numberOfPlayer)
 
     def third_player(self):
+        print("3")
         self.numberOfPlayer = 3
-        self.update_id(self.numberOfPlayer)
+     #   self.update_id(self.numberOfPlayer)
 
     def fourth_player(self):
+        print("4")
         self.numberOfPlayer = 4
-        self.update_id(self.numberOfPlayer)
+      #  self.update_id(self.numberOfPlayer)
 
-    def update_id(self, user_id):
-        try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
-            c = db.cursor()  # dodajemy kursor
-
-            c.execute("UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
-            db.commit()
-
-
-        except sql.Error as e:
-            print("Error")
+    # def update_id(self, user_id):
+    #     try:
+    #         db = sql.connect('siema.db')  # łączymy się do bazy
+    #         c = db.cursor()  # dodajemy kursor
+    #
+    #         c.execute("UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
+    #         db.commit()
+    #
+    #
+    #     except sql.Error as e:
+    #         print("Error")
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
@@ -831,7 +847,7 @@ class usersForm(object):
 
     def show_login(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.loginForm()
+        self.ui = loginEng.loginForm(self.numberOfPlayer)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -840,3 +856,6 @@ class usersForm(object):
         self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
+
+    #def close_options(self):
+

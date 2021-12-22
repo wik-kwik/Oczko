@@ -20,6 +20,7 @@ class playOptionsForm(object):
             self.betting = 3
             self.warningType = 0
 
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(740, 769)
@@ -197,6 +198,7 @@ class playOptionsForm(object):
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
         self.nextButton.clicked.connect(self.userSettings)
+        self.nextButton.clicked.connect(Form.close)
 
 
     def retranslateUi(self, Form):
@@ -337,3 +339,11 @@ class playOptionsForm(object):
             self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
             self.ui.setupUi(self.window)
             self.window.show()
+
+
+
+
+
+
+
+

@@ -156,7 +156,7 @@ class registerEngForm(object):
 
             # c.execute("""CREATE TABLE users (
             #                user_id integer PRIMARY KEY,
-            #                username text,
+            #                username text UNIQUE,
             #                password text,
             #                games_played integer,
             #                win_rate real,
@@ -181,21 +181,25 @@ class registerEngForm(object):
                 self.statusLabel.setText("Please fill in all the required fields")
 
             elif password == confirm:
-                c.executemany(
-                    "INSERT INTO users (username,password,games_played,win_rate,time_spent,chips) VALUES (?,?,?,?,?,?)",
-                    data)
+                try:
+                    c.executemany(
+                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,chips) VALUES (?,?,?,?,?,?)",
+                        data)
+                    db.commit()
+                    print("Data has been inserted")
+                    self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
+                    self.statusLabel.setText("You have been registered!")
+                    self.createButton.setEnabled(False)
 
-                db.commit()
-                print("Data has been inserted")
-                self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
-                self.statusLabel.setText("You have been registered!")
-                self.createButton.setEnabled(False)
+                    c.execute("SELECT * FROM users")
 
-                c.execute("SELECT * FROM users")
+                    print(c.fetchall())
+                    db.commit()
+                    db.close()
 
-                print(c.fetchall())
-                db.commit()
-                db.close()
+                except sql.IntegrityError as e:
+                    self.statusLabel.setText("This nickname is not available")
+
             else:
                 self.statusLabel.setText("Passwords don't match")
 
