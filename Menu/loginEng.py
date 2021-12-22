@@ -152,11 +152,11 @@ class loginForm(object):
             db = sql.connect('siema.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
-            c.execute("""CREATE TABLE logged_users (
-                            id integer,
-                            username text,
-                            password text
-                            )""")
+            # c.execute("""CREATE TABLE logged_users (
+            #                 id integer,
+            #                 username text,
+            #                 password text
+            #                 )""")
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
