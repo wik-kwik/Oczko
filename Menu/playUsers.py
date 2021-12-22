@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, loginEng, registerEng, board
+import sqlite3 as sql
 
 
 class usersForm(object):
@@ -22,6 +23,7 @@ class usersForm(object):
         self.computerTwoLevel = 0
         self.computerThreeLevel = 0
         self.computerFourLevel = 0
+        self.numberOfPlayer = 0
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -288,27 +290,7 @@ class usersForm(object):
         self.nextButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.nextButton.setText("")
         self.nextButton.setObjectName("nextButton")
-        # self.playerOneNickname = QtWidgets.QLabel(Form)
-        # self.playerOneNickname.setGeometry(QtCore.QRect(96, 220, 151, 31))
-        # self.playerOneNickname.setText("")
-        # self.playerOneNickname.setAlignment(QtCore.Qt.AlignCenter)
-        # self.playerOneNickname.setObjectName("playerOneNickname")
-        # self.playerTwoNickname = QtWidgets.QLabel(Form)
-        # self.playerTwoNickname.setGeometry(QtCore.QRect(274, 220, 151, 31))
-        # self.playerTwoNickname.setText("")
-        # self.playerTwoNickname.setAlignment(QtCore.Qt.AlignCenter)
-        # self.playerTwoNickname.setObjectName("playerTwoNickname")
-        # self.playerThreeNickname = QtWidgets.QLabel(Form)
-        # self.playerThreeNickname.setGeometry(QtCore.QRect(96, 341, 151, 31))
-        # self.playerThreeNickname.setText("")
-        # self.playerThreeNickname.setAlignment(QtCore.Qt.AlignCenter)
-        # self.playerThreeNickname.setObjectName("playerThreeNickname")
-        # self.playerFourNickname = QtWidgets.QLabel(Form)
-        # self.playerFourNickname.setGeometry(QtCore.QRect(274, 341, 151, 31))
-        # self.playerFourNickname.setStyleSheet("color: rgb(255, 85, 0);")
-        # self.playerFourNickname.setText("")
-        # self.playerFourNickname.setAlignment(QtCore.Qt.AlignCenter)
-        # self.playerFourNickname.setObjectName("playerFourNickname")
+
         self.background.raise_()
         self.backgroundDark.raise_()
         self.difficultyLabel.raise_()
@@ -322,6 +304,10 @@ class usersForm(object):
         self.easyGameButton.raise_()
         self.mediumGameButton.raise_()
         self.hardGameButton.raise_()
+        self.playerOneNickname.raise_()
+        self.playerTwoNickname.raise_()
+        self.playerThreeNickname.raise_()
+        self.playerFourNickname.raise_()
         self.playerOneLogin.raise_()
         self.playerOneRegister.raise_()
         self.compTwoLabel.raise_()
@@ -351,10 +337,7 @@ class usersForm(object):
         self.nextIcon.raise_()
         self.nextButton.raise_()
         self.returnButton.raise_()
-        # self.playerOneNickname.raise_()
-        # self.playerTwoNickname.raise_()
-        # self.playerThreeNickname.raise_()
-        # self.playerFourNickname.raise_()
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -811,6 +794,34 @@ class usersForm(object):
         self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactive.png);")
         self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
                                             "border: 0px;")
+
+    def first_player(self):
+        self.numberOfPlayer = 1
+        self.update_id(self.numberOfPlayer)
+
+    def second_player(self):
+        self.numberOfPlayer = 2
+        self.update_id(self.numberOfPlayer)
+
+    def third_player(self):
+        self.numberOfPlayer = 3
+        self.update_id(self.numberOfPlayer)
+
+    def fourth_player(self):
+        self.numberOfPlayer = 4
+        self.update_id(self.numberOfPlayer)
+
+    def update_id(self, user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            c.execute("UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
+            db.commit()
+
+
+        except sql.Error as e:
+            print("Error")
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()

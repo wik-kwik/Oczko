@@ -152,25 +152,49 @@ class loginForm(object):
             db = sql.connect('siema.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
-            nickname = self.usernameLine.text()
+            c.execute("""CREATE TABLE logged_users (
+                            id integer,
+                            username text,
+                            password text
+                            )""")
+
+            username = self.usernameLine.text()
             password = self.passwordLine.text()
 
-            query = "SELECT username, password from users where username like '" + nickname + "'and password like '" + password + "'"
+            query = "SELECT username, password from users where username like '" + username + "'and password like '" + password + "'"
             c.execute(query)
+            db.commit()
 
             result = c.fetchone()
 
-            if nickname == "" or password == "":
+            if username == "" or password == "":
                 self.statusLabel.setText("Please fill in all the required fields")
             elif result == None:
                 self.statusLabel.setText("Incorrect username or password")
             else:
                 self.loginStatus = 1
-                self.playerNickname = nickname
+                self.playerNickname = username
                 # playUsers.usersForm.loginInfo(self.loginStatus, self.playerNickname)
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
                 self.statusLabel.setText("You are logged in")
                 self.loginButton.setEnabled(False)
+                c.execute(
+                    "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, username, password))
+                db.commit()
+                self.update_db(2)
 
         except sql.Error as e:
             self.statusLabel.setText("Error")
+
+    def update_db(self, user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            c.execute(
+                "UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
+            # "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, self.username, self.password))
+            db.commit()
+
+        except sql.Error as e:
+            print("Error")
