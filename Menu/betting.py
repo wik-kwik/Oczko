@@ -9,9 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import sqlite3 as sql
+import playUsers
 
 class bettingForm(object):
+
+    def __init__(self, numberOfPlayer):
+        self.numberOfPlayer = numberOfPlayer
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(759, 571)
@@ -126,15 +131,69 @@ class bettingForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+
+        if (1 in self.numberOfPlayer) == True:
+            self.playerOneNickname.setText(self.set_username(1))
+            self.playerOneWallet.setText(str(self.set_wallet(1)))
+        if (2 in self.numberOfPlayer) == True:
+            self.playerTwoNickname.setText(self.set_username(2))
+            self.playerTwoWallet.setText(str(self.set_wallet(2)))
+        if (3 in self.numberOfPlayer) == True:
+            self.playerThreeNickname.setText(self.set_username(3))
+            self.playerThreeWallet.setText(str(self.set_wallet(3)))
+        if (4 in self.numberOfPlayer) == True:
+            self.playerFourNickname.setText(self.set_username(4))
+            self.playerFourWallet.setText(str(self.set_wallet(4)))
+
+        self.playButton.clicked.connect(self.play)
+
+
+    def set_username(self,user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result[1])
+            return result[1]
+
+        except sql.Error as e:
+            print("huj")
+
+    def set_wallet(self,user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result[2])
+            return result[2]
+
+        except sql.Error as e:
+            print("error")
+
+    def play(self):
+        input = int(self.betInput.text())
+        if input > self.set_wallet(1) and input > self.set_wallet(2) and input > self.set_wallet(3) and input > self.set_wallet(4):
+            self.warningLabel.setText("kogo")
+        else:
+            self.warningLabel.setText("gituwa")
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.playButton.setText(_translate("Form", "PLAY!"))
-        self.playerOneNickname.setText(_translate("Form", "dupa"))
-        self.playerTwoNickname.setText(_translate("Form", "nickname"))
-        self.playerThreeNickname.setText(_translate("Form", "nickname"))
-        self.playerFourNickname.setText(_translate("Form", "nickname"))
-        self.playerOneWallet.setText(_translate("Form", "25235"))
-        self.playerTwoWallet.setText(_translate("Form", "5235235"))
-        self.playerThreeWallet.setText(_translate("Form", "5235"))
-        self.playerFourWallet.setText(_translate("Form", "5235325"))
+        #self.playerOneNickname.setText(_translate("Form", "dupa"))
+        #self.playerTwoNickname.setText(_translate("Form", "nickname"))
+        #self.playerThreeNickname.setText(_translate("Form", "nickname"))
+        #self.playerFourNickname.setText(_translate("Form", "nickname"))
+        # self.playerOneWallet.setText(_translate("Form", "25235"))
+        # self.playerTwoWallet.setText(_translate("Form", "5235235"))
+        # self.playerThreeWallet.setText(_translate("Form", "5235"))
+        # self.playerFourWallet.setText(_translate("Form", "5235325"))

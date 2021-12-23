@@ -430,14 +430,17 @@ class boardForm(object):
         self.closeLabel.raise_()
         self.closeButton.raise_()
 
-        if self.betting == 1:
-            self.window = QtWidgets.QMainWindow()
-            self.ui = betting.bettingForm()
-            self.ui.setupUi(self.window)
-            self.window.show()
-
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
+
+        # if self.betting == 1:
+        #     self.window = QtWidgets.QMainWindow()
+        #     self.ui = betting.bettingForm()
+        #     self.ui.setupUi(self.window)
+        #     self.window.show()
+
+
+
 
     def retranslateUi(self, boardForm):
         _translate = QtCore.QCoreApplication.translate

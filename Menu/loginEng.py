@@ -133,9 +133,19 @@ class loginForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        if (1 in self.numberOfPlayer) == True:
+            self.update_db(1)
+        if (2 in self.numberOfPlayer) == True:
+            self.update_db(2)
+        if (3 in self.numberOfPlayer) == True:
+            self.update_db(3)
+        if (4 in self.numberOfPlayer) == True:
+            self.update_db(4)
+
         # Obsługa przycisków
         self.loginButton.clicked.connect(self.login)
         self.closeButton.clicked.connect(Form.close)
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -155,17 +165,18 @@ class loginForm(object):
             # c.execute("""CREATE TABLE logged_users (
             #                 id integer,
             #                 username text UNIQUE,
-            #                 password text
+            #                 coins integer
             #                 )""")
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
 
-            query = "SELECT username, password from users where username like '" + username + "'and password like '" + password + "'"
+            query = "SELECT username, password, coins from users where username like '" + username + "'and password like '" + password + "'"
             c.execute(query)
             db.commit()
 
             result = c.fetchone()
+
 
             if username == "" or password == "":
                 self.statusLabel.setText("Please fill in all the required fields")
@@ -177,11 +188,14 @@ class loginForm(object):
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
                 self.statusLabel.setText("You are logged in")
                 self.loginButton.setEnabled(False)
+
                 try:
+                    coins = result[2]
                     c.execute(
-                        "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, username, password))
+                        "INSERT INTO logged_users (id,username,coins) VALUES (?,?,?)", (0, username, coins))
                     db.commit()
-                    self.update_db(self.numberOfPlayer)
+                    self.update_db(self.numberOfPlayer[-1])
+
                 except sql.Error as e:
                     self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
                     self.statusLabel.setText("This user is already logged in")

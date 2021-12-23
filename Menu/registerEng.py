@@ -161,8 +161,9 @@ class registerEngForm(object):
             #                games_played integer,
             #                win_rate real,
             #                time_spent integer,
-            #                chips integer
+            #                coins integer
             #                )""")
+
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
@@ -171,10 +172,10 @@ class registerEngForm(object):
             games_played = 0
             win_rate = 0
             time_spent = 0
-            chips = 1000
+            coins = 1000
             data = [
                 (username, password, games_played,
-                 win_rate, time_spent, chips)
+                 win_rate, time_spent, coins)
             ]
 
             if username == "" or password == "" or confirm == "":
@@ -183,7 +184,7 @@ class registerEngForm(object):
             elif password == confirm:
                 try:
                     c.executemany(
-                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,chips) VALUES (?,?,?,?,?,?)",
+                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,coins) VALUES (?,?,?,?,?,?)",
                         data)
                     db.commit()
                     print("Data has been inserted")

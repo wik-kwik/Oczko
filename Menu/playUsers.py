@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import playOptions, loginEng, registerEng, board
+import playOptions, loginEng, registerEng, board, betting
 import sqlite3 as sql
 
 
@@ -23,8 +23,8 @@ class usersForm(object):
         self.computerTwoLevel = 0
         self.computerThreeLevel = 0
         self.computerFourLevel = 0
-        self.numberOfPlayer = 0
-        self.numberOfPlayer = 0
+        self.numberOfPlayer = []
+        self.popups = []
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -373,7 +373,10 @@ class usersForm(object):
         self.mediumGameButton.clicked.connect(self.mediumLevel)
         self.hardGameButton.clicked.connect(self.hardLevel)
         self.nextButton.clicked.connect(Form.close)
-        self.nextButton.clicked.connect(self.openBoard)
+        #self.nextButton.clicked.connect(self.openBoard)
+        self.nextButton.clicked.connect(self.show_betting)
+
+
 
         # self.playerOneLogin.clicked.connect(self.show_login)
         # self.playerTwoLogin.clicked.connect(self.show_login)
@@ -809,35 +812,30 @@ class usersForm(object):
 
     def first_player(self):
         print("1")
-        self.numberOfPlayer = 1
+        self.numberOfPlayer.append(1)
+        print(self.numberOfPlayer)
+        self.playerOneLogin.setVisible(False)
+        self.playerOneNickname.setText("siema")
      #   self.update_id(self.numberOfPlayer)
 
     def second_player(self):
         print("2")
-        self.numberOfPlayer = 2
+        self.numberOfPlayer.append(2)
+        print(self.numberOfPlayer)
       #  self.update_id(self.numberOfPlayer)
 
     def third_player(self):
         print("3")
-        self.numberOfPlayer = 3
+        self.numberOfPlayer.append(3)
+        print(self.numberOfPlayer)
      #   self.update_id(self.numberOfPlayer)
 
     def fourth_player(self):
         print("4")
-        self.numberOfPlayer = 4
+        self.numberOfPlayer.append(4)
+        print(self.numberOfPlayer)
       #  self.update_id(self.numberOfPlayer)
 
-    # def update_id(self, user_id):
-    #     try:
-    #         db = sql.connect('siema.db')  # łączymy się do bazy
-    #         c = db.cursor()  # dodajemy kursor
-    #
-    #         c.execute("UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
-    #         db.commit()
-    #
-    #
-    #     except sql.Error as e:
-    #         print("Error")
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
@@ -856,6 +854,18 @@ class usersForm(object):
         self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
+        self.popups.append(self.window)
 
-    #def close_options(self):
+    def show_betting(self):
+        if self.betting == 1:
+            self.openBoard()
+            self.window = QtWidgets.QMainWindow()
+            self.ui = betting.bettingForm(self.numberOfPlayer)
+            self.ui.setupUi(self.window)
+            self.window.show()
+            self.popups.append(self.window)
+
+
+        elif self.betting == 0:
+            self.openBoard()
 
