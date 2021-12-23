@@ -9,11 +9,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
 import playUsers
+import playOptions
 
 
 class loginForm(object):
     def __init__(self, numberOfPlayer):
         self.numberOfPlayer = numberOfPlayer
+        # self.playersNumber = playersNumber
+        # self.computersNumber = computersNumber
+        # self.betting = betting
         self.playerNickname = ''
 
     def setupUi(self, Form):
@@ -145,6 +149,8 @@ class loginForm(object):
         # Obsługa przycisków
         self.loginButton.clicked.connect(self.login)
         self.closeButton.clicked.connect(Form.close)
+        #self.closeButton.clicked.connect(self.returnToUsers)
+
 
 
     def retranslateUi(self, Form):
@@ -198,6 +204,7 @@ class loginForm(object):
 
                 except sql.Error as e:
                     self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
+                    self.loginButton.setEnabled(True)
                     self.statusLabel.setText("This user is already logged in")
 
 
@@ -217,3 +224,9 @@ class loginForm(object):
 
         except sql.Error as e:
             print("Error")
+
+    # def returnToUsers(self):
+    #     self.window = QtWidgets.QMainWindow()
+    #     self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+    #     self.ui.setupUi(self.window)
+    #     self.window.show()

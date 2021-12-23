@@ -61,6 +61,7 @@ class warningForm(object):
         self.ui.setupUi(self.window)
         QtCore.QTimer.singleShot(3000, self.window.show)
 
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))

@@ -198,7 +198,7 @@ class playOptionsForm(object):
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
         self.nextButton.clicked.connect(self.userSettings)
-        self.nextButton.clicked.connect(Form.close)
+        self.nextButton.clicked.connect(Form.hide)
 
 
     def retranslateUi(self, Form):

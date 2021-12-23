@@ -292,6 +292,8 @@ class usersForm(object):
         self.nextButton.setText("")
         self.nextButton.setObjectName("nextButton")
 
+
+
         self.background.raise_()
         self.backgroundDark.raise_()
         self.difficultyLabel.raise_()
@@ -373,6 +375,7 @@ class usersForm(object):
         self.mediumGameButton.clicked.connect(self.mediumLevel)
         self.hardGameButton.clicked.connect(self.hardLevel)
         self.nextButton.clicked.connect(Form.close)
+        #self.playerOneLogin.clicked.connect(Form.close)
         #self.nextButton.clicked.connect(self.openBoard)
         self.nextButton.clicked.connect(self.show_betting)
 
@@ -814,27 +817,52 @@ class usersForm(object):
         print("1")
         self.numberOfPlayer.append(1)
         print(self.numberOfPlayer)
+
         self.playerOneLogin.setVisible(False)
-        self.playerOneNickname.setText("siema")
+        self.playerOneNickname.setText(self.set_username(1))
      #   self.update_id(self.numberOfPlayer)
 
     def second_player(self):
         print("2")
         self.numberOfPlayer.append(2)
         print(self.numberOfPlayer)
+
+        self.playerTwoLogin.setVisible(False)
+        self.playerTwoNickname.setText(self.set_username(2))
       #  self.update_id(self.numberOfPlayer)
 
     def third_player(self):
         print("3")
         self.numberOfPlayer.append(3)
         print(self.numberOfPlayer)
+
+        self.playerThreeLogin.setVisible(False)
+        self.playerThreeNickname.setText(self.set_username(3))
      #   self.update_id(self.numberOfPlayer)
 
     def fourth_player(self):
         print("4")
         self.numberOfPlayer.append(4)
         print(self.numberOfPlayer)
+
+        self.playerFourLogin.setVisible(False)
+        self.playerFourNickname.setText(self.set_username(4))
       #  self.update_id(self.numberOfPlayer)
+
+    def set_username(self,user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result[1])
+            return result[1]
+
+        except sql.Error as e:
+            print("huj")
 
 
     def show_register(self):
