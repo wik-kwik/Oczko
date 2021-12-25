@@ -383,11 +383,13 @@ class boardForm(object):
         self.toWinLabel.raise_()
         self.coinsIcon.raise_()
         self.prizeLabel.raise_()
+
         self.playerTwoLabel.raise_()
         self.playerThreeCard_1.raise_()
         self.playerThreeLabel.raise_()
         self.playerFourLabel.raise_()
-        self.playerTwoCard_1.raise_()
+
+        self.playerOneCard_1.raise_()
         self.playerOneCard_2.raise_()
         self.playerOneCard_3.raise_()
         self.playerOneCard_4.raise_()
@@ -397,6 +399,8 @@ class boardForm(object):
         self.playerOneCard_8.raise_()
         self.playerOneCard_9.raise_()
         self.playerOneCard_10.raise_()
+
+        self.playerTwoCard_1.raise_()
         self.playerTwoCard_2.raise_()
         self.playerTwoCard_3.raise_()
         self.playerTwoCard_4.raise_()
@@ -406,6 +410,7 @@ class boardForm(object):
         self.playerTwoCard_8.raise_()
         self.playerTwoCard_9.raise_()
         self.playerTwoCard_10.raise_()
+
         self.playerThreeCard_2.raise_()
         self.playerThreeCard_3.raise_()
         self.playerThreeCard_4.raise_()
@@ -415,6 +420,7 @@ class boardForm(object):
         self.playerThreeCard_8.raise_()
         self.playerThreeCard_9.raise_()
         self.playerThreeCard_10.raise_()
+
         self.playerFourCard_1.raise_()
         self.playerFourCard_2.raise_()
         self.playerFourCard_3.raise_()
@@ -433,12 +439,66 @@ class boardForm(object):
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
 
-        # if self.betting == 1:
-        #     self.window = QtWidgets.QMainWindow()
-        #     self.ui = betting.bettingForm()
-        #     self.ui.setupUi(self.window)
-        #     self.window.show()
+        # Ustawianie kart w zaleznosci od ilosci graczy
+        if self.playersNumber + self.computersNumber == 2:
 
+            self.playerOneLabel.setGeometry(QtCore.QRect(680, 100, 271, 31))
+            self.playerOneCard_1.setGeometry(QtCore.QRect(670, 160, 131, 171))
+            self.playerOneCard_2.setGeometry(QtCore.QRect(700, 160, 131, 171))
+            self.playerOneCard_3.setGeometry(QtCore.QRect(730, 160, 131, 171))
+            self.playerOneCard_4.setGeometry(QtCore.QRect(760, 160, 131, 171))
+            self.playerOneCard_5.setGeometry(QtCore.QRect(790, 160, 131, 171))
+            self.playerOneCard_6.setGeometry(QtCore.QRect(820, 160, 131, 171))
+            self.playerOneCard_7.setGeometry(QtCore.QRect(850, 160, 131, 171))
+            self.playerOneCard_8.setGeometry(QtCore.QRect(880, 160, 131, 171))
+            self.playerOneCard_9.setGeometry(QtCore.QRect(910, 160, 131, 171))
+            self.playerOneCard_10.setGeometry(QtCore.QRect(940, 160, 131, 171))
+
+            self.playerTwoLabel.setGeometry(QtCore.QRect(680, 430, 271, 31))
+            self.playerTwoCard_1.setGeometry(QtCore.QRect(670, 490, 131, 171))
+            self.playerTwoCard_2.setGeometry(QtCore.QRect(700, 490, 131, 171))
+            self.playerTwoCard_3.setGeometry(QtCore.QRect(730, 490, 131, 171))
+            self.playerTwoCard_4.setGeometry(QtCore.QRect(760, 490, 131, 171))
+            self.playerTwoCard_5.setGeometry(QtCore.QRect(790, 490, 131, 171))
+            self.playerTwoCard_6.setGeometry(QtCore.QRect(820, 490, 131, 171))
+            self.playerTwoCard_7.setGeometry(QtCore.QRect(850, 490, 131, 171))
+            self.playerTwoCard_8.setGeometry(QtCore.QRect(880, 490, 131, 171))
+            self.playerTwoCard_9.setGeometry(QtCore.QRect(910, 490, 131, 171))
+            self.playerTwoCard_10.setGeometry(QtCore.QRect(940, 490, 131, 171))
+
+            self.playerThreeCard_1.setStyleSheet("")
+            self.playerThreeCard_2.setStyleSheet("")
+            self.playerThreeCard_3.setStyleSheet("")
+            self.playerThreeCard_4.setStyleSheet("")
+            self.playerThreeCard_5.setStyleSheet("")
+            self.playerThreeCard_6.setStyleSheet("")
+            self.playerThreeCard_7.setStyleSheet("")
+            self.playerThreeCard_8.setStyleSheet("")
+            self.playerThreeCard_9.setStyleSheet("")
+            self.playerThreeCard_10.setStyleSheet("")
+
+            self.playerFourCard_1.setStyleSheet("")
+            self.playerFourCard_2.setStyleSheet("")
+            self.playerFourCard_3.setStyleSheet("")
+            self.playerFourCard_4.setStyleSheet("")
+            self.playerFourCard_5.setStyleSheet("")
+            self.playerFourCard_6.setStyleSheet("")
+            self.playerFourCard_7.setStyleSheet("")
+            self.playerFourCard_8.setStyleSheet("")
+            self.playerFourCard_9.setStyleSheet("")
+            self.playerFourCard_10.setStyleSheet("")
+
+        elif self.playersNumber + self.computersNumber == 3:
+            self.playerFourCard_1.setStyleSheet("")
+            self.playerFourCard_2.setStyleSheet("")
+            self.playerFourCard_3.setStyleSheet("")
+            self.playerFourCard_4.setStyleSheet("")
+            self.playerFourCard_5.setStyleSheet("")
+            self.playerFourCard_6.setStyleSheet("")
+            self.playerFourCard_7.setStyleSheet("")
+            self.playerFourCard_8.setStyleSheet("")
+            self.playerFourCard_9.setStyleSheet("")
+            self.playerFourCard_10.setStyleSheet("")
 
 
 
