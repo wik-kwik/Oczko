@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, registerEng, res
 import playOptions
+import rules
 
 
 class menuForm(object):
@@ -19,6 +20,7 @@ class menuForm(object):
         Form.resize(901, 616)
         Form.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setGeometry(QtCore.QRect(0, 0, 901, 601))
         self.widget.setObjectName("widget")
@@ -186,6 +188,7 @@ class menuForm(object):
         self.playButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(Form.close)
         self.rulesButton.clicked.connect(self.rules)
+        self.rulesButton.clicked.connect(Form.close)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -193,7 +196,10 @@ class menuForm(object):
         self.closeLabel.setText(_translate("Form", "X"))
 
     def rules(self):
-        print('zasady')
+        self.window = QtWidgets.QMainWindow()
+        self.ui = rules.rulesForm()
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def register(self):
         self.registerWindow = QtWidgets.QMainWindow()
@@ -203,10 +209,10 @@ class menuForm(object):
 
 
     def play(self):
-            self.playWindow = QtWidgets.QMainWindow()
-            self.ui = playOptions.playOptionsForm()
-            self.ui.setupUi(self.playWindow)
-            self.playWindow.show()
+        self.playWindow = QtWidgets.QMainWindow()
+        self.ui = playOptions.playOptionsForm()
+        self.ui.setupUi(self.playWindow)
+        self.playWindow.show()
 
     def rank(self):
         print('ranking')

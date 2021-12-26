@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>rulesText.png</file>
     <file>bettingBackground.png</file>
     <file>PRAJZ.png</file>
     <file>balance.png</file>
@@ -23,6 +24,7 @@
     <file>playerTwoInactive.png</file>
     <file>registerButtonInactive.png</file>
     <file>logInInactive.png</file>
+    <file>logOut.png</file>
     <file>registerButtonInactive.png</file>
     <file>easyTimingInactive.png</file>
     <file>hardTimingInactive.png</file>
