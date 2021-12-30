@@ -16,11 +16,13 @@ class Player:
         self.type = type
         self.points = 0
         self.playing = True  # sprawdzenie czy gracz uczestniczy w rundzie
+        self.cards_played = 0
 
     def start_round(self, deck):  # dobranie reki na start rundy
         self.hand = Hand()
         self.hand.add_card(deck.deal())
         self.hand.add_card(deck.deal())
+        self.cards_played += 2
         self.playing = True
 
 
@@ -111,6 +113,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
 
             if ask[0].lower() == 'h':
                 hit(deck, player.hand)
+                player.cards_played += 1
             elif ask[0].lower() == 's':
                 print("Player stands.")
                 player.playing = False
@@ -124,6 +127,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
             if ask is True:
                 print(player.name + " hits.")
                 hit(deck, player.hand)
+                player.cards_played += 1
 
             else:
                 print(player.name + " stands.")
@@ -135,6 +139,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
             if player.hand.value <= 17:
                 print(player.name + " hits.")
                 hit(deck, player.hand)
+                player.cards_played += 1
 
             else:
                 print(player.name + " stands.")
@@ -148,6 +153,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
                     if player.hand.value + 1 <= 21:
                         print(player.name + " hits.")
                         hit(deck, player.hand)
+                        player.cards_played += 1
 
                     else:
                         print(player.name + " stands.")
@@ -160,6 +166,7 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
             else:
                 print(player.name + " hits.")
                 hit(deck, player.hand)
+                player.cards_played += 1
 
             break
 
