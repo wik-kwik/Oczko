@@ -155,13 +155,15 @@ class registerEngForm(object):
             c = db.cursor()  # dodajemy kursor
 
             # c.execute("""CREATE TABLE users (
-            #                username text,
+            #                user_id integer PRIMARY KEY,
+            #                username text UNIQUE,
             #                password text,
             #                games_played integer,
             #                win_rate real,
             #                time_spent integer,
-            #                chips integer
+            #                coins integer
             #                )""")
+
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
@@ -170,26 +172,35 @@ class registerEngForm(object):
             games_played = 0
             win_rate = 0
             time_spent = 0
-            chips = 1000
+            coins = 1000
+            data = [
+                (username, password, games_played,
+                 win_rate, time_spent, coins)
+            ]
 
             if username == "" or password == "" or confirm == "":
                 self.statusLabel.setText("Please fill in all the required fields")
 
             elif password == confirm:
-                c.execute(
-                    "INSERT INTO users VALUES ('{}', '{}', {}, {}, {}, {})".format(username, password, games_played,
-                                                                                   win_rate, time_spent, chips))
-                db.commit()
-                print("Data has been inserted")
-                self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
-                self.statusLabel.setText("You have been registered!")
-                self.createButton.setEnabled(False)
+                try:
+                    c.executemany(
+                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,coins) VALUES (?,?,?,?,?,?)",
+                        data)
+                    db.commit()
+                    print("Data has been inserted")
+                    self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
+                    self.statusLabel.setText("You have been registered!")
+                    self.createButton.setEnabled(False)
 
-                c.execute("SELECT * FROM users")
+                    c.execute("SELECT * FROM users")
 
-                print(c.fetchall())
-                db.commit()
-                db.close()
+                    print(c.fetchall())
+                    db.commit()
+                    db.close()
+
+                except sql.IntegrityError as e:
+                    self.statusLabel.setText("This nickname is not available")
+
             else:
                 self.statusLabel.setText("Passwords don't match")
 

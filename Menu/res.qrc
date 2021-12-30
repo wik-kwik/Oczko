@@ -1,5 +1,17 @@
 <RCC>
   <qresource prefix="images">
+    <file>rulesText.png</file>
+    <file>bettingBackground.png</file>
+    <file>PRAJZ.png</file>
+    <file>balance.png</file>
+    <file>prize.png</file>
+    <file>coins.png</file>
+    <file>timeLeft.png</file>
+    <file>cardBackOne.png</file>
+    <file>hit.png</file>
+    <file>stand.png</file>
+    <file>wallet.png</file>
+    <file>2_of_clubs.png</file>
     <file>warningType3.png</file>
     <file>warningType2.png</file>
     <file>computerFourInactive.png</file>
@@ -12,6 +24,7 @@
     <file>playerTwoInactive.png</file>
     <file>registerButtonInactive.png</file>
     <file>logInInactive.png</file>
+    <file>logOut.png</file>
     <file>registerButtonInactive.png</file>
     <file>easyTimingInactive.png</file>
     <file>hardTimingInactive.png</file>
