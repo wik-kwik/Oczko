@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>warningType4.png</file>
     <file>rulesText.png</file>
     <file>bettingBackground.png</file>
     <file>PRAJZ.png</file>
