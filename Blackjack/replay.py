@@ -21,11 +21,10 @@ class Replay:  # powtorki
             for card in player.hand.cards:
                 first_hand += self.convert.convert_card_to_string(card)
 
-        self.round_replay.append(first_hand)
+        self.round_replay = [first_hand]
 
-    def add_move(self, decision, player_number, card, round_number):
-        move = str(round_number)
-        move += str(player_number)
+    def add_move(self, decision, player_number, card):
+        move = str(player_number)
         if decision is True:
             move += "H"
             move += self.convert.convert_card_to_string(card)
@@ -33,6 +32,9 @@ class Replay:  # powtorki
 
         else:
             move += "S"
+            self.round_replay.append(move)
+
+        print(self.replay)
 
     def add_round_to_game_replay(self):
         self.replay.append(self.round_replay)

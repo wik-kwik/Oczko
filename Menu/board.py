@@ -13,10 +13,11 @@ import betting
 
 
 class boardForm(object):
-    def __init__(self, playersNumber, computersNumber, betting):
+    def __init__(self, playersNumber, computersNumber, betting, players):
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
+        self.players = players
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
