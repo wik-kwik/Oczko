@@ -262,12 +262,6 @@ class menuForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-    def play(self):
-        self.playWindow = QtWidgets.QMainWindow()
-        self.ui = playOptions.playOptionsForm()
-        self.ui.setupUi(self.playWindow)
-        self.playWindow.show()
-
     def english(self):
         self.language = 1
         self.playIcon.setStyleSheet("border-image: url(:/images/play.png);")
@@ -282,3 +276,9 @@ class menuForm(object):
 
     def rank(self):
         print('ranking')
+
+    def play(self):
+        self.playWindow = QtWidgets.QMainWindow()
+        self.ui = playOptions.playOptionsForm(self.language)
+        self.ui.setupUi(self.playWindow)
+        self.playWindow.show()

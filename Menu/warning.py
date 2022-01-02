@@ -12,7 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions
 
 class warningForm(object):
-    def __init__(self, warningType):
+    def __init__(self, language, warningType):
+        self.language = language
         self.warningType=warningType
 
     def setupUi(self, Form):
@@ -60,7 +61,7 @@ class warningForm(object):
 
     def show_playOptions(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = playOptions.playOptionsForm()
+        self.ui = playOptions.playOptionsForm(self.language)
         self.ui.setupUi(self.window)
         QtCore.QTimer.singleShot(3000, self.window.show)
 

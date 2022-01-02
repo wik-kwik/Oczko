@@ -15,10 +15,8 @@ import playOptions
 
 
 class loginForm(object):
-
-
-
-    def __init__(self, numberOfPlayer, playersNumber, computersNumber, betting):
+    def __init__(self, language, numberOfPlayer, playersNumber, computersNumber, betting):
+        self.language = language
         self.numberOfPlayer = numberOfPlayer
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
@@ -233,6 +231,6 @@ class loginForm(object):
 
     def returnToUsers(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
+        self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()

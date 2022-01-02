@@ -13,7 +13,8 @@ import betting
 
 
 class boardForm(object):
-    def __init__(self, playersNumber, computersNumber, betting, players):
+    def __init__(self, language, playersNumber, computersNumber, betting, players):
+        self.language = language
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
