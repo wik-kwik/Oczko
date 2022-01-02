@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, loginEng, registerEng, board, betting
 import sqlite3 as sql
-from ..Blackjack.player import Player
 
 
 class usersForm(object):
@@ -191,6 +190,13 @@ class usersForm(object):
         self.playerOneRegister.setText("")
         self.playerOneRegister.setObjectName("playerOneRegister")
 
+        self.playerOneLogout = QtWidgets.QPushButton(Form)
+        self.playerOneLogout.setGeometry(QtCore.QRect(120, 261, 101, 31))
+        self.playerOneLogout.setStyleSheet("image: url(:images/logOut.png);\n"
+                                           "border: 0px;")
+        self.playerOneLogout.setText("")
+        self.playerOneLogout.setObjectName("playerOneLogout")
+
         self.playerTwoLogin = QtWidgets.QPushButton(Form)
         self.playerTwoLogin.setGeometry(QtCore.QRect(290, 221, 121, 31))
         self.playerTwoLogin.setStyleSheet("image: url(:/images/logIn.png);\n"
@@ -203,6 +209,14 @@ class usersForm(object):
                                              "border: 0px;")
         self.playerTwoRegister.setText("")
         self.playerTwoRegister.setObjectName("playerTwoRegister")
+
+        self.playerTwoLogout = QtWidgets.QPushButton(Form)
+        self.playerTwoLogout.setGeometry(QtCore.QRect(300, 261, 101, 31))
+        self.playerTwoLogout.setStyleSheet("image: url(:/images/logOut.png);\n"
+                                           "border: 0px;")
+        self.playerTwoLogout.setText("")
+        self.playerTwoLogout.setObjectName("playerTwoLogout")
+
         self.playerThreeRegister = QtWidgets.QPushButton(Form)
         self.playerThreeRegister.setGeometry(QtCore.QRect(120, 381, 101, 31))
         self.playerThreeRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
@@ -215,6 +229,14 @@ class usersForm(object):
                                             "border: 0px;")
         self.playerThreeLogin.setText("")
         self.playerThreeLogin.setObjectName("playerThreeLogin")
+
+        self.playerThreeLogout = QtWidgets.QPushButton(Form)
+        self.playerThreeLogout.setGeometry(QtCore.QRect(120, 381, 101, 31))
+        self.playerThreeLogout.setStyleSheet("image: url(:/images/logOut.png);\n"
+                                             "border: 0px;")
+        self.playerThreeLogout.setText("")
+        self.playerThreeLogout.setObjectName("playerThreeLogout")
+
         self.playerFourRegister = QtWidgets.QPushButton(Form)
         self.playerFourRegister.setGeometry(QtCore.QRect(300, 381, 101, 31))
         self.playerFourRegister.setStyleSheet("image: url(:/images/registerButton.png);\n"
@@ -227,6 +249,13 @@ class usersForm(object):
                                            "border: 0px;")
         self.playerFourLogin.setText("")
         self.playerFourLogin.setObjectName("playerFourLogin")
+
+        self.playerFourLogout = QtWidgets.QPushButton(Form)
+        self.playerFourLogout.setGeometry(QtCore.QRect(300, 381, 101, 31))
+        self.playerFourLogout.setStyleSheet("image: url(:/images/logOut.png);\n"
+                                            "border: 0px;")
+        self.playerFourLogout.setText("")
+        self.playerFourLogout.setObjectName("playerFourLogout")
 
         self.compTwoMediumButton = QtWidgets.QPushButton(Form)
         self.compTwoMediumButton.setGeometry(QtCore.QRect(333, 481, 61, 31))
@@ -312,6 +341,10 @@ class usersForm(object):
         self.playerTwoNickname.raise_()
         self.playerThreeNickname.raise_()
         self.playerFourNickname.raise_()
+        self.playerOneLogout.raise_()
+        self.playerTwoLogout.raise_()
+        self.playerThreeLogout.raise_()
+        self.playerFourLogout.raise_()
         self.playerOneLogin.raise_()
         self.playerOneRegister.raise_()
         self.compTwoLabel.raise_()
@@ -367,6 +400,10 @@ class usersForm(object):
         if self.computersNumber == 4:
             self.fourComputers()
 
+        # self.first_player()
+        # self.second_player()
+        # self.third_player()
+        # self.fourth_player()
 
         # Obsługa przycisków
         self.returnButton.clicked.connect(self.returnToOptions)
@@ -382,10 +419,10 @@ class usersForm(object):
 
 
 
-        # self.playerOneLogin.clicked.connect(self.show_login)
-        # self.playerTwoLogin.clicked.connect(self.show_login)
-        # self.playerThreeLogin.clicked.connect(self.show_login)
-        # self.playerFourLogin.clicked.connect(self.show_login)
+        self.playerOneLogin.clicked.connect(Form.close)
+        self.playerTwoLogin.clicked.connect(Form.close)
+        self.playerThreeLogin.clicked.connect(Form.close)
+        self.playerFourLogin.clicked.connect(Form.close)
 
         # self.playerOneRegister.clicked.connect(self.show_register)
         # self.playerTwoRegister.clicked.connect(self.show_register)
@@ -426,9 +463,13 @@ class usersForm(object):
                                               "border: 0px;")
 
     def onePlayer(self):
+        self.first_player()
+
+
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerOneLogout.clicked.connect(self.logout_one)
 
         self.playerTwoLabel.setStyleSheet("image: url(:/images/playerTwoInactive.png);")
         self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
@@ -448,12 +489,18 @@ class usersForm(object):
                                               "border: 0px;")
 
     def twoPlayers(self):
+        self.first_player()
+        self.second_player()
+
+
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerOneLogout.clicked.connect(self.logout_one)
         self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerTwoLogout.clicked.connect(self.logout_two)
 
         self.playerThreeLabel.setStyleSheet("image: url(:/images/playerThreeInactive.png);")
         self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
@@ -468,15 +515,23 @@ class usersForm(object):
                                               "border: 0px;")
 
     def threePlayers(self):
+        self.first_player()
+        self.second_player()
+        self.third_player()
+
+
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerOneLogout.clicked.connect(self.logout_one)
         self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerTwoLogout.clicked.connect(self.logout_two)
         self.playerThreeLogin.clicked.connect(self.third_player)
         self.playerThreeLogin.clicked.connect(self.show_login)
         self.playerThreeRegister.clicked.connect(self.show_register)
+        self.playerThreeLogout.clicked.connect(self.logout_three)
 
         self.playerFourLabel.setStyleSheet("image: url(:/images/playerFourInactive.png);")
 
@@ -486,18 +541,27 @@ class usersForm(object):
                                               "border: 0px;")
 
     def fourPlayers(self):
+        self.first_player()
+        self.second_player()
+        self.third_player()
+        self.fourth_player()
+
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
+        self.playerOneLogout.clicked.connect(self.logout_one)
         self.playerTwoLogin.clicked.connect(self.second_player)
         self.playerTwoLogin.clicked.connect(self.show_login)
         self.playerTwoRegister.clicked.connect(self.show_register)
+        self.playerTwoLogout.clicked.connect(self.logout_two)
         self.playerThreeLogin.clicked.connect(self.third_player)
         self.playerThreeLogin.clicked.connect(self.show_login)
         self.playerThreeRegister.clicked.connect(self.show_register)
+        self.playerThreeLogout.clicked.connect(self.logout_three)
         self.playerFourLogin.clicked.connect(self.fourth_player)
         self.playerFourLogin.clicked.connect(self.show_login)
         self.playerFourRegister.clicked.connect(self.show_register)
+        self.playerFourLogout.clicked.connect(self.logout_four)
 
     def zeroComputers(self):
         self.compOneLabel.setStyleSheet("image: url(:/images/computerOneInactive.png);")
@@ -815,40 +879,72 @@ class usersForm(object):
                                             "border: 0px;")
 
     def first_player(self):
+
+        result = self.assign_player(1)
+
         print("1")
         self.numberOfPlayer.append(1)
         print(self.numberOfPlayer)
 
-        self.playerOneLogin.setVisible(False)
-        self.playerOneNickname.setText(self.set_username(1))
-     #   self.update_id(self.numberOfPlayer)
+        if result is not None:
+
+            self.playerOneLogin.setVisible(False)
+            self.playerOneRegister.setVisible(False)
+
+            self.playerOneNickname.setText(self.set_username(1))
+            #   self.update_id(self.numberOfPlayer)
+        else:
+            print("xd")
+
 
     def second_player(self):
+        result = self.assign_player(2)
+
         print("2")
         self.numberOfPlayer.append(2)
         print(self.numberOfPlayer)
 
-        self.playerTwoLogin.setVisible(False)
-        self.playerTwoNickname.setText(self.set_username(2))
-      #  self.update_id(self.numberOfPlayer)
+        if result is not None:
+            self.playerTwoLogin.setVisible(False)
+            self.playerTwoRegister.setVisible(False)
+
+            self.playerTwoNickname.setText(self.set_username(2))
+            #  self.update_id(self.numberOfPlayer)
+
+        else:
+            print("xd")
 
     def third_player(self):
+        result = self.assign_player(3)
         print("3")
         self.numberOfPlayer.append(3)
         print(self.numberOfPlayer)
 
-        self.playerThreeLogin.setVisible(False)
-        self.playerThreeNickname.setText(self.set_username(3))
-     #   self.update_id(self.numberOfPlayer)
+        if result is not None:
+            self.playerThreeLogin.setVisible(False)
+            self.playerThreeRegister.setVisible(False)
+
+            self.playerThreeNickname.setText(self.set_username(3))
+            #   self.update_id(self.numberOfPlayer)
+
+        else:
+            print("xd")
 
     def fourth_player(self):
+        result = self.assign_player(4)
+
         print("4")
         self.numberOfPlayer.append(4)
         print(self.numberOfPlayer)
 
-        self.playerFourLogin.setVisible(False)
-        self.playerFourNickname.setText(self.set_username(4))
-      #  self.update_id(self.numberOfPlayer)
+        if result is not None:
+            self.playerFourLogin.setVisible(False)
+            self.playerFourRegister.setVisible(False)
+
+            self.playerFourNickname.setText(self.set_username(4))
+            #  self.update_id(self.numberOfPlayer)
+        else:
+            print("xd")
 
     def set_username(self,user_id):
         try:
@@ -859,8 +955,30 @@ class usersForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result[1])
-            return result[1]
+            #print(result[1])
+
+            #return result[1]
+
+            if result is not None:
+                return result[1]
+            else:
+                return "-"
+
+        except sql.Error as e:
+            print("huj")
+
+    def assign_player(self,user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            # query = "DELETE FROM logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            return result
+
 
         except sql.Error as e:
             print("huj")
@@ -874,16 +992,13 @@ class usersForm(object):
 
     def show_login(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.loginForm(self.numberOfPlayer)
+        self.ui = loginEng.loginForm(self.numberOfPlayer, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
 
     def openBoard(self):
         self.window = QtWidgets.QMainWindow()
-        players = []
-        # dodanie graczy do planszy
-        # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
-        self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting, players)
+        self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
         self.popups.append(self.window)
@@ -900,4 +1015,71 @@ class usersForm(object):
 
         elif self.betting == 0:
             self.openBoard()
+
+    def logout_one(self):
+        print("siema")
+        # self.playerOneNickname.setVisible(False)
+        # self.playerOneLogout.setVisible(False)
+
+        self.numberOfPlayer.remove(1)
+        print(self.numberOfPlayer)
+        self.delete_user(1)
+
+        self.playerOneRegister.setVisible(True)
+        self.playerOneLogin.setVisible(True)
+
+
+    def logout_two(self):
+        print("siema")
+        # self.playerOneNickname.setVisible(False)
+        # self.playerOneLogout.setVisible(False)
+
+        self.numberOfPlayer.remove(2)
+        print(self.numberOfPlayer)
+        self.delete_user(2)
+
+        self.playerTwoRegister.setVisible(True)
+        self.playerTwoLogin.setVisible(True)
+
+
+    def logout_three(self):
+        print("siema")
+        # self.playerOneNickname.setVisible(False)
+        # self.playerOneLogout.setVisible(False)
+
+        self.numberOfPlayer.remove(3)
+        print(self.numberOfPlayer)
+        self.delete_user(3)
+
+        self.playerThreeRegister.setVisible(True)
+        self.playerThreeLogin.setVisible(True)
+
+    def logout_four(self):
+        print("siema")
+        # self.playerOneNickname.setVisible(False)
+        # self.playerOneLogout.setVisible(False)
+
+        self.numberOfPlayer.remove(4)
+        print(self.numberOfPlayer)
+        self.delete_user(4)
+
+        self.playerFourRegister.setVisible(True)
+        self.playerFourLogin.setVisible(True)
+
+
+
+    def delete_user(self, user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            # query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            query = "DELETE FROM logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+
+        except sql.Error as e:
+            print("huj")
+
+
 
