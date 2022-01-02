@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, loginEng, registerEng, board, betting
 import sqlite3 as sql
-from ..Blackjack.player import Player
+# from ..Blackjack.player import Player
 
 
 class usersForm(object):

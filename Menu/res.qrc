@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="images">
+    <file>logoPL.png</file>
+    <file>playPL.png</file>
+    <file>settingsPL.png</file>
+    <file>cardBackOneInactive.png</file>
+    <file>cardBackTwoInactive.png</file>
+    <file>cardBackTwo.png</file>
+    <file>settingsEng.png</file>
+    <file>userIcon.png</file>
     <file>warningType4.png</file>
     <file>rulesText.png</file>
     <file>bettingBackground.png</file>

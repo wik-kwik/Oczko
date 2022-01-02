@@ -4,17 +4,34 @@ from PyQt5.QtWidgets import QApplication
 
 import menu
 
-class MyWindow(QtWidgets.QMainWindow, menu.menuForm):
+class MainWindow(QtWidgets.QWidget):
     def __init__(self):
-        super(MyWindow, self).__init__()
-        self.setupUi(self)
+        self.language = 1
+        super(MainWindow, self).__init__()
+        self.initUI()
 
     def close_window(self):
         self.close()
 
+    def initUI(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.center()
 
-app = QApplication(sys.argv)
-window = MyWindow()
-window.show()
-sys.exit(app.exec_())
+    def center(self):
+        frameGm = self.frameGeometry()
+        screen = QApplication.desktop().screenNumber(QApplication.desktop().cursor().pos())
+        centerPoint = QApplication.desktop().screenGeometry(screen).center()
+        frameGm.moveCenter(centerPoint)
+        self.move(frameGm.topLeft())
+
+def main():
+    app = QApplication(sys.argv)
+    mainWindow = MainWindow()
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
 

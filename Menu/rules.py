@@ -13,6 +13,9 @@ import menu
 
 
 class rulesForm(object):
+    def __init__(self, language):
+        self.language = language
+
     def setupUi(self, rulesForm):
         rulesForm.setObjectName("rulesForm")
         rulesForm.resize(901, 616)
@@ -35,13 +38,16 @@ class rulesForm(object):
         self.closeButton.clicked.connect(rulesForm.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
+        if self.language == 2:
+            print('chuj')
+
     def retranslateUi(self, rulesForm):
         _translate = QtCore.QCoreApplication.translate
         rulesForm.setWindowTitle(_translate("rulesForm", "Form"))
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = menu.menuForm()
+        self.ui = menu.menuForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 

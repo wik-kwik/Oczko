@@ -12,9 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, registerEng, res
 import playOptions
 import rules
+import settings
 
 
 class menuForm(object):
+    def __init__(self, language):
+        # Ustawienia języka, 1 - angielski, 2 - polski
+        self.language = language
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(901, 616)
@@ -27,7 +32,7 @@ class menuForm(object):
         self.backgroundPicture = QtWidgets.QLabel(self.widget)
         self.backgroundPicture.setGeometry(QtCore.QRect(-10, 0, 441, 611))
         self.backgroundPicture.setStyleSheet("border-image: url(:/images/background.jpg);\n"
-"")
+                                             "")
         self.backgroundPicture.setText("")
         self.backgroundPicture.setObjectName("backgroundPicture")
         self.backgroundSolid = QtWidgets.QLabel(self.widget)
@@ -38,8 +43,8 @@ class menuForm(object):
         self.rankLabel = QtWidgets.QLabel(self.widget)
         self.rankLabel.setGeometry(QtCore.QRect(510, 420, 121, 111))
         self.rankLabel.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
-"border-radius:50px;\n"
-"")
+                                     "border-radius:50px;\n"
+                                     "")
         self.rankLabel.setText("")
         self.rankLabel.setObjectName("rankLabel")
         self.rankIcon = QtWidgets.QLabel(self.widget)
@@ -47,16 +52,28 @@ class menuForm(object):
         self.rankIcon.setStyleSheet("border-image: url(:/images/rank.png);")
         self.rankIcon.setText("")
         self.rankIcon.setObjectName("rankIcon")
+        self.rankLabel = QtWidgets.QLabel(self.widget)
+        self.rankLabel.setGeometry(QtCore.QRect(460, 420, 101, 101))
+        self.rankLabel.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
+                                     "border-radius:50px;\n"
+                                     "")
+        self.rankLabel.setText("")
+        self.rankLabel.setObjectName("rankLabel")
+        self.rankIcon = QtWidgets.QLabel(self.widget)
+        self.rankIcon.setGeometry(QtCore.QRect(466, 420, 91, 91))
+        self.rankIcon.setStyleSheet("border-image: url(:/images/rank.png);")
+        self.rankIcon.setText("")
+        self.rankIcon.setObjectName("rankIcon")
         self.registerIcon = QtWidgets.QLabel(self.widget)
-        self.registerIcon.setGeometry(QtCore.QRect(700, 440, 81, 81))
+        self.registerIcon.setGeometry(QtCore.QRect(761, 433, 71, 71))
         self.registerIcon.setStyleSheet("border-image: url(:/images/register.png);")
         self.registerIcon.setText("")
         self.registerIcon.setObjectName("registerIcon")
         self.registerLabel = QtWidgets.QLabel(self.widget)
-        self.registerLabel.setGeometry(QtCore.QRect(680, 420, 121, 111))
+        self.registerLabel.setGeometry(QtCore.QRect(745, 420, 101, 101))
         self.registerLabel.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
-"border-radius:50px;\n"
-"")
+                                         "border-radius:50px;\n"
+                                         "")
         self.registerLabel.setText("")
         self.registerLabel.setObjectName("registerLabel")
         self.playIcon = QtWidgets.QLabel(self.widget)
@@ -70,12 +87,12 @@ class menuForm(object):
         self.logo.setText("")
         self.logo.setObjectName("logo")
         self.rankButton = QtWidgets.QPushButton(self.widget)
-        self.rankButton.setGeometry(QtCore.QRect(510, 420, 121, 111))
+        self.rankButton.setGeometry(QtCore.QRect(460, 420, 101, 101))
         self.rankButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.rankButton.setText("")
         self.rankButton.setObjectName("rankButton")
         self.registerButton = QtWidgets.QPushButton(self.widget)
-        self.registerButton.setGeometry(QtCore.QRect(680, 420, 121, 111))
+        self.registerButton.setGeometry(QtCore.QRect(752, 420, 91, 101))
         self.registerButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.registerButton.setText("")
         self.registerButton.setObjectName("registerButton")
@@ -152,8 +169,33 @@ class menuForm(object):
         self.settingsButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.settingsButton.setText("")
         self.settingsButton.setObjectName("settingsButton")
+        self.closeButton.setObjectName("closeButton")
+        self.accountLabel = QtWidgets.QLabel(self.widget)
+        self.accountLabel.setGeometry(QtCore.QRect(602, 420, 101, 101))
+        self.accountLabel.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
+                                        "border-radius:50px;\n"
+                                        "")
+        self.accountLabel.setText("")
+        self.accountLabel.setObjectName("accountLabel")
+        self.accountButton = QtWidgets.QPushButton(self.widget)
+        self.accountButton.setGeometry(QtCore.QRect(600, 420, 101, 101))
+        self.accountButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
+        self.accountButton.setText("")
+        self.accountButton.setObjectName("accountButton")
+        self.accountIcon = QtWidgets.QLabel(self.widget)
+        self.accountIcon.setGeometry(QtCore.QRect(628, 442, 51, 51))
+        self.accountIcon.setStyleSheet("border-image: url(:/images/userIcon.png);")
+        self.accountIcon.setText("")
+        self.accountIcon.setObjectName("accountIcon")
 
-
+        if self.language == 1:
+            self.playIcon.setStyleSheet("border-image: url(:/images/play.png);")
+            self.logo.setStyleSheet("border-image: url(:/images/logo.png);")
+            self.logo.setGeometry(QtCore.QRect(470, 60, 391, 81))
+        elif self.language == 2:
+            self.logo.setStyleSheet("border-image: url(:/images/logoPL.png);")
+            self.logo.setGeometry(QtCore.QRect(530, 60, 281, 81))
+            self.playIcon.setStyleSheet("border-image: url(:/images/playPL.png);")
 
         self.backgroundPicture.raise_()
         self.backgroundSolid.raise_()
@@ -178,6 +220,9 @@ class menuForm(object):
         self.historyIcon.raise_()
         self.historyButton.raise_()
         self.settingsButton.raise_()
+        self.accountLabel.raise_()
+        self.accountButton.raise_()
+        self.accountIcon.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -189,6 +234,10 @@ class menuForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.rulesButton.clicked.connect(self.rules)
         self.rulesButton.clicked.connect(Form.close)
+        self.settingsButton.clicked.connect(self.settings)
+        self.settingsButton.clicked.connect(Form.close)
+        self.englishButton.clicked.connect(self.english)
+        self.polishButton.clicked.connect(self.polish)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -197,7 +246,7 @@ class menuForm(object):
 
     def rules(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = rules.rulesForm()
+        self.ui = rules.rulesForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -207,6 +256,11 @@ class menuForm(object):
         self.ui.setupUi(self.registerWindow)
         self.registerWindow.show()
 
+    def settings(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = settings.settingsForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def play(self):
         self.playWindow = QtWidgets.QMainWindow()
@@ -214,6 +268,17 @@ class menuForm(object):
         self.ui.setupUi(self.playWindow)
         self.playWindow.show()
 
+    def english(self):
+        self.language = 1
+        self.playIcon.setStyleSheet("border-image: url(:/images/play.png);")
+        self.logo.setStyleSheet("border-image: url(:/images/logo.png);")
+        self.logo.setGeometry(QtCore.QRect(470, 60, 391, 81))
+
+    def polish(self):
+        self.language = 2
+        self.logo.setStyleSheet("border-image: url(:/images/logoPL.png);")
+        self.logo.setGeometry(QtCore.QRect(530, 60, 281, 81))
+        self.playIcon.setStyleSheet("border-image: url(:/images/playPL.png);")
+
     def rank(self):
         print('ranking')
-
