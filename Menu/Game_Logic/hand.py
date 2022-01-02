@@ -1,4 +1,4 @@
-from cards import Cards
+from .cards import Cards
 
 cards = Cards()
 ranks = cards.ranks

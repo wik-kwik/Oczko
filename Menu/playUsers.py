@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, loginEng, registerEng, board, betting
 import sqlite3 as sql
-from ..Blackjack.player import Player
+from Game_Logic.player import Player
 
 
 class usersForm(object):
@@ -883,6 +883,7 @@ class usersForm(object):
         players = []
         # dodanie graczy do planszy
         # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
+        player = Player ("XXD", "XXD ", 1)
         self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting, players)
         self.ui.setupUi(self.window)
         self.window.show()
