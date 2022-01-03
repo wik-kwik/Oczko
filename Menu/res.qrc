@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="images">
+    <file>loginENG.png</file>
+    <file>loginPL.png</file>
     <file>nextInactive.png</file>
     <file>betsPL.png</file>
     <file>noBetsPL.png</file>

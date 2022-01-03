@@ -33,38 +33,18 @@ class loginForm(object):
         font = QtGui.QFont()
         font.setBold(False)
         self.gradientBackground.setFont(font)
-        self.gradientBackground.setStyleSheet("background-color: rgb(16, 31, 25);\n"
-"border-color: 3 px rgb(255, 170, 0);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0.0170455, stop:0 rgba(24, 47, 38, 255), stop:0.0454545 rgba(24, 47, 38, 255), stop:0.0795455 rgba(30, 58, 47, 255), stop:0.369318 rgba(255, 170, 0, 255), stop:0.465909 rgba(255, 170, 0, 255), stop:0.517045 rgba(255, 170, 0, 255), stop:0.528409 rgba(255, 170, 0, 255), stop:0.670455 rgba(255, 170, 0, 255), stop:0.935 rgba(24, 47, 38, 255));\n"
-"")
         self.gradientBackground.setText("")
         self.gradientBackground.setObjectName("gradientBackground")
-        self.background = QtWidgets.QLabel(Form)
-        self.background.setGeometry(QtCore.QRect(90, 120, 211, 301))
-        self.background.setStyleSheet("background-color: rgb(24, 47, 38);\n"
-"background-color: rgb(24, 47, 38);\n"
-"border-radius:10px;\n"
-"")
-        self.background.setText("")
-        self.background.setObjectName("background")
-        self.loginText = QtWidgets.QLabel(Form)
-        self.loginText.setGeometry(QtCore.QRect(136, 130, 121, 51))
-        font = QtGui.QFont()
-        font.setPointSize(25)
-        font.setBold(False)
-        self.loginText.setFont(font)
-        self.loginText.setStyleSheet("color: rgb(255, 170, 0);")
-        self.loginText.setObjectName("loginText")
         self.usernameLine = QtWidgets.QLineEdit(Form)
         self.usernameLine.setGeometry(QtCore.QRect(127, 210, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.usernameLine.setFont(font)
         self.usernameLine.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:2px solid rgba(0, 0, 0, 0);\n"
-"border-bottom-color: rgb(255, 170, 0);\n"
-"color: rgb(80, 93, 94);\n"
-"padding-bottom: 7px;")
+                                        "border:2px solid rgba(0, 0, 0, 0);\n"
+                                        "border-bottom-color: rgb(24, 47, 38);\n"
+                                        "color: rgb(80, 93, 94);\n"
+                                        "padding-bottom: 7px;")
         self.usernameLine.setAlignment(QtCore.Qt.AlignCenter)
         self.usernameLine.setObjectName("usernameLine")
         self.passwordLine = QtWidgets.QLineEdit(Form)
@@ -73,10 +53,10 @@ class loginForm(object):
         font.setPointSize(11)
         self.passwordLine.setFont(font)
         self.passwordLine.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:2px solid rgba(0, 0, 0, 0);\n"
-"border-bottom-color: rgb(255, 170, 0);\n"
-"color: rgb(80, 93, 94);\n"
-"padding-bottom: 7px;")
+                                        "border:2px solid rgba(0, 0, 0, 0);\n"
+                                        "border-bottom-color: rgb(24, 47, 38);\n"
+                                        "color: rgb(80, 93, 94);\n"
+                                        "padding-bottom: 7px;")
         self.passwordLine.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordLine.setAlignment(QtCore.Qt.AlignCenter)
         self.passwordLine.setDragEnabled(False)
@@ -88,54 +68,53 @@ class loginForm(object):
         font.setBold(False)
         self.loginButton.setFont(font)
         self.loginButton.setStyleSheet("QPushButton#loginButton{\n"
-"    background-color: rgb(255, 170, 0);\n"
-"    color: rgb(255, 104, 3);\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QPushButton#loginButton:pressed{\n"
-"    padding-left:3px;\n"
-"    padding-top:3px;\n"
-"    background-color: rgb(255, 206, 12);\n"
-"    background-position:calc(100%-10px)center;\n"
-"}\n"
-"\n"
-"QPushButton#loginButton:hover{\n"
-"    background-color: rgb(255, 206, 12);\n"
-"}\n"
-"")
+                                       "    background-color: rgb(24, 47, 38);\n"
+                                       "    color: rgb(255, 183, 16);\n"
+                                       "    border-radius: 5px;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton#loginButton:pressed{\n"
+                                       "    padding-left:3px;\n"
+                                       "    padding-top:3px;\n"
+                                       "    \n"
+                                       "    background-color: rgb(48, 94, 66);\n"
+                                       "    background-position:calc(100%-10px)center;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton#pushButton:hover{\n"
+                                       "    background-color: rgb(255, 206, 12);\n"
+                                       "}\n"
+                                       "")
         self.loginButton.setObjectName("loginButton")
         self.statusLabel = QtWidgets.QLabel(Form)
-        self.statusLabel.setGeometry(QtCore.QRect(95, 170, 201, 51))
+        self.statusLabel.setGeometry(QtCore.QRect(95, 163, 201, 51))
         font = QtGui.QFont()
         font.setBold(False)
         self.statusLabel.setFont(font)
         self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
-        self.statusLabel.setText("")
         self.statusLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.statusLabel.setObjectName("statusLabel")
-        self.changePassword = QtWidgets.QLabel(Form)
-        self.changePassword.setGeometry(QtCore.QRect(144, 390, 101, 31))
-        font = QtGui.QFont()
-        font.setUnderline(True)
-        self.changePassword.setFont(font)
-        self.changePassword.setStyleSheet("color: rgb(59, 115, 92);\n"
-"color: rgb(48, 94, 66);")
-        self.changePassword.setAlignment(QtCore.Qt.AlignCenter)
-        self.changePassword.setObjectName("changePassword")
         self.closeLabel = QtWidgets.QLabel(Form)
         self.closeLabel.setGeometry(QtCore.QRect(324, 90, 16, 21))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(False)
         self.closeLabel.setFont(font)
-        self.closeLabel.setStyleSheet("color: rgb(255, 170, 0);")
+        self.closeLabel.setStyleSheet("color: rgb(24, 47, 38);")
         self.closeLabel.setObjectName("closeLabel")
         self.closeButton = QtWidgets.QPushButton(Form)
         self.closeButton.setGeometry(QtCore.QRect(322, 95, 14, 17))
         self.closeButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
+
+        self.gradientBackground.raise_()
+        self.closeLabel.raise_()
+        self.closeButton.raise_()
+        self.loginButton.raise_()
+        self.passwordLine.raise_()
+        self.usernameLine.raise_()
+        self.statusLabel.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -154,18 +133,32 @@ class loginForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.returnToUsers)
 
+        # Obsługa języków
+        if self.language == 1:
+            self.gradientBackground.setStyleSheet("image: url(:/images/loginENG.png);")
+        if self.language == 2:
+            self.gradientBackground.setStyleSheet("image: url(:/images/loginPL.png);")
+
+
+
 
 
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.loginText.setText(_translate("Form", "LOG IN"))
-        self.usernameLine.setPlaceholderText(_translate("Form", "USERNAME"))
-        self.passwordLine.setPlaceholderText(_translate("Form", "PASSWORD"))
-        self.loginButton.setText(_translate("Form", "LOG IN"))
-        self.changePassword.setText(_translate("Form", "Change password"))
         self.closeLabel.setText(_translate("Form", "x"))
+        # Obsługa języków
+        if self.language == 1:
+            self.usernameLine.setPlaceholderText(_translate("Form", "USERNAME"))
+            self.passwordLine.setPlaceholderText(_translate("Form", "PASSWORD"))
+            self.loginButton.setText(_translate("Form", "LOG IN"))
+        if self.language == 2:
+            self.usernameLine.setPlaceholderText(_translate("Form", "LOGIN"))
+            self.passwordLine.setPlaceholderText(_translate("Form", "HASŁO"))
+            self.loginButton.setText(_translate("Form", "ZALOGUJ SIĘ"))
+
+
 
     def login(self):
         try:
@@ -189,14 +182,23 @@ class loginForm(object):
 
 
             if username == "" or password == "":
-                self.statusLabel.setText("Please fill in all the required fields")
+                if self.language == 1:
+                    self.statusLabel.setText("Please fill in all the required fields")
+                if self.language == 2:
+                    self.statusLabel.setText("Wypełnij wszystkie pola")
             elif result == None:
-                self.statusLabel.setText("Incorrect username or password")
+                if self.language == 1:
+                    self.statusLabel.setText("Incorrect username or password")
+                if self.language == 2:
+                    self.statusLabel.setText("Niepoprawna nazwa lub hasło")
             else:
                 self.playerNickname = username
                 # playUsers.usersForm.loginInfo(self.loginStatus, self.playerNickname)
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
-                self.statusLabel.setText("You are logged in")
+                if self.language == 1:
+                    self.statusLabel.setText("You are logged in")
+                if self.language == 2:
+                    self.statusLabel.setText("Zalogowano")
                 self.loginButton.setEnabled(False)
 
                 try:
@@ -209,7 +211,10 @@ class loginForm(object):
                 except sql.Error as e:
                     self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
                     self.loginButton.setEnabled(True)
-                    self.statusLabel.setText("This user is already logged in")
+                    if self.language == 1:
+                        self.statusLabel.setText("This user is already logged in")
+                    if self.language == 2:
+                        self.statusLabel.setText("Ten użytkownik jest już zalogowany")
 
 
         except sql.Error as e:
