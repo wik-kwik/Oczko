@@ -9,17 +9,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDesktopWidget, QGridLayout
 import menu, res, playUsers, warning
 
 
 class playOptionsForm(object):
-    def __init__(self):
-            self.playersNumber = 0
-            self.computersNumber = 0
-            self.betting = 3
-            self.warningType = 0
-
+    def __init__(self, language):
+        self.language = language
+        self.playersNumber = 0
+        self.computersNumber = 0
+        self.betting = 3
+        self.warningType = 0
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -39,8 +38,8 @@ class playOptionsForm(object):
         self.backgroundDark = QtWidgets.QLabel(Form)
         self.backgroundDark.setGeometry(QtCore.QRect(20, 120, 471, 571))
         self.backgroundDark.setStyleSheet("background-color:rgba(0, 0, 0, 100);\n"
-"border-radius:10px;\n"
-"")
+                                          "border-radius:10px;\n"
+                                          "")
         self.backgroundDark.setText("")
         self.backgroundDark.setObjectName("backgroundDark")
         self.returnIcon = QtWidgets.QLabel(Form)
@@ -182,7 +181,7 @@ class playOptionsForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        #Obsługa przycisków
+        # Obsługa przycisków
         self.zeroPlayersButton.clicked.connect(self.zeroPlayers)
         self.onePlayerButton.clicked.connect(self.onePlayer)
         self.twoPlayersButton.clicked.connect(self.twoPlayers)
@@ -200,6 +199,15 @@ class playOptionsForm(object):
         self.nextButton.clicked.connect(self.userSettings)
         self.nextButton.clicked.connect(Form.hide)
 
+        self.onePlayerButton.clicked.connect(self.betsVisibility)
+        self.twoPlayersButton.clicked.connect(self.betsVisibility)
+        self.threePlayersButton.clicked.connect(self.betsVisibility)
+        self.fourPlayersButton.clicked.connect(self.betsVisibility)
+        self.zeroPlayersButton.clicked.connect(self.betsVisibility)
+        self.oneComputerButton.clicked.connect(self.betsVisibility)
+        self.twoComputersButton.clicked.connect(self.betsVisibility)
+        self.threeComputersButton.clicked.connect(self.betsVisibility)
+        self.fourComputersButton.clicked.connect(self.betsVisibility)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -207,143 +215,149 @@ class playOptionsForm(object):
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = menu.menuForm()
+        self.ui = menu.menuForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 
     # Paraolimpiada estetyczna - wygaszanie nieużytych opcji
 
-
     def zeroPlayers(self):
-            self.playersNumber = 0
-            print(self.playersNumber)
-            self.zeroPlayersButton.setStyleSheet("image: url(:/images/zero.png);")
-            self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.playersNumber = 0
+        self.zeroPlayersButton.setStyleSheet("image: url(:/images/zero.png);")
+        self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def onePlayer(self):
-            self.playersNumber = 1
-            self.onePlayerButton.setStyleSheet("image: url(:/images/one.png);")
-            self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.playersNumber = 1
+        self.onePlayerButton.setStyleSheet("image: url(:/images/one.png);")
+        self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def twoPlayers(self):
-            self.playersNumber = 2
-            self.twoPlayersButton.setStyleSheet("image: url(:/images/two.png);")
-            self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.playersNumber = 2
+        self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
+        self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+        self.twoPlayersButton.setStyleSheet("image: url(:/images/two.png);")
+        self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def threePlayers(self):
-            self.playersNumber = 3
-            self.threePlayersButton.setStyleSheet("image: url(:/images/three.png);")
-            self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.playersNumber = 3
+        self.threePlayersButton.setStyleSheet("image: url(:/images/three.png);")
+        self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def fourPlayers(self):
-            self.playersNumber = 4
-            self.fourPlayersButton.setStyleSheet("image: url(:/images/four.png);")
-            self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.playersNumber = 4
+        self.fourPlayersButton.setStyleSheet("image: url(:/images/four.png);")
+        self.zeroPlayersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
 
     def zeroComputers(self):
-            self.computersNumber = 0
-            self.zeroComputersButton.setStyleSheet("image: url(:/images/zero.png);")
-            self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.computersNumber = 0
+        self.zeroComputersButton.setStyleSheet("image: url(:/images/zero.png);")
+        self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def oneComputer(self):
-            self.computersNumber = 1
-            self.oneComputerButton.setStyleSheet("image: url(:/images/one.png);")
-            self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.computersNumber = 1
+        self.oneComputerButton.setStyleSheet("image: url(:/images/one.png);")
+        self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def twoComputers(self):
-            self.computersNumber = 2
-            self.twoComputersButton.setStyleSheet("image: url(:/images/two.png);")
-            self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-            self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.computersNumber = 2
+        self.twoComputersButton.setStyleSheet("image: url(:/images/two.png);")
+        self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def threeComputers(self):
-            self.computersNumber = 3
-            self.threeComputersButton.setStyleSheet("image: url(:/images/three.png);")
-            self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
+        self.computersNumber = 3
+        self.threeComputersButton.setStyleSheet("image: url(:/images/three.png);")
+        self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
 
     def fourComputers(self):
-            self.computersNumber = 4
-            self.fourComputersButton.setStyleSheet("image: url(:/images/four.png);")
-            self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
-            self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
-            self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
-            self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+        self.computersNumber = 4
+        self.fourComputersButton.setStyleSheet("image: url(:/images/four.png);")
+        self.zeroComputersButton.setStyleSheet("image: url(:/images/zeroInactive.png);")
+        self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
+        self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
+        self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
+
 
     def bets(self):
-            self.betting = 1
-            self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
-            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+        self.betting = 1
+        self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
+        self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
 
     def noBets(self):
+        self.betting = 0
+        self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+        self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+
+    # Funkcja wyłączająca opcję betowania dla komputerów oraz komputera vs gracza
+    def betsVisibility(self):
+        if self.playersNumber <= 1 and self.computersNumber >= 1:
             self.betting = 0
+            self.betsButton.setVisible(False)
+            self.noBetsButton.setVisible(False)
             self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+        else:
+            self.betsButton.setVisible(True)
+            self.noBetsButton.setVisible(True)
+            self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
 
     def warning(self):
-            self.window = QtWidgets.QMainWindow()
-            self.ui = warning.warningForm(self.warningType)
-            self.ui.setupUi(self.window)
-            self.window.show()
-            QtCore.QTimer.singleShot(3000, self.window.close)
-
+        self.window = QtWidgets.QMainWindow()
+        self.ui = warning.warningForm(self.language, self.warningType)
+        self.ui.setupUi(self.window)
+        self.window.show()
+        QtCore.QTimer.singleShot(3000, self.window.close)
 
     def userSettings(self):
-            # Kontrola zastosowanych opcji
-            if (self.playersNumber + self.computersNumber > 4):
-                    self.warningType = 1
-                    self.warning()
-            elif (self.betting != 0 and self.betting != 1):
-                    self.warningType = 2
-                    self.warning()
-            elif (self.playersNumber == 0 and self.computersNumber == 0):
-                    if self.betting == 3:
-                            self.warningType = 2
-                            self.warning()
-                    else:
-                            self.warningType = 3
-                            self.warning()
-            elif (self.playersNumber + self.computersNumber < 2):
-                    self.warningType = 3
-                    self.warning()
+        # Kontrola zastosowanych opcji
+        if (self.playersNumber + self.computersNumber > 4):
+            self.warningType = 1
+            self.warning()
+        elif (self.betting != 0 and self.betting != 1):
+            self.warningType = 2
+            self.warning()
+        elif (self.playersNumber == 0 and self.computersNumber == 0):
+            if self.betting == 3:
+                self.warningType = 2
+                self.warning()
             else:
-                    self.proceed()
+                self.warningType = 3
+                self.warning()
+        elif (self.playersNumber + self.computersNumber < 2):
+            self.warningType = 3
+            self.warning()
+        else:
+            self.proceed()
 
     def proceed(self):
-            self.window = QtWidgets.QMainWindow()
-            self.ui = playUsers.usersForm(self.playersNumber, self.computersNumber, self.betting)
-            self.ui.setupUi(self.window)
-            self.window.show()
-
-
-
-
-
-
-
-
+        self.window = QtWidgets.QMainWindow()
+        self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)
+        self.ui.setupUi(self.window)
+        self.window.show()

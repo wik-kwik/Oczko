@@ -230,6 +230,7 @@ class menuForm(object):
         # Obsługa przycisków
         self.playButton.clicked.connect(self.play)
         self.registerButton.clicked.connect(self.register)
+        self.registerButton.clicked.connect(Form.close)
         self.playButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(Form.close)
         self.rulesButton.clicked.connect(self.rules)
@@ -244,30 +245,6 @@ class menuForm(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.closeLabel.setText(_translate("Form", "X"))
 
-    def rules(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = rules.rulesForm(self.language)
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-    def register(self):
-        self.registerWindow = QtWidgets.QMainWindow()
-        self.ui = registerEng.registerEngForm()
-        self.ui.setupUi(self.registerWindow)
-        self.registerWindow.show()
-
-    def settings(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = settings.settingsForm(self.language)
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-    def play(self):
-        self.playWindow = QtWidgets.QMainWindow()
-        self.ui = playOptions.playOptionsForm()
-        self.ui.setupUi(self.playWindow)
-        self.playWindow.show()
-
     def english(self):
         self.language = 1
         self.playIcon.setStyleSheet("border-image: url(:/images/play.png);")
@@ -280,5 +257,29 @@ class menuForm(object):
         self.logo.setGeometry(QtCore.QRect(530, 60, 281, 81))
         self.playIcon.setStyleSheet("border-image: url(:/images/playPL.png);")
 
+    def rules(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = rules.rulesForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def register(self):
+        self.registerWindow = QtWidgets.QMainWindow()
+        self.ui = registerEng.registerEngForm(self.language)
+        self.ui.setupUi(self.registerWindow)
+        self.registerWindow.show()
+
+    def settings(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = settings.settingsForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def rank(self):
         print('ranking')
+
+    def play(self):
+        self.playWindow = QtWidgets.QMainWindow()
+        self.ui = playOptions.playOptionsForm(self.language)
+        self.ui.setupUi(self.playWindow)
+        self.playWindow.show()

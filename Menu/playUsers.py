@@ -15,7 +15,8 @@ from Game_Logic.player import Player
 
 
 class usersForm(object):
-    def __init__(self, playersNumber, computersNumber, betting):
+    def __init__(self, language, playersNumber, computersNumber, betting):
+        self.language = language
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
@@ -155,26 +156,36 @@ class usersForm(object):
                                              "border: 0px;")
         self.compOneHardButton.setText("")
         self.compOneHardButton.setObjectName("compOneHardButton")
-
         self.playerOneNickname = QtWidgets.QLabel(Form)
-        self.playerOneNickname.setGeometry(QtCore.QRect(96, 220, 151, 31))
+        self.playerOneNickname.setGeometry(QtCore.QRect(97, 220, 151, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        self.playerOneNickname.setFont(font)
+        self.playerOneNickname.setStyleSheet("color: rgb(255, 170, 0);")
         self.playerOneNickname.setText("")
         self.playerOneNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerOneNickname.setObjectName("playerOneNickname")
         self.playerTwoNickname = QtWidgets.QLabel(Form)
         self.playerTwoNickname.setGeometry(QtCore.QRect(274, 220, 151, 31))
+        self.playerTwoNickname.setFont(font)
+        self.playerTwoNickname.setStyleSheet("color: rgb(255, 170, 0);")
         self.playerTwoNickname.setText("")
         self.playerTwoNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerTwoNickname.setObjectName("playerTwoNickname")
         self.playerThreeNickname = QtWidgets.QLabel(Form)
         self.playerThreeNickname.setGeometry(QtCore.QRect(96, 341, 151, 31))
         self.playerThreeNickname.setText("")
+        self.playerThreeNickname.setFont(font)
+        self.playerThreeNickname.setStyleSheet("color: rgb(255, 170, 0);")
         self.playerThreeNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerThreeNickname.setObjectName("playerThreeNickname")
         self.playerFourNickname = QtWidgets.QLabel(Form)
         self.playerFourNickname.setGeometry(QtCore.QRect(274, 341, 151, 31))
         self.playerFourNickname.setStyleSheet("color: rgb(255, 85, 0);")
         self.playerFourNickname.setText("")
+        self.playerFourNickname.setFont(font)
+        self.playerFourNickname.setStyleSheet("color: rgb(255, 170, 0);")
         self.playerFourNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerFourNickname.setObjectName("playerFourNickname")
 
@@ -436,7 +447,7 @@ class usersForm(object):
 
     def returnToOptions(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = playOptions.playOptionsForm()
+        self.ui = playOptions.playOptionsForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -993,7 +1004,7 @@ class usersForm(object):
 
     def show_login(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.loginForm(self.numberOfPlayer, self.playersNumber, self.computersNumber, self.betting)
+        self.ui = loginEng.loginForm(self.language, self.numberOfPlayer, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -1003,7 +1014,7 @@ class usersForm(object):
         # dodanie graczy do planszy
         # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
         player = Player ("XXD", "XXD ", 1)
-        self.ui = board.boardForm(self.playersNumber, self.computersNumber, self.betting, players)
+        self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting, players)
         self.ui.setupUi(self.window)
         self.window.show()
         self.popups.append(self.window)
