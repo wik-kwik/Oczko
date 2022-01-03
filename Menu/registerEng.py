@@ -144,11 +144,14 @@ class registerEngForm(object):
             self.confirmLine.setPlaceholderText(_translate("Form", "POTWIERDŹ HASŁO"))
             self.createButton.setText(_translate("Form", "UTWÓRZ KONTO"))
 
+    # Rejestrowanie użytkownika
     def new_user(self):
         try:
             db = sql.connect('siema.db')  # łączymy się do bazy
 
             c = db.cursor()  # dodajemy kursor
+
+            # Tworzenie tabeli przechowującej wszystkich użytkowników w przypadku jej usunięcia
 
             # c.execute("""CREATE TABLE users (
             #                user_id integer PRIMARY KEY,
@@ -174,10 +177,22 @@ class registerEngForm(object):
                  win_rate, time_spent, coins)
             ]
 
-            if username == "" or password == "" or confirm == "":
+            if len(username) < 3:
+                if self.language == 1:
+                    self.statusLabel.setText("Username is too short")
+                elif self.language == 2:
+                    self.statusLabel.setText("Nazwa użytkownika jest za krótka")
+
+            elif len(password) < 6:
+                if self.language == 1:
+                    self.statusLabel.setText("Password is too short")
+                elif self.language == 2:
+                    self.statusLabel.setText("Hasło jest za krótkie")
+
+            elif username == "" or password == "" or confirm == "":
                 if self.language == 1:
                     self.statusLabel.setText("Please fill in all the required fields")
-                if self.language == 2:
+                elif self.language == 2:
                     self.statusLabel.setText("Wypełnij wszystkie pola")
 
             elif password == confirm:

@@ -189,11 +189,4 @@ class bettingForm(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.playButton.setText(_translate("Form", "PLAY!"))
-        #self.playerOneNickname.setText(_translate("Form", "dupa"))
-        #self.playerTwoNickname.setText(_translate("Form", "nickname"))
-        #self.playerThreeNickname.setText(_translate("Form", "nickname"))
-        #self.playerFourNickname.setText(_translate("Form", "nickname"))
-        # self.playerOneWallet.setText(_translate("Form", "25235"))
-        # self.playerTwoWallet.setText(_translate("Form", "5235235"))
-        # self.playerThreeWallet.setText(_translate("Form", "5235"))
-        # self.playerFourWallet.setText(_translate("Form", "5235325"))
+

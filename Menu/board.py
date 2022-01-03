@@ -10,15 +10,16 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import betting
+import sqlite3 as sql
 
 
 class boardForm(object):
-    def __init__(self, language, playersNumber, computersNumber, betting, players):
+    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer):
         self.language = language
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
-        self.players = players
+        self.numberOfPlayer = numberOfPlayer
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
@@ -441,6 +442,20 @@ class boardForm(object):
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
 
+        if (1 in self.numberOfPlayer) == True:
+            self.playerOneLabel.setText(self.set_username(1))
+            # self.playerOneWallet.setText(str(self.set_wallet(1)))
+        if (2 in self.numberOfPlayer) == True:
+            self.playerTwoLabel.setText(self.set_username(2))
+            #self.playerTwoWallet.setText(str(self.set_wallet(2)))
+        if (3 in self.numberOfPlayer) == True:
+            self.playerThreeLabel.setText(self.set_username(3))
+            #self.playerThreeWallet.setText(str(self.set_wallet(3)))
+        if (4 in self.numberOfPlayer) == True:
+            self.playerFourLabel.setText(self.set_username(4))
+            #self.playerFourWallet.setText(str(self.set_wallet(4)))
+
+
         # Ustawianie kart w zaleznosci od ilosci graczy
         if self.playersNumber + self.computersNumber == 2:
 
@@ -502,6 +517,20 @@ class boardForm(object):
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
 
+    def set_username(self,user_id):
+        try:
+            db = sql.connect('siema.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result[1])
+            return result[1]
+
+        except sql.Error as e:
+            print("huj")
 
 
     def retranslateUi(self, boardForm):

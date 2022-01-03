@@ -412,11 +412,6 @@ class usersForm(object):
         if self.computersNumber == 4:
             self.fourComputers()
 
-        # self.first_player()
-        # self.second_player()
-        # self.third_player()
-        # self.fourth_player()
-
         # Obsługa przycisków
         self.returnButton.clicked.connect(self.returnToOptions)
         self.returnButton.clicked.connect(Form.close)
@@ -425,21 +420,12 @@ class usersForm(object):
         self.mediumGameButton.clicked.connect(self.mediumLevel)
         self.hardGameButton.clicked.connect(self.hardLevel)
         self.nextButton.clicked.connect(Form.close)
-        #self.playerOneLogin.clicked.connect(Form.close)
-        #self.nextButton.clicked.connect(self.openBoard)
         self.nextButton.clicked.connect(self.show_betting)
-
-
 
         self.playerOneLogin.clicked.connect(Form.close)
         self.playerTwoLogin.clicked.connect(Form.close)
         self.playerThreeLogin.clicked.connect(Form.close)
         self.playerFourLogin.clicked.connect(Form.close)
-
-        # self.playerOneRegister.clicked.connect(self.show_register)
-        # self.playerTwoRegister.clicked.connect(self.show_register)
-        # self.playerThreeRegister.clicked.connect(self.show_register)
-        # self.playerFourRegister.clicked.connect(self.show_register)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -477,7 +463,6 @@ class usersForm(object):
     def onePlayer(self):
         self.first_player()
 
-
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
@@ -504,7 +489,6 @@ class usersForm(object):
         self.first_player()
         self.second_player()
 
-
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
         self.playerOneRegister.clicked.connect(self.show_register)
@@ -530,7 +514,6 @@ class usersForm(object):
         self.first_player()
         self.second_player()
         self.third_player()
-
 
         self.playerOneLogin.clicked.connect(self.first_player)
         self.playerOneLogin.clicked.connect(self.show_login)
@@ -904,7 +887,7 @@ class usersForm(object):
             self.playerOneRegister.setVisible(False)
 
             self.playerOneNickname.setText(self.set_username(1))
-            #   self.update_id(self.numberOfPlayer)
+
         else:
             print("xd")
 
@@ -921,8 +904,6 @@ class usersForm(object):
             self.playerTwoRegister.setVisible(False)
 
             self.playerTwoNickname.setText(self.set_username(2))
-            #  self.update_id(self.numberOfPlayer)
-
         else:
             print("xd")
 
@@ -937,7 +918,6 @@ class usersForm(object):
             self.playerThreeRegister.setVisible(False)
 
             self.playerThreeNickname.setText(self.set_username(3))
-            #   self.update_id(self.numberOfPlayer)
 
         else:
             print("xd")
@@ -954,10 +934,11 @@ class usersForm(object):
             self.playerFourRegister.setVisible(False)
 
             self.playerFourNickname.setText(self.set_username(4))
-            #  self.update_id(self.numberOfPlayer)
+
         else:
             print("xd")
 
+    # Nadanie użytkownikowi nazwy po zalogowaniu
     def set_username(self,user_id):
         try:
             db = sql.connect('siema.db')  # łączymy się do bazy
@@ -967,9 +948,6 @@ class usersForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            #print(result[1])
-
-            #return result[1]
 
             if result is not None:
                 return result[1]
@@ -977,7 +955,7 @@ class usersForm(object):
                 return "-"
 
         except sql.Error as e:
-            print("huj")
+            print("xd")
 
     def assign_player(self,user_id):
         try:
@@ -985,20 +963,17 @@ class usersForm(object):
             c = db.cursor()  # dodajemy kursor
 
             query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
-            # query = "DELETE FROM logged_users where id = {}".format(user_id)
             c.execute(query)
             db.commit()
             result = c.fetchone()
             return result
 
-
         except sql.Error as e:
-            print("huj")
-
+            print("xd")
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = registerEng.registerEngForm()
+        self.ui = registerEng.registerEngForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -1010,11 +985,11 @@ class usersForm(object):
 
     def openBoard(self):
         self.window = QtWidgets.QMainWindow()
-        players = []
-        # dodanie graczy do planszy
-        # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
-        player = Player ("XXD", "XXD ", 1)
-        self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting, players)
+        # players = []
+        # # dodanie graczy do planszy
+        # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
+        # player = Player ("XXD", "XXD ", 1)
+        self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting, self.numberOfPlayer)
         self.ui.setupUi(self.window)
         self.window.show()
         self.popups.append(self.window)
@@ -1032,10 +1007,9 @@ class usersForm(object):
         elif self.betting == 0:
             self.openBoard()
 
+    # Wylogowywanie poszczególnych graczy
     def logout_one(self):
         print("siema")
-        # self.playerOneNickname.setVisible(False)
-        # self.playerOneLogout.setVisible(False)
 
         self.numberOfPlayer.remove(1)
         print(self.numberOfPlayer)
@@ -1047,8 +1021,6 @@ class usersForm(object):
 
     def logout_two(self):
         print("siema")
-        # self.playerOneNickname.setVisible(False)
-        # self.playerOneLogout.setVisible(False)
 
         self.numberOfPlayer.remove(2)
         print(self.numberOfPlayer)
@@ -1060,8 +1032,7 @@ class usersForm(object):
 
     def logout_three(self):
         print("siema")
-        # self.playerOneNickname.setVisible(False)
-        # self.playerOneLogout.setVisible(False)
+
 
         self.numberOfPlayer.remove(3)
         print(self.numberOfPlayer)
@@ -1072,8 +1043,6 @@ class usersForm(object):
 
     def logout_four(self):
         print("siema")
-        # self.playerOneNickname.setVisible(False)
-        # self.playerOneLogout.setVisible(False)
 
         self.numberOfPlayer.remove(4)
         print(self.numberOfPlayer)
@@ -1082,20 +1051,17 @@ class usersForm(object):
         self.playerFourRegister.setVisible(True)
         self.playerFourLogin.setVisible(True)
 
-
-
     def delete_user(self, user_id):
         try:
             db = sql.connect('siema.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
-            # query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
             query = "DELETE FROM logged_users where id = {}".format(user_id)
             c.execute(query)
             db.commit()
 
         except sql.Error as e:
-            print("huj")
+            print("xd")
 
 
 
