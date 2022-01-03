@@ -177,7 +177,13 @@ class registerForm(object):
                  win_rate, time_spent, coins)
             ]
 
-            if len(username) < 3:
+            if username == "" or password == "" or confirm == "":
+                if self.language == 1:
+                    self.statusLabel.setText("Please fill in all the required fields")
+                elif self.language == 2:
+                    self.statusLabel.setText("Wypełnij wszystkie pola")
+
+            elif len(username) < 3:
                 if self.language == 1:
                     self.statusLabel.setText("Username is too short")
                 elif self.language == 2:
@@ -188,12 +194,6 @@ class registerForm(object):
                     self.statusLabel.setText("Password is too short")
                 elif self.language == 2:
                     self.statusLabel.setText("Hasło jest za krótkie")
-
-            elif username == "" or password == "" or confirm == "":
-                if self.language == 1:
-                    self.statusLabel.setText("Please fill in all the required fields")
-                elif self.language == 2:
-                    self.statusLabel.setText("Wypełnij wszystkie pola")
 
             elif password == confirm:
                 try:
