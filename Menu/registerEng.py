@@ -5,6 +5,9 @@ import menu
 import sqlite3 as sql
 
 class registerEngForm(object):
+    def __init__(self, language):
+        self.language = language
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(535, 802)
@@ -15,27 +18,8 @@ class registerEngForm(object):
         font = QtGui.QFont()
         font.setBold(False)
         self.background.setFont(font)
-        self.background.setStyleSheet("background-color: rgb(16, 31, 25);\n"
-"border-color: 3 px rgb(255, 170, 0);")
         self.background.setText("")
         self.background.setObjectName("background")
-        self.backgroundLight = QtWidgets.QLabel(Form)
-        self.backgroundLight.setGeometry(QtCore.QRect(70, 50, 329, 491))
-        self.backgroundLight.setStyleSheet("background-color: rgb(24, 47, 38);\n"
-"background-color: rgb(24, 47, 38);\n"
-"border-radius:10px;\n"
-"")
-        self.backgroundLight.setText("")
-        self.backgroundLight.setObjectName("backgroundLight")
-        self.registerLabel = QtWidgets.QLabel(Form)
-        self.registerLabel.setGeometry(QtCore.QRect(131, 100, 221, 51))
-        font = QtGui.QFont()
-        font.setFamily("Microsoft YaHei UI")
-        font.setPointSize(36)
-        font.setBold(False)
-        self.registerLabel.setFont(font)
-        self.registerLabel.setStyleSheet("color: rgb(255, 170, 0);")
-        self.registerLabel.setObjectName("registerLabel")
         self.usernameLine = QtWidgets.QLineEdit(Form)
         self.usernameLine.setGeometry(QtCore.QRect(131, 200, 201, 31))
         font = QtGui.QFont()
@@ -133,20 +117,32 @@ class registerEngForm(object):
         self.closeButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
+        self.closeButton.clicked.connect(self.returnToMenu)
         self.closeButton.clicked.connect(Form.close)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        # Ustawienia w zaleznosci od jezyka
+        if self.language == 1:
+            self.background.setStyleSheet("border-image: url(:/images/registerENG.png);")
+        if self.language == 2:
+            self.background.setStyleSheet("border-image: url(:/images/registerPL.png);")
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.registerLabel.setText(_translate("Form", "REGISTER"))
-        self.usernameLine.setPlaceholderText(_translate("Form", "USERNAME"))
-        self.passwordLine.setPlaceholderText(_translate("Form", "PASSWORD"))
-        self.confirmLine.setPlaceholderText(_translate("Form", "CONFIRM PASSWORD"))
-        self.createButton.setText(_translate("Form", "CREATE ACCOUNT"))
         self.closeLabel.setText(_translate("Form", "X"))
+        if self.language == 1:
+            self.usernameLine.setPlaceholderText(_translate("Form", "USERNAME"))
+            self.passwordLine.setPlaceholderText(_translate("Form", "PASSWORD"))
+            self.confirmLine.setPlaceholderText(_translate("Form", "CONFIRM PASSWORD"))
+            self.createButton.setText(_translate("Form", "CREATE ACCOUNT"))
+        if self.language == 2:
+            self.usernameLine.setPlaceholderText(_translate("Form", "NAZWA UŻYTKOWNIKA"))
+            self.passwordLine.setPlaceholderText(_translate("Form", "HASŁO"))
+            self.confirmLine.setPlaceholderText(_translate("Form", "POTWIERDŹ HASŁO"))
+            self.createButton.setText(_translate("Form", "UTWÓRZ KONTO"))
 
     def new_user(self):
         try:
@@ -179,7 +175,10 @@ class registerEngForm(object):
             ]
 
             if username == "" or password == "" or confirm == "":
-                self.statusLabel.setText("Please fill in all the required fields")
+                if self.language == 1:
+                    self.statusLabel.setText("Please fill in all the required fields")
+                if self.language == 2:
+                    self.statusLabel.setText("Wypełnij wszystkie pola")
 
             elif password == confirm:
                 try:
@@ -189,7 +188,10 @@ class registerEngForm(object):
                     db.commit()
                     print("Data has been inserted")
                     self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
-                    self.statusLabel.setText("You have been registered!")
+                    if self.language == 1:
+                        self.statusLabel.setText("You have been registered!")
+                    if self.language == 2:
+                        self.statusLabel.setText("Pomyślnie zarejestrowano!")
                     self.createButton.setEnabled(False)
 
                     c.execute("SELECT * FROM users")
@@ -199,16 +201,23 @@ class registerEngForm(object):
                     db.close()
 
                 except sql.IntegrityError as e:
-                    self.statusLabel.setText("This nickname is not available")
+                    if self.language == 1:
+                        self.statusLabel.setText("This nickname is not available")
+                    if self.language == 2:
+                        self.statusLabel.setText("Ta nazwa użytkownika jest niedostępna")
+
 
             else:
-                self.statusLabel.setText("Passwords don't match")
+                if self.language == 1:
+                    self.statusLabel.setText("Passwords don't match")
+                if self.language == 2:
+                    self.statusLabel.setText("Hasła nie są zgodne")
 
         except sql.Error as e:
             self.statusLabel.setText("Error")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = menu.menuForm()
+        self.ui = menu.menuForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()

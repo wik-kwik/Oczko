@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="images">
+    <file>registerPL.png</file>
+    <file>registerENG.png</file>
     <file>logoPL.png</file>
     <file>playPL.png</file>
     <file>settingsPL.png</file>
