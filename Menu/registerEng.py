@@ -69,7 +69,7 @@ class registerEngForm(object):
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei")
         font.setPointSize(11)
-        font.setBold(False)
+        font.setBold(True)
         self.createButton.setFont(font)
         self.createButton.setStyleSheet("QPushButton#createButton{\n"
 "    background-color: rgb(255, 170, 0);\n"
