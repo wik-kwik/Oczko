@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import betting
 import sqlite3 as sql
+from Game_Logic.player import Player
 
 
 class boardForm(object):
@@ -442,18 +443,37 @@ class boardForm(object):
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
 
+        if self.betting == 0:
+            self.toWinLabel.setVisible(False)
+            self.coinsIcon.setVisible(False)
+            self.prizeLabel.setVisible(False)
+            self.walletIcon.setVisible(False)
+            self.balanceText.setVisible(False)
+            self.balanceLabel.setVisible(False)
+
+        players = []
+
         if (1 in self.numberOfPlayer) == True:
             self.playerOneLabel.setText(self.set_username(1))
+            # players.append(Player("self.set_username(1)", "player", 1)) type reference in ..Blackjack.player Player class
             # self.playerOneWallet.setText(str(self.set_wallet(1)))
         if (2 in self.numberOfPlayer) == True:
             self.playerTwoLabel.setText(self.set_username(2))
+            # players.append(Player("self.set_username(2)", "player", 2)) type reference in ..Blackjack.player Player class
             #self.playerTwoWallet.setText(str(self.set_wallet(2)))
         if (3 in self.numberOfPlayer) == True:
+            # players.append(Player("self.set_username(3)", "player", 3)) type reference in ..Blackjack.player Player class
             self.playerThreeLabel.setText(self.set_username(3))
             #self.playerThreeWallet.setText(str(self.set_wallet(3)))
         if (4 in self.numberOfPlayer) == True:
             self.playerFourLabel.setText(self.set_username(4))
+            # players.append(Player("self.set_username(4)", "player", 4)) type reference in ..Blackjack.player Player class
             #self.playerFourWallet.setText(str(self.set_wallet(4)))
+
+
+        # # dodanie graczy do planszy
+        # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
+        # player = Player ("XXD", "XXD ", 1)
 
 
         # Ustawianie kart w zaleznosci od ilosci graczy
@@ -516,6 +536,8 @@ class boardForm(object):
             self.playerFourCard_8.setStyleSheet("")
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
+
+
 
     def set_username(self,user_id):
         try:
