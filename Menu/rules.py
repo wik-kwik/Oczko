@@ -23,7 +23,7 @@ class rulesForm(object):
         rulesForm.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.label = QtWidgets.QLabel(rulesForm)
         self.label.setGeometry(QtCore.QRect(0, 0, 901, 616))
-        self.label.setStyleSheet("image: url(:/images/rulesText.png);")
+
         self.label.setText("")
         self.label.setObjectName("label")
         self.closeButton = QtWidgets.QPushButton(rulesForm)
@@ -38,8 +38,10 @@ class rulesForm(object):
         self.closeButton.clicked.connect(rulesForm.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
+        if self.language == 1:
+            self.label.setStyleSheet("image: url(:/images/rulesText.png);")
         if self.language == 2:
-            print('chuj')
+            self.label.setStyleSheet("image: url(:/images/rulesTextPL.png);")
 
     def retranslateUi(self, rulesForm):
         _translate = QtCore.QCoreApplication.translate

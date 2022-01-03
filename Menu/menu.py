@@ -239,6 +239,7 @@ class menuForm(object):
         self.settingsButton.clicked.connect(Form.close)
         self.englishButton.clicked.connect(self.english)
         self.polishButton.clicked.connect(self.polish)
+        # self.accountButton.clicked.connect(self.login)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
