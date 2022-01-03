@@ -57,13 +57,13 @@ class warningForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.show_playOptions()
-
-    def show_playOptions(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playOptions.playOptionsForm(self.language)
-        self.ui.setupUi(self.window)
-        QtCore.QTimer.singleShot(3000, self.window.show)
+    #     self.show_playOptions()
+    #
+    # def show_playOptions(self):
+    #     self.window = QtWidgets.QMainWindow()
+    #     self.ui = playOptions.playOptionsForm(self.language)
+    #     self.ui.setupUi(self.window)
+    #     QtCore.QTimer.singleShot(3000, self.window.show)
 
 
     def retranslateUi(self, Form):

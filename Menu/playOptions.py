@@ -210,8 +210,8 @@ class playOptionsForm(object):
         self.returnButton.clicked.connect(Form.close)
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
-        self.nextButton.clicked.connect(self.userSettings)
-        self.nextButton.clicked.connect(Form.hide)
+        # self.nextButton.clicked.connect(self.userSettings)
+        # self.nextButton.clicked.connect(Form.hide)
 
         self.onePlayerButton.clicked.connect(self.betsVisibility)
         self.twoPlayersButton.clicked.connect(self.betsVisibility)
@@ -223,9 +223,26 @@ class playOptionsForm(object):
         self.threeComputersButton.clicked.connect(self.betsVisibility)
         self.fourComputersButton.clicked.connect(self.betsVisibility)
 
+        self.zeroPlayersButton.clicked.connect(self.userSettings)
+        self.onePlayerButton.clicked.connect(self.userSettings)
+        self.twoPlayersButton.clicked.connect(self.userSettings)
+        self.threePlayersButton.clicked.connect(self.userSettings)
+        self.fourPlayersButton.clicked.connect(self.userSettings)
+        self.zeroComputersButton.clicked.connect(self.userSettings)
+        self.oneComputerButton.clicked.connect(self.userSettings)
+        self.twoComputersButton.clicked.connect(self.userSettings)
+        self.threeComputersButton.clicked.connect(self.userSettings)
+        self.fourComputersButton.clicked.connect(self.userSettings)
+        self.betsButton.clicked.connect(self.userSettings)
+        self.noBetsButton.clicked.connect(self.userSettings)
+
+        self.nextButton.clicked.connect(self.proceed)
+        self.nextButton.clicked.connect(Form.close)
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
@@ -342,6 +359,7 @@ class playOptionsForm(object):
             self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
 
+    # Popup z warningiem
     def warning(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = warning.warningForm(self.language, self.warningType)
@@ -349,26 +367,38 @@ class playOptionsForm(object):
         self.window.show()
         QtCore.QTimer.singleShot(3000, self.window.close)
 
+    # Kontrola zastosowanych opcji - wyświetla warningi i uniemożliwia przejście dalej
     def userSettings(self):
-        # Kontrola zastosowanych opcji
         if (self.playersNumber + self.computersNumber > 4):
             self.warningType = 1
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
             self.warning()
         elif (self.betting != 0 and self.betting != 1):
-            self.warningType = 2
-            self.warning()
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+            # self.warningType = 2
+            # self.warning()
         elif (self.playersNumber == 0 and self.computersNumber == 0):
             if self.betting == 3:
-                self.warningType = 2
-                self.warning()
+                self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+                self.nextButton.setVisible(False)
+                # self.warningType = 2
+                # self.warning()
             else:
-                self.warningType = 3
-                self.warning()
+                self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+                self.nextButton.setVisible(False)
+                # self.warningType = 3
+                # self.warning()
         elif (self.playersNumber + self.computersNumber < 2):
-            self.warningType = 3
-            self.warning()
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+            # self.warningType = 3
+            # self.warning()
         else:
-            self.proceed()
+            self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
+            self.nextButton.setVisible(True)
+
 
     def proceed(self):
         self.window = QtWidgets.QMainWindow()

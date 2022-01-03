@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys, registerEng, res
+import sys, register, res
 import playOptions
 import rules
 import settings
@@ -265,7 +265,7 @@ class menuForm(object):
 
     def register(self):
         self.registerWindow = QtWidgets.QMainWindow()
-        self.ui = registerEng.registerEngForm(self.language)
+        self.ui = register.registerForm(self.language)
         self.ui.setupUi(self.registerWindow)
         self.registerWindow.show()
 

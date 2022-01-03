@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import playOptions, loginEng, registerEng, board, betting
+import playOptions, login, register, board, betting
 import sqlite3 as sql
 from Game_Logic.player import Player
 
@@ -973,13 +973,13 @@ class usersForm(object):
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = registerEng.registerEngForm(self.language)
+        self.ui = register.registerForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 
     def show_login(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginEng.loginForm(self.language, self.numberOfPlayer, self.playersNumber, self.computersNumber, self.betting)
+        self.ui = login.loginForm(self.language, self.numberOfPlayer, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -1050,6 +1050,7 @@ class usersForm(object):
 
         self.playerFourRegister.setVisible(True)
         self.playerFourLogin.setVisible(True)
+
 
     def delete_user(self, user_id):
         try:

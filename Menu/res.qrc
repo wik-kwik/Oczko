@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>nextInactive.png</file>
     <file>betsPL.png</file>
     <file>noBetsPL.png</file>
     <file>playersPL.png</file>
