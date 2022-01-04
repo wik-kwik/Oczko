@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, register, res
+
+import account
 import playOptions
 import rules, login
 import settings
@@ -241,7 +243,8 @@ class menuForm(object):
         self.englishButton.clicked.connect(self.english)
         self.polishButton.clicked.connect(self.polish)
         self.accountButton.clicked.connect(Form.close)
-        self.accountButton.clicked.connect(self.show_login)
+        # self.accountButton.clicked.connect(self.show_login)
+        self.accountButton.clicked.connect(self.account)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -275,6 +278,12 @@ class menuForm(object):
     def settings(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = settings.settingsForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def account(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = account.accountForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 

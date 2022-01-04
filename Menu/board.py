@@ -11,6 +11,7 @@ class boardForm(object):
         self.computersNumber = computersNumber
         self.betting = betting
         self.numberOfPlayer = numberOfPlayer
+        self.gameLevel = gameLevel
         self.computerOneLevel = computerOneLevel
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
