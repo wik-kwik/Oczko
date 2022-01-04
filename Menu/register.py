@@ -1,12 +1,17 @@
-# UI rejestracji, wersja angielska
+# UI rejestracji
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import menu
 import sqlite3 as sql
+import playUsers
 
 class registerForm(object):
-    def __init__(self, language):
+    def __init__(self, language, numberOfPlayer, playersNumber, computersNumber, betting):
         self.language = language
+        self.numberOfPlayer = numberOfPlayer
+        self.playersNumber = playersNumber
+        self.computersNumber = computersNumber
+        self.betting = betting
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -117,13 +122,19 @@ class registerForm(object):
         self.closeButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
-        self.closeButton.clicked.connect(self.returnToMenu)
+
+        # Obsługa przycisków; podział funkcji closeButton w zależności czy wracamy do menu czy do playUsers
+        self.closeButton.clicked.connect(self.returnToUsers)
         self.closeButton.clicked.connect(Form.close)
+
+        if self.betting == 3:
+            self.closeButton.clicked.connect(self.returnToMenu)
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        # Ustawienia w zaleznosci od jezyka
+        # Ustawienia w zależności od języka
         if self.language == 1:
             self.background.setStyleSheet("border-image: url(:/images/registerENG.png);")
         if self.language == 2:
@@ -234,5 +245,11 @@ class registerForm(object):
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def returnToUsers(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()

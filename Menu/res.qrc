@@ -1,5 +1,40 @@
 <RCC>
   <qresource prefix="images">
+    <file>easyInactivePL.png</file>
+    <file>hardInactivePL.png</file>
+    <file>mediumInactivePL.png</file>
+    <file>easyPL.png</file>
+    <file>hardPL.png</file>
+    <file>mediumPL.png</file>
+    <file>computerFourPL.png</file>
+    <file>computerOnePL.png</file>
+    <file>computerThreePL.png</file>
+    <file>computerTwoPL.png</file>
+    <file>computerFourInactivePL.png</file>
+    <file>computerOneInactivePL.png</file>
+    <file>computerThreeInactivePL.png</file>
+    <file>computerTwoInactivePL.png</file>
+    <file>easyTimingInactivePL.png</file>
+    <file>easyTimingPL.png</file>
+    <file>hardTimingInactivePL.png</file>
+    <file>hardTimingPL.png</file>
+    <file>mediumTimingInactivePL.png</file>
+    <file>mediumTimingPL.png</file>
+    <file>logOutPL.png</file>
+    <file>logOutInactivePL.png</file>
+    <file>registerButtonInactivePL.png</file>
+    <file>registerButtonPL.png</file>
+    <file>logInButtonPL.png</file>
+    <file>playerFourPL.png</file>
+    <file>playerOnePL.png</file>
+    <file>playerThreePL.png</file>
+    <file>playerTwoPL.png</file>
+    <file>playerFourInactivePL.png</file>
+    <file>logInInactivePL.png</file>
+    <file>playerOneInactivePL.png</file>
+    <file>playerThreeInactivePL.png</file>
+    <file>playerTwoInactivePL.png</file>
+    <file>difficultyPL.png</file>
     <file>rulesTextPL.png</file>
     <file>loginENG.png</file>
     <file>loginPL.png</file>

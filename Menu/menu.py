@@ -240,6 +240,7 @@ class menuForm(object):
         self.settingsButton.clicked.connect(Form.close)
         self.englishButton.clicked.connect(self.english)
         self.polishButton.clicked.connect(self.polish)
+        self.accountButton.clicked.connect(Form.close)
         self.accountButton.clicked.connect(self.show_login)
 
     def retranslateUi(self, Form):
@@ -267,7 +268,7 @@ class menuForm(object):
 
     def register(self):
         self.registerWindow = QtWidgets.QMainWindow()
-        self.ui = register.registerForm(self.language)
+        self.ui = register.registerForm(self.language, [], 0, 0, 3)
         self.ui.setupUi(self.registerWindow)
         self.registerWindow.show()
 
@@ -288,6 +289,6 @@ class menuForm(object):
 
     def show_login(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = login.loginForm(self.language, [], 0, 0, 0)
+        self.ui = login.loginForm(self.language, [], 0, 0, 3)
         self.ui.setupUi(self.window)
         self.window.show()
