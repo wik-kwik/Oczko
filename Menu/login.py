@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
+
+import account
 import menu
 import playUsers
 import playOptions
@@ -191,6 +193,8 @@ class loginForm(object):
                 if self.language == 2:
                     self.statusLabel.setText("Zalogowano")
                 self.loginButton.setEnabled(False)
+                if self.betting == 3:
+                    self.closeButton.clicked.connect(self.account)
 
                 try:
                     coins = result[2]
@@ -234,5 +238,11 @@ class loginForm(object):
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def account(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = account.accountForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
