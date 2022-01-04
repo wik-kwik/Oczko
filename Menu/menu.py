@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, register, res
 import playOptions
-import rules
+import rules, login
 import settings
 
 
@@ -221,8 +221,9 @@ class menuForm(object):
         self.historyButton.raise_()
         self.settingsButton.raise_()
         self.accountLabel.raise_()
-        self.accountButton.raise_()
         self.accountIcon.raise_()
+        self.accountButton.raise_()
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -239,7 +240,7 @@ class menuForm(object):
         self.settingsButton.clicked.connect(Form.close)
         self.englishButton.clicked.connect(self.english)
         self.polishButton.clicked.connect(self.polish)
-        # self.accountButton.clicked.connect(self.login)
+        self.accountButton.clicked.connect(self.show_login)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -284,3 +285,9 @@ class menuForm(object):
         self.ui = playOptions.playOptionsForm(self.language)
         self.ui.setupUi(self.playWindow)
         self.playWindow.show()
+
+    def show_login(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = login.loginForm(self.language, [], 0, 0, 0)
+        self.ui.setupUi(self.window)
+        self.window.show()
