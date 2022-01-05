@@ -158,7 +158,7 @@ class registerForm(object):
     # Rejestrowanie użytkownika
     def new_user(self):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
 
             c = db.cursor()  # dodajemy kursor
 
@@ -171,6 +171,7 @@ class registerForm(object):
             #                games_played integer,
             #                win_rate real,
             #                time_spent integer,
+            #                cards_used,
             #                coins integer
             #                )""")
 
@@ -182,10 +183,11 @@ class registerForm(object):
             games_played = 0
             win_rate = 0
             time_spent = 0
+            cards_used = 0
             coins = 1000
             data = [
                 (username, password, games_played,
-                 win_rate, time_spent, coins)
+                 win_rate, time_spent, cards_used, coins)
             ]
 
             if username == "" or password == "" or confirm == "":
@@ -209,7 +211,7 @@ class registerForm(object):
             elif password == confirm:
                 try:
                     c.executemany(
-                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,coins) VALUES (?,?,?,?,?,?)",
+                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,cards_used,coins) VALUES (?,?,?,?,?,?,?)",
                         data)
                     db.commit()
                     print("Data has been inserted")

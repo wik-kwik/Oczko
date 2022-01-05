@@ -11,11 +11,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import menu
+import sqlite3 as sql
 
 
 class accountForm(object):
     def __init__(self, language):
         self.language = language
+        self.idPlayerMenu = 0
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -93,20 +95,62 @@ class accountForm(object):
         if self.language == 2:
             self.backgroundLabel.setStyleSheet("image: url(:/images/accountBackgroundPL.png);")
 
+        self.show_data()
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.winsLabel.setText(_translate("Form", "69%"))
-        self.gamesLabel.setText(_translate("Form", "2"))
-        self.cardsLabel.setText(_translate("Form", "12"))
-        self.minutesLabel.setText(_translate("Form", "21"))
-        self.walletLabel.setText(_translate("Form", "1241"))
-        self.usernameLabel.setText(_translate("Form", "niknejm"))
+        # self.winsLabel.setText(_translate("Form", "69%"))
+        # self.gamesLabel.setText(_translate("Form", "2"))
+        # self.cardsLabel.setText(_translate("Form", "12"))
+        # self.minutesLabel.setText(_translate("Form", "21"))
+        # self.walletLabel.setText(_translate("Form", "1241"))
+        # self.usernameLabel.setText(_translate("Form", "niknejm"))
+
+    def show_data(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT id, username, coins, games_played, win_rate, time_spent, cards_used from logged_users where id = 5"
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+
+            id = result[0]
+            username = result[1]
+            coins = str(result[2])
+            games_played = str(result[3])
+            win_rate = str(result[4])
+            time_spent = str(result[5])
+            cards_used = str(result[6])
+
+            self.usernameLabel.setText(username)
+            self.walletLabel.setText(coins)
+            self.gamesLabel.setText(games_played)
+            self.winsLabel.setText(win_rate + "%")
+            self.minutesLabel.setText(time_spent)
+            self.cardsLabel.setText(cards_used)
+
+        except sql.Error as e:
+            print("xd")
+
 
     def returnToMenu(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "DELETE FROM logged_users where id = 5"
+            c.execute(query)
+            db.commit()
+
+        except sql.Error as e:
+            print("xd")
+
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
         self.ui.setupUi(self.window)

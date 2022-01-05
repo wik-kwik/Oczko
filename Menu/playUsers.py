@@ -1476,7 +1476,7 @@ class usersForm(object):
     # Nadanie użytkownikowi nazwy po zalogowaniu
     def set_username(self, user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
@@ -1494,7 +1494,7 @@ class usersForm(object):
 
     def assign_player(self, user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
@@ -1588,7 +1588,7 @@ class usersForm(object):
 
     def delete_user(self, user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             query = "DELETE FROM logged_users where id = {}".format(user_id)

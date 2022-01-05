@@ -120,6 +120,7 @@ class loginForm(object):
         if (4 in self.numberOfPlayer) == True:
             self.update_db(4)
 
+
         # Obsługa przycisków
         self.loginButton.clicked.connect(self.login)
         self.closeButton.clicked.connect(Form.close)
@@ -155,23 +156,31 @@ class loginForm(object):
 
     def login(self):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             # c.execute("""CREATE TABLE logged_users (
             #                 id integer,
             #                 username text UNIQUE,
-            #                 coins integer
+            #                 coins integer,
+            #                 games_played integer,
+            #                 win_rate integer,
+            #                 time_spent integer,
+            #                 cards_used integer
             #                 )""")
 
             username = self.usernameLine.text()
             password = self.passwordLine.text()
 
-            query = "SELECT username, password, coins from users where username like '" + username + "'and password like '" + password + "'"
+            query = "SELECT username, password, coins, games_played, win_rate, time_spent, cards_used from users where username like '" + username + "'and password like '" + password + "'"
             c.execute(query)
             db.commit()
 
             result = c.fetchone()
+            games_played = result[3]
+            win_rate = result[4]
+            time_spent = result[5]
+            cards_used = result[6]
 
 
             if username == "" or password == "":
@@ -193,15 +202,20 @@ class loginForm(object):
                 if self.language == 2:
                     self.statusLabel.setText("Zalogowano")
                 self.loginButton.setEnabled(False)
-                if self.betting == 3:
-                    self.closeButton.clicked.connect(self.account)
+
 
                 try:
                     coins = result[2]
                     c.execute(
-                        "INSERT INTO logged_users (id,username,coins) VALUES (?,?,?)", (0, username, coins))
+                        "INSERT INTO logged_users (id,username,coins, games_played, win_rate, time_spent, cards_used) VALUES (?,?,?,?,?,?,?)", (0, username, coins, games_played, win_rate, time_spent, cards_used))
                     db.commit()
-                    self.update_db(self.numberOfPlayer[-1])
+
+                    if self.betting != 3:
+                        self.update_db(self.numberOfPlayer[-1])
+                    else:
+                        self.update_db(5)
+                        print("5")
+                        self.closeButton.clicked.connect(self.account)
 
                 except sql.Error as e:
                     self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
@@ -218,7 +232,7 @@ class loginForm(object):
 
     def update_db(self, user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             c.execute(

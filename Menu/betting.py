@@ -145,7 +145,7 @@ class bettingForm(object):
 
     def set_username(self,user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
@@ -160,7 +160,7 @@ class bettingForm(object):
 
     def set_wallet(self,user_id):
         try:
-            db = sql.connect('siema.db')  # łączymy się do bazy
+            db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
             query = "SELECT id, username, coins from logged_users where id = {}".format(user_id)
