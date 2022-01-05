@@ -201,16 +201,6 @@ class playOptionsForm(object):
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
 
-        self.onePlayerButton.clicked.connect(self.betsVisibility)
-        self.twoPlayersButton.clicked.connect(self.betsVisibility)
-        self.threePlayersButton.clicked.connect(self.betsVisibility)
-        self.fourPlayersButton.clicked.connect(self.betsVisibility)
-        self.zeroPlayersButton.clicked.connect(self.betsVisibility)
-        self.oneComputerButton.clicked.connect(self.betsVisibility)
-        self.twoComputersButton.clicked.connect(self.betsVisibility)
-        self.threeComputersButton.clicked.connect(self.betsVisibility)
-        self.fourComputersButton.clicked.connect(self.betsVisibility)
-
         self.zeroPlayersButton.clicked.connect(self.userSettings)
         self.onePlayerButton.clicked.connect(self.userSettings)
         self.twoPlayersButton.clicked.connect(self.userSettings)
@@ -223,6 +213,19 @@ class playOptionsForm(object):
         self.fourComputersButton.clicked.connect(self.userSettings)
         self.betsButton.clicked.connect(self.userSettings)
         self.noBetsButton.clicked.connect(self.userSettings)
+
+        self.zeroPlayersButton.clicked.connect(self.betsVisibility)
+        self.onePlayerButton.clicked.connect(self.betsVisibility)
+        self.twoPlayersButton.clicked.connect(self.betsVisibility)
+        self.threePlayersButton.clicked.connect(self.betsVisibility)
+        self.fourPlayersButton.clicked.connect(self.betsVisibility)
+        self.zeroComputersButton.clicked.connect(self.betsVisibility)
+        self.oneComputerButton.clicked.connect(self.betsVisibility)
+        self.twoComputersButton.clicked.connect(self.betsVisibility)
+        self.threeComputersButton.clicked.connect(self.betsVisibility)
+        self.fourComputersButton.clicked.connect(self.betsVisibility)
+
+
 
         self.nextButton.setVisible(False)
         self.nextButton.clicked.connect(self.proceed)
@@ -336,17 +339,20 @@ class playOptionsForm(object):
 
     # Funkcja wyłączająca opcję betowania dla komputerów oraz komputera vs gracza
     def betsVisibility(self):
-        if self.playersNumber <= 1 and self.computersNumber >= 1:
-            self.betting = 0
-            self.betsButton.setVisible(False)
-            self.noBetsButton.setVisible(False)
-            self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
-            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
-        else:
-            self.betsButton.setVisible(True)
-            self.noBetsButton.setVisible(True)
+        if self.computersNumber == 0:
             self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+            self.betsButton.setEnabled(True)
+            self.noBetsButton.setEnabled(True)
+
+        elif self.computersNumber >= 1:
+            self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+            self.betting = 0
+            self.betsButton.setEnabled(False)
+            self.noBetsButton.setEnabled(False)
+
+
 
     # Popup z warningiem
     def warning(self):
