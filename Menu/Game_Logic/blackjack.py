@@ -29,12 +29,10 @@ def take_bet(chips):  # wez coinsy od gracza
 
 def hit(deck, hand):
     hand.add_card(deck.deal())
-    hand.adjust_for_ace()
 
 
 def hit_on_replays(card, hand):
     hand.add_card(card)
-    hand.adjust_for_ace()
 
 
 def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
@@ -128,7 +126,7 @@ def check_if_round_over(players):  # sprawdzenie czy wszyscy gracze skonczyli ru
 def add_points(players):  # dodawanie punktow po rundzie
     players_max = []
     for player in players:
-        if player.hand.value > 21:  # sprawdzenie czy gracz nie spalil reki
+        if player.hand.value > 21 and (player.hand.value != 22 and player.hand.aces != 2):  # sprawdzenie czy gracz nie spalil reki
             pass
 
         elif len(players_max) == 0 or player.hand.value == players_max[0].hand.value:
@@ -137,6 +135,14 @@ def add_points(players):  # dodawanie punktow po rundzie
         elif player.hand.value > players_max[0].hand.value:
             players_max.clear()
             players_max = [player]
+
+        elif player.hand.value == 22 and player.hand.aces == 2:
+            if player.hand.value > players_max[0].hand.value:
+                players_max.clear()
+                players_max = [player]
+
+            elif player.hand.value == players_max[0].hand.value:
+                players_max.append(player)
 
     for player in players_max:
         print(player.name + " " + str(player.hand.value))

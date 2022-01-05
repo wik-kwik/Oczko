@@ -18,8 +18,3 @@ class Hand:  # odkrywanie kart
         self.value += values[card.rank]
         if card.rank == 'Ace':
             self.aces += 1
-
-    def adjust_for_ace(self):  # 1 lub 11 dla asa
-        while self.value > 21 and self.aces:
-            self.value -= 10
-            self.aces -= 1
