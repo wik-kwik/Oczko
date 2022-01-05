@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 
 import menu
+import sqlite3 as sql
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -30,6 +31,17 @@ class MainWindow(QtWidgets.QWidget):
 def main():
     app = QApplication(sys.argv)
     mainWindow = MainWindow()
+    try:
+        db = sql.connect('database.db')  # łączymy się do bazy
+        c = db.cursor()  # dodajemy kursor
+
+        query = "DELETE FROM logged_users"
+        c.execute(query)
+        db.commit()
+
+    except sql.Error as e:
+        print("xd")
+
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

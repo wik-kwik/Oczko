@@ -10,6 +10,7 @@ class usersForm(object):
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
         self.betting = betting
+        self.input = ""
         self.gameLevel = 0
         self.computerOneLevel = 0
         self.computerTwoLevel = 0
@@ -548,6 +549,17 @@ class usersForm(object):
         Form.setWindowTitle(_translate("Form", "Form"))
 
     def returnToOptions(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "DELETE FROM logged_users"
+            c.execute(query)
+            db.commit()
+
+        except sql.Error as e:
+            print("xd")
+
         self.window = QtWidgets.QMainWindow()
         self.ui = playOptions.playOptionsForm(self.language)
         self.ui.setupUi(self.window)
@@ -1522,24 +1534,21 @@ class usersForm(object):
 
     def openBoard(self):
         self.window = QtWidgets.QMainWindow()
-        # players = []
-        # # dodanie graczy do planszy
-        # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
-        # player = Player ("XXD", "XXD ", 1)
         self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting,
-                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel)
+                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)
         self.ui.setupUi(self.window)
         self.window.show()
-        self.popups.append(self.window)
+        # self.popups.append(self.window)
 
     def show_betting(self):
         if self.betting == 1:
-            self.openBoard()
+            # self.openBoard()
             self.window = QtWidgets.QMainWindow()
-            self.ui = betting.bettingForm(self.numberOfPlayer)
+            self.ui = betting.bettingForm(self.language, self.playersNumber, self.computersNumber, self.betting,
+                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel)
             self.ui.setupUi(self.window)
             self.window.show()
-            self.popups.append(self.window)
+            # self.popups.append(self.window)
 
 
         elif self.betting == 0:

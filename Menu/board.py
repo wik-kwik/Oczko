@@ -1,11 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import betting
+import betting, menu
 import sqlite3 as sql
 from Game_Logic.player import Player
 
 
 class boardForm(object):
-    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel):
+    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel, input):
         self.language = language
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
@@ -16,6 +16,7 @@ class boardForm(object):
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
+        self.input = input
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
@@ -438,6 +439,12 @@ class boardForm(object):
         self.retranslateUi(boardForm)
         QtCore.QMetaObject.connectSlotsByName(boardForm)
 
+        self.closeButton.clicked.connect(boardForm.close)
+        self.closeButton.clicked.connect(self.returnToMenu)
+
+        self.returnButton.clicked.connect(boardForm.close)
+
+
         if self.betting == 0:
             self.toWinLabel.setVisible(False)
             self.coinsIcon.setVisible(False)
@@ -445,6 +452,9 @@ class boardForm(object):
             self.walletIcon.setVisible(False)
             self.balanceText.setVisible(False)
             self.balanceLabel.setVisible(False)
+        elif self.betting == 1:
+            total_bet = int(self.input * len(self.numberOfPlayer))
+            self.toWinLabel.setText(str(total_bet))
 
         players = []
 
@@ -548,6 +558,12 @@ class boardForm(object):
 
         except sql.Error as e:
             print("huj")
+
+    def returnToMenu(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
 
 
     def retranslateUi(self, boardForm):

@@ -10,12 +10,24 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
-import playUsers
+import playUsers, board
 
 class bettingForm(object):
 
-    def __init__(self, numberOfPlayer):
+    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel,
+                 computerTwoLevel, computerThreeLevel, computerFourLevel):
+        self.language = language
+        self.playersNumber = playersNumber
+        self.computersNumber = computersNumber
+        self.betting = betting
         self.numberOfPlayer = numberOfPlayer
+        self.gameLevel = gameLevel
+        self.computerOneLevel = computerOneLevel
+        self.computerTwoLevel = computerTwoLevel
+        self.computerThreeLevel = computerThreeLevel
+        self.computerFourLevel = computerFourLevel
+        self.input = ""
+
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -174,11 +186,45 @@ class bettingForm(object):
             print("error")
 
     def play(self):
-        input = int(self.betInput.text())
-        if input > self.set_wallet(1) and input > self.set_wallet(2) and input > self.set_wallet(3) and input > self.set_wallet(4):
-            self.warningLabel.setText("kogo")
-        else:
-            self.warningLabel.setText("gituwa")
+        try:
+            self.input = int(self.betInput.text())
+
+        # Poniższy "if" jest niepotrzebny, ponieważ gracz nie może grać sam na pieniądze. W razie późniejszych zmian tylko zakomentowany
+
+        # if len(self.numberOfPlayer) == 1:
+        #     if self.input > self.set_wallet(1):
+        #         self.warningLabel.setText("kogo")
+        #     else:
+        #         self.openBoard()
+
+            if len(self.numberOfPlayer) == 2:
+                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
+                    self.warningLabel.setText("Invalid value")
+                else:
+                    self.openBoard()
+            elif len(self.numberOfPlayer) == 3:
+                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) \
+                        or self.input > self.set_wallet(3) or self.input < 1:
+                    self.warningLabel.setText("Invalid value")
+                else:
+                    self.openBoard()
+            elif len(self.numberOfPlayer) == 4:
+                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2)\
+                        or self.input > self.set_wallet(3) or self.input > self.set_wallet(4) or self.input < 1:
+                    self.warningLabel.setText("Invalid value")
+                else:
+                    self.openBoard()
+        except ValueError as e:
+            self.warningLabel.setText("That's not a number!")
+
+
+
+    def openBoard(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting,
+                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
