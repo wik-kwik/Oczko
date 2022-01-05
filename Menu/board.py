@@ -458,22 +458,22 @@ class boardForm(object):
 
         players = []
 
-        if (1 in self.numberOfPlayer) == True:
+        if (1 in self.numberOfPlayer) is True:
             self.playerOneLabel.setText(self.set_username(1))
-            # players.append(Player("self.set_username(1)", "player", 1)) type reference in ..Blackjack.player Player class
+            players.append(Player(self.set_username(1), "player", 1))
             # self.playerOneWallet.setText(str(self.set_wallet(1)))
-        if (2 in self.numberOfPlayer) == True:
+        if (2 in self.numberOfPlayer) is True:
             self.playerTwoLabel.setText(self.set_username(2))
-            # players.append(Player("self.set_username(2)", "player", 2)) type reference in ..Blackjack.player Player class
-            #self.playerTwoWallet.setText(str(self.set_wallet(2)))
-        if (3 in self.numberOfPlayer) == True:
-            # players.append(Player("self.set_username(3)", "player", 3)) type reference in ..Blackjack.player Player class
+            players.append(Player(self.set_username(2), "player", 2))
+            # self.playerTwoWallet.setText(str(self.set_wallet(2)))
+        if (3 in self.numberOfPlayer) is True:
             self.playerThreeLabel.setText(self.set_username(3))
-            #self.playerThreeWallet.setText(str(self.set_wallet(3)))
-        if (4 in self.numberOfPlayer) == True:
+            players.append(Player(self.set_username(3), "player", 3))
+            # self.playerThreeWallet.setText(str(self.set_wallet(3)))
+        if (4 in self.numberOfPlayer) is True:
             self.playerFourLabel.setText(self.set_username(4))
-            # players.append(Player("self.set_username(4)", "player", 4)) type reference in ..Blackjack.player Player class
-            #self.playerFourWallet.setText(str(self.set_wallet(4)))
+            players.append(Player(self.set_username(4), "player", 4))
+            # self.playerFourWallet.setText(str(self.set_wallet(4)))
 
 
         # # dodanie graczy do planszy

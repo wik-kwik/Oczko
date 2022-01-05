@@ -35,6 +35,14 @@ def main():
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
 
+        # c.execute("""CREATE TABLE settings (
+        #                 number_of_decks integer,
+        #                 path text
+        #                 )""")
+
+        # c.execute("INSERT INTO settings (number_of_decks, path) VALUES (?,?)", (1, "image: url(:/images/cardBackOne.png);"))
+        # db.commit()
+
         query = "DELETE FROM logged_users"
         c.execute(query)
         db.commit()
