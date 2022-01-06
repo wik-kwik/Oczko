@@ -36,11 +36,11 @@ def main():
         c = db.cursor()  # dodajemy kursor
 
         # c.execute("""CREATE TABLE settings (
-        #                 number_of_decks integer,
-        #                 path text
+        #                 decks integer,
+        #                 skin integer
         #                 )""")
-
-        # c.execute("INSERT INTO settings (number_of_decks, path) VALUES (?,?)", (1, "image: url(:/images/cardBackOne.png);"))
+        #
+        # c.execute("INSERT INTO settings (decks, skin) VALUES (?,?)", (0, 0))
         # db.commit()
 
         query = "DELETE FROM logged_users"

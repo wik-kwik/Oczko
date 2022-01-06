@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import menu
+import sqlite3 as sql
 
 
 class settingsForm(object):
@@ -93,31 +94,82 @@ class settingsForm(object):
 
     def oneDeck(self):
         self.decksNumber = 1
+        self.set_decks(1)
         self.oneDeckButton.setStyleSheet("image: url(:/images/one.png);")
         self.twoDecksButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threeDecksButton.setStyleSheet("image: url(:/images/threeInactive.png);")
 
     def twoDecks(self):
         self.decksNumber = 2
+        self.set_decks(2)
         self.oneDeckButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoDecksButton.setStyleSheet("image: url(:/images/two.png);")
         self.threeDecksButton.setStyleSheet("image: url(:/images/threeInactive.png);")
 
     def threeDecks(self):
         self.decksNumber = 3
+        self.set_decks(3)
         self.oneDeckButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoDecksButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threeDecksButton.setStyleSheet("image: url(:/images/three.png);")
 
     def classicSkin(self):
         self.cardSkin = 1
+        self.set_skin(1)
         self.classicSkinIcon.setStyleSheet("image: url(:/images/cardBackOne.png);")
         self.fancySkinIcon.setStyleSheet("image: url(:/images/cardBackTwoInactive.png);")
 
     def fancySkin(self):
         self.cardSkin = 2
+        self.set_skin(2)
         self.classicSkinIcon.setStyleSheet("image: url(:/images/cardBackOneInactive.png);")
         self.fancySkinIcon.setStyleSheet("image: url(:/images/cardBackTwo.png);")
+
+    def set_decks(self, decks):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            # c.execute("""CREATE TABLE settings (
+            #                 number_of_decks integer,
+            #                 path text
+            #                 )""")
+
+            # NAJPIERW RESETUJEMY POPRZEDNI WYBÓR
+            # query = "DELETE FROM settings"
+            # c.execute(query)
+            # db.commit()
+
+            # c.execute("INSERT INTO settings (number_of_decks, path) VALUES (?,?)", (number_of_decks, path))
+            c.execute("UPDATE settings SET decks = {}".format(decks))
+            db.commit()
+
+
+        except sql.Error as e:
+            print("xd")
+
+    def set_skin(self, skin):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            # c.execute("""CREATE TABLE settings (
+            #                 number_of_decks integer,
+            #                 path text
+            #                 )""")
+
+            # NAJPIERW RESETUJEMY POPRZEDNI WYBÓR
+            # query = "DELETE FROM settings"
+            # c.execute(query)
+            # db.commit()
+
+            # c.execute("INSERT INTO settings (number_of_decks, path) VALUES (?,?)", (number_of_decks, path))
+            c.execute("UPDATE settings SET skin = {}".format(skin))
+            db.commit()
+
+
+        except sql.Error as e:
+            print("xd")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
