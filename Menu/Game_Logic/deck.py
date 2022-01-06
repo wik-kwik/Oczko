@@ -1,6 +1,6 @@
 import random
-from card import Card
-from cards import Cards
+from .card import Card
+from .cards import Cards
 
 cards = Cards()
 suits = cards.suits

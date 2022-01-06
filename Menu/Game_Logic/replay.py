@@ -1,5 +1,5 @@
-from convert_methods import Convert
-from card import Card
+from .convert_methods import Convert
+from .card import Card
 
 
 class Replay:  # powtorki

@@ -1,11 +1,11 @@
 import random
-from player import Player
-from hand import Hand
-from card import Card
-from cards import Cards
-from deck import Deck
-from replay import Replay
-from convert_methods import Convert
+from .player import Player
+from .hand import Hand
+# from card import Card
+from .cards import Cards
+# from deck import Deck
+# from replay import Replay
+from .convert_methods import Convert
 
 cards = Cards()
 suits = cards.suits
