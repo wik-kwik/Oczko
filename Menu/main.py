@@ -39,7 +39,7 @@ def main():
         #                 decks integer,
         #                 skin integer
         #                 )""")
-        #
+
         # c.execute("INSERT INTO settings (decks, skin) VALUES (?,?)", (0, 0))
         # db.commit()
 

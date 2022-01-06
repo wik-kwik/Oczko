@@ -21,11 +21,16 @@ class boardForm(object):
         self.input = input
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
-        query = "SELECT path from settings"
+        query = "SELECT skin from settings"
         c.execute(query)
         db.commit()
         result = c.fetchone()
-        self.path = result[0]
+        self.skin = result[0]
+        if self.skin == 2:
+            self.path = "image: url(:/images/cardBackTwo.png);"
+
+        else:
+            self.path = "image: url(:/images/cardBackOne.png);"
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
