@@ -471,28 +471,24 @@ class boardForm(object):
             total_bet = int(self.input * len(self.numberOfPlayer))
             self.toWinLabel.setText(str(total_bet))
 
-        players = []
+        self.players = []
 
         if (1 in self.numberOfPlayer) is True:
             self.playerOneLabel.setText(self.set_username(1))
-            players.append(Player(self.set_username(1), "player", 1))
+            self.players.append(Player(self.set_username(1), "player", 1))
             # self.playerOneWallet.setText(str(self.set_wallet(1)))
         if (2 in self.numberOfPlayer) is True:
             self.playerTwoLabel.setText(self.set_username(2))
-            players.append(Player(self.set_username(2), "player", 2))
+            self.players.append(Player(self.set_username(2), "player", 2))
             # self.playerTwoWallet.setText(str(self.set_wallet(2)))
         if (3 in self.numberOfPlayer) is True:
             self.playerThreeLabel.setText(self.set_username(3))
-            players.append(Player(self.set_username(3), "player", 3))
+            self.players.append(Player(self.set_username(3), "player", 3))
             # self.playerThreeWallet.setText(str(self.set_wallet(3)))
         if (4 in self.numberOfPlayer) is True:
             self.playerFourLabel.setText(self.set_username(4))
-            players.append(Player(self.set_username(4), "player", 4))
+            self.players.append(Player(self.set_username(4), "player", 4))
             # self.playerFourWallet.setText(str(self.set_wallet(4)))
-
-        self.frontend_logic = FrontendLogic(self, players)
-        self.frontend_logic.start_game()
-        boardLabels = BoardLabels(self)
 
         # # dodanie graczy do planszy
         # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class

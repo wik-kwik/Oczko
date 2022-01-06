@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import playOptions, login, register, board, betting
 import sqlite3 as sql
 from Game_Logic.player import Player
+from frontendLogic import FrontendLogic
 
 
 class usersForm(object):
@@ -1538,6 +1539,9 @@ class usersForm(object):
                                   self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)
         self.ui.setupUi(self.window)
         self.window.show()
+        self.frontend_logic = FrontendLogic(self.ui)
+        self.frontend_logic.start_game()
+        # boardLabels = BoardLabels(self)
         # self.popups.append(self.window)
 
     def show_betting(self):

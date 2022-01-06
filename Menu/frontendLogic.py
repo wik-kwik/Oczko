@@ -11,10 +11,10 @@ import tkinter as tk
 
 
 class FrontendLogic:
-    def __init__(self, board, players):
+    def __init__(self, board):
         self.board = board
         self.number_of_players = board.playersNumber + board.computersNumber
-        self.players = players
+        self.players = board.players
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT decks from settings"
