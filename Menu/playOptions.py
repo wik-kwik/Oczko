@@ -4,8 +4,8 @@ import menu, res, playUsers, warning
 class playOptionsForm(object):
     def __init__(self, language):
         self.language = language
-        self.playersNumber = 0
-        self.computersNumber = 0
+        self.playersNumber = -1
+        self.computersNumber = -1
         self.betting = 3
         self.warningType = 0
 
@@ -394,6 +394,10 @@ class playOptionsForm(object):
             self.nextButton.setVisible(False)
 
         elif self.computersNumber == 0 and (self.betting != 0 and self.betting != 1):
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+
+        elif self.computersNumber == -1 or self.playersNumber == -1:
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
 
