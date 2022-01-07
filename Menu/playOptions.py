@@ -201,18 +201,18 @@ class playOptionsForm(object):
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
 
-        self.zeroPlayersButton.clicked.connect(self.userSettings)
-        self.onePlayerButton.clicked.connect(self.userSettings)
-        self.twoPlayersButton.clicked.connect(self.userSettings)
-        self.threePlayersButton.clicked.connect(self.userSettings)
-        self.fourPlayersButton.clicked.connect(self.userSettings)
-        self.zeroComputersButton.clicked.connect(self.userSettings)
-        self.oneComputerButton.clicked.connect(self.userSettings)
-        self.twoComputersButton.clicked.connect(self.userSettings)
-        self.threeComputersButton.clicked.connect(self.userSettings)
-        self.fourComputersButton.clicked.connect(self.userSettings)
-        self.betsButton.clicked.connect(self.userSettings)
-        self.noBetsButton.clicked.connect(self.userSettings)
+        self.zeroPlayersButton.clicked.connect(self.optionsSettings)
+        self.onePlayerButton.clicked.connect(self.optionsSettings)
+        self.twoPlayersButton.clicked.connect(self.optionsSettings)
+        self.threePlayersButton.clicked.connect(self.optionsSettings)
+        self.fourPlayersButton.clicked.connect(self.optionsSettings)
+        self.zeroComputersButton.clicked.connect(self.optionsSettings)
+        self.oneComputerButton.clicked.connect(self.optionsSettings)
+        self.twoComputersButton.clicked.connect(self.optionsSettings)
+        self.threeComputersButton.clicked.connect(self.optionsSettings)
+        self.fourComputersButton.clicked.connect(self.optionsSettings)
+        self.betsButton.clicked.connect(self.optionsSettings)
+        self.noBetsButton.clicked.connect(self.optionsSettings)
 
         self.zeroPlayersButton.clicked.connect(self.betsVisibility)
         self.onePlayerButton.clicked.connect(self.betsVisibility)
@@ -363,7 +363,7 @@ class playOptionsForm(object):
         QtCore.QTimer.singleShot(3000, self.window.close)
 
     # Kontrola zastosowanych opcji - wyświetla warningi i uniemożliwia przejście dalej
-    def userSettings(self):
+    def optionsSettings(self):
         if self.playersNumber + self.computersNumber > 4:
             self.warningType = 1
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")

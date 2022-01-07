@@ -2,11 +2,11 @@ from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
-import time
-import asyncio
-import threading
-import matplotlib
-import pygame
+# import time
+# import asyncio
+# import threading
+# import matplotlib
+# import pygame
 import tkinter as tk
 
 
