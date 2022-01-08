@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="images">
+    <file>historyBackgroundPL.png</file>
+    <file>historyBackground.png</file>
+    <file>playersChange.png</file>
+    <file>playersChangePL.png</file>
+    <file>rankingBackgroundPL.png</file>
+    <file>rankingBackground.png</file>
     <file>warningType1PL.png</file>
     <file>warningBackground.jpg</file>
     <file>PRAJZPL.jpg</file>

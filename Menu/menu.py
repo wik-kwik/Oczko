@@ -12,7 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, register, res
 
 import account
+import gameHistory
 import playOptions
+import ranking
 import rules, login
 import settings
 
@@ -230,6 +232,7 @@ class menuForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+
         # Obsługa przycisków
         self.playButton.clicked.connect(self.play)
         self.registerButton.clicked.connect(self.register)
@@ -244,7 +247,10 @@ class menuForm(object):
         self.polishButton.clicked.connect(self.polish)
         self.accountButton.clicked.connect(Form.close)
         self.accountButton.clicked.connect(self.show_login)
-        # self.accountButton.clicked.connect(self.account)
+        self.rankButton.clicked.connect(Form.close)
+        self.rankButton.clicked.connect(self.rank)
+        self.historyButton.clicked.connect(Form.close)
+        self.historyButton.clicked.connect(self.history)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -282,7 +288,16 @@ class menuForm(object):
         self.window.show()
 
     def rank(self):
-        print('ranking')
+        self.window = QtWidgets.QMainWindow()
+        self.ui = ranking.rankingForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def history(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = gameHistory.historyForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def play(self):
         self.playWindow = QtWidgets.QMainWindow()
