@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import changePassword
 import menu
 import sqlite3 as sql
 
@@ -87,8 +88,11 @@ class accountForm(object):
         self.passwordButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.passwordButton.setText("")
         self.passwordButton.setObjectName("passwordButton")
+        # Obsługa przycisków
         self.closeButton.clicked.connect(self.returnToMenu)
         self.closeButton.clicked.connect(Form.close)
+        self.passwordButton.clicked.connect(Form.close)
+        self.passwordButton.clicked.connect(self.changePassword)
 
         if self.language == 1:
             self.backgroundLabel.setStyleSheet("image: url(:/images/accountBackground.png);")
@@ -102,7 +106,7 @@ class accountForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Account"))
         # self.winsLabel.setText(_translate("Form", "69%"))
         # self.gamesLabel.setText(_translate("Form", "2"))
         # self.cardsLabel.setText(_translate("Form", "12"))
@@ -156,3 +160,8 @@ class accountForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
+    def changePassword(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = changePassword.changeForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()

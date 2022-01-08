@@ -140,7 +140,7 @@ class loginForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Login"))
         self.closeLabel.setText(_translate("Form", "x"))
         # Obsługa języków
         if self.language == 1:

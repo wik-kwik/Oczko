@@ -1,5 +1,12 @@
 <RCC>
   <qresource prefix="images">
+    <file>timeLeftPL.png</file>
+    <file>balancePL.png</file>
+    <file>standPL.png</file>
+    <file>hitPL.png</file>
+    <file>changeBackgroundPL.png</file>
+    <file>changeBackground.png</file>
+    <file>totalBetPL.jpg</file>
     <file>accountBackgroundPL.png</file>
     <file>accountBackground.png</file>
     <file>bettingBackgroundPL.png</file>
@@ -61,9 +68,9 @@
     <file>bettingBackground.png</file>
     <file>PRAJZ.png</file>
     <file>balance.png</file>
-    <file>prize.png</file>
     <file>coins.png</file>
     <file>timeLeft.png</file>
+    <file>totalBetPL.jpg</file>
     <file>cardBackOne.png</file>
     <file>hit.png</file>
     <file>stand.png</file>

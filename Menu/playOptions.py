@@ -233,7 +233,7 @@ class playOptionsForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Game setup"))
 
 
     def returnToMenu(self):

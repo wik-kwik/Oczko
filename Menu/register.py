@@ -142,7 +142,7 @@ class registerForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Register"))
         self.closeLabel.setText(_translate("Form", "X"))
         if self.language == 1:
             self.usernameLine.setPlaceholderText(_translate("Form", "USERNAME"))

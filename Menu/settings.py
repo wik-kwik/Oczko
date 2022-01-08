@@ -26,7 +26,6 @@ class settingsForm(object):
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.backgroundLabel = QtWidgets.QLabel(Form)
         self.backgroundLabel.setGeometry(QtCore.QRect(0, 0, 371, 361))
-        self.backgroundLabel.setStyleSheet("image: url(:/images/settingsEng.png);")
         self.backgroundLabel.setText("")
         self.backgroundLabel.setObjectName("backgroundLabel")
         self.twoDecksButton = QtWidgets.QPushButton(Form)
@@ -74,6 +73,7 @@ class settingsForm(object):
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
 
+        # Obsługa przycisków
         self.oneDeckButton.clicked.connect(self.oneDeck)
         self.twoDecksButton.clicked.connect(self.twoDecks)
         self.threeDecksButton.clicked.connect(self.threeDecks)
@@ -85,12 +85,15 @@ class settingsForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        # Obsługa języków
+        if self.language == 1:
+            self.backgroundLabel.setStyleSheet("image: url(:/images/settingsEng.png);")
         if self.language == 2:
             self.backgroundLabel.setStyleSheet("image: url(:/images/settingsPL.png);")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Settings"))
 
     def oneDeck(self):
         self.decksNumber = 1

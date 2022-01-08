@@ -49,19 +49,13 @@ class boardForm(object):
         self.backgroundDark.setObjectName("backgroundDark")
         self.standButton = QtWidgets.QPushButton(boardForm)
         self.standButton.setGeometry(QtCore.QRect(1510, 520, 161, 61))
-        self.standButton.setStyleSheet("image: url(:/images/stand.png);\n"
-                                       "border: 0px;")
         self.standButton.setText("")
         self.standButton.setObjectName("standButton")
         self.timeLeftIcon = QtWidgets.QLabel(boardForm)
-        self.timeLeftIcon.setGeometry(QtCore.QRect(1500, 160, 201, 71))
-        self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeft.png);")
         self.timeLeftIcon.setText("")
         self.timeLeftIcon.setObjectName("timeLeftIcon")
         self.hitButton = QtWidgets.QPushButton(boardForm)
         self.hitButton.setGeometry(QtCore.QRect(1510, 430, 161, 61))
-        self.hitButton.setStyleSheet("image: url(:/images/hit.png);\n"
-                                     "border: 0px;")
         self.hitButton.setText("")
         self.hitButton.setObjectName("hitButton")
         self.playerOneCard_1 = QtWidgets.QLabel(boardForm)
@@ -101,12 +95,10 @@ class boardForm(object):
         self.logoLabel.setObjectName("logoLabel")
         self.balanceText = QtWidgets.QLabel(boardForm)
         self.balanceText.setGeometry(QtCore.QRect(1540, 830, 161, 41))
-        self.balanceText.setStyleSheet("image: url(:/images/balance.png);")
         self.balanceText.setText("")
         self.balanceText.setObjectName("balanceText")
         self.toWinLabel = QtWidgets.QLabel(boardForm)
         self.toWinLabel.setGeometry(QtCore.QRect(650, 824, 191, 81))
-        self.toWinLabel.setStyleSheet("image: url(:/images/PRAJZ.png);")
         self.toWinLabel.setText("")
         self.toWinLabel.setObjectName("toWinLabel")
         self.balanceLabel = QtWidgets.QLabel(boardForm)
@@ -387,6 +379,28 @@ class boardForm(object):
         self.closeButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
+
+        # Obsługa języków
+
+        if self.language == 1:
+            self.standButton.setStyleSheet("image: url(:/images/stand.png);\n"
+                                           "border: 0px;")
+            self.hitButton.setStyleSheet("image: url(:/images/hit.png);\n"
+                                         "border: 0px;")
+            self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeft.png);")
+            self.balanceText.setStyleSheet("image: url(:/images/balance.png);")
+            self.toWinLabel.setStyleSheet("image: url(:/images/PRAJZ.png);")
+            self.timeLeftIcon.setGeometry(QtCore.QRect(1500, 160, 201, 71))
+        if self.language == 2:
+            self.standButton.setStyleSheet("image: url(:/images/standPL.png);\n"
+                                           "border: 0px;")
+            self.hitButton.setStyleSheet("image: url(:/images/hitPL.png);\n"
+                                         "border: 0px;")
+            self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeftPL.png);")
+            self.balanceText.setStyleSheet("image: url(:/images/balancePL.png);")
+            self.toWinLabel.setStyleSheet("image: url(:/images/totalBetPL.png);")
+            self.timeLeftIcon.setGeometry(QtCore.QRect(1492, 160, 201, 71))
+
         self.backgroundDark.raise_()
         self.playerOneCard_1.raise_()
         self.playerOneLabel.raise_()
@@ -467,6 +481,7 @@ class boardForm(object):
         self.standButton.clicked.connect(self.stand)
 
         if self.betting == 0:
+            self.prizeLabel.setVisible(False)
             self.toWinLabel.setVisible(False)
             self.coinsIcon.setVisible(False)
             self.prizeLabel.setVisible(False)
@@ -475,7 +490,7 @@ class boardForm(object):
             self.balanceLabel.setVisible(False)
         elif self.betting == 1:
             total_bet = int(self.input * len(self.numberOfPlayer))
-            self.toWinLabel.setText(str(total_bet))
+            self.prizeLabel.setText(str(total_bet))
 
         self.players = []
 
@@ -631,7 +646,7 @@ class boardForm(object):
 
     def retranslateUi(self, boardForm):
         _translate = QtCore.QCoreApplication.translate
-        boardForm.setWindowTitle(_translate("boardForm", "Form"))
+        boardForm.setWindowTitle(_translate("boardForm", "Board"))
         self.closeLabel.setText(_translate("boardForm", "X"))
 
     def hit(self):
