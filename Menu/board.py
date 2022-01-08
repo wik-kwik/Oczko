@@ -398,7 +398,7 @@ class boardForm(object):
                                          "border: 0px;")
             self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeftPL.png);")
             self.balanceText.setStyleSheet("image: url(:/images/balancePL.png);")
-            self.toWinLabel.setStyleSheet("image: url(:/images/totalBetPL.png);")
+            self.toWinLabel.setStyleSheet("image: url(:/images/totalBetPL.jpg);")
             self.timeLeftIcon.setGeometry(QtCore.QRect(1492, 160, 201, 71))
 
         self.backgroundDark.raise_()

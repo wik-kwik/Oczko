@@ -36,7 +36,6 @@ class bettingForm(object):
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.backgroundDark = QtWidgets.QLabel(Form)
         self.backgroundDark.setGeometry(QtCore.QRect(90, 70, 581, 381))
-        self.backgroundDark.setStyleSheet("image: url(:/images/bettingBackground.png);")
         self.backgroundDark.setText("")
         self.backgroundDark.setAlignment(QtCore.Qt.AlignCenter)
         self.backgroundDark.setObjectName("backgroundDark")
@@ -135,6 +134,12 @@ class bettingForm(object):
         self.playerFourWallet.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.playerFourWallet.setObjectName("playerFourWallet")
 
+        # Obsługa języków
+        if self.language == 1:
+            self.backgroundDark.setStyleSheet("image: url(:/images/bettingBackground.png);")
+        if self.language == 2:
+            self.backgroundDark.setStyleSheet("image: url(:/images/bettingBackgroundPL.png);")
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -228,6 +233,10 @@ class bettingForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
+        if self.language == 1:
+            self.playButton.setText(_translate("Form", "PLAY!"))
+        if self.language == 2:
+            self.playButton.setText(_translate("Form", "GRAJ!"))
         Form.setWindowTitle(_translate("Form", "Betting"))
-        self.playButton.setText(_translate("Form", "PLAY!"))
+
 
