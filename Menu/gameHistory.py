@@ -39,6 +39,7 @@ class historyForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         # Obsługa przycisków
+        self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
         # Obsługa języków
