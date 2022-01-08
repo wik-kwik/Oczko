@@ -201,30 +201,29 @@ class playOptionsForm(object):
         self.betsButton.clicked.connect(self.bets)
         self.noBetsButton.clicked.connect(self.noBets)
 
-        # self.zeroPlayersButton.clicked.connect(self.optionsSettings)
-        # self.onePlayerButton.clicked.connect(self.optionsSettings)
-        # self.twoPlayersButton.clicked.connect(self.optionsSettings)
-        # self.threePlayersButton.clicked.connect(self.optionsSettings)
-        # self.fourPlayersButton.clicked.connect(self.optionsSettings)
-        # self.zeroComputersButton.clicked.connect(self.optionsSettings)
-        # self.oneComputerButton.clicked.connect(self.optionsSettings)
-        # self.twoComputersButton.clicked.connect(self.optionsSettings)
-        # self.threeComputersButton.clicked.connect(self.optionsSettings)
-        # self.fourComputersButton.clicked.connect(self.optionsSettings)
-        # self.betsButton.clicked.connect(self.optionsSettings)
-        # self.noBetsButton.clicked.connect(self.optionsSettings)
+        self.zeroPlayersButton.clicked.connect(self.betsVisibility)
+        self.onePlayerButton.clicked.connect(self.betsVisibility)
+        self.twoPlayersButton.clicked.connect(self.betsVisibility)
+        self.threePlayersButton.clicked.connect(self.betsVisibility)
+        self.fourPlayersButton.clicked.connect(self.betsVisibility)
+        self.zeroComputersButton.clicked.connect(self.betsVisibility)
+        self.oneComputerButton.clicked.connect(self.betsVisibility)
+        self.twoComputersButton.clicked.connect(self.betsVisibility)
+        self.threeComputersButton.clicked.connect(self.betsVisibility)
+        self.fourComputersButton.clicked.connect(self.betsVisibility)
 
-        # self.zeroPlayersButton.clicked.connect(self.betsVisibility)
-        # self.onePlayerButton.clicked.connect(self.betsVisibility)
-        # self.twoPlayersButton.clicked.connect(self.betsVisibility)
-        # self.threePlayersButton.clicked.connect(self.betsVisibility)
-        # self.fourPlayersButton.clicked.connect(self.betsVisibility)
-        # self.zeroComputersButton.clicked.connect(self.betsVisibility)
-        # self.oneComputerButton.clicked.connect(self.betsVisibility)
-        # self.twoComputersButton.clicked.connect(self.betsVisibility)
-        # self.threeComputersButton.clicked.connect(self.betsVisibility)
-        # self.fourComputersButton.clicked.connect(self.betsVisibility)
-
+        self.zeroPlayersButton.clicked.connect(self.optionsSettings)
+        self.onePlayerButton.clicked.connect(self.optionsSettings)
+        self.twoPlayersButton.clicked.connect(self.optionsSettings)
+        self.threePlayersButton.clicked.connect(self.optionsSettings)
+        self.fourPlayersButton.clicked.connect(self.optionsSettings)
+        self.zeroComputersButton.clicked.connect(self.optionsSettings)
+        self.oneComputerButton.clicked.connect(self.optionsSettings)
+        self.twoComputersButton.clicked.connect(self.optionsSettings)
+        self.threeComputersButton.clicked.connect(self.optionsSettings)
+        self.fourComputersButton.clicked.connect(self.optionsSettings)
+        self.betsButton.clicked.connect(self.optionsSettings)
+        self.noBetsButton.clicked.connect(self.optionsSettings)
 
 
         # self.nextButton.setVisible(False)
@@ -252,7 +251,7 @@ class playOptionsForm(object):
         self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
 
     def onePlayer(self):
@@ -262,7 +261,7 @@ class playOptionsForm(object):
         self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def twoPlayers(self):
         self.playersNumber = 2
@@ -273,7 +272,7 @@ class playOptionsForm(object):
         self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def threePlayers(self):
         self.playersNumber = 3
@@ -282,7 +281,7 @@ class playOptionsForm(object):
         self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.fourPlayersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def fourPlayers(self):
         self.playersNumber = 4
@@ -291,7 +290,7 @@ class playOptionsForm(object):
         self.onePlayerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoPlayersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threePlayersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-        self.optionsSettings()
+       # self.optionsSettings()
 
     def zeroComputers(self):
         self.computersNumber = 0
@@ -300,7 +299,7 @@ class playOptionsForm(object):
         self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def oneComputer(self):
         self.computersNumber = 1
@@ -309,7 +308,7 @@ class playOptionsForm(object):
         self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def twoComputers(self):
         self.computersNumber = 2
@@ -318,7 +317,7 @@ class playOptionsForm(object):
         self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
         self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def threeComputers(self):
         self.computersNumber = 3
@@ -327,7 +326,7 @@ class playOptionsForm(object):
         self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.fourComputersButton.setStyleSheet("image: url(:/images/fourInactive.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     def fourComputers(self):
         self.computersNumber = 4
@@ -336,40 +335,57 @@ class playOptionsForm(object):
         self.oneComputerButton.setStyleSheet("image: url(:/images/oneInactive.png);")
         self.twoComputersButton.setStyleSheet("image: url(:/images/twoInactive.png);")
         self.threeComputersButton.setStyleSheet("image: url(:/images/threeInactive.png);")
-        self.optionsSettings()
+       #self.optionsSettings()
 
 
     def bets(self):
         self.betting = 1
         self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
         self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
-        self.optionsSettings()
+       # self.optionsSettings()
 
     def noBets(self):
         self.betting = 0
         self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
         self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
-        self.optionsSettings()
+        #self.optionsSettings()
 
     # Funkcja wyłączająca opcję betowania dla komputerów oraz komputera vs gracza
-    def betsVisibility(self):
+    # def betsVisibility(self):
+    #
+    #     if self.computersNumber == 0:
+    #         self.betsButton.setEnabled(True)
+    #         self.noBetsButton.setEnabled(True)
+    #         if self.betting == 1:
+    #             self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
+    #             self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+    #         elif self.betting == 0:
+    #             self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+    #             self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+    #
+    #     elif self.computersNumber >= 1:
+    #         self.betting = 0
+    #         self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+    #         self.betsButton.setEnabled(False)
+    #         self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+    #         self.noBetsButton.setEnabled(False)
 
-        if self.computersNumber == 0:
-            self.betsButton.setEnabled(True)
-            self.noBetsButton.setEnabled(True)
+    def betsVisibility(self):
+        if self.playersNumber <= 1 and self.computersNumber >= 1:
+            self.betting = 0
+            self.betsButton.setVisible(False)
+            self.noBetsButton.setVisible(False)
+            self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
+            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
+        else:
+            self.betsButton.setVisible(True)
+            self.noBetsButton.setVisible(True)
             if self.betting == 1:
                 self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
                 self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
             elif self.betting == 0:
                 self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
                 self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
-
-        elif self.computersNumber >= 1:
-            self.betting = 0
-            self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
-            self.betsButton.setEnabled(False)
-            self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
-            self.noBetsButton.setEnabled(False)
 
     # Popup z warningiem
     def warning(self):
@@ -380,32 +396,52 @@ class playOptionsForm(object):
         QtCore.QTimer.singleShot(3000, self.window.close)
 
     # Kontrola zastosowanych opcji - wyświetla warningi i uniemożliwia przejście dalej
-    def optionsSettings(self):
-        self.betsVisibility()
+    # def optionsSettings(self):
+    #     self.betsVisibility()
+    #
+    #     if self.playersNumber + self.computersNumber > 4:
+    #         self.warningType = 1
+    #         self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+    #         self.nextButton.setVisible(False)
+    #         self.warning()
+    #
+    #     elif self.playersNumber + self.computersNumber < 2:
+    #         self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+    #         self.nextButton.setVisible(False)
+    #
+    #     elif self.computersNumber == 0 and (self.betting != 0 and self.betting != 1):
+    #         self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+    #         self.nextButton.setVisible(False)
+    #
+    #     elif self.computersNumber == -1 or self.playersNumber == -1:
+    #         self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+    #         self.nextButton.setVisible(False)
+    #
+    #     else:
+    #         self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
+    #         self.nextButton.setVisible(True)
 
+        # self.betsVisibility()
+
+    def optionsSettings(self):
         if self.playersNumber + self.computersNumber > 4:
             self.warningType = 1
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
             self.warning()
-
+        elif self.betting != 0 and self.betting != 1:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+            # self.warningType = 2
+            # self.warning()
         elif self.playersNumber + self.computersNumber < 2:
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
-
-        elif self.computersNumber == 0 and (self.betting != 0 and self.betting != 1):
-            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
-            self.nextButton.setVisible(False)
-
-        elif self.computersNumber == -1 or self.playersNumber == -1:
-            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
-            self.nextButton.setVisible(False)
-
+            # self.warningType = 3
+            # self.warning()
         else:
             self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
             self.nextButton.setVisible(True)
-
-        # self.betsVisibility()
 
     def proceed(self):
         self.window = QtWidgets.QMainWindow()
