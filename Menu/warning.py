@@ -13,14 +13,9 @@ class warningForm(object):
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.orangeBackground = QtWidgets.QLabel(Form)
         self.orangeBackground.setGeometry(QtCore.QRect(0, 0, 401, 301))
-        self.orangeBackground.setStyleSheet("background-color: rgb(255, 170, 0);")
+        self.orangeBackground.setStyleSheet("image: url(:/images/warningBackground.jpg);")
         self.orangeBackground.setText("")
         self.orangeBackground.setObjectName("orangeBackground")
-        self.background = QtWidgets.QLabel(Form)
-        self.background.setGeometry(QtCore.QRect(10, 10, 381, 281))
-        self.background.setStyleSheet("background-color: rgb(24, 47, 38);")
-        self.background.setText("")
-        self.background.setObjectName("background")
         self.warningIcon = QtWidgets.QLabel(Form)
         self.warningIcon.setGeometry(QtCore.QRect(155, 50, 91, 81))
         self.warningIcon.setStyleSheet("image: url(:/images/warning.png);")
@@ -32,16 +27,19 @@ class warningForm(object):
         self.warningText.setText("")
         self.warningText.setObjectName("warningText")
 
-        if (self.warningType==1):
-            self.warningText.setStyleSheet("image: url(:/images/warningType1.png);")
-
-        if (self.warningType==2):
+        if self.warningType==1:
+            if self.language==1:
+                self.warningText.setStyleSheet("image: url(:/images/warningType1.png);")
+            if self.language==2:
+                self.warningText.setStyleSheet("image: url(:/images/warningType1PL.png);")
+        # Po zmianie koncepcji - nieużywane warningi, nieprzetłumaczone
+        if self.warningType==2:
             self.warningText.setStyleSheet("image: url(:/images/warningType2.png);")
 
-        if (self.warningType==3):
+        if self.warningType==3:
             self.warningText.setStyleSheet("image: url(:/images/warningType3.png);")
 
-        if (self.warningType==4):
+        if self.warningType==4:
             self.warningText.setStyleSheet("image: url(:/images/warningType4.png);")
 
         self.retranslateUi(Form)
