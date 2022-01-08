@@ -631,7 +631,7 @@ class boardForm(object):
 
     def retranslateUi(self, boardForm):
         _translate = QtCore.QCoreApplication.translate
-        boardForm.setWindowTitle(_translate("boardForm", "Form"))
+        boardForm.setWindowTitle(_translate("boardForm", "Board"))
         self.closeLabel.setText(_translate("boardForm", "X"))
 
     def hit(self):

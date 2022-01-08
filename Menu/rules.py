@@ -34,7 +34,7 @@ class rulesForm(object):
 
     def retranslateUi(self, rulesForm):
         _translate = QtCore.QCoreApplication.translate
-        rulesForm.setWindowTitle(_translate("rulesForm", "Form"))
+        rulesForm.setWindowTitle(_translate("rulesForm", "Rules"))
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()

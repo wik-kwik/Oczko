@@ -228,6 +228,6 @@ class bettingForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Betting"))
         self.playButton.setText(_translate("Form", "PLAY!"))
 

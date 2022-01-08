@@ -248,7 +248,7 @@ class menuForm(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Menu"))
         self.closeLabel.setText(_translate("Form", "X"))
 
     def english(self):
