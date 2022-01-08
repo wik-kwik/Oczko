@@ -1,13 +1,9 @@
 from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
-import time
-import asyncio
-import threading
-import matplotlib
-import pygame
-import tkinter as tk
+from timer import Timer
 
 
 class FrontendLogic:
@@ -23,8 +19,6 @@ class FrontendLogic:
         result = c.fetchone()
         self.number_of_decks = result[0]
         self.replay = Replay()
-        self.time = 15
-        self.current_time = 15
         self.decision = 'wait'
 
     def clicked_hit(self):
@@ -34,19 +28,20 @@ class FrontendLogic:
         self.decision = 'stand'
 
     def check_if_clicked(self):
-        print(self.current_time)
+        print(self.timer.current_time)
 
     def start_game(self):
         deck = Deck()
         deck.deck = deck.deck * self.number_of_decks
         deck.shuffle_cards()
         self.replay.add_players(self.players)
-        root = tk.Tk()
-        playing = True
-        self.current_time = 5
-        while self.current_time >= 0:
-            root.after(1000, self.check_if_clicked())
-            self.current_time = self.current_time - 1
+
+        # while self.current_time >= 0:
+        #     # timer = QtCore.QTimer()  # set up your QTimer
+        #     # timer.timeout.connect(self.check_if_clicked())  # connect it to your update function
+        #     # timer.start(1000)  # set it to timeout in 5000 ms
+        #     time.sleep(1)
+        #     self.current_time = self.current_time - 1
 
 
         # while len(deck.deck) > self.number_of_players * 2:

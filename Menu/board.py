@@ -1,9 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from boardLabels import BoardLabels
-from frontendLogic import FrontendLogic
 import betting, menu
 import sqlite3 as sql
 from Game_Logic.player import Player
+from frontendLogic import FrontendLogic
+import time
+import threading
+import datetime
+from PyQt5.QtCore import QTimer
 
 
 class boardForm(object):
@@ -490,6 +494,23 @@ class boardForm(object):
             self.players.append(Player(self.set_username(4), "player", 4))
             # self.playerFourWallet.setText(str(self.set_wallet(4)))
 
+        self.timerLabel = QtWidgets.QLabel(boardForm)
+        self.timerLabel.setGeometry(QtCore.QRect(590, 490, 201, 51))
+        self.timerLabel.setStyleSheet("")
+        self.timerLabel.setText("")
+        self.timerLabel.setObjectName("playerTwoCard_10")
+
+        # timer which repate function `display_time` every 1000ms (1s)
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.display_time)  # execute `display_time`
+        self.timer.start()
+        self.timer.setInterval(1000)
+        self.time = 10
+        self.start_time = time.time()
+
+        # self.frontend_logic = FrontendLogic(self)
+        # self.frontend_logic.start_game()
+
         # # dodanie graczy do planszy
         # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
         # player = Player ("XXD", "XXD ", 1)
@@ -556,9 +577,17 @@ class boardForm(object):
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
 
+    def display_time(self):
 
+        if int(time.time() - self.start_time) <= self.time:
+            self.current_time = int(time.time() - self.start_time)
+            print('current_time:', self.current_time)
+            time.sleep(1)
 
-    def set_username(self,user_id):
+        else:
+            self.timer.stop()
+
+    def set_username(self, user_id):
         try:
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
@@ -586,7 +615,11 @@ class boardForm(object):
         self.closeLabel.setText(_translate("boardForm", "X"))
 
     def hit(self):
-        self.frontend_logic.clicked_hit()
+        print("ES")
+
 
     def stand(self):
-        self.frontend_logic.clicked_stand()
+        print("ES")
+
+    def check_if_clicked(self):
+        print("ES")
