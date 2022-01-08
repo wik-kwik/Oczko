@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import account
+import sqlite3 as sql
 
 
 class changeForm(object):
@@ -142,38 +143,59 @@ class changeForm(object):
 
 
             password = self.passwordLine.text()
-            confirm = self.usernameLine.text()
+            confirm = self.confirmLine.text()
 
             query = "SELECT username from logged_users where id = 5"
             c.execute(query)
             db.commit()
-            result = c.fetchone()[0]
-            print(result)
+            username = c.fetchone()[0]
+            print(username)
 
-            if password == confirm:
+            query = "SELECT password from users where username = '" + username + "'"
+            c.execute(query)
+            db.commit()
+            current_password = c.fetchone()[0]
+            print(current_password)
+
+            if password != confirm:
+                if self.language == 1:
+                    self.statusLabel.setText("Passwords don't match")
+                elif self.language == 2:
+                    self.statusLabel.setText("Hasła nie są zgodne")
+
+            elif password == confirm == current_password:
+                if self.language == 1:
+                    self.statusLabel.setText("This is your current password")
+                elif self.language == 2:
+                    self.statusLabel.setText("To jest Twoje obecne hasło")
+
+            elif len(password) < 6:
+                if self.language == 1:
+                    self.statusLabel.setText("Password is too short")
+                elif self.language == 2:
+                    self.statusLabel.setText("Podane hasło jest za krótkie")
+
+            else:
 
                 self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
                 if self.language == 1:
-                    self.statusLabel.setText("You are logged in")
+                    self.statusLabel.setText("Password has changed")
                 if self.language == 2:
-                    self.statusLabel.setText("Zalogowano")
+                    self.statusLabel.setText("Hasło zostało zmienione")
                 self.changeButton.setEnabled(False)
 
                 try:
-                    c.execute("UPDATE logged_users SET password = '" + password + "'")
+                    c.execute("UPDATE users SET password = '" + password + "' where username = '" + username + "'")
                     db.commit()
 
 
                 except sql.Error as e:
+                    self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
                     self.statusLabel.setText("Error")
 
-            # query = "SELECT username, password, coins, games_played, win_rate, time_spent, cards_used from logged_users" #where username = '" + username + "'and password = '" + password + "'"
-            # c.execute(query)
-            # db.commit()
-            #
-            # result = c.fetchone()
 
         except sql.Error as e:
+            self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
             self.statusLabel.setText("Error")
 
     def account(self):
