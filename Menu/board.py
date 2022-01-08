@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from boardLabels import BoardLabels
-import betting, menu
+from frontendLogic import FrontendLogic
+import betting, menu, playUsers
 import sqlite3 as sql
 from Game_Logic.player import Player
 from frontendLogic import FrontendLogic
@@ -461,6 +462,7 @@ class boardForm(object):
         self.closeButton.clicked.connect(self.returnToMenu)
 
         self.returnButton.clicked.connect(boardForm.close)
+        self.returnButton.clicked.connect(self.returnToUsers)
         self.hitButton.clicked.connect(self.hit)
         self.standButton.clicked.connect(self.stand)
 
@@ -603,8 +605,26 @@ class boardForm(object):
             print("huj")
 
     def returnToMenu(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "DELETE FROM logged_users"
+            c.execute(query)
+            c.execute("UPDATE levels SET level = 0")
+            db.commit()
+
+        except sql.Error as e:
+            print("xd")
+
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def returnToUsers(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
 

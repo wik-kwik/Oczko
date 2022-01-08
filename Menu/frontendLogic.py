@@ -3,7 +3,6 @@ from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
-from timer import Timer
 
 
 class FrontendLogic:

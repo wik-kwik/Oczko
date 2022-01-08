@@ -21,6 +21,8 @@ class usersForm(object):
         self.computerFourLevel = 0
         self.numberOfPlayer = []
         self.popups = []
+        self.loggedUsers = []
+
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -505,6 +507,8 @@ class usersForm(object):
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardPL.png);\n"
                                                   "border: 0px;")
 
+
+
         # Przygotowanie okna w zależności od ilości userów
         if self.playersNumber == 0:
             self.zeroPlayers()
@@ -527,7 +531,17 @@ class usersForm(object):
         if self.computersNumber == 4:
             self.fourComputers()
 
+        if self.check_level(5) == 1:
+            self.easyLevel()
+        if self.check_level(5) == 2:
+            self.mediumLevel()
+        if self.check_level(5) == 3:
+            self.hardLevel()
+
+
         # Obsługa przycisków
+
+
         self.returnButton.clicked.connect(self.returnToOptions)
         self.returnButton.clicked.connect(Form.close)
 
@@ -536,6 +550,8 @@ class usersForm(object):
         self.hardGameButton.clicked.connect(self.hardLevel)
         self.nextButton.clicked.connect(Form.close)
         self.nextButton.clicked.connect(self.show_betting)
+
+
 
         self.playerOneLogin.clicked.connect(Form.close)
         self.playerTwoLogin.clicked.connect(Form.close)
@@ -546,6 +562,8 @@ class usersForm(object):
         self.playerTwoRegister.clicked.connect(Form.close)
         self.playerThreeRegister.clicked.connect(Form.close)
         self.playerFourRegister.clicked.connect(Form.close)
+
+        self.settings()
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -558,6 +576,7 @@ class usersForm(object):
 
             query = "DELETE FROM logged_users"
             c.execute(query)
+            c.execute("UPDATE levels SET level = 0")
             db.commit()
 
         except sql.Error as e:
@@ -884,6 +903,9 @@ class usersForm(object):
         self.compOneMediumButton.clicked.connect(self.compOneMediumLevel)
         self.compOneHardButton.clicked.connect(self.compOneHardLevel)
 
+
+
+
         if self.language == 1:
             self.compOneLabel.setStyleSheet("image: url(:/images/computerOne.png);")
             self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwoInactive.png);")
@@ -914,6 +936,8 @@ class usersForm(object):
                                                    "border: 0px;")
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
                                                   "border: 0px;")
+
+
         if self.language == 2:
             self.compOneLabel.setStyleSheet("image: url(:/images/computerOnePL.png);")
             self.compTwoLabel.setStyleSheet("image: url(:/images/computerTwoInactivePL.png);")
@@ -943,6 +967,12 @@ class usersForm(object):
                                                    "border: 0px;")
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                   "border: 0px;")
+        if self.check_level(1) == 1:
+            self.compOneEasyLevel()
+        elif self.check_level(1) == 2:
+            self.compOneMediumLevel()
+        elif self.check_level(1) == 3:
+            self.compOneHardLevel()
 
     def twoComputers(self):
         self.compOneEasyButton.setEnabled(True)
@@ -1024,6 +1054,18 @@ class usersForm(object):
                                                    "border: 0px;")
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                   "border: 0px;")
+        if self.check_level(1) == 1:
+            self.compOneEasyLevel()
+        elif self.check_level(1) == 2:
+            self.compOneMediumLevel()
+        elif self.check_level(1) == 3:
+            self.compOneHardLevel()
+        if self.check_level(2) == 1:
+            self.compTwoEasyLevel()
+        elif self.check_level(2) == 2:
+            self.compTwoMediumLevel()
+        elif self.check_level(2) == 3:
+            self.compTwoHardLevel()
 
     def threeComputers(self):
         self.compOneEasyButton.setEnabled(True)
@@ -1109,6 +1151,25 @@ class usersForm(object):
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                   "border: 0px;")
 
+        if self.check_level(1) == 1:
+            self.compOneEasyLevel()
+        elif self.check_level(1) == 2:
+            self.compOneMediumLevel()
+        elif self.check_level(1) == 3:
+            self.compOneHardLevel()
+        if self.check_level(2) == 1:
+            self.compTwoEasyLevel()
+        elif self.check_level(2) == 2:
+            self.compTwoMediumLevel()
+        elif self.check_level(2) == 3:
+            self.compTwoHardLevel()
+        if self.check_level(3) == 1:
+            self.compThreeEasyLevel()
+        elif self.check_level(3) == 2:
+            self.compThreeMediumLevel()
+        elif self.check_level(3) == 3:
+            self.compThreeHardLevel()
+
     def fourComputers(self):
         self.compOneEasyButton.setEnabled(True)
         self.compTwoEasyButton.setEnabled(True)
@@ -1136,12 +1197,38 @@ class usersForm(object):
         self.compFourMediumButton.clicked.connect(self.compFourMediumLevel)
         self.compFourHardButton.clicked.connect(self.compFourHardLevel)
 
+        if self.check_level(1) == 1:
+            self.compOneEasyLevel()
+        elif self.check_level(1) == 2:
+            self.compOneMediumLevel()
+        elif self.check_level(1) == 3:
+            self.compOneHardLevel()
+        if self.check_level(2) == 1:
+            self.compTwoEasyLevel()
+        elif self.check_level(2) == 2:
+            self.compTwoMediumLevel()
+        elif self.check_level(2) == 3:
+            self.compTwoHardLevel()
+        if self.check_level(3) == 1:
+            self.compThreeEasyLevel()
+        elif self.check_level(3) == 2:
+            self.compThreeMediumLevel()
+        elif self.check_level(3) == 3:
+            self.compThreeHardLevel()
+        if self.check_level(4) == 1:
+            self.compFourEasyLevel()
+        elif self.check_level(4) == 2:
+            self.compFourMediumLevel()
+        elif self.check_level(4) == 3:
+            self.compFourHardLevel()
+
     # Wygaszanie nieużywanych opcji + przypisywanie poziomów do zmiennych
 
     # Poziomy pierwszego komputera
 
     def compOneEasyLevel(self):
         self.computerOneLevel = 1
+        self.update_leveldb(1, 1)
         if self.language == 1:
             self.compOneEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                                  "border: 0px;")
@@ -1157,8 +1244,11 @@ class usersForm(object):
             self.compOneHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
     def compOneMediumLevel(self):
         self.computerOneLevel = 2
+        self.update_leveldb(1, 2)
         if self.language == 1:
             self.compOneEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                  "border: 0px;")
@@ -1174,8 +1264,11 @@ class usersForm(object):
             self.compOneHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
     def compOneHardLevel(self):
         self.computerOneLevel = 3
+        self.update_leveldb(1, 3)
         if self.language == 1:
             self.compOneEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                  "border: 0px;")
@@ -1191,10 +1284,13 @@ class usersForm(object):
             self.compOneHardButton.setStyleSheet("image: url(:/images/hardPL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
         # Poziomy drugiego komputera
 
     def compTwoEasyLevel(self):
         self.computerTwoLevel = 1
+        self.update_leveldb(2, 1)
         if self.language == 1:
             self.compTwoEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                                  "border: 0px;")
@@ -1210,8 +1306,11 @@ class usersForm(object):
             self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
     def compTwoMediumLevel(self):
         self.computerTwoLevel = 2
+        self.update_leveldb(2, 2)
         if self.language == 1:
             self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                  "border: 0px;")
@@ -1227,8 +1326,11 @@ class usersForm(object):
             self.compTwoHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
     def compTwoHardLevel(self):
         self.computerTwoLevel = 3
+        self.update_leveldb(2, 3)
         if self.language == 1:
             self.compTwoEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                  "border: 0px;")
@@ -1244,10 +1346,13 @@ class usersForm(object):
             self.compTwoHardButton.setStyleSheet("image: url(:/images/hardPL.png);\n"
                                                  "border: 0px;")
 
+        self.settings()
+
         # Poziomy trzeciego komputera
 
     def compThreeEasyLevel(self):
         self.computerThreeLevel = 1
+        self.update_leveldb(3, 1)
         if self.language == 1:
             self.compThreeEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                                    "border: 0px;")
@@ -1263,8 +1368,11 @@ class usersForm(object):
             self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                    "border: 0px;")
 
+        self.settings()
+
     def compThreeMediumLevel(self):
         self.computerThreeLevel = 2
+        self.update_leveldb(3, 2)
         if self.language == 1:
             self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                    "border: 0px;")
@@ -1280,8 +1388,11 @@ class usersForm(object):
             self.compThreeHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                    "border: 0px;")
 
+        self.settings()
+
     def compThreeHardLevel(self):
         self.computerThreeLevel = 3
+        self.update_leveldb(3, 3)
         if self.language == 1:
             self.compThreeEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                    "border: 0px;")
@@ -1297,10 +1408,13 @@ class usersForm(object):
             self.compThreeHardButton.setStyleSheet("image: url(:/images/hardPL.png);\n"
                                                    "border: 0px;")
 
+        self.settings()
+
         # Poziomy czwartego komputera
 
     def compFourEasyLevel(self):
         self.computerFourLevel = 1
+        self.update_leveldb(4, 1)
         if self.language == 1:
             self.compFourEasyButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                                   "border: 0px;")
@@ -1316,8 +1430,11 @@ class usersForm(object):
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                   "border: 0px;")
 
+        self.settings()
+
     def compFourMediumLevel(self):
         self.computerFourLevel = 2
+        self.update_leveldb(4, 2)
         if self.language == 1:
             self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                   "border: 0px;")
@@ -1333,8 +1450,11 @@ class usersForm(object):
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                                   "border: 0px;")
 
+        self.settings()
+
     def compFourHardLevel(self):
         self.computerFourLevel = 3
+        self.update_leveldb(4, 3)
         if self.language == 1:
             self.compFourEasyButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
                                                   "border: 0px;")
@@ -1350,10 +1470,14 @@ class usersForm(object):
             self.compFourHardButton.setStyleSheet("image: url(:/images/hardPL.png);\n"
                                                   "border: 0px;")
 
+        self.settings()
+
         # Wygaszanie poziomu gry
 
     def easyLevel(self):
         self.gameLevel = 1
+        self.update_leveldb(5,1)
+
         if self.language == 1:
             self.easyGameButton.setStyleSheet("image: url(:/images/easy.png);\n"
                                               "border: 0px;")
@@ -1375,8 +1499,13 @@ class usersForm(object):
             self.hardGameButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                               "border: 0px;")
 
+        self.settings()
+
+
+
     def mediumLevel(self):
         self.gameLevel = 2
+        self.update_leveldb(5, 2)
         if self.language == 1:
             self.mediumGameButton.setStyleSheet("image: url(:/images/medium.png);\n"
                                                 "border: 0px;")
@@ -1398,8 +1527,11 @@ class usersForm(object):
             self.hardGameButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
                                               "border: 0px;")
 
+        self.settings()
+
     def hardLevel(self):
         self.gameLevel = 3
+        self.update_leveldb(5, 3)
         if self.language == 1:
             self.hardLabel.setStyleSheet("image: url(:/images/hardTiming.png);")
             self.hardGameButton.setStyleSheet("image: url(:/images/hard.png);\n"
@@ -1422,6 +1554,7 @@ class usersForm(object):
             self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactivePL.png);")
             self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactivePL.png);\n"
                                                 "border: 0px;")
+        self.settings()
 
     def first_player(self):
 
@@ -1432,7 +1565,7 @@ class usersForm(object):
         print(self.numberOfPlayer)
 
         if result is not None:
-
+            self.loggedUsers.append(1)
             self.playerOneLogin.setVisible(False)
             self.playerOneRegister.setVisible(False)
             self.playerOneLogout.setVisible(True)
@@ -1450,6 +1583,7 @@ class usersForm(object):
         print(self.numberOfPlayer)
 
         if result is not None:
+            self.loggedUsers.append(2)
             self.playerTwoLogin.setVisible(False)
             self.playerTwoRegister.setVisible(False)
 
@@ -1464,6 +1598,7 @@ class usersForm(object):
         print(self.numberOfPlayer)
 
         if result is not None:
+            self.loggedUsers.append(3)
             self.playerThreeLogin.setVisible(False)
             self.playerThreeRegister.setVisible(False)
 
@@ -1480,6 +1615,7 @@ class usersForm(object):
         print(self.numberOfPlayer)
 
         if result is not None:
+            self.loggedUsers.append(4)
             self.playerFourLogin.setVisible(False)
             self.playerFourRegister.setVisible(False)
 
@@ -1520,6 +1656,67 @@ class usersForm(object):
 
         except sql.Error as e:
             print("xd")
+
+    def update_leveldb(self, level_id, level):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            c.execute(
+                "UPDATE levels SET level = {} WHERE id = {}".format(level, level_id))
+            # "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, self.username, self.password))
+            db.commit()
+        except sql.Error as e:
+            print("Error")
+
+    def check_level(self, level_id):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT level from levels where id = {}".format(level_id)
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result)
+            return result[0]
+
+
+        except sql.Error as e:
+            print("xd")
+
+
+    def settings(self):
+        if self.playersNumber == 1 and len(self.loggedUsers) != 1:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.playersNumber == 2 and len(self.loggedUsers) != 2:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.playersNumber == 3 and len(self.loggedUsers) != 3:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.playersNumber == 4 and len(self.loggedUsers) != 4:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.computersNumber == 1 and self.check_level(1) == 0:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.computersNumber == 2 and (self.check_level(1) == 0 or self.check_level(2) == 0):
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.computersNumber == 3 and (self.check_level(1) == 0 or self.check_level(2) == 0 or self.check_level(3) == 0):
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.computersNumber == 4 and (self.check_level(1) == 0 or self.check_level(2) == 0 or self.check_level(3) == 0 or self.check_level(4) == 0):
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        elif self.gameLevel == 0 and self.check_level(5) == 0:
+            self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+            self.nextButton.setVisible(False)
+        else:
+            self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
+            self.nextButton.setVisible(True)
 
     def show_register(self):
         self.window = QtWidgets.QMainWindow()
@@ -1563,41 +1760,53 @@ class usersForm(object):
         print("siema")
 
         self.numberOfPlayer.remove(1)
+        self.loggedUsers.remove(1)
         print(self.numberOfPlayer)
         self.delete_user(1)
 
         self.playerOneRegister.setVisible(True)
         self.playerOneLogin.setVisible(True)
+        self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+        self.nextButton.setVisible(False)
 
     def logout_two(self):
         print("siema")
 
         self.numberOfPlayer.remove(2)
+        self.loggedUsers.remove(2)
         print(self.numberOfPlayer)
         self.delete_user(2)
 
         self.playerTwoRegister.setVisible(True)
         self.playerTwoLogin.setVisible(True)
+        self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+        self.nextButton.setVisible(False)
 
     def logout_three(self):
         print("siema")
 
         self.numberOfPlayer.remove(3)
+        self.loggedUsers.remove(3)
         print(self.numberOfPlayer)
         self.delete_user(3)
 
         self.playerThreeRegister.setVisible(True)
         self.playerThreeLogin.setVisible(True)
+        self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+        self.nextButton.setVisible(False)
 
     def logout_four(self):
         print("siema")
 
         self.numberOfPlayer.remove(4)
+        self.loggedUsers.remove(4)
         print(self.numberOfPlayer)
         self.delete_user(4)
 
         self.playerFourRegister.setVisible(True)
         self.playerFourLogin.setVisible(True)
+        self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
+        self.nextButton.setVisible(False)
 
     def delete_user(self, user_id):
         try:
