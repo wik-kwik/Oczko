@@ -202,6 +202,7 @@ class registerForm(object):
                 elif self.language == 2:
                     self.statusLabel.setText("Nazwa użytkownika jest za krótka")
 
+
             elif len(password) < 6:
                 if self.language == 1:
                     self.statusLabel.setText("Password is too short")

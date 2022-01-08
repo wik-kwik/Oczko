@@ -107,6 +107,8 @@ class changeForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.account)
 
+        self.changeButton.clicked.connect(self.new_password)
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Change password"))
@@ -122,6 +124,57 @@ class changeForm(object):
             self.changeButton.setText(_translate("Form", "ZMIEŃ"))
             self.closeLabel.setText(_translate("Form", "x"))
             self.confirmLine.setPlaceholderText(_translate("Form", "POTWIERDŹ HASŁO"))
+
+    def new_password(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            # c.execute("""CREATE TABLE logged_users (
+            #                 id integer,
+            #                 username text UNIQUE,
+            #                 coins integer,
+            #                 games_played integer,
+            #                 win_rate integer,
+            #                 time_spent integer,
+            #                 cards_used integer
+            #                 )""")
+
+
+            password = self.passwordLine.text()
+            confirm = self.usernameLine.text()
+
+            query = "SELECT username from logged_users where id = 5"
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()[0]
+            print(result)
+
+            if password == confirm:
+
+                self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
+                if self.language == 1:
+                    self.statusLabel.setText("You are logged in")
+                if self.language == 2:
+                    self.statusLabel.setText("Zalogowano")
+                self.changeButton.setEnabled(False)
+
+                try:
+                    c.execute("UPDATE logged_users SET password = '" + password + "'")
+                    db.commit()
+
+
+                except sql.Error as e:
+                    self.statusLabel.setText("Error")
+
+            # query = "SELECT username, password, coins, games_played, win_rate, time_spent, cards_used from logged_users" #where username = '" + username + "'and password = '" + password + "'"
+            # c.execute(query)
+            # db.commit()
+            #
+            # result = c.fetchone()
+
+        except sql.Error as e:
+            self.statusLabel.setText("Error")
 
     def account(self):
         self.window = QtWidgets.QMainWindow()

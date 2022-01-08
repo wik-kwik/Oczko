@@ -172,15 +172,12 @@ class loginForm(object):
             username = self.usernameLine.text()
             password = self.passwordLine.text()
 
-            query = "SELECT username, password, coins, games_played, win_rate, time_spent, cards_used from users where username like '" + username + "'and password like '" + password + "'"
+            query = "SELECT username, password, coins, games_played, win_rate, time_spent, cards_used from users where username = '" + username + "'and password = '" + password + "'"
             c.execute(query)
             db.commit()
 
             result = c.fetchone()
-            games_played = result[3]
-            win_rate = result[4]
-            time_spent = result[5]
-            cards_used = result[6]
+
 
 
             if username == "" or password == "":
@@ -206,6 +203,10 @@ class loginForm(object):
 
                 try:
                     coins = result[2]
+                    games_played = result[3]
+                    win_rate = result[4]
+                    time_spent = result[5]
+                    cards_used = result[6]
                     c.execute(
                         "INSERT INTO logged_users (id,username,coins, games_played, win_rate, time_spent, cards_used) VALUES (?,?,?,?,?,?,?)", (0, username, coins, games_played, win_rate, time_spent, cards_used))
                     db.commit()
