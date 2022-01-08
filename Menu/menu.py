@@ -13,6 +13,7 @@ import sys, register, res
 
 import account
 import playOptions
+import ranking
 import rules, login
 import settings
 
@@ -244,7 +245,8 @@ class menuForm(object):
         self.polishButton.clicked.connect(self.polish)
         self.accountButton.clicked.connect(Form.close)
         self.accountButton.clicked.connect(self.show_login)
-        # self.accountButton.clicked.connect(self.account)
+        self.rankButton.clicked.connect(Form.close)
+        self.rankButton.clicked.connect(self.rank)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -282,7 +284,10 @@ class menuForm(object):
         self.window.show()
 
     def rank(self):
-        print('ranking')
+        self.window = QtWidgets.QMainWindow()
+        self.ui = ranking.rankingForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
 
     def play(self):
         self.playWindow = QtWidgets.QMainWindow()
