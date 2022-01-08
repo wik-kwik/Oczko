@@ -149,15 +149,19 @@ class changeForm(object):
             c.execute(query)
             db.commit()
             username = c.fetchone()[0]
-            print(username)
 
             query = "SELECT password from users where username = '" + username + "'"
             c.execute(query)
             db.commit()
             current_password = c.fetchone()[0]
-            print(current_password)
+        
+            if password == "" or confirm == "":
+                if self.language == 1:
+                    self.statusLabel.setText("Please fill in all the required fields")
+                elif self.language == 2:
+                    self.statusLabel.setText("Wypełnij wszystkie pola")
 
-            if password != confirm:
+            elif password != confirm:
                 if self.language == 1:
                     self.statusLabel.setText("Passwords don't match")
                 elif self.language == 2:
