@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from boardLabels import BoardLabels
 from frontendLogic import FrontendLogic
-import betting, menu, playUsers
+import menu, playUsers
 import sqlite3 as sql
 from Game_Logic.player import Player
 from frontendLogic import FrontendLogic
@@ -571,6 +571,9 @@ class boardForm(object):
         self.frontend_logic = FrontendLogic(self)
         self.frontend_logic.start_game()
 
+        self.closeButton.clicked.connect(self.timer.stop)
+        self.returnButton.clicked.connect(self.timer.stop)
+
         # # dodanie graczy do planszy
         # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
         # player = Player ("XXD", "XXD ", 1)
@@ -638,15 +641,22 @@ class boardForm(object):
             self.playerFourCard_10.setStyleSheet("")
 
     def display_time(self):
-
-        if int(time.time() - self.start_time) <= self.time:
-            self.current_time = int(time.time() - self.start_time)
-            print('current_time:', self.current_time)
-            self.timerLabel.setText(str(self.time - self.current_time))
+        if self.frontend_logic.current_player.type != "player":
+            time.sleep(1)
+            self.timer.stop()
+            self.frontend_logic.decision_ai()
+            self.change_player()
 
         else:
-            self.timer.stop()
-            self.change_player()
+            if int(time.time() - self.start_time) <= self.time:
+                self.current_time = int(time.time() - self.start_time)
+                print('current_time:', self.current_time)
+                self.timerLabel.setText(str(self.time - self.current_time))
+
+            else:
+                self.timer.stop()
+                self.frontend_logic.clicked_stand()
+                self.change_player()
 
     def change_player(self):
         self.window = QtWidgets.QMainWindow()
@@ -660,13 +670,13 @@ class boardForm(object):
 
     def hit(self):
         self.timer.stop()
-        self.change_player()
         self.frontend_logic.clicked_hit()
+        self.change_player()
 
     def stand(self):
         self.timer.stop()
-        self.change_player()
         self.frontend_logic.clicked_stand()
+        self.change_player()
 
     # def check_if_clicked(self):
     #     print("ES")

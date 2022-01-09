@@ -156,5 +156,57 @@
     <file>play.png</file>
     <file>rank.png</file>
     <file>register.png</file>
+    <file>two_of_clubs.png</file>
+    <file>two_of_diamonds.png</file>
+    <file>two_of_hearts.png</file>
+    <file>two_of_spades.png</file>
+    <file>three_of_clubs.png</file>
+    <file>three_of_diamonds.png</file>
+    <file>three_of_hearts.png</file>
+    <file>three_of_spades.png</file>
+    <file>four_of_clubs.png</file>
+    <file>four_of_diamonds.png</file>
+    <file>four_of_hearts.png</file>
+    <file>four_of_spades.png</file>
+    <file>five_of_clubs.png</file>
+    <file>five_of_diamonds.png</file>
+    <file>five_of_hearts.png</file>
+    <file>five_of_spades.png</file>
+    <file>six_of_clubs.png</file>
+    <file>six_of_diamonds.png</file>
+    <file>six_of_hearts.png</file>
+    <file>six_of_spades.png</file>
+    <file>seven_of_clubs.png</file>
+    <file>seven_of_diamonds.png</file>
+    <file>seven_of_hearts.png</file>
+    <file>seven_of_spades.png</file>
+    <file>eight_of_clubs.png</file>
+    <file>eight_of_diamonds.png</file>
+    <file>eight_of_hearts.png</file>
+    <file>eight_of_spades.png</file>
+    <file>nine_of_clubs.png</file>
+    <file>nine_of_diamonds.png</file>
+    <file>nine_of_hearts.png</file>
+    <file>nine_of_spades.png</file>
+    <file>ten_of_clubs.png</file>
+    <file>ten_of_diamonds.png</file>
+    <file>ten_of_hearts.png</file>
+    <file>ten_of_spades.png</file>
+    <file>jack_of_clubs.png</file>
+    <file>jack_of_diamonds.png</file>
+    <file>jack_of_hearts.png</file>
+    <file>jack_of_spades.png</file>
+    <file>queen_of_clubs.png</file>
+    <file>queen_of_diamonds.png</file>
+    <file>queen_of_hearts.png</file>
+    <file>queen_of_spades.png</file>
+    <file>king_of_clubs.png</file>
+    <file>king_of_diamonds.png</file>
+    <file>king_of_hearts.png</file>
+    <file>king_of_spades.png</file>
+    <file>ace_of_clubs.png</file>
+    <file>ace_of_diamonds.png</file>
+    <file>ace_of_hearts.png</file>
+    <file>ace_of_spades.png</file>
   </qresource>
 </RCC>

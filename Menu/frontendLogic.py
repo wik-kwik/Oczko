@@ -26,31 +26,60 @@ class FrontendLogic:
         self.replay.add_players(self.players)
         self.current_player_index = 0
         self.current_player = self.players[self.current_player_index]
+        self.start_round()
         self.set_player_labels()
 
-    def player_change(self):
-        if self.current_player_index + 1 < self.number_of_players:
-            self.current_player_index += 1
+    def start_round(self):
+        for player in self.players:
+            player.start_round(self.deck)
 
-        else:
-            self.current_player_index = 0
+    def player_change(self):
+        self.reset_card_png()
+        while True:
+            if self.current_player_index + 1 < self.number_of_players:
+                self.current_player_index += 1
+
+            else:
+                self.current_player_index = 0
+
+            if self.players[self.current_player_index].playing is True:
+                break
+
+            else:
+                continue
 
         self.current_player = self.players[self.current_player_index]
-        print(self.current_player)
+        self.set_player_labels()
+        # print(self.current_player)
 
     def clicked_hit(self):
         decision = 'hit'
-        blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
         self.player_change()
 
     def clicked_stand(self):
         decision = 'stand'
-        blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
+        self.player_change()
+
+    def decision_ai(self):
+        decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
+        self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
         self.player_change()
 
     def set_player_labels(self):
-        for i in range(len(self.current_player.cards)):
-            self.board.boardLabels.labels[self.current_player_index][i].setText(self.current_player.hand.hand).setText(self.current_player.cards[i].path)
+        for i in range(len(self.current_player.hand.cards)):
+            aux_path = "image: url(:/images/"+ self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
+            self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet(aux_path)
+            print(aux_path)
+            # self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet("image: url(:/images/ace_of_clubs.png);")
+
+    def reset_card_png(self):
+        for i in range(len(self.players)):
+            for j in range(len(self.players[i].hand.cards)):
+                self.board.boardLabels.labels[i][j].setStyleSheet(self.board.path)
 
 
     # def start_game(self):

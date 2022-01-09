@@ -15,7 +15,7 @@ class changeForm(object):
     def __init__(self, board):
         self.language = board.language
         self.board_timer = board.timer
-        self.frontendLogic = board.frontendLogic
+        self.frontendLogic = board.frontend_logic
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -78,7 +78,7 @@ class changeForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Change user"))
-        self.nicknameLabel.setText(_translate("Form", "nejfik69g"))
+        self.nicknameLabel.setText(_translate("Form", self.frontendLogic.current_player.name))
         if self.language == 1:
             self.playButton.setText(_translate("Form", "PLAY"))
         if self.language == 2:
