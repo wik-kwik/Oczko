@@ -73,6 +73,17 @@ class settingsForm(object):
         self.closeButton.setText("")
         self.closeButton.setObjectName("closeButton")
 
+        if self.check_deck() == 1:
+            self.oneDeck()
+        elif self.check_deck() == 2:
+            self.twoDecks()
+        elif self.check_deck() == 3:
+            self.threeDecks()
+        if self.check_skin() == 1:
+            self.classicSkin()
+        if self.check_skin() == 2:
+            self.fancySkin()
+
         # Obsługa przycisków
         self.oneDeckButton.clicked.connect(self.oneDeck)
         self.twoDecksButton.clicked.connect(self.twoDecks)
@@ -169,6 +180,38 @@ class settingsForm(object):
             # c.execute("INSERT INTO settings (number_of_decks, path) VALUES (?,?)", (number_of_decks, path))
             c.execute("UPDATE settings SET skin = {}".format(skin))
             db.commit()
+
+
+        except sql.Error as e:
+            print("xd")
+
+    def check_deck(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT decks from settings"
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result)
+            return result[0]
+
+
+        except sql.Error as e:
+            print("xd")
+
+    def check_skin(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT skin from settings"
+            c.execute(query)
+            db.commit()
+            result = c.fetchone()
+            print(result)
+            return result[0]
 
 
         except sql.Error as e:

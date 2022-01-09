@@ -26,7 +26,8 @@ class bettingForm(object):
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
-        self.input = ""
+        self.input = 0
+        self.siema = 0
 
 
     def setupUi(self, Form):
@@ -134,6 +135,13 @@ class bettingForm(object):
         self.playerFourWallet.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.playerFourWallet.setObjectName("playerFourWallet")
 
+        self.xdButton = QtWidgets.QPushButton(Form)
+        self.xdButton.setGeometry(QtCore.QRect(340, 395, 81, 31))
+        self.xdButton.setFont(font)
+        self.xdButton.setStyleSheet("")
+        self.xdButton.setObjectName("xdButton")
+        self.xdButton.setVisible(False)
+
         # Obsługa języków
         if self.language == 1:
             self.backgroundDark.setStyleSheet("image: url(:/images/bettingBackground.png);")
@@ -158,6 +166,30 @@ class bettingForm(object):
             self.playerFourWallet.setText(str(self.set_wallet(4)))
 
         self.playButton.clicked.connect(self.play)
+        # self.playButton.clicked.connect(Form.close)
+        self.xdButton.clicked.connect(Form.close)
+        print(self.siema)
+
+
+
+        Form.hide()
+
+        # if self.input == 1:
+        #     self.playButton.clicked.connect(Form.close)
+        # self.play()
+        # if self.xdButton.isChecked is True:
+        #     self.xdButton.clicked.connect(Form.close)
+
+        # if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
+        #     self.warningLabel.setText("<3")
+        # else:
+        #     pass
+
+        # self.close()if self.abc == 1:
+        if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
+            Form.close()
+
+
 
 
     def set_username(self,user_id):
@@ -192,7 +224,8 @@ class bettingForm(object):
 
     def play(self):
         try:
-            self.input = int(self.betInput.text())
+            self.input = str(self.betInput.text())
+            self.input = int(self.input)
 
         # Poniższy "if" jest niepotrzebny, ponieważ gracz nie może grać sam na pieniądze. W razie późniejszych zmian tylko zakomentowany
 
@@ -203,28 +236,51 @@ class bettingForm(object):
         #         self.openBoard()
 
             if len(self.numberOfPlayer) == 2:
-                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
+                if self.input == "":
+                    self.warningLabel.setText("")
+                elif self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
                     self.warningLabel.setText("Invalid value")
                 else:
+                    self.siema = 1
                     self.openBoard()
             elif len(self.numberOfPlayer) == 3:
-                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) \
+                if self.input == "":
+                    self.warningLabel.setText("")
+                elif self.input > self.set_wallet(1) or self.input > self.set_wallet(2) \
                         or self.input > self.set_wallet(3) or self.input < 1:
                     self.warningLabel.setText("Invalid value")
                 else:
+                    self.siema = 1
                     self.openBoard()
             elif len(self.numberOfPlayer) == 4:
-                if self.input > self.set_wallet(1) or self.input > self.set_wallet(2)\
+                if self.input == "":
+                    self.warningLabel.setText("")
+                elif self.input > self.set_wallet(1) or self.input > self.set_wallet(2)\
                         or self.input > self.set_wallet(3) or self.input > self.set_wallet(4) or self.input < 1:
                     self.warningLabel.setText("Invalid value")
                 else:
+                    self.siema = 1
                     self.openBoard()
         except ValueError as e:
-            self.warningLabel.setText("That's not a number!")
+            print("xd")
+
+
+    def refresh_betting(self):
+        self.window = QtWidgets.QMainWindow()
+        self.xd = bettingForm(self.language, self.playersNumber, self.computersNumber, self.betting,
+                              self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel,
+                              self.computerThreeLevel, self.computerFourLevel)
+        self.xd.setupUi(self.window)
+        self.window.show()
+
+
 
 
 
     def openBoard(self):
+
+        self.playButton.setEnabled(False)
+        self.xdButton.click()
         self.window = QtWidgets.QMainWindow()
         self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting,
                                   self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)

@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import menu
+import sqlite3 as sql
 
 
 class rankingForm(object):
@@ -235,6 +236,10 @@ class rankingForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
+        # self.siema()
+
+        self.show_data()
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -248,14 +253,140 @@ class rankingForm(object):
         self.playerThreeWinrate.setText(_translate("Form", "33%"))
         self.playerFourWinrate.setText(_translate("Form", "33%"))
         self.playerFiveWinrate.setText(_translate("Form", "33%"))
-        self.easyWinrate.setText(_translate("Form", "2%"))
-        self.mediumWinrate.setText(_translate("Form", "2%"))
-        self.hardWinrate.setText(_translate("Form", "2%"))
+        self.easyWinrate.setText(_translate("Form", "200%"))
+        self.mediumWinrate.setText(_translate("Form", "200%"))
+        self.hardWinrate.setText(_translate("Form", "200%"))
         self.cardOneCounter.setText(_translate("Form", "18"))
         self.cardTwoCounter.setText(_translate("Form", "6969"))
         self.cardThreeCounter.setText(_translate("Form", "6969"))
         self.cardFourCounter.setText(_translate("Form", "2"))
         self.cardFiveCounter.setText(_translate("Form", "1"))
+
+    def show_data(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "SELECT sum from cards order by sum limit 5"
+            c.execute(query)
+            db.commit()
+            sum = c.fetchall()
+
+            self.cardOneCounter.setText(str(sum[0][0]))
+            self.cardTwoCounter.setText(str(sum[1][0]))
+            self.cardThreeCounter.setText(str(sum[2][0]))
+            self.cardFourCounter.setText(str(sum[3][0]))
+            self.cardFiveCounter.setText(str(sum[4][0]))
+
+            query = "SELECT win_rate from users order by win_rate limit 5"
+            c.execute(query)
+            db.commit()
+            winrate = c.fetchall()
+
+            first_player = str(round(winrate[0][0]))
+            second_player = str(round(winrate[1][0]))
+            third_player = str(round(winrate[2][0]))
+            fourth_player = str(round(winrate[3][0]))
+            fifth_player = str(round(winrate[4][0]))
+
+            self.playerOneWinrate.setText(first_player + "%")
+            self.playerTwoWinrate.setText(second_player + "%")
+            self.playerThreeWinrate.setText(third_player + "%")
+            self.playerFourWinrate.setText(fourth_player + "%")
+            self.playerFiveWinrate.setText(fifth_player + "%")
+
+            query = "SELECT win_rate from games_ai"
+            c.execute(query)
+            db.commit()
+            winrate = c.fetchall()
+
+            self.easyWinrate.setText(str(winrate[0][0]) + "%")
+            self.mediumWinrate.setText(str(winrate[1][0]) + "%")
+            self.hardWinrate.setText(str(winrate[2][0]) + "%")
+
+
+        except sql.Error as e:
+            print("xd")
+
+    def siema(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (1,0,0,0))
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (2, 0, 0, 0))
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (3, 0, 0, 0))
+            # db.commit()
+    #
+    #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (1, "Two of Hearts", 0))
+    #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (2, "Two of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (3, "Two of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (4, "Two of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (5, "Three of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (6, "Three of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (7, "Three of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (8, "Three of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (9, "Four of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (10, "Four of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (11, "Four of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (12, "Four of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (13, "Five of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (14, "Five of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (15, "Five of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (16, "Five of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (17, "Six of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (18, "Six of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (19, "Six of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (20, "Six of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (21, "Seven of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (22, "Seven of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (23, "Seven of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (24, "Seven of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (25, "Eight of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (26, "Eight of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (27, "Eight of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (28, "Eight of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (29, "Nine of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (30, "Nine of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (31, "Nine of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (32, "Nine of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (33, "Ten of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (34, "Ten of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (35, "Ten of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (36, "Ten of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (37, "Jack of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (38, "Jack of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (39, "Jack of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (40, "Jack of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (41, "Queen of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (42, "Queen of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (43, "Queen of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (44, "Queen of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (45, "King of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (46, "King of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (47, "King of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (48, "King of Clubs", 0))
+    #
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (49, "Ace of Hearts", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (50, "Ace of Diamonds", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (51, "Ace of Spades", 0))
+    #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (52, "Ace of Clubs", 0))
+    #
+    #
+    #         db.commit()
+
+        except sql.Error as e:
+            print("xd")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
