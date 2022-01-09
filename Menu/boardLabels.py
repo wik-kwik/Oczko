@@ -44,3 +44,5 @@ class BoardLabels:
                                board.playerFourCard_8,
                                board.playerFourCard_9,
                                board.playerFourCard_10]
+
+        self.labels = [self.player1_labels, self.player2_labels, self.player3_labels, self.player4_labels]

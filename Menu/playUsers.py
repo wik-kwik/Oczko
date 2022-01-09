@@ -4,7 +4,6 @@ import sqlite3 as sql
 from Game_Logic.player import Player
 import frontendLogic
 import threading
-import timer
 
 
 class usersForm(object):

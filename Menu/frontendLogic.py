@@ -10,6 +10,8 @@ class FrontendLogic:
         self.board = board
         self.number_of_players = board.playersNumber + board.computersNumber
         self.players = board.players
+
+    def start_game(self):
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT decks from settings"
@@ -18,22 +20,40 @@ class FrontendLogic:
         result = c.fetchone()
         self.number_of_decks = result[0]
         self.replay = Replay()
-        self.decision = 'wait'
+        self.deck = Deck()
+        self.deck.deck = self.deck.deck * self.number_of_decks
+        self.deck.shuffle_cards()
+        self.replay.add_players(self.players)
+        self.current_player_index = 0
+        self.current_player = self.players[self.current_player_index]
+        self.set_player_labels()
+
+    def player_change(self):
+        if self.current_player_index + 1 < self.number_of_players:
+            self.current_player_index += 1
+
+        else:
+            self.current_player_index = 0
+
+        self.current_player = self.players[self.current_player_index]
+        print(self.current_player)
 
     def clicked_hit(self):
-        self.decision = 'hit'
+        decision = 'hit'
+        blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        self.player_change()
 
     def clicked_stand(self):
-        self.decision = 'stand'
+        decision = 'stand'
+        blackjack.hit_or_stand(self.deck, self.current_player, decision)
+        self.player_change()
 
-    def check_if_clicked(self):
-        print(self.timer.current_time)
+    def set_player_labels(self):
+        for i in range(len(self.current_player.cards)):
+            self.board.boardLabels.labels[self.current_player_index][i].setText(self.current_player.hand.hand).setText(self.current_player.cards[i].path)
 
-    def start_game(self):
-        deck = Deck()
-        deck.deck = deck.deck * self.number_of_decks
-        deck.shuffle_cards()
-        self.replay.add_players(self.players)
+
+    # def start_game(self):
 
         # while self.current_time >= 0:
         #     # timer = QtCore.QTimer()  # set up your QTimer
@@ -59,20 +79,20 @@ class FrontendLogic:
 
         #                     time.sleep(1)
 
-                        # print("Playing: " + player.name + " value: " + str(player.hand.value))
-                        # if player.playing is True:
-                        #     decision = blackjack.hit_or_stand(deck, player)
-                        #     self.replay.add_move(decision, player.player_number, player.hand.new_card)
-                        #     print("value: " + str(player.hand.value))
-                        #     if len(deck.deck) == 0:
-                        #         playing = False
-                        #         playing_round = False
-                        #         break
+        #                 print("Playing: " + player.name + " value: " + str(player.hand.value))
+        #                 if player.playing is True:
+        #                     decision = blackjack.hit_or_stand(deck, player)
+        #                     self.replay.add_move(decision, player.player_number, player.hand.new_card)
+        #                     print("value: " + str(player.hand.value))
+        #                     if len(deck.deck) == 0:
+        #                         playing = False
+        #                         playing_round = False
+        #                         break
 
-                    # playing_round = blackjack.check_if_round_over(self.players)
+        #             playing_round = blackjack.check_if_round_over(self.players)
 
-            #     self.replay.add_round_to_game_replay()
-            #     blackjack.add_points(self.players)
+        #         self.replay.add_round_to_game_replay()
+        #         blackjack.add_points(self.players)
 
-            # else:
-            #     break
+        #     else:
+        #         break

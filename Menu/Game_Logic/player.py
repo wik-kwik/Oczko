@@ -2,10 +2,11 @@ from .hand import Hand
 
 
 class Player:
-    def __init__(self, name, type, player_number):
+    def __init__(self, name, type, player_number, labels):
         self.name = name
         self.type = type
         self.player_number = player_number
+        self.labels = labels
         self.points = 0
         self.playing = True  # sprawdzenie czy gracz uczestniczy w rundzie
         self.cards_played = 0

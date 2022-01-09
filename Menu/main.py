@@ -1,9 +1,9 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
-
 import menu
 import sqlite3 as sql
+
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -27,6 +27,7 @@ class MainWindow(QtWidgets.QWidget):
         centerPoint = QApplication.desktop().screenGeometry(screen).center()
         frameGm.moveCenter(centerPoint)
         self.move(frameGm.topLeft())
+
 
 def main():
     app = QApplication(sys.argv)
@@ -65,6 +66,7 @@ def main():
         print("xd")
 
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()

@@ -35,68 +35,50 @@ def hit_on_replays(card, hand):
     hand.add_card(card)
 
 
-def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
-    global playing
+def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac dalej
+    if player.type == "player":
+        if decision == 'hit':
+            hit(deck, player.hand)
+            player.cards_played += 1
+            return True
 
-    while True:
-        if player.type == "player":
-            ask = input("Would you like to hit or stand? Please enter 'h' or 's': ")
+        elif decision == 'stand':
+            player.playing = False
+            return False
 
-            if ask[0].lower() == 'h':
-                hit(deck, player.hand)
-                player.cards_played += 1
-                return True
-            elif ask[0].lower() == 's':
-                print("Player stands.")
-                player.playing = False
-                return False
-            else:
-                print("Sorry, I didn't understand that, please try again!")
-                continue
-            break
+    if player.type == "ceasy":  # easy (losowe decyzje)
+        ask = bool(random.getrandbits(1))
+        if ask is True:
+            print(player.name + " hits.")
+            hit(deck, player.hand)
+            player.cards_played += 1
+            return True
 
-        if player.type == "ceasy":  # easy (losowe decyzje)
-            ask = bool(random.getrandbits(1))
-            if ask is True:
-                print(player.name + " hits.")
-                hit(deck, player.hand)
-                player.cards_played += 1
-                return True
+        else:
+            print(player.name + " stands.")
+            player.playing = False
+            return False
 
-            else:
-                print(player.name + " stands.")
-                player.playing = False
-                return False
+    if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
+        if player.hand.value <= 17:
+            print(player.name + " hits.")
+            hit(deck, player.hand)
+            player.cards_played += 1
+            return True
 
-            break
+        else:
+            print(player.name + " stands.")
+            player.playing = False
+            return False
 
-        if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
-            if player.hand.value <= 17:
-                print(player.name + " hits.")
-                hit(deck, player.hand)
-                player.cards_played += 1
-                return True
-
-            else:
-                print(player.name + " stands.")
-                player.playing = False
-                return False
-
-            break
-
-        if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
-            if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
-                if deck.deck[len(deck.deck) - 1].rank == 'Ace':
-                    if player.hand.value + 1 <= 21:
-                        print(player.name + " hits.")
-                        hit(deck, player.hand)
-                        player.cards_played += 1
-                        return True
-
-                    else:
-                        print(player.name + " stands.")
-                        player.playing = False
-                        return False
+    if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
+        if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
+            if deck.deck[len(deck.deck) - 1].rank == 'Ace':
+                if player.hand.value + 1 <= 21:
+                    print(player.name + " hits.")
+                    hit(deck, player.hand)
+                    player.cards_played += 1
+                    return True
 
                 else:
                     print(player.name + " stands.")
@@ -104,12 +86,15 @@ def hit_or_stand(deck, player):  # zapytaj gracza, czy chce podbijac dalej
                     return False
 
             else:
-                print(player.name + " hits.")
-                hit(deck, player.hand)
-                player.cards_played += 1
+                print(player.name + " stands.")
+                player.playing = False
                 return False
 
-            break
+        else:
+            print(player.name + " hits.")
+            hit(deck, player.hand)
+            player.cards_played += 1
+            return False
 
 
 def check_if_round_over(players):  # sprawdzenie czy wszyscy gracze skonczyli runde
@@ -202,40 +187,40 @@ def add_points(players):  # dodawanie punktow po rundzie
 
 # odczytywanie zapisu z replaya
 
-replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S'],
-['S4CTSASKH6HTH4H9', '1S', '2S', '3HDK', '4S', '3S', '4S']]
-players = []
-number_of_players = len(replay[0])
-convert = Convert()
+# replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S'],
+# ['S4CTSASKH6HTH4H9', '1S', '2S', '3HDK', '4S', '3S', '4S']]
+# players = []
+# number_of_players = len(replay[0])
+# convert = Convert()
 
-for player in replay[0]:
-    player, player_number = player[:-1], player[-1]
-    player_number = int(player_number)
+# for player in replay[0]:
+#     player, player_number = player[:-1], player[-1]
+#     player_number = int(player_number)
 
-    players.append(Player(player, "replay", player_number))
+#     players.append(Player(player, "replay", player_number))
 
-i = 1
-while i < len(replay):
-    aux = number_of_players - 1
-    first_hands = replay[i][0]
-    while first_hands != "":
-        first_hands, card = first_hands[:-2], first_hands[-2:]
-        players[aux].hand = Hand()
-        hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
-        first_hands, card = first_hands[:-2], first_hands[-2:]
-        hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
-        aux = aux - 1
+# i = 1
+# while i < len(replay):
+#     aux = number_of_players - 1
+#     first_hands = replay[i][0]
+#     while first_hands != "":
+#         first_hands, card = first_hands[:-2], first_hands[-2:]
+#         players[aux].hand = Hand()
+#         hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
+#         first_hands, card = first_hands[:-2], first_hands[-2:]
+#         hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
+#         aux = aux - 1
 
-    j = 1
-    while j < len(replay[i]):
-        player = players[int(replay[i][j][0]) - 1]
-        if replay[i][j][1] == "H":
-            card = replay[i][j][-2:]
-            hit_on_replays(convert.convert_string_to_card(card), players[int(replay[i][j][0]) - 1].hand)
+#     j = 1
+#     while j < len(replay[i]):
+#         player = players[int(replay[i][j][0]) - 1]
+#         if replay[i][j][1] == "H":
+#             card = replay[i][j][-2:]
+#             hit_on_replays(convert.convert_string_to_card(card), players[int(replay[i][j][0]) - 1].hand)
 
-        if replay[i][j][1] == "S":
-            pass
+#         if replay[i][j][1] == "S":
+#             pass
 
-        j += 1
+#         j += 1
 
-    i += 1
+#     i += 1

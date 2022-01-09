@@ -6,9 +6,9 @@ import sqlite3 as sql
 from Game_Logic.player import Player
 from frontendLogic import FrontendLogic
 import time
-import threading
-import datetime
 from PyQt5.QtCore import QTimer
+import playerChange
+from boardLabels import BoardLabels
 
 
 class boardForm(object):
@@ -23,6 +23,7 @@ class boardForm(object):
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
+        print(gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel)
         self.input = input
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
@@ -36,6 +37,15 @@ class boardForm(object):
 
         else:
             self.path = "image: url(:/images/cardBackOne.png);"
+
+        if gameLevel == 1:
+            self.time = 15
+
+        elif gameLevel == 2:
+            self.time = 10
+
+        elif gameLevel == 3:
+            self.time = 5
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
@@ -492,41 +502,74 @@ class boardForm(object):
             total_bet = int(self.input * len(self.numberOfPlayer))
             self.prizeLabel.setText(str(total_bet))
 
+        player_number_aux = 0
+        self.boardLabels = BoardLabels(self)
         self.players = []
 
-        if (1 in self.numberOfPlayer) is True:
-            self.playerOneLabel.setText(self.set_username(1))
-            self.players.append(Player(self.set_username(1), "player", 1))
-            # self.playerOneWallet.setText(str(self.set_wallet(1)))
-        if (2 in self.numberOfPlayer) is True:
-            self.playerTwoLabel.setText(self.set_username(2))
-            self.players.append(Player(self.set_username(2), "player", 2))
-            # self.playerTwoWallet.setText(str(self.set_wallet(2)))
-        if (3 in self.numberOfPlayer) is True:
-            self.playerThreeLabel.setText(self.set_username(3))
-            self.players.append(Player(self.set_username(3), "player", 3))
-            # self.playerThreeWallet.setText(str(self.set_wallet(3)))
-        if (4 in self.numberOfPlayer) is True:
-            self.playerFourLabel.setText(self.set_username(4))
-            self.players.append(Player(self.set_username(4), "player", 4))
-            # self.playerFourWallet.setText(str(self.set_wallet(4)))
+        for i in range(1, self.playersNumber + 1):
+            self.get_player_label(i).setText(self.set_username(i))
+            self.players.append(Player(self.set_username(i), "player", i, self.boardLabels.labels[player_number_aux]))
+            player_number_aux += 1
 
-        self.timerLabel = QtWidgets.QLabel(boardForm)
-        self.timerLabel.setGeometry(QtCore.QRect(590, 490, 201, 51))
-        self.timerLabel.setStyleSheet("")
-        self.timerLabel.setText("")
-        self.timerLabel.setObjectName("playerTwoCard_10")
+        for i in range(1, self.computersNumber + 1):
+            name, type = self.set_computer_data(self.get_computer_level(i))
+            self.get_player_label(self.playersNumber + i).setText(name)
+            self.players.append(Player(name, type, self.playersNumber + i, self.boardLabels.labels[player_number_aux]))
+            player_number_aux += 1
+
+
+        # if (1 in self.numberOfPlayer) is True:
+        #     self.playerOneLabel.setText(self.set_username(1))
+        #     self.players.append(Player(self.set_username(1), "player", 1, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        #     # self.playerOneWallet.setText(str(self.set_wallet(1)))
+        # if (2 in self.numberOfPlayer) is True:
+        #     self.playerTwoLabel.setText(self.set_username(2))
+        #     self.players.append(Player(self.set_username(2), "player", 2, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        #     # self.playerTwoWallet.setText(str(self.set_wallet(2)))
+        # if (3 in self.numberOfPlayer) is True:
+        #     self.playerThreeLabel.setText(self.set_username(3))
+        #     self.players.append(Player(self.set_username(3), "player", 3, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        #     # self.playerThreeWallet.setText(str(self.set_wallet(3)))
+        # if (4 in self.numberOfPlayer) is True:
+        #     self.playerFourLabel.setText(self.set_username(4))
+        #     self.players.append(Player(self.set_username(4), "player", 4, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        #     # self.playerFourWallet.setText(str(self.set_wallet(4)))
+
+        # if (1 in self.computersNumber) is True:
+        #     name, type = self.set_computer_data()
+        #     self.playerOneLabel.setText(name)
+        #     self.players.append(Player(name, type, self.playersNumber + 1, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        # if (2 in self.computersNumber) is True:
+        #     name, type = self.set_computer_data()
+        #     self.playerTwoLabel.setText(name)
+        #     self.players.append(Player(name, type, self.playersNumber + 2, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        # if (3 in self.computersNumber) is True:
+        #     name, type = self.set_computer_data()
+        #     self.playerThreeLabel.setText(name)
+        #     self.players.append(Player(name, type, self.playersNumber + 3, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+        # if (4 in self.computersNumber) is True:
+        #     name, type = self.set_computer_data()
+        #     self.playerFourLabel.setText(name)
+        #     self.players.append(Player(name, type, self.playersNumber + 4, self.boardLabels.labels[player_number_aux]))
+        #     player_number_aux += 1
+
 
         # timer which repate function `display_time` every 1000ms (1s)
         self.timer = QTimer()
         self.timer.timeout.connect(self.display_time)  # execute `display_time`
         self.timer.start()
         self.timer.setInterval(1000)
-        self.time = 10
         self.start_time = time.time()
 
-        # self.frontend_logic = FrontendLogic(self)
-        # self.frontend_logic.start_game()
+        self.frontend_logic = FrontendLogic(self)
+        self.frontend_logic.start_game()
 
         # # dodanie graczy do planszy
         # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
@@ -599,10 +642,75 @@ class boardForm(object):
         if int(time.time() - self.start_time) <= self.time:
             self.current_time = int(time.time() - self.start_time)
             print('current_time:', self.current_time)
-            time.sleep(1)
+            self.timerLabel.setText(str(self.time - self.current_time))
 
         else:
             self.timer.stop()
+            self.change_player()
+
+    def change_player(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = playerChange.changeForm(self)
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.reset_timer()
+
+    def reset_timer(self):
+        self.start_time = time.time()
+
+    def hit(self):
+        self.timer.stop()
+        self.change_player()
+        self.frontend_logic.clicked_hit()
+
+    def stand(self):
+        self.timer.stop()
+        self.change_player()
+        self.frontend_logic.clicked_stand()
+
+    # def check_if_clicked(self):
+    #     print("ES")
+
+    def get_player_label(self, player_number):
+        if player_number == 1:
+            return self.playerOneLabel
+
+        elif player_number == 2:
+            return self.playerTwoLabel
+
+        elif player_number == 3:
+            return self.playerThreeLabel
+
+        elif player_number == 4:
+            return self.playerFourLabel
+
+    def get_computer_level(self, computerNumber):
+        if computerNumber == 1:
+            return self.computerOneLevel
+
+        elif computerNumber == 2:
+            return self.computerTwoLevel
+
+        elif computerNumber == 3:
+            return self.computerThreeLevel
+
+        elif computerNumber == 4:
+            return self.computerFourLevel
+
+    def set_computer_data(self, level):
+        if level == 1:
+            name = "Computer Easy"
+            type = "ceasy"
+
+        elif level == 2:
+            name = "Computer Medium"
+            type = "cmedium"
+
+        elif level == 3:
+            name = "Computer Hard"
+            type = "chard"
+
+        return name, type
 
     def set_username(self, user_id):
         try:
@@ -643,18 +751,7 @@ class boardForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-
     def retranslateUi(self, boardForm):
         _translate = QtCore.QCoreApplication.translate
         boardForm.setWindowTitle(_translate("boardForm", "Board"))
         self.closeLabel.setText(_translate("boardForm", "X"))
-
-    def hit(self):
-        print("ES")
-
-
-    def stand(self):
-        print("ES")
-
-    def check_if_clicked(self):
-        print("ES")

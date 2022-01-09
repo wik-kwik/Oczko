@@ -12,8 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class changeForm(object):
-    def __init__(self, language):
-        self.language = language
+    def __init__(self, board):
+        self.language = board.language
+        self.board_timer = board.timer
+        self.frontendLogic = board.frontendLogic
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -60,6 +62,10 @@ class changeForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.playButton.clicked.connect(Form.close)
+        self.playButton.clicked.connect(self.board_timer.start)
+        self.playButton.clicked.connect(self.frontendLogic.player_change)
+
         # Obsługa języków
         if self.language == 1:
             self.backgroundLabel.setStyleSheet("image: url(:/images/playersChange.png);")
@@ -77,5 +83,3 @@ class changeForm(object):
             self.playButton.setText(_translate("Form", "PLAY"))
         if self.language == 2:
             self.playButton.setText(_translate("Form", "GRAJ"))
-
-
