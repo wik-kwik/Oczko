@@ -271,7 +271,6 @@ class rankingForm(object):
             c.execute(query)
             db.commit()
             sum = c.fetchall()
-            # print(result[0][0], result[1][0], result[2][0], result[3][0], result[4][0])
 
             self.cardOneCounter.setText(str(sum[0][0]))
             self.cardTwoCounter.setText(str(sum[1][0]))
@@ -289,7 +288,6 @@ class rankingForm(object):
             third_player = str(round(winrate[2][0]))
             fourth_player = str(round(winrate[3][0]))
             fifth_player = str(round(winrate[4][0]))
-            # print(round(winrate[0][0]), round(winrate[1][0]), round(winrate[2][0]), round(winrate[3][0]), round(winrate[4][0]))
 
             self.playerOneWinrate.setText(first_player + "%")
             self.playerTwoWinrate.setText(second_player + "%")
@@ -297,34 +295,27 @@ class rankingForm(object):
             self.playerFourWinrate.setText(fourth_player + "%")
             self.playerFiveWinrate.setText(fifth_player + "%")
 
-            # self.cardOneCounter.setText(str(winrate[0][0]))
-            # self.cardTwoCounter.setText(str(winrate[1][0]))
-            # self.cardThreeCounter.setText(str(winrate[2][0]))
-            # self.cardFourCounter.setText(str(winrate[3][0]))
-            # self.cardFiveCounter.setText(str(winrate[4][0]))
+            query = "SELECT win_rate from games_ai"
+            c.execute(query)
+            db.commit()
+            winrate = c.fetchall()
 
-            # id = result[0]
-            # username = result[1]
-            # coins = str(result[2])
-            # games_played = str(result[3])
-            # win_rate = str(result[4])
-            # time_spent = str(result[5])
-            # cards_used = str(result[6])
+            self.easyWinrate.setText(str(winrate[0][0]) + "%")
+            self.mediumWinrate.setText(str(winrate[1][0]) + "%")
+            self.hardWinrate.setText(str(winrate[2][0]) + "%")
 
-            # self.usernameLabel.setText(username)
-            # self.walletLabel.setText(coins)
-            # self.gamesLabel.setText(games_played)
-            # self.winsLabel.setText(win_rate + "%")
-            # self.minutesLabel.setText(time_spent)
-            # self.cardsLabel.setText(cards_used)
 
         except sql.Error as e:
             print("xd")
 
-    # def siema(self):
-    #     try:
-    #         db = sql.connect('database.db')  # łączymy się do bazy
-    #         c = db.cursor()  # dodajemy kursor
+    def siema(self):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (1,0,0,0))
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (2, 0, 0, 0))
+            # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (3, 0, 0, 0))
+            # db.commit()
     #
     #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (1, "Two of Hearts", 0))
     #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (2, "Two of Diamonds", 0))
@@ -394,8 +385,8 @@ class rankingForm(object):
     #
     #         db.commit()
 
-        # except sql.Error as e:
-        #     print("xd")
+        except sql.Error as e:
+            print("xd")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()

@@ -1749,7 +1749,7 @@ class usersForm(object):
                                   self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel)
             self.ui.setupUi(self.window)
             self.window.show()
-            # self.popups.append(self.window)
+
 
 
         elif self.betting == 0:
