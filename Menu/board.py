@@ -681,6 +681,7 @@ class boardForm(object):
         self.window.close()
         self.reset_timer()
         self.timer.start()
+        self.frontend_logic.set_player_labels()
         self.show_user_points()
 
     def reset_timer(self):
@@ -725,13 +726,11 @@ class boardForm(object):
             self.playerThreePoints.setText("")
             self.playerFourPoints.setText("")
 
-
         elif self.frontend_logic.current_player_index == 2:
             self.playerOnePoints.setText("")
             self.playerTwoPoints.setText("")
             self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
             self.playerFourPoints.setText("")
-
 
         elif self.frontend_logic.current_player_index == 3:
             self.playerOnePoints.setText("")
