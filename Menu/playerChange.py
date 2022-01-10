@@ -75,6 +75,7 @@ class changeForm(object):
         self.playButton.clicked.connect(self.board.reset_timer)
         self.playButton.clicked.connect(self.board.show_user_points)
         self.playButton.clicked.connect(self.board_timer.start)
+        self.playButton.clicked.connect(self.frontendLogic.set_player_labels)
 
         # Obsługa języków
         if self.language == 1:

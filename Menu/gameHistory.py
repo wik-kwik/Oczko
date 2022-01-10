@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 import menu
-
+import replayBoard
 
 class historyForm(object):
     def __init__(self, language):
@@ -42,12 +42,14 @@ class historyForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
+        self.playButton.clicked.connect(Form.close)
+        self.playButton.clicked.connect(self.show_replay)
+
         # Obsługa języków
         if self.language == 1:
             self.backgroundLabel.setStyleSheet("image: url(:/images/historyBackground.png);")
         if self.language == 2:
             self.backgroundLabel.setStyleSheet("image: url(:/images/historyBackgroundPL.png);")
-
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -58,5 +60,11 @@ class historyForm(object):
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def show_replay(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = replayBoard.replayBoardForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()

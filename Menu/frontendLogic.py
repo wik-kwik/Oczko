@@ -2,6 +2,7 @@ from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
+import time
 
 
 class FrontendLogic:
@@ -34,9 +35,9 @@ class FrontendLogic:
                 player.playing = False
         self.reset_card_png()
         self.set_player_labels()
+        self.check_if_round_over
 
-    def player_change(self):
-        self.reset_card_png()
+    def player_change(self, decision):
         while True:
             if self.current_player_index + 1 < self.number_of_players:
                 self.current_player_index += 1
@@ -51,22 +52,23 @@ class FrontendLogic:
                 continue
 
         self.current_player = self.players[self.current_player_index]
-        self.board.change_player()
-        self.set_player_labels()
+        self.board.change_player(decision)
         # print(self.current_player)
 
     def clicked_hit(self):
         decision = 'hit'
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
+
         if self.current_player.hand.value >= 21:
             self.current_player.playing = False
 
-        elif self.check_if_round_over() is True:
+        if self.check_if_round_over() is True:
             self.board.round_over()
 
         else:
-            self.player_change()
+            self.set_player_labels()
+            self.player_change(decision)
 
     def clicked_stand(self):
         decision = 'stand'
@@ -77,7 +79,7 @@ class FrontendLogic:
             self.board.round_over()
 
         else:
-            self.player_change()
+            self.player_change(decision)
 
     def decision_ai(self):
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
@@ -87,7 +89,7 @@ class FrontendLogic:
             self.board.round_over()
 
         else:
-            self.player_change()
+            self.player_change("")
 
     def set_player_labels(self):
         for i in range(len(self.current_player.hand.cards)):

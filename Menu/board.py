@@ -560,51 +560,9 @@ class boardForm(object):
             self.players.append(Player(name, type, self.playersNumber + i, self.boardLabels.labels[player_number_aux]))
             player_number_aux += 1
 
-
-        # if (1 in self.numberOfPlayer) is True:
-        #     self.playerOneLabel.setText(self.set_username(1))
-        #     self.players.append(Player(self.set_username(1), "player", 1, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerOneWallet.setText(str(self.set_wallet(1)))
-        # if (2 in self.numberOfPlayer) is True:
-        #     self.playerTwoLabel.setText(self.set_username(2))
-        #     self.players.append(Player(self.set_username(2), "player", 2, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerTwoWallet.setText(str(self.set_wallet(2)))
-        # if (3 in self.numberOfPlayer) is True:
-        #     self.playerThreeLabel.setText(self.set_username(3))
-        #     self.players.append(Player(self.set_username(3), "player", 3, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerThreeWallet.setText(str(self.set_wallet(3)))
-        # if (4 in self.numberOfPlayer) is True:
-        #     self.playerFourLabel.setText(self.set_username(4))
-        #     self.players.append(Player(self.set_username(4), "player", 4, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerFourWallet.setText(str(self.set_wallet(4)))
-
-        # if (1 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerOneLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 1, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (2 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerTwoLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 2, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (3 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerThreeLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 3, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (4 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerFourLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 4, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-
         self.frontend_logic = FrontendLogic(self)
         self.frontend_logic.start_game()
+        self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.display_time)  # execute `display_time`
@@ -698,16 +656,26 @@ class boardForm(object):
             else:
                 self.frontend_logic.clicked_stand()
 
-    def change_player(self):
+    def change_player(self, decision):
         self.timer.stop()
         self.hitButton.setEnabled(False)
         self.standButton.setEnabled(False)
         self.window = QtWidgets.QMainWindow()
         self.ui = playerChange.changeForm(self)
         self.ui.setupUi(self.window)
-        self.window.show()
+        if decision == 'hit':
+            QtCore.QTimer.singleShot(1500, self.hit_logic)
+        else:
+            self.window.show()
+            self.frontend_logic.reset_card_png()
+
         if self.frontend_logic.current_player.type != "player":
             QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
+
+    def hit_logic(self):
+        self.window.show()
+        self.frontend_logic.set_player_labels()
+        self.frontend_logic.reset_card_png()
 
     def close_window_for_ai(self):
         self.window.close()

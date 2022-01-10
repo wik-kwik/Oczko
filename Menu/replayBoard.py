@@ -6,7 +6,6 @@ import sqlite3 as sql
 from Game_Logic.player import Player
 from frontendLogic import FrontendLogic
 import time
-from PyQt5.QtCore import QTimer
 import playerChange
 from boardLabels import BoardLabels
 import summary
@@ -16,6 +15,7 @@ from Game_Logic.convert_methods import Convert
 class replayBoardForm(object):
     def __init__(self, language):
         self.language = language
+        self.replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S']]
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT skin from settings"
@@ -460,7 +460,6 @@ class replayBoardForm(object):
         self.boardLabels = BoardLabels(self)
         self.players = []
 
-        self.replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S']]
         players = []
         self.number_of_players = len(self.replay[0])
         self.convert = Convert()
@@ -578,32 +577,32 @@ class replayBoardForm(object):
         self.window.show()
         self.board.close()
 
-    def show_user_points(self):
-        if self.frontend_logic.current_player_index == 0:
-            self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
-            self.playerTwoPoints.setText("")
-            self.playerThreePoints.setText("")
-            self.playerOnePoints.setText("")
+    # def show_user_points(self):
+    #     if self.frontend_logic.current_player_index == 0:
+    #         self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
+    #         self.playerTwoPoints.setText("")
+    #         self.playerThreePoints.setText("")
+    #         self.playerOnePoints.setText("")
 
-        elif self.frontend_logic.current_player_index == 1:
-            self.playerOnePoints.setText("")
-            self.playerTwoPoints.setText(str(self.frontend_logic.current_player.hand.value))
-            self.playerThreePoints.setText("")
-            self.playerOnePoints.setText("")
-
-
-        elif self.frontend_logic.current_player_index == 2:
-            self.playerOnePoints.setText("")
-            self.playerTwoPoints.setText("")
-            self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
-            self.playerOnePoints.setText("")
+    #     elif self.frontend_logic.current_player_index == 1:
+    #         self.playerOnePoints.setText("")
+    #         self.playerTwoPoints.setText(str(self.frontend_logic.current_player.hand.value))
+    #         self.playerThreePoints.setText("")
+    #         self.playerOnePoints.setText("")
 
 
-        elif self.frontend_logic.current_player_index == 3:
-            self.playerOnePoints.setText("")
-            self.playerTwoPoints.setText("")
-            self.playerThreePoints.setText("")
-            self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
+    #     elif self.frontend_logic.current_player_index == 2:
+    #         self.playerOnePoints.setText("")
+    #         self.playerTwoPoints.setText("")
+    #         self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
+    #         self.playerOnePoints.setText("")
+
+
+    #     elif self.frontend_logic.current_player_index == 3:
+    #         self.playerOnePoints.setText("")
+    #         self.playerTwoPoints.setText("")
+    #         self.playerThreePoints.setText("")
+    #         self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:
