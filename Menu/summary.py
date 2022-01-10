@@ -38,7 +38,7 @@ class summaryForm(object):
         self.winnerNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.winnerNickname.setObjectName("winnerNickname")
         self.playerOneNickname = QtWidgets.QLabel(Form)
-        self.playerOneNickname.setGeometry(QtCore.QRect(130, 140, 151, 31))
+        self.playerOneNickname.setGeometry(QtCore.QRect(110, 140, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
@@ -47,7 +47,7 @@ class summaryForm(object):
         self.playerOneNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerOneNickname.setObjectName("playerOneNickname")
         self.playerThreeNickname = QtWidgets.QLabel(Form)
-        self.playerThreeNickname.setGeometry(QtCore.QRect(320, 140, 151, 31))
+        self.playerThreeNickname.setGeometry(QtCore.QRect(300, 140, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
@@ -56,7 +56,7 @@ class summaryForm(object):
         self.playerThreeNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerThreeNickname.setObjectName("playerThreeNickname")
         self.playerTwoNickname = QtWidgets.QLabel(Form)
-        self.playerTwoNickname.setGeometry(QtCore.QRect(130, 200, 151, 31))
+        self.playerTwoNickname.setGeometry(QtCore.QRect(110, 200, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
@@ -65,7 +65,7 @@ class summaryForm(object):
         self.playerTwoNickname.setAlignment(QtCore.Qt.AlignCenter)
         self.playerTwoNickname.setObjectName("playerTwoNickname")
         self.playerFourNickname = QtWidgets.QLabel(Form)
-        self.playerFourNickname.setGeometry(QtCore.QRect(320, 200, 151, 31))
+        self.playerFourNickname.setGeometry(QtCore.QRect(300, 200, 171, 31))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
@@ -209,6 +209,21 @@ class summaryForm(object):
         for i in range(1, len(self.board.players) + 1):
             self.get_player_label(i).setText(self.board.players[i - 1].name)
             self.get_value_label(i).setText(str(self.board.players[i - 1].hand.value))
+
+        # Ustawianie kart w zaleznosci od ilosci graczy
+        if self.playersNumber + self.computersNumber == 2:
+            self.playerOneNickname.setGeometry(QtCore.QRect(200, 140, 171, 31))
+            self.playerTwoNickname.setGeometry(QtCore.QRect(200, 200, 171, 31))
+            self.playerOnePoints.setGeometry(QtCore.QRect(210, 170, 151, 31))
+            self.playerTwoPoints.setGeometry(QtCore.QRect(210, 230, 151, 31))
+        elif self.playersNumber + self.computersNumber == 3:
+            self.playerOneNickname.setGeometry(QtCore.QRect(110, 140, 171, 31))
+            self.playerTwoNickname.setGeometry(QtCore.QRect(210, 200, 171, 31))
+            self.playerThreeNickname.setGeometry(QtCore.QRect(310, 140, 171, 31))
+            self.playerOnePoints.setGeometry(QtCore.QRect(120, 170, 151, 31))
+            self.playerTwoPoints.setGeometry(QtCore.QRect(220, 230, 151, 31))
+            self.playerThreePoints.setGeometry(QtCore.QRect(320, 170, 151, 31))
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
