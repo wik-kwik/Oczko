@@ -7,7 +7,6 @@ class Player:
         self.type = type
         self.player_number = player_number
         self.labels = labels
-        self.points = 0
         self.playing = True  # sprawdzenie czy gracz uczestniczy w rundzie
         self.cards_played = 0
 

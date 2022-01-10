@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import board
+import menu
 
 
 class summaryForm(object):
@@ -183,11 +185,30 @@ class summaryForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        # Obsługa języków
-        if self.language == 1:
-            self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackground.png);")
-        if self.language == 2:
-            self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackgroundPL.png);")
+        self.playButton.clicked.connect(self.play_again)
+        self.playButton.clicked.connect(Form.close)
+
+        self.backButton.clicked.connect(self.return_to_menu)
+        self.backButton.clicked.connect(Form.close)
+
+        if len(self.board.frontend_logic.winners) > 1:
+            self.winnerNickname.setVisible(False)
+            if self.language == 1:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryTieBackground.png);")
+            if self.language == 2:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryTieBackgroundPL.png);")
+
+        else:
+            self.winnerNickname.setText(self.board.frontend_logic.winners[0].name)
+            # Obsługa języków
+            if self.language == 1:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackground.png);")
+            if self.language == 2:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackgroundPL.png);")
+
+        for i in range(1, len(self.board.players) + 1):
+            self.get_player_label(i).setText(self.board.players[i - 1].name)
+            self.get_value_label(i).setText(str(self.board.players[i - 1].hand.value))
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -202,12 +223,52 @@ class summaryForm(object):
             self.replayButton.setText(_translate("Form", "ODWTÓRZ"))
             self.backButton.setText(_translate("Form", "WRÓĆ DO MENU"))
 
-        self.winnerNickname.setText(_translate("Form", "sratatattata"))
-        self.playerOneNickname.setText(_translate("Form", "dupadupa"))
-        self.playerThreeNickname.setText(_translate("Form", "nejfik69gieta"))
-        self.playerTwoNickname.setText(_translate("Form", "pawciopilat"))
-        self.playerFourNickname.setText(_translate("Form", "kwik"))
-        self.playerOnePoints.setText(_translate("Form", "21"))
-        self.playerTwoPoints.setText(_translate("Form", "21"))
-        self.playerThreePoints.setText(_translate("Form", "21"))
-        self.playerFourPoints.setText(_translate("Form", "21"))
+        self.winnerNickname.setText(_translate("Form", ""))
+        self.playerOneNickname.setText(_translate("Form", ""))
+        self.playerThreeNickname.setText(_translate("Form", ""))
+        self.playerTwoNickname.setText(_translate("Form", ""))
+        self.playerFourNickname.setText(_translate("Form", ""))
+        self.playerOnePoints.setText(_translate("Form", ""))
+        self.playerTwoPoints.setText(_translate("Form", ""))
+        self.playerThreePoints.setText(_translate("Form", ""))
+        self.playerFourPoints.setText(_translate("Form", ""))
+
+    def play_again(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = board.boardForm(self.board.language, self.board.playersNumber, self.board.computersNumber, self.board.betting,
+                                  self.board.numberOfPlayer, self.board.gameLevel, self.board.computerOneLevel, self.board.computerTwoLevel, 
+                                  self.board.computerThreeLevel, self.board.computerFourLevel, self.board.input)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def return_to_menu(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = menu.menuForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def get_player_label(self, player_number):
+        if player_number == 1:
+            return self.playerOneNickname
+
+        elif player_number == 2:
+            return self.playerTwoNickname
+
+        elif player_number == 3:
+            return self.playerThreeNickname
+
+        elif player_number == 4:
+            return self.playerFourNickname
+
+    def get_value_label(self, player_number):
+        if player_number == 1:
+            return self.playerOnePoints
+
+        elif player_number == 2:
+            return self.playerTwoPoints
+
+        elif player_number == 3:
+            return self.playerThreePoints
+
+        elif player_number == 4:
+            return self.playerFourPoints

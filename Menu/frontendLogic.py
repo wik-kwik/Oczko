@@ -9,6 +9,7 @@ class FrontendLogic:
         self.board = board
         self.number_of_players = board.playersNumber + board.computersNumber
         self.players = board.players
+        self.winners = []
 
     def start_game(self):
         db = sql.connect('database.db')  # łączymy się do bazy
@@ -111,7 +112,7 @@ class FrontendLogic:
                 active_players += 1
 
         if active_players < 2:
-            blackjack.add_points(self.players)
+            self.winners = blackjack.add_points(self.players)
             self.replay.add_round_to_game_replay()
 
             return True

@@ -129,9 +129,8 @@ def add_points(players):  # dodawanie punktow po rundzie
             elif player.hand.value == players_max[0].hand.value:
                 players_max.append(player)
 
-    for player in players_max:
-        print(player.name + " " + str(player.hand.value))
-        player.points += 1
+    print(players_max)
+    return players_max
 
 
 # deck = Deck()  # stworzenie talii

@@ -64,6 +64,13 @@ class changeForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        if self.frontendLogic.current_player.type != "player":
+            self.playButton.setVisible(False)
+
+        else:
+            self.playButton.setVisible(True)
+            self.playButton.clicked.connect(self.board.enable_buttons)
+
         self.playButton.clicked.connect(Form.close)
         self.playButton.clicked.connect(self.board.reset_timer)
         self.playButton.clicked.connect(self.board_timer.start)
@@ -75,7 +82,6 @@ class changeForm(object):
         if self.language == 2:
             self.backgroundLabel.setStyleSheet("image: url(:/images/playersChangePL.png);")
             self.playButton.setGeometry(QtCore.QRect(870, 660, 91, 91))
-
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

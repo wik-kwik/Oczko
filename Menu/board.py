@@ -24,7 +24,6 @@ class boardForm(object):
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
-        print(gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel)
         self.input = input
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
@@ -687,6 +686,8 @@ class boardForm(object):
     def display_time(self):
         if self.frontend_logic.current_player.type != "player":
             self.timer.stop()
+            self.hitButton.setEnabled(False)
+            self.standButton.setEnabled(False)
             QtCore.QTimer.singleShot(1000, self.frontend_logic.decision_ai)
 
         else:
@@ -700,6 +701,8 @@ class boardForm(object):
 
     def change_player(self):
         self.timer.stop()
+        self.hitButton.setEnabled(False)
+        self.standButton.setEnabled(False)
         self.window = QtWidgets.QMainWindow()
         self.ui = playerChange.changeForm(self)
         self.ui.setupUi(self.window)
@@ -716,10 +719,18 @@ class boardForm(object):
         self.start_time = time.time()
 
     def hit(self):
+        self.hitButton.setEnabled(False)
+        self.standButton.setEnabled(False)
         self.frontend_logic.clicked_hit()
 
     def stand(self):
+        self.hitButton.setEnabled(False)
+        self.standButton.setEnabled(False)
         self.frontend_logic.clicked_stand()
+
+    def enable_buttons(self):
+        self.hitButton.setEnabled(True)
+        self.standButton.setEnabled(True)
 
     def round_over(self):
         print("round over")
@@ -731,6 +742,7 @@ class boardForm(object):
         self.ui = summary.summaryForm(self)
         self.ui.setupUi(self.window)
         self.window.show()
+        self.board.close()
 
     # def check_if_clicked(self):
     #     print("ES")
