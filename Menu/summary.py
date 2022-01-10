@@ -206,17 +206,19 @@ class summaryForm(object):
             if self.language == 2:
                 self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackgroundPL.png);")
 
-        for i in range(1, len(self.board.players) + 1):
+        self.number_of_players = len(self.board.players)
+
+        for i in range(1,  + self.number_of_players + 1):
             self.get_player_label(i).setText(self.board.players[i - 1].name)
             self.get_value_label(i).setText(str(self.board.players[i - 1].hand.value))
 
         # Ustawianie kart w zaleznosci od ilosci graczy
-        if self.playersNumber + self.computersNumber == 2:
+        if self.number_of_players == 2:
             self.playerOneNickname.setGeometry(QtCore.QRect(200, 140, 171, 31))
             self.playerTwoNickname.setGeometry(QtCore.QRect(200, 200, 171, 31))
             self.playerOnePoints.setGeometry(QtCore.QRect(210, 170, 151, 31))
             self.playerTwoPoints.setGeometry(QtCore.QRect(210, 230, 151, 31))
-        elif self.playersNumber + self.computersNumber == 3:
+        elif self.number_of_players == 3:
             self.playerOneNickname.setGeometry(QtCore.QRect(110, 140, 171, 31))
             self.playerTwoNickname.setGeometry(QtCore.QRect(210, 200, 171, 31))
             self.playerThreeNickname.setGeometry(QtCore.QRect(310, 140, 171, 31))
