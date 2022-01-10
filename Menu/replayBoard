@@ -10,9 +10,10 @@ from PyQt5.QtCore import QTimer
 import playerChange
 from boardLabels import BoardLabels
 import summary
+from Game_Logic.convert_methods import Convert
 
 
-class boardForm(object):
+class replayBoardForm(object):
     def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel, input):
         self.language = language
         self.playersNumber = playersNumber
@@ -58,17 +59,17 @@ class boardForm(object):
         self.backgroundDark.setStyleSheet("background-color: rgb(24, 47, 38);")
         self.backgroundDark.setText("")
         self.backgroundDark.setObjectName("backgroundDark")
-        self.standButton = QtWidgets.QPushButton(boardForm)
-        self.standButton.setGeometry(QtCore.QRect(1510, 520, 161, 61))
-        self.standButton.setText("")
-        self.standButton.setObjectName("standButton")
-        self.timeLeftIcon = QtWidgets.QLabel(boardForm)
-        self.timeLeftIcon.setText("")
-        self.timeLeftIcon.setObjectName("timeLeftIcon")
-        self.hitButton = QtWidgets.QPushButton(boardForm)
-        self.hitButton.setGeometry(QtCore.QRect(1510, 430, 161, 61))
-        self.hitButton.setText("")
-        self.hitButton.setObjectName("hitButton")
+        # self.standButton = QtWidgets.QPushButton(boardForm)
+        # self.standButton.setGeometry(QtCore.QRect(1510, 520, 161, 61))
+        # self.standButton.setText("")
+        # # self.standButton.setObjectName("standButton")
+        # self.timeLeftIcon = QtWidgets.QLabel(boardForm)
+        # self.timeLeftIcon.setText("")
+        # self.timeLeftIcon.setObjectName("timeLeftIcon")
+        # self.hitButton = QtWidgets.QPushButton(boardForm)
+        # self.hitButton.setGeometry(QtCore.QRect(1510, 430, 161, 61))
+        # self.hitButton.setText("")
+        # self.hitButton.setObjectName("hitButton")
         self.playerOneCard_1 = QtWidgets.QLabel(boardForm)
         self.playerOneCard_1.setGeometry(QtCore.QRect(320, 160, 131, 171))
         self.playerOneCard_1.setStyleSheet(self.path)
@@ -127,11 +128,11 @@ class boardForm(object):
         font = QtGui.QFont()
         font.setPointSize(27)
         font.setBold(True)
-        self.timerLabel.setFont(font)
-        self.timerLabel.setStyleSheet("color: rgb(255, 170, 0);")
-        self.timerLabel.setText("")
-        self.timerLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.timerLabel.setObjectName("timerLabel")
+        # self.timerLabel.setFont(font)
+        # self.timerLabel.setStyleSheet("color: rgb(255, 170, 0);")
+        # self.timerLabel.setText("")
+        # self.timerLabel.setAlignment(QtCore.Qt.AlignCenter)
+        # self.timerLabel.setObjectName("timerLabel")
         self.prizeLabel = QtWidgets.QLabel(boardForm)
         self.prizeLabel.setGeometry(QtCore.QRect(650, 860, 191, 31))
         font = QtGui.QFont()
@@ -367,16 +368,16 @@ class boardForm(object):
         self.playerFourCard_10.setStyleSheet("")
         self.playerFourCard_10.setText("")
         self.playerFourCard_10.setObjectName("playerFourCard_10")
-        self.returnIcon = QtWidgets.QLabel(boardForm)
-        self.returnIcon.setGeometry(QtCore.QRect(50, 10, 31, 31))
-        self.returnIcon.setStyleSheet("border-image: url(:/images/return.png);")
-        self.returnIcon.setText("")
-        self.returnIcon.setObjectName("returnIcon")
-        self.returnButton = QtWidgets.QPushButton(boardForm)
-        self.returnButton.setGeometry(QtCore.QRect(50, 10, 31, 31))
-        self.returnButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
-        self.returnButton.setText("")
-        self.returnButton.setObjectName("returnButton")
+        # self.returnIcon = QtWidgets.QLabel(boardForm)
+        # self.returnIcon.setGeometry(QtCore.QRect(50, 10, 31, 31))
+        # self.returnIcon.setStyleSheet("border-image: url(:/images/return.png);")
+        # self.returnIcon.setText("")
+        # self.returnIcon.setObjectName("returnIcon")
+        # self.returnButton = QtWidgets.QPushButton(boardForm)
+        # self.returnButton.setGeometry(QtCore.QRect(50, 10, 31, 31))
+        # self.returnButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
+        # self.returnButton.setText("")
+        # self.returnButton.setObjectName("returnButton")
         self.closeLabel = QtWidgets.QLabel(boardForm)
         self.closeLabel.setGeometry(QtCore.QRect(20, 4, 21, 41))
         font = QtGui.QFont()
@@ -393,32 +394,32 @@ class boardForm(object):
 
         # Obsługa języków
 
-        if self.language == 1:
-            self.standButton.setStyleSheet("image: url(:/images/stand.png);\n"
-                                           "border: 0px;")
-            self.hitButton.setStyleSheet("image: url(:/images/hit.png);\n"
-                                         "border: 0px;")
-            self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeft.png);")
-            self.balanceText.setStyleSheet("image: url(:/images/balance.png);")
-            self.toWinLabel.setStyleSheet("image: url(:/images/PRAJZ.png);")
-            self.timeLeftIcon.setGeometry(QtCore.QRect(1500, 160, 201, 71))
-        if self.language == 2:
-            self.standButton.setStyleSheet("image: url(:/images/standPL.png);\n"
-                                           "border: 0px;")
-            self.hitButton.setStyleSheet("image: url(:/images/hitPL.png);\n"
-                                         "border: 0px;")
-            self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeftPL.png);")
-            self.balanceText.setStyleSheet("image: url(:/images/balancePL.png);")
-            self.toWinLabel.setStyleSheet("image: url(:/images/totalBetPL.jpg);")
-            self.timeLeftIcon.setGeometry(QtCore.QRect(1492, 160, 201, 71))
+        # if self.language == 1:
+        #     self.standButton.setStyleSheet("image: url(:/images/stand.png);\n"
+        #                                    "border: 0px;")
+        #     self.hitButton.setStyleSheet("image: url(:/images/hit.png);\n"
+        #                                  "border: 0px;")
+        #     self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeft.png);")
+        #     self.balanceText.setStyleSheet("image: url(:/images/balance.png);")
+        #     self.toWinLabel.setStyleSheet("image: url(:/images/PRAJZ.png);")
+        #     self.timeLeftIcon.setGeometry(QtCore.QRect(1500, 160, 201, 71))
+        # if self.language == 2:
+        #     self.standButton.setStyleSheet("image: url(:/images/standPL.png);\n"
+        #                                    "border: 0px;")
+        #     self.hitButton.setStyleSheet("image: url(:/images/hitPL.png);\n"
+        #                                  "border: 0px;")
+        #     self.timeLeftIcon.setStyleSheet("image: url(:/images/timeLeftPL.png);")
+        #     self.balanceText.setStyleSheet("image: url(:/images/balancePL.png);")
+        #     self.toWinLabel.setStyleSheet("image: url(:/images/totalBetPL.jpg);")
+        #     self.timeLeftIcon.setGeometry(QtCore.QRect(1492, 160, 201, 71))
 
         self.backgroundDark.raise_()
         self.playerOneCard_1.raise_()
         self.playerOneLabel.raise_()
         self.menuStripe.raise_()
-        self.timeLeftIcon.raise_()
-        self.hitButton.raise_()
-        self.standButton.raise_()
+        # self.timeLeftIcon.raise_()
+        # self.hitButton.raise_()
+        # self.standButton.raise_()
         self.walletIcon.raise_()
         self.logoLabel.raise_()
         self.balanceText.raise_()
@@ -475,8 +476,8 @@ class boardForm(object):
         self.playerFourCard_8.raise_()
         self.playerFourCard_9.raise_()
         self.playerFourCard_10.raise_()
-        self.returnIcon.raise_()
-        self.returnButton.raise_()
+        # self.returnIcon.raise_()
+        # self.returnButton.raise_()
         self.closeLabel.raise_()
         self.closeButton.raise_()
 
@@ -486,101 +487,55 @@ class boardForm(object):
         self.closeButton.clicked.connect(boardForm.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
-        self.returnButton.clicked.connect(boardForm.close)
-        self.returnButton.clicked.connect(self.returnToUsers)
-        self.hitButton.clicked.connect(self.hit)
-        self.standButton.clicked.connect(self.stand)
+        # self.returnButton.clicked.connect(boardForm.close)
+        # self.returnButton.clicked.connect(self.returnToUsers)
+        # self.hitButton.clicked.connect(self.hit)
+        # self.standButton.clicked.connect(self.stand)
 
         self.board = boardForm
 
-        if self.betting == 0:
-            self.prizeLabel.setVisible(False)
-            self.toWinLabel.setVisible(False)
-            self.coinsIcon.setVisible(False)
-            self.prizeLabel.setVisible(False)
-            self.walletIcon.setVisible(False)
-            self.balanceText.setVisible(False)
-            self.balanceLabel.setVisible(False)
-        elif self.betting == 1:
-            total_bet = int(self.input * len(self.numberOfPlayer))
-            self.prizeLabel.setText(str(total_bet))
+        # if self.betting == 0:
+        #     self.prizeLabel.setVisible(False)
+        #     self.toWinLabel.setVisible(False)
+        #     self.coinsIcon.setVisible(False)
+        #     self.prizeLabel.setVisible(False)
+        #     self.walletIcon.setVisible(False)
+        #     self.balanceText.setVisible(False)
+        #     self.balanceLabel.setVisible(False)
+        # elif self.betting == 1:
+        #     total_bet = int(self.input * len(self.numberOfPlayer))
+        #     self.prizeLabel.setText(str(total_bet))
 
-        player_number_aux = 0
         self.boardLabels = BoardLabels(self)
         self.players = []
 
-        for i in range(1, self.playersNumber + 1):
-            self.get_player_label(i).setText(self.set_username(i))
-            self.players.append(Player(self.set_username(i), "player", i, self.boardLabels.labels[player_number_aux]))
+        self.replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S'],
+        ['S4CTSASKH6HTH4H9', '1S', '2S', '3HDK', '4S', '3S', '4S']]
+        players = []
+        self.number_of_players = len(self.replay[0])
+        self.convert = Convert()
+        player_number_aux = 1
+        for player in self.replay[0]:
+            player, player_number = player[:-1], player[-1]
+            player_number = int(player_number)
+
+            players.append(Player(player, "replay", player_number))
+            self.get_player_label(player_number_aux).setText(player)
             player_number_aux += 1
-
-        for i in range(1, self.computersNumber + 1):
-            name, type = self.set_computer_data(self.get_computer_level(i))
-            self.get_player_label(self.playersNumber + i).setText(name)
-            self.players.append(Player(name, type, self.playersNumber + i, self.boardLabels.labels[player_number_aux]))
-            player_number_aux += 1
-
-
-        # if (1 in self.numberOfPlayer) is True:
-        #     self.playerOneLabel.setText(self.set_username(1))
-        #     self.players.append(Player(self.set_username(1), "player", 1, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerOneWallet.setText(str(self.set_wallet(1)))
-        # if (2 in self.numberOfPlayer) is True:
-        #     self.playerTwoLabel.setText(self.set_username(2))
-        #     self.players.append(Player(self.set_username(2), "player", 2, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerTwoWallet.setText(str(self.set_wallet(2)))
-        # if (3 in self.numberOfPlayer) is True:
-        #     self.playerThreeLabel.setText(self.set_username(3))
-        #     self.players.append(Player(self.set_username(3), "player", 3, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerThreeWallet.setText(str(self.set_wallet(3)))
-        # if (4 in self.numberOfPlayer) is True:
-        #     self.playerFourLabel.setText(self.set_username(4))
-        #     self.players.append(Player(self.set_username(4), "player", 4, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        #     # self.playerFourWallet.setText(str(self.set_wallet(4)))
-
-        # if (1 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerOneLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 1, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (2 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerTwoLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 2, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (3 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerThreeLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 3, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
-        # if (4 in self.computersNumber) is True:
-        #     name, type = self.set_computer_data()
-        #     self.playerFourLabel.setText(name)
-        #     self.players.append(Player(name, type, self.playersNumber + 4, self.boardLabels.labels[player_number_aux]))
-        #     player_number_aux += 1
 
 
         # timer which repate function `display_time` every 1000ms (1s)
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.display_time)  # execute `display_time`
-        self.timer.start()
-        self.timer.setInterval(1000)
-        self.start_time = time.time()
+        # self.timer = QTimer()
+        # self.timer.timeout.connect(self.display_time)  # execute `display_time`
+        # self.timer.start()
+        # self.timer.setInterval(1000)
+        # self.start_time = time.time()
 
         self.frontend_logic = FrontendLogic(self)
         self.frontend_logic.start_game()
 
-        self.closeButton.clicked.connect(self.timer.stop)
-        self.returnButton.clicked.connect(self.timer.stop)
-
-        # # dodanie graczy do planszy
-        # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
-        # player = Player ("XXD", "XXD ", 1)
-
+        # self.closeButton.clicked.connect(self.timer.stop)
+        # self.returnButton.clicked.connect(self.timer.stop)
 
         # Ustawianie kart w zaleznosci od ilosci graczy
         if self.playersNumber + self.computersNumber == 2:
@@ -643,57 +598,57 @@ class boardForm(object):
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
 
-    def display_time(self):
-        if self.frontend_logic.current_player.type != "player":
-            QtCore.QTimer.singleShot(1000, self.frontend_logic.decision_ai)
+    # def display_time(self):
+    #     if self.frontend_logic.current_player.type != "player":
+    #         self.frontend_logic.decision_ai()
 
-        else:
-            if int(time.time() - self.start_time) <= self.time:
-                self.current_time = int(time.time() - self.start_time)
-                print('current_time:', self.current_time)
-                self.timerLabel.setText(str(self.time - self.current_time))
+    #     else:
+    #         if int(time.time() - self.start_time) <= self.time:
+    #             self.current_time = int(time.time() - self.start_time)
+    #             print('current_time:', self.current_time)
+    #             self.timerLabel.setText(str(self.time - self.current_time))
 
-            else:
-                self.frontend_logic.clicked_stand()
+    #         else:
+    #             self.frontend_logic.clicked_stand()
 
-    def change_player(self):
-        self.timer.stop()
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playerChange.changeForm(self)
-        self.ui.setupUi(self.window)
-        self.window.show()
-        if self.frontend_logic.current_player.type != "player":
-            QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
+    # def change_player(self):
+    #     self.timer.stop()
+    #     self.window = QtWidgets.QMainWindow()
+    #     self.ui = playerChange.changeForm(self)
+    #     self.ui.setupUi(self.window)
+    #     self.window.show()
+    #     if self.frontend_logic.current_player.type != "player":
+    #         QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
 
-    def close_window_for_ai(self):
-        self.window.close()
-        self.reset_timer()
-        self.timer.start()
+    # def close_window_for_ai(self):
+    #     self.window.close()
+    #     self.reset_timer()
+    #     self.timer.start()
 
-    def reset_timer(self):
-        self.start_time = time.time()
+    # def reset_timer(self):
+    #     self.start_time = time.time()
 
-    def hit(self):
-        self.frontend_logic.clicked_hit()
+    # def hit(self):
+    #     self.frontend_logic.clicked_hit()
 
-    def stand(self):
-        self.frontend_logic.clicked_stand()
+    # def stand(self):
+    #     self.frontend_logic.clicked_stand()
 
-    def round_over(self):
-        print("round over")
-        self.frontend_logic.start_round()
-        self.change_player()
+    # def round_over(self):
+    #     print("round over")
+    #     self.frontend_logic.start_round()
+    #     self.change_player()
 
-    def game_ends(self):
-        self.timer.stop()
-        self.window = QtWidgets.QMainWindow()
-        self.ui = summary.summaryForm(self)
-        self.ui.setupUi(self.window)
-        self.window.show()
-        self.board.close()
+    # def game_ends(self):
+    #     self.timer.stop()
+    #     self.window = QtWidgets.QMainWindow()
+    #     self.ui = summary.summaryForm(self)
+    #     self.ui.setupUi(self.window)
+    #     self.window.show()
+    #     self.board.close()
 
-    # def check_if_clicked(self):
-    #     print("ES")
+    # # def check_if_clicked(self):
+    # #     print("ES")
 
     def get_player_label(self, player_number):
         if player_number == 1:
@@ -708,33 +663,33 @@ class boardForm(object):
         elif player_number == 4:
             return self.playerFourLabel
 
-    def get_computer_level(self, computerNumber):
-        if computerNumber == 1:
-            return self.computerOneLevel
+    # def get_computer_level(self, computerNumber):
+    #     if computerNumber == 1:
+    #         return self.computerOneLevel
 
-        elif computerNumber == 2:
-            return self.computerTwoLevel
+    #     elif computerNumber == 2:
+    #         return self.computerTwoLevel
 
-        elif computerNumber == 3:
-            return self.computerThreeLevel
+    #     elif computerNumber == 3:
+    #         return self.computerThreeLevel
 
-        elif computerNumber == 4:
-            return self.computerFourLevel
+    #     elif computerNumber == 4:
+    #         return self.computerFourLevel
 
-    def set_computer_data(self, level):
-        if level == 1:
-            name = "Computer Easy"
-            type = "ceasy"
+    # def set_computer_data(self, level):
+    #     if level == 1:
+    #         name = "Computer Easy"
+    #         type = "ceasy"
 
-        elif level == 2:
-            name = "Computer Medium"
-            type = "cmedium"
+    #     elif level == 2:
+    #         name = "Computer Medium"
+    #         type = "cmedium"
 
-        elif level == 3:
-            name = "Computer Hard"
-            type = "chard"
+    #     elif level == 3:
+    #         name = "Computer Hard"
+    #         type = "chard"
 
-        return name, type
+    #     return name, type
 
     def set_username(self, user_id):
         try:

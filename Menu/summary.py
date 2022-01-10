@@ -12,8 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class summaryForm(object):
-    def __init__(self, language):
-        self.language = language
+    def __init__(self, board):
+        self.board = board
+        self.language = board.language
 
     def setupUi(self, Form):
         Form.setObjectName("Form")

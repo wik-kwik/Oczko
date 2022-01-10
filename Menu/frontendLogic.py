@@ -1,7 +1,6 @@
 from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
-from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3 as sql
 
 
@@ -12,6 +11,7 @@ class FrontendLogic:
         self.players = board.players
 
     def start_game(self):
+        self.game_not_over = True
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT decks from settings"
@@ -30,8 +30,15 @@ class FrontendLogic:
         self.set_player_labels()
 
     def start_round(self):
+        self.current_player_index = 0
+        self.current_player = self.players[self.current_player_index]
+
         for player in self.players:
             player.start_round(self.deck)
+            if player.hand.value >= 21:
+                player.playing = False
+
+        self.reset_card_png()
 
     def player_change(self):
         self.reset_card_png()
@@ -49,6 +56,7 @@ class FrontendLogic:
                 continue
 
         self.current_player = self.players[self.current_player_index]
+        self.board.change_player()
         self.set_player_labels()
         # print(self.current_player)
 
@@ -56,72 +64,90 @@ class FrontendLogic:
         decision = 'hit'
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        self.player_change()
+        if self.current_player.hand.value >= 21:
+            self.current_player.playing = False
+
+        if len(self.deck.deck) == 0:
+            blackjack.add_points(self.players)
+            self.replay.add_round_to_game_replay()
+            self.board.game_ends()
+
+        elif self.check_if_round_over() is True:
+            self.board.round_over()
+
+        else:
+            self.player_change()
 
     def clicked_stand(self):
         decision = 'stand'
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        self.player_change()
+        if len(self.deck.deck) == 0:
+            blackjack.add_points(self.players)
+            self.replay.add_round_to_game_replay()
+            self.board.game_ends()
+
+        elif self.check_if_round_over() is True:
+            self.board.round_over()
+
+        else:
+            self.player_change()
 
     def decision_ai(self):
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        self.player_change()
+        if len(self.deck.deck) == 0:
+            blackjack.add_points(self.players)
+            self.replay.add_round_to_game_replay()
+            self.board.game_ends()
+
+        elif self.check_if_round_over() is True:
+            self.board.round_over()
+
+        else:
+            self.player_change()
 
     def set_player_labels(self):
         for i in range(len(self.current_player.hand.cards)):
-            aux_path = "image: url(:/images/"+ self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
+            aux_path = "image: url(:/images/" + self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
             self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet(aux_path)
-            print(aux_path)
+            # print(aux_path)
             # self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet("image: url(:/images/ace_of_clubs.png);")
 
     def reset_card_png(self):
         for i in range(len(self.players)):
+            for j in range(len(self.board.boardLabels.labels[i])):
+                self.board.boardLabels.labels[i][j].setStyleSheet("")
+
+        for i in range(len(self.players)):
             for j in range(len(self.players[i].hand.cards)):
                 self.board.boardLabels.labels[i][j].setStyleSheet(self.board.path)
 
+    def check_if_game_end(self):
+        if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
+            self.game_not_over = True
 
-    # def start_game(self):
+        else:
+            self.game_not_over = False
+            self.board.game_ends()
 
-        # while self.current_time >= 0:
-        #     # timer = QtCore.QTimer()  # set up your QTimer
-        #     # timer.timeout.connect(self.check_if_clicked())  # connect it to your update function
-        #     # timer.start(1000)  # set it to timeout in 5000 ms
-        #     time.sleep(1)
-        #     self.current_time = self.current_time - 1
+    def check_if_round_over(self):
+        active_players = 0
+        for player in self.players:
+            if player.playing is True:
+                active_players += 1
 
+        if active_players < 2:
+            self.current_player_index = 0
+            self.current_player = self.players[self.current_player_index]
+            blackjack.add_points(self.players)
+            self.replay.add_round_to_game_replay()
+            self.check_if_game_end()
+            if self.game_not_over is True:
+                self.board.round_over()
+                return False
 
-        # while len(deck.deck) > self.number_of_players * 2:
-        #     if playing:
-        #         playing_round = True
-
-        #         for player in self.players:
-        #             player.start_round(deck)
-
-        #         self.replay.add_first_hands(self.players)
-
-        #         while playing_round:  # round loop
-        #             for player in self.players:
-        #                 self.current_time = self.time
-        #                 for self.current_time in range(self.time, 0):
-
-        #                     time.sleep(1)
-
-        #                 print("Playing: " + player.name + " value: " + str(player.hand.value))
-        #                 if player.playing is True:
-        #                     decision = blackjack.hit_or_stand(deck, player)
-        #                     self.replay.add_move(decision, player.player_number, player.hand.new_card)
-        #                     print("value: " + str(player.hand.value))
-        #                     if len(deck.deck) == 0:
-        #                         playing = False
-        #                         playing_round = False
-        #                         break
-
-        #             playing_round = blackjack.check_if_round_over(self.players)
-
-        #         self.replay.add_round_to_game_replay()
-        #         blackjack.add_points(self.players)
-
-        #     else:
-        #         break
+            else:
+                return True
+        else:
+            return False

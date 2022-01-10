@@ -9,10 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import time
 
 
 class changeForm(object):
     def __init__(self, board):
+        self.board = board
         self.language = board.language
         self.board_timer = board.timer
         self.frontendLogic = board.frontend_logic
@@ -63,6 +65,7 @@ class changeForm(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
         self.playButton.clicked.connect(Form.close)
+        self.playButton.clicked.connect(self.board.reset_timer)
         self.playButton.clicked.connect(self.board_timer.start)
         self.playButton.clicked.connect(self.frontendLogic.player_change)
 
