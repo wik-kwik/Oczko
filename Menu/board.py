@@ -681,8 +681,7 @@ class boardForm(object):
 
     def round_over(self):
         print("round over")
-        self.frontend_logic.start_round()
-        self.change_player()
+        self.game_ends()
 
     def game_ends(self):
         self.timer.stop()
@@ -690,7 +689,6 @@ class boardForm(object):
         self.ui = summary.summaryForm(self)
         self.ui.setupUi(self.window)
         self.window.show()
-        self.board.close()
 
     # def check_if_clicked(self):
     #     print("ES")

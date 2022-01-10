@@ -11,7 +11,6 @@ class FrontendLogic:
         self.players = board.players
 
     def start_game(self):
-        self.game_not_over = True
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT decks from settings"
@@ -26,19 +25,12 @@ class FrontendLogic:
         self.replay.add_players(self.players)
         self.current_player_index = 0
         self.current_player = self.players[self.current_player_index]
-        self.start_round()
-        self.set_player_labels()
-
-    def start_round(self):
-        self.current_player_index = 0
-        self.current_player = self.players[self.current_player_index]
-
         for player in self.players:
             player.start_round(self.deck)
             if player.hand.value >= 21:
                 player.playing = False
-
         self.reset_card_png()
+        self.set_player_labels()
 
     def player_change(self):
         self.reset_card_png()
@@ -67,10 +59,10 @@ class FrontendLogic:
         if self.current_player.hand.value >= 21:
             self.current_player.playing = False
 
-        if len(self.deck.deck) == 0:
-            blackjack.add_points(self.players)
-            self.replay.add_round_to_game_replay()
-            self.board.game_ends()
+        # if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
+        #     blackjack.add_points(self.players)
+        #     self.replay.add_round_to_game_replay()
+        #     self.board.game_ends()
 
         elif self.check_if_round_over() is True:
             self.board.round_over()
@@ -82,12 +74,12 @@ class FrontendLogic:
         decision = 'stand'
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        if len(self.deck.deck) == 0:
-            blackjack.add_points(self.players)
-            self.replay.add_round_to_game_replay()
-            self.board.game_ends()
+        # if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
+        #     blackjack.add_points(self.players)
+        #     self.replay.add_round_to_game_replay()
+        #     self.board.game_ends()
 
-        elif self.check_if_round_over() is True:
+        if self.check_if_round_over() is True:
             self.board.round_over()
 
         else:
@@ -96,12 +88,12 @@ class FrontendLogic:
     def decision_ai(self):
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        if len(self.deck.deck) == 0:
+        if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
             blackjack.add_points(self.players)
             self.replay.add_round_to_game_replay()
             self.board.game_ends()
 
-        elif self.check_if_round_over() is True:
+        if self.check_if_round_over() is True:
             self.board.round_over()
 
         else:
@@ -123,14 +115,6 @@ class FrontendLogic:
             for j in range(len(self.players[i].hand.cards)):
                 self.board.boardLabels.labels[i][j].setStyleSheet(self.board.path)
 
-    def check_if_game_end(self):
-        if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
-            self.game_not_over = True
-
-        else:
-            self.game_not_over = False
-            self.board.game_ends()
-
     def check_if_round_over(self):
         active_players = 0
         for player in self.players:
@@ -138,16 +122,9 @@ class FrontendLogic:
                 active_players += 1
 
         if active_players < 2:
-            self.current_player_index = 0
-            self.current_player = self.players[self.current_player_index]
             blackjack.add_points(self.players)
             self.replay.add_round_to_game_replay()
-            self.check_if_game_end()
-            if self.game_not_over is True:
-                self.board.round_over()
-                return False
 
-            else:
-                return True
+            return True
         else:
             return False
