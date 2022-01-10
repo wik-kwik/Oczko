@@ -223,14 +223,14 @@ class rankingForm(object):
         # Obsługa języków
         if self.language == 1:
             self.backgroundLabel.setStyleSheet("image: url(:/images/rankingBackground.png);")
-            self.easyWinrate.setGeometry(QtCore.QRect(330, 510, 41, 21))
-            self.mediumWinrate.setGeometry(QtCore.QRect(432, 510, 41, 21))
-            self.hardWinrate.setGeometry(QtCore.QRect(537, 510, 41, 21))
+            self.easyWinrate.setGeometry(QtCore.QRect(315, 510, 69, 21))
+            self.mediumWinrate.setGeometry(QtCore.QRect(420, 510, 69, 21))
+            self.hardWinrate.setGeometry(QtCore.QRect(523, 510, 69, 21))
         if self.language == 2:
             self.backgroundLabel.setStyleSheet("image: url(:/images/rankingBackgroundPL.png);")
-            self.easyWinrate.setGeometry(QtCore.QRect(317, 510, 41, 21))
-            self.mediumWinrate.setGeometry(QtCore.QRect(424, 510, 41, 21))
-            self.hardWinrate.setGeometry(QtCore.QRect(542, 510, 41, 21))
+            self.easyWinrate.setGeometry(QtCore.QRect(300, 510, 69, 21))
+            self.mediumWinrate.setGeometry(QtCore.QRect(410, 510, 69, 21))
+            self.hardWinrate.setGeometry(QtCore.QRect(530, 510, 69, 21))
 
         # Obsługa przycisków
         self.closeButton.clicked.connect(Form.close)
@@ -253,9 +253,9 @@ class rankingForm(object):
         self.playerThreeWinrate.setText(_translate("Form", "33%"))
         self.playerFourWinrate.setText(_translate("Form", "33%"))
         self.playerFiveWinrate.setText(_translate("Form", "33%"))
-        self.easyWinrate.setText(_translate("Form", "200%"))
-        self.mediumWinrate.setText(_translate("Form", "200%"))
-        self.hardWinrate.setText(_translate("Form", "200%"))
+        # self.easyWinrate.setText(_translate("Form", "200%"))
+        # self.mediumWinrate.setText(_translate("Form", "200%"))
+        # self.hardWinrate.setText(_translate("Form", "200%"))
         self.cardOneCounter.setText(_translate("Form", "18"))
         self.cardTwoCounter.setText(_translate("Form", "6969"))
         self.cardThreeCounter.setText(_translate("Form", "6969"))
