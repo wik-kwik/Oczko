@@ -110,7 +110,7 @@ class FrontendLogic:
             if player.playing is True:
                 active_players += 1
 
-        if active_players < 2:
+        if active_players == 0:
             self.winners = blackjack.add_points(self.players)
             self.replay.add_round_to_game_replay()
 
