@@ -149,7 +149,7 @@ class settingsForm(object):
             #                 path text
             #                 )""")
 
-            # NAJPIERW RESETUJEMY POPRZEDNI WYBÓR
+            # # NAJPIERW RESETUJEMY POPRZEDNI WYBÓR
             # query = "DELETE FROM settings"
             # c.execute(query)
             # db.commit()

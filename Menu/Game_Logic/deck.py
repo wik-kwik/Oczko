@@ -2,16 +2,13 @@ import random
 from .card import Card
 from .cards import Cards
 
-cards = Cards()
-suits = cards.suits
-ranks = cards.ranks
-
 
 class Deck:  # talia kart ugulem
     def __init__(self):
         self.deck = []  # lista, ktora wypelnimy kartami i otrzymamy talie kart
-        for suit in suits:
-            for rank in ranks:
+        self.cards = Cards()
+        for suit in self.cards.suits:
+            for rank in self.cards.ranks:
                 self.deck.append(Card(suit, rank))
 
     def __str__(self):

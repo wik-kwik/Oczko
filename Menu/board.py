@@ -563,15 +563,14 @@ class boardForm(object):
         #     self.players.append(Player(name, type, self.playersNumber + 4, self.boardLabels.labels[player_number_aux]))
         #     player_number_aux += 1
 
+        self.frontend_logic = FrontendLogic(self)
+        self.frontend_logic.start_game()
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.display_time)  # execute `display_time`
         self.timer.start()
         self.timer.setInterval(200)
         self.start_time = time.time()
-
-        self.frontend_logic = FrontendLogic(self)
-        self.frontend_logic.start_game()
 
         self.closeButton.clicked.connect(self.timer.stop)
         self.returnButton.clicked.connect(self.timer.stop)

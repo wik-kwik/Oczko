@@ -18,6 +18,8 @@ class FrontendLogic:
         db.commit()
         result = c.fetchone()
         self.number_of_decks = result[0]
+        if self.number_of_decks == 0:
+            self.number_of_decks = 1
         self.replay = Replay()
         self.deck = Deck()
         self.deck.deck = self.deck.deck * self.number_of_decks
