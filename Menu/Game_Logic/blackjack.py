@@ -48,7 +48,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
 
     if player.type == "ceasy":  # easy (losowe decyzje)
         ask = bool(random.getrandbits(1))
-        if ask is True:
+        if ask is True and player.hand.value < 21:
             print(player.name + " hits.")
             hit(deck, player.hand)
             player.cards_played += 1

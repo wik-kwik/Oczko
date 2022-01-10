@@ -473,7 +473,7 @@ class replayBoardForm(object):
             player_number_aux += 1
 
         # Ustawianie kart w zaleznosci od ilosci graczy
-        if self.playersNumber + self.computersNumber == 2:
+        if self.number_of_players == 2:
 
             self.playerOneLabel.setGeometry(QtCore.QRect(680, 100, 271, 31))
             self.playerOneCard_1.setGeometry(QtCore.QRect(670, 160, 131, 171))
@@ -523,7 +523,7 @@ class replayBoardForm(object):
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
 
-        elif self.playersNumber + self.computersNumber == 3:
+        elif self.number_of_players == 3:
             self.playerFourCard_1.setStyleSheet("")
             self.playerFourCard_2.setStyleSheet("")
             self.playerFourCard_3.setStyleSheet("")

@@ -560,15 +560,15 @@ class boardForm(object):
             self.players.append(Player(name, type, self.playersNumber + i, self.boardLabels.labels[player_number_aux]))
             player_number_aux += 1
 
-        self.frontend_logic = FrontendLogic(self)
-        self.frontend_logic.start_game()
-        self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
-
         self.timer = QTimer()
         self.timer.timeout.connect(self.display_time)  # execute `display_time`
         self.timer.start()
         self.timer.setInterval(200)
         self.start_time = time.time()
+
+        self.frontend_logic = FrontendLogic(self)
+        self.frontend_logic.start_game()
+        self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
         self.closeButton.clicked.connect(self.timer.stop)
         self.returnButton.clicked.connect(self.timer.stop)
@@ -717,27 +717,27 @@ class boardForm(object):
             self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
             self.playerTwoPoints.setText("")
             self.playerThreePoints.setText("")
-            self.playerOnePoints.setText("")
+            self.playerFourPoints.setText("")
 
         elif self.frontend_logic.current_player_index == 1:
             self.playerOnePoints.setText("")
             self.playerTwoPoints.setText(str(self.frontend_logic.current_player.hand.value))
             self.playerThreePoints.setText("")
-            self.playerOnePoints.setText("")
+            self.playerFourPoints.setText("")
 
 
         elif self.frontend_logic.current_player_index == 2:
             self.playerOnePoints.setText("")
             self.playerTwoPoints.setText("")
             self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
-            self.playerOnePoints.setText("")
+            self.playerFourPoints.setText("")
 
 
         elif self.frontend_logic.current_player_index == 3:
             self.playerOnePoints.setText("")
             self.playerTwoPoints.setText("")
             self.playerThreePoints.setText("")
-            self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
+            self.playerFourPoints.setText(str(self.frontend_logic.current_player.hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:
