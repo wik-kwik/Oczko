@@ -59,6 +59,9 @@ class FrontendLogic:
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
 
+        if self.current_player.hand.value >= 21:
+            self.current_player.playing = False
+
         if self.check_if_round_over() is True:
             self.board.round_over()
 
