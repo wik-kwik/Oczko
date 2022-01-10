@@ -73,6 +73,7 @@ class changeForm(object):
 
         self.playButton.clicked.connect(Form.close)
         self.playButton.clicked.connect(self.board.reset_timer)
+        self.playButton.clicked.connect(self.board.show_user_points)
         self.playButton.clicked.connect(self.board_timer.start)
 
         # Obsługa języków

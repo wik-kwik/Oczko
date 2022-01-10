@@ -129,7 +129,6 @@ def add_points(players):  # dodawanie punktow po rundzie
             elif player.hand.value == players_max[0].hand.value:
                 players_max.append(player)
 
-    print(players_max)
     return players_max
 
 

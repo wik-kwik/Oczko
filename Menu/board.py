@@ -39,13 +39,13 @@ class boardForm(object):
             self.path = "image: url(:/images/cardBackOne.png);"
 
         if gameLevel == 1:
-            self.time = 16
+            self.time = 15
 
         elif gameLevel == 2:
-            self.time = 11
+            self.time = 10
 
         elif gameLevel == 3:
-            self.time = 6
+            self.time = 5
 
     def setupUi(self, boardForm):
         boardForm.setObjectName("boardForm")
@@ -693,7 +693,6 @@ class boardForm(object):
         else:
             if int(time.time() - self.start_time) <= self.time:
                 self.current_time = int(time.time() - self.start_time)
-                print('current_time:', self.current_time)
                 self.timerLabel.setText(str(self.time - self.current_time))
 
             else:
@@ -714,6 +713,7 @@ class boardForm(object):
         self.window.close()
         self.reset_timer()
         self.timer.start()
+        self.show_user_points()
 
     def reset_timer(self):
         self.start_time = time.time()
@@ -744,8 +744,32 @@ class boardForm(object):
         self.window.show()
         self.board.close()
 
-    # def check_if_clicked(self):
-    #     print("ES")
+    def show_user_points(self):
+        if self.frontend_logic.current_player_index == 0:
+            self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
+            self.playerTwoPoints.setText("")
+            self.playerThreePoints.setText("")
+            self.playerOnePoints.setText("")
+
+        elif self.frontend_logic.current_player_index == 1:
+            self.playerOnePoints.setText("")
+            self.playerTwoPoints.setText(str(self.frontend_logic.current_player.hand.value))
+            self.playerThreePoints.setText("")
+            self.playerOnePoints.setText("")
+
+
+        elif self.frontend_logic.current_player_index == 2:
+            self.playerOnePoints.setText("")
+            self.playerTwoPoints.setText("")
+            self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
+            self.playerOnePoints.setText("")
+
+
+        elif self.frontend_logic.current_player_index == 3:
+            self.playerOnePoints.setText("")
+            self.playerTwoPoints.setText("")
+            self.playerThreePoints.setText("")
+            self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:
