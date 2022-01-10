@@ -59,11 +59,6 @@ class FrontendLogic:
         if self.current_player.hand.value >= 21:
             self.current_player.playing = False
 
-        # if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
-        #     blackjack.add_points(self.players)
-        #     self.replay.add_round_to_game_replay()
-        #     self.board.game_ends()
-
         elif self.check_if_round_over() is True:
             self.board.round_over()
 
@@ -74,10 +69,6 @@ class FrontendLogic:
         decision = 'stand'
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, decision)
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        # if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
-        #     blackjack.add_points(self.players)
-        #     self.replay.add_round_to_game_replay()
-        #     self.board.game_ends()
 
         if self.check_if_round_over() is True:
             self.board.round_over()
@@ -88,10 +79,6 @@ class FrontendLogic:
     def decision_ai(self):
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
-        if len(self.deck.deck) >= self.number_of_players * 2 + self.number_of_players:
-            blackjack.add_points(self.players)
-            self.replay.add_round_to_game_replay()
-            self.board.game_ends()
 
         if self.check_if_round_over() is True:
             self.board.round_over()

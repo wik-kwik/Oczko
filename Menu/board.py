@@ -564,11 +564,10 @@ class boardForm(object):
         #     player_number_aux += 1
 
 
-        # timer which repate function `display_time` every 1000ms (1s)
         self.timer = QTimer()
         self.timer.timeout.connect(self.display_time)  # execute `display_time`
         self.timer.start()
-        self.timer.setInterval(1000)
+        self.timer.setInterval(200)
         self.start_time = time.time()
 
         self.frontend_logic = FrontendLogic(self)
@@ -645,6 +644,7 @@ class boardForm(object):
 
     def display_time(self):
         if self.frontend_logic.current_player.type != "player":
+            self.timer.stop()
             QtCore.QTimer.singleShot(1000, self.frontend_logic.decision_ai)
 
         else:
