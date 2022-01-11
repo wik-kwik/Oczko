@@ -534,74 +534,12 @@ class replayBoardForm(object):
             self.playerFourCard_9.setStyleSheet("")
             self.playerFourCard_10.setStyleSheet("")
 
-    def display_time(self):
-        if self.frontend_logic.current_player.type != "player":
-            self.timer.stop()
-            self.hitButton.setEnabled(False)
-            self.standButton.setEnabled(False)
-            QtCore.QTimer.singleShot(1000, self.frontend_logic.decision_ai)
-
-        else:
-            if int(time.time() - self.start_time) <= self.time:
-                self.current_time = int(time.time() - self.start_time)
-                self.timerLabel.setText(str(self.time - self.current_time))
-
-            else:
-                self.frontend_logic.clicked_stand()
-
-    def change_player(self):
-        self.timer.stop()
-        self.hitButton.setEnabled(False)
-        self.standButton.setEnabled(False)
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playerChange.changeForm(self)
-        self.ui.setupUi(self.window)
-        self.window.show()
-        if self.frontend_logic.current_player.type != "player":
-            QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
-
-    def close_window_for_ai(self):
-        self.window.close()
-        self.reset_timer()
-        self.show_user_points()
-
-    def round_over(self):
-        print("round over")
-        self.game_ends()
-
     def game_ends(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = summary.summaryForm(self)
         self.ui.setupUi(self.window)
         self.window.show()
         self.board.close()
-
-    # def show_user_points(self):
-    #     if self.frontend_logic.current_player_index == 0:
-    #         self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
-    #         self.playerTwoPoints.setText("")
-    #         self.playerThreePoints.setText("")
-    #         self.playerOnePoints.setText("")
-
-    #     elif self.frontend_logic.current_player_index == 1:
-    #         self.playerOnePoints.setText("")
-    #         self.playerTwoPoints.setText(str(self.frontend_logic.current_player.hand.value))
-    #         self.playerThreePoints.setText("")
-    #         self.playerOnePoints.setText("")
-
-
-    #     elif self.frontend_logic.current_player_index == 2:
-    #         self.playerOnePoints.setText("")
-    #         self.playerTwoPoints.setText("")
-    #         self.playerThreePoints.setText(str(self.frontend_logic.current_player.hand.value))
-    #         self.playerOnePoints.setText("")
-
-
-    #     elif self.frontend_logic.current_player_index == 3:
-    #         self.playerOnePoints.setText("")
-    #         self.playerTwoPoints.setText("")
-    #         self.playerThreePoints.setText("")
-    #         self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:
