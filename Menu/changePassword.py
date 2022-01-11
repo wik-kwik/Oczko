@@ -192,7 +192,6 @@ class changeForm(object):
                     c.execute("UPDATE users SET password = '" + password + "' where username = '" + username + "'")
                     db.commit()
 
-
                 except sql.Error as e:
                     self.statusLabel.setStyleSheet("color: rgb(255, 46, 56);")
                     self.statusLabel.setText("Error")

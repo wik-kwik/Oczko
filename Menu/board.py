@@ -552,6 +552,7 @@ class boardForm(object):
         for i in range(1, self.playersNumber + 1):
             self.get_player_label(i).setText(self.set_username(i))
             self.players.append(Player(self.set_username(i), "player", i, self.boardLabels.labels[player_number_aux]))
+            self.update_games(self.set_username(i))
             player_number_aux += 1
 
         for i in range(1, self.computersNumber + 1):
@@ -788,11 +789,24 @@ class boardForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result[1])
+
             return result[1]
 
         except sql.Error as e:
             print("huj")
+
+    def update_games(self, player):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "UPDATE users SET games_played = games_played + 1 where username = '{}'".format(player)
+            c.execute(query)
+            db.commit()
+
+        except sql.Error as e:
+            print("sth wrong with update")
+
 
     def returnToMenu(self):
         try:

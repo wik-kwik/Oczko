@@ -11,7 +11,7 @@ class playOptionsForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(740, 769)
+        Form.resize(530, 732)
         Form.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.background = QtWidgets.QLabel(Form)
@@ -230,6 +230,8 @@ class playOptionsForm(object):
         # self.nextButton.setVisible(False)
         self.nextButton.clicked.connect(self.proceed)
         self.nextButton.clicked.connect(Form.close)
+
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
