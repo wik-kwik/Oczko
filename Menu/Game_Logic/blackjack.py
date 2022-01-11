@@ -6,6 +6,7 @@ from .cards import Cards
 # from deck import Deck
 # from replay import Replay
 from .convert_methods import Convert
+import sqlite3 as sql
 
 cards = Cards()
 suits = cards.suits
@@ -40,6 +41,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
         if decision == 'hit':
             hit(deck, player.hand)
             player.cards_played += 1
+            update_cards(player.name)
             return True
 
         elif decision == 'stand':
@@ -122,6 +124,22 @@ def add_points(players):  # dodawanie punktow po rundzie
             players_max = [player]
 
     return players_max
+
+def update_cards(player):
+    try:
+        db = sql.connect('database.db')  # łączymy się do bazy
+        c = db.cursor()  # dodajemy kursor
+
+        # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
+        # c.execute(query)
+        # db.commit()
+
+        query = "UPDATE users SET cards_used = cards_used + 1 where username = '{}'".format(player)
+        c.execute(query)
+        db.commit()
+
+    except sql.Error as e:
+        print("sth wrong with update")
 
 
 # deck = Deck()  # stworzenie talii
