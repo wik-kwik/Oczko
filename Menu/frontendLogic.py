@@ -63,7 +63,7 @@ class FrontendLogic:
         if self.current_player.hand.value >= 21:
             self.current_player.playing = False
 
-        if self.current_player.hand.value > 21:
+        if self.current_player.hand.value > 21 and self.check_if_round_over() is False:
             self.window = QtWidgets.QMainWindow()
             self.ui = bustPopout.bustForm(self.board, self.current_player.name)
             self.ui.setupUi(self.window)
@@ -96,12 +96,11 @@ class FrontendLogic:
             if self.current_player.hand.value >= 21:
                 self.current_player.playing = False
 
-            if self.current_player.hand.value > 21:
+            if self.current_player.hand.value > 21 and self.check_if_round_over() is False:
                 self.window = QtWidgets.QMainWindow()
                 self.ui = bustPopout.bustForm(self.board, self.current_player.name)
                 self.ui.setupUi(self.window)
                 self.window.show()
-
 
         if self.check_if_round_over() is True:
             self.board.round_over()

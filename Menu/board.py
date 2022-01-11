@@ -10,6 +10,7 @@ from PyQt5.QtCore import QTimer
 import playerChange
 from boardLabels import BoardLabels
 import summary
+import Game_Logic.blackjack as blackjack
 
 
 class boardForm(object):
@@ -655,7 +656,7 @@ class boardForm(object):
                 self.timerLabel.setText(str(self.time - self.current_time))
 
             else:
-                self.frontend_logic.clicked_stand()
+                self.stand()
 
     def change_player(self, decision):
         self.timer.stop()
@@ -703,7 +704,8 @@ class boardForm(object):
         self.standButton.setEnabled(True)
 
     def round_over(self):
-        print("round over")
+        self.frontend_logic.winners = blackjack.add_points(self.frontend_logic.players)
+        self.frontend_logic.replay.add_round_to_game_replay()
         self.game_ends()
 
     def game_ends(self):
