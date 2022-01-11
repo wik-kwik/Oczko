@@ -1,5 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from boardLabels import BoardLabels
 from frontendLogic import FrontendLogic
 import menu, playUsers
 import sqlite3 as sql

@@ -1,8 +1,10 @@
 from Game_Logic.deck import Deck
 from Game_Logic.hand import Hand
-from Game_Logic.convert_methods import Conver
+from Game_Logic.convert_methods import Convert
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
+
+from Menu.Game_Logic.player import Player
 
 
 class FrontendLogic:
@@ -10,8 +12,9 @@ class FrontendLogic:
         self.board = replayBoard
         self.replay = replayBoard.replay
         self.players = replayBoard.players
+        self.number_of_players = len(self.players)
         self.winners = []
-        self.conver = Convert
+        self.conver = Convert()
 
     def start_game(self):
         self.current_player_index = 0
@@ -19,7 +22,7 @@ class FrontendLogic:
         self.reset_card_png()
         self.set_player_labels()
 
-        aux = number_of_players - 1
+        aux = self.number_of_players - 1
         first_hands = self.replay[1][0]
         while first_hands != "":
             first_hands, card = first_hands[:-2], first_hands[-2:]
@@ -30,13 +33,13 @@ class FrontendLogic:
             aux = aux - 1
 
         j = 1
-        while j < len(replay[i]):
-            player = self.players[int(self.replay[i][j][0]) - 1]
-            if self.replay[i][j][1] == "H":
-                card = self.replay[i][j][-2:]
-                hit_on_replays(self.convert.convert_string_to_card(card), self.players[int(self.replay[i][j][0]) - 1].hand)
+        while j < len(self.replay[1]):
+            player = self.players[int(self.replay[1][j][0]) - 1]
+            if self.replay[1][j][1] == "H":
+                card = self.replay[1][j][-2:]
+                blackjack.hit_on_replays(self.convert.convert_string_to_card(card), self.players[int(self.replay[1][j][0]) - 1].hand)
 
-            if self.replay[i][j][1] == "S":
+            if self.replay[1][j][1] == "S":
                 pass
 
             j += 1
@@ -95,6 +98,12 @@ class FrontendLogic:
         for i in range(len(self.players)):
             for j in range(len(self.players[i].hand.cards)):
                 self.board.boardLabels.labels[i][j].setStyleSheet(self.board.path)
+
+    def show_cards_on_replay(self):
+        for i in range(len(self.players)):
+            for j in range(len(self.boardLabels.labels[i].hand.cards)):
+                aux_path = "image: url(:/images/" + self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
+                self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet(aux_path)
 
     # def check_if_round_over(self):
     #     active_players = 0
