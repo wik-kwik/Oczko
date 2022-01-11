@@ -2,7 +2,8 @@ from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
-import time
+from PyQt5 import QtWidgets
+import bustPopout
 
 
 class FrontendLogic:
@@ -62,6 +63,12 @@ class FrontendLogic:
         if self.current_player.hand.value >= 21:
             self.current_player.playing = False
 
+        if self.current_player.hand.value > 21:
+            self.window = QtWidgets.QMainWindow()
+            self.ui = bustPopout.bustForm(self.board, self.current_player.name)
+            self.ui.setupUi(self.window)
+            self.window.show()
+
         if self.check_if_round_over() is True:
             self.board.round_over()
 
@@ -84,6 +91,17 @@ class FrontendLogic:
     def decision_ai(self):
         decision_bool = blackjack.hit_or_stand(self.deck, self.current_player, "")
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
+
+        if decision_bool is True:
+            if self.current_player.hand.value >= 21:
+                self.current_player.playing = False
+
+            if self.current_player.hand.value > 21:
+                self.window = QtWidgets.QMainWindow()
+                self.ui = bustPopout.bustForm(self.board, self.current_player.name)
+                self.ui.setupUi(self.window)
+                self.window.show()
+
 
         if self.check_if_round_over() is True:
             self.board.round_over()

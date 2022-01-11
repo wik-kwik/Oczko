@@ -16,3 +16,10 @@ class Player:
         self.hand.add_card(deck.deal())
         self.cards_played += 2
         self.playing = True
+
+    def check_if_pers(self):
+        if len(self.hand.cards) == 2 and self.hand.aces == 2:
+            return True
+
+        else:
+            return False

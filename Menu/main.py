@@ -54,7 +54,7 @@ def main():
         # c.execute("INSERT INTO levels (id, level) VALUES (?,?)", (3, 0))
         # c.execute("INSERT INTO levels (id, level) VALUES (?,?)", (4, 0))
         # c.execute("INSERT INTO levels (id, level) VALUES (?,?)", (5, 0))
-        
+
         # db.commit()
 
         # query = "DELETE FROM logged_users"

@@ -2,9 +2,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class bustForm(object):
-    def __init__(self, board):
+    def __init__(self, board, name):
         self.board = board
         self.language = board.language
+        self.name = name
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -53,6 +54,8 @@ class bustForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.playButton.clicked.connect(Form.close)
+
         # Obsługa języków
         if self.language == 1:
             self.backgroundLabel.setStyleSheet("image: url(:/images/bustBackground.png);")
@@ -64,5 +67,5 @@ class bustForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.nicknameLabel.setText(_translate("Form", "nejfik69g"))
+        self.nicknameLabel.setText(_translate("Form", self.name))
         self.playButton.setText(_translate("Form", "OK"))

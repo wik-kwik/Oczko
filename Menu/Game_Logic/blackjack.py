@@ -111,7 +111,7 @@ def check_if_round_over(players):  # sprawdzenie czy wszyscy gracze skonczyli ru
 def add_points(players):  # dodawanie punktow po rundzie
     players_max = []
     for player in players:
-        if player.hand.value > 21 and (player.hand.value != 22 and player.hand.aces != 2):  # sprawdzenie czy gracz nie spalil reki
+        if player.hand.value > 21 and player.check_if_pers() is False:  # sprawdzenie czy gracz nie spalil reki
             pass
 
         elif len(players_max) == 0 or player.hand.value == players_max[0].hand.value:
@@ -120,14 +120,6 @@ def add_points(players):  # dodawanie punktow po rundzie
         elif player.hand.value > players_max[0].hand.value:
             players_max.clear()
             players_max = [player]
-
-        elif player.hand.value == 22 and player.hand.aces == 2:
-            if player.hand.value > players_max[0].hand.value:
-                players_max.clear()
-                players_max = [player]
-
-            elif player.hand.value == players_max[0].hand.value:
-                players_max.append(player)
 
     return players_max
 

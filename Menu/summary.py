@@ -198,6 +198,15 @@ class summaryForm(object):
             if self.language == 2:
                 self.backgroundLabel.setStyleSheet("image: url(:/images/summaryTieBackgroundPL.png);")
 
+        elif len(self.board.frontend_logic.winners) == 0:
+            self.winnerNickname.setText("No winners")
+            # Obsługa języków
+            if self.language == 1:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackground.png);")
+            if self.language == 2:
+                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackgroundPL.png);")
+
+
         else:
             self.winnerNickname.setText(self.board.frontend_logic.winners[0].name)
             # Obsługa języków
