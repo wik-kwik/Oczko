@@ -1,12 +1,11 @@
 import time
-
 from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
 from PyQt5 import QtWidgets
 import bustPopout
-from Menu.betting import bettingForm
+
 
 class FrontendLogic:
     def __init__(self, board):
@@ -16,7 +15,6 @@ class FrontendLogic:
         self.winners = []
         self.losers = []
         self.total_bet = board.total_bet
-
 
     def start_game(self):
         db = sql.connect('database.db')  # łączymy się do bazy
@@ -40,8 +38,8 @@ class FrontendLogic:
 
         self.reset_card_png()
         self.set_player_labels()
-        self.check_if_round_over
-
+        self.check_if_round_over()
+        self.replay.add_first_hands(self.players)
         self.start_time = time.time()
 
     def player_change(self, decision):

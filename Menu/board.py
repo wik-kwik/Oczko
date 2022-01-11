@@ -705,7 +705,6 @@ class boardForm(object):
 
     def round_over(self):
         self.frontend_logic.winners = blackjack.add_points(self.frontend_logic.players)
-        self.frontend_logic.replay.add_round_to_game_replay()
         self.game_ends()
 
     def game_ends(self):
