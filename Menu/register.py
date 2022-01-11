@@ -169,9 +169,10 @@ class registerForm(object):
             #                username text UNIQUE,
             #                password text,
             #                games_played integer,
+            #                games_won integer,
             #                win_rate real,
-            #                time_spent integer,
-            #                cards_used,
+            #                time_spent real,
+            #                cards_used integer,
             #                coins integer
             #                )""")
 
@@ -181,12 +182,13 @@ class registerForm(object):
             confirm = self.confirmLine.text()
 
             games_played = 0
+            games_won = 0
             win_rate = 0
             time_spent = 0
             cards_used = 0
             coins = 1000
             data = [
-                (username, password, games_played,
+                (username, password, games_played, games_won,
                  win_rate, time_spent, cards_used, coins)
             ]
 
@@ -217,7 +219,7 @@ class registerForm(object):
             elif password == confirm:
                 try:
                     c.executemany(
-                        "INSERT INTO users (username,password,games_played,win_rate,time_spent,cards_used,coins) VALUES (?,?,?,?,?,?,?)",
+                        "INSERT INTO users (username,password,games_played,games_won,win_rate,time_spent,cards_used,coins) VALUES (?,?,?,?,?,?,?,?)",
                         data)
                     db.commit()
                     print("Data has been inserted")

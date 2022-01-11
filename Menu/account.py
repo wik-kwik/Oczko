@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import changePassword
 import menu
 import sqlite3 as sql
+import math
 
 
 class accountForm(object):
@@ -43,7 +44,7 @@ class accountForm(object):
         self.winsLabel.setStyleSheet("color: rgb(255, 85, 0);")
         self.winsLabel.setObjectName("winsLabel")
         self.gamesLabel = QtWidgets.QLabel(Form)
-        self.gamesLabel.setGeometry(QtCore.QRect(192, 230, 91, 51))
+        self.gamesLabel.setGeometry(QtCore.QRect(192, 230, 99, 51))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -128,8 +129,8 @@ class accountForm(object):
             username = result[1]
             coins = str(result[2])
             games_played = str(result[3])
-            win_rate = str(result[4])
-            time_spent = str(result[5])
+            win_rate = str(round(result[4]))
+            time_spent = str(math.floor(result[5]))
             cards_used = str(result[6])
 
             self.usernameLabel.setText(username)

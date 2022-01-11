@@ -236,7 +236,7 @@ class rankingForm(object):
         self.closeButton.clicked.connect(Form.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
-        # self.siema()
+        #self.siema()
 
         self.show_data()
 
@@ -267,7 +267,7 @@ class rankingForm(object):
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
-            query = "SELECT sum from cards order by sum limit 5"
+            query = "SELECT sum, path from cards order by sum limit 5"
             c.execute(query)
             db.commit()
             sum = c.fetchall()
@@ -278,16 +278,36 @@ class rankingForm(object):
             self.cardFourCounter.setText(str(sum[3][0]))
             self.cardFiveCounter.setText(str(sum[4][0]))
 
-            query = "SELECT win_rate from users order by win_rate limit 5"
+
+
+            self.cardOne.setStyleSheet(sum[0][1])
+            self.cardTwo.setStyleSheet(sum[1][1])
+            self.cardThree.setStyleSheet(sum[2][1])
+            self.cardFour.setStyleSheet(sum[3][1])
+            self.cardFive.setStyleSheet(sum[4][1])
+
+            query = "SELECT username, win_rate from users order by win_rate desc limit 5"
             c.execute(query)
             db.commit()
             winrate = c.fetchall()
 
-            first_player = str(round(winrate[0][0]))
-            second_player = str(round(winrate[1][0]))
-            third_player = str(round(winrate[2][0]))
-            fourth_player = str(round(winrate[3][0]))
-            fifth_player = str(round(winrate[4][0]))
+            first_player = winrate[0][0]
+            second_player = winrate[1][0]
+            third_player = winrate[2][0]
+            fourth_player = winrate[3][0]
+            fifth_player = winrate[4][0]
+
+            self.playerOneNickname.setText(first_player)
+            self.playerTwoNickname.setText(second_player)
+            self.playerThreeNickname.setText(third_player)
+            self.playerFourNickname.setText(fourth_player)
+            self.playerFiveNickname.setText(fifth_player)
+
+            first_player = str(round(winrate[0][1]))
+            second_player = str(round(winrate[1][1]))
+            third_player = str(round(winrate[2][1]))
+            fourth_player = str(round(winrate[3][1]))
+            fifth_player = str(round(winrate[4][1]))
 
             self.playerOneWinrate.setText(first_player + "%")
             self.playerTwoWinrate.setText(second_player + "%")
@@ -316,8 +336,9 @@ class rankingForm(object):
             # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (2, 0, 0, 0))
             # c.execute("INSERT INTO games_ai (level, games_played, games_won, win_rate) VALUES (?,?,?,?)", (3, 0, 0, 0))
             # db.commit()
-    #
-    #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (1, "Two of Hearts", 0))
+            #c.execute("INSERT INTO cards (path) VALUES (?) where id = 4", (""))
+            c.execute("SELECT path FROM cards WHERE id = 4")
+    #          c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (1, "Two of Hearts", 0))
     #         # c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (2, "Two of Diamonds", 0))
     #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (3, "Two of Spades", 0))
     #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (4, "Two of Clubs", 0))
@@ -383,7 +404,8 @@ class rankingForm(object):
     #         c.execute("INSERT INTO cards (id, name, sum) VALUES (?,?,?)", (52, "Ace of Clubs", 0))
     #
     #
-    #         db.commit()
+            db.commit()
+            print(c.fetchone()[0])
 
         except sql.Error as e:
             print("xd")
