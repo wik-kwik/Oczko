@@ -79,22 +79,6 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
             player.playing = False
             return False
 
-            if deck.deck[len(deck.deck) - 1].rank == 'Ace':
-                if player.hand.value + 1 <= 21:
-                    hit(deck, player.hand)
-                    update_card_stat(player.hand.new_card)
-                    player.cards_played += 1
-                    return True
-
-                else:
-                    player.playing = False
-                    return False
-
-            else:
-                player.playing = False
-                return False
-
-
         else:
             hit(deck, player.hand)
             update_card_stat(player.hand.new_card)
