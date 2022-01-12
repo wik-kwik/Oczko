@@ -40,6 +40,8 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
     if player.type == "player":
         if decision == 'hit':
             hit(deck, player.hand)
+            print(player.hand.new_card)
+            update_card_stat(player.hand.new_card)
             player.cards_played += 1
             update_cards(player.name)
             return True
@@ -52,6 +54,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
         ask = bool(random.getrandbits(1))
         if ask is True and player.hand.value < 21:
             hit(deck, player.hand)
+            update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -62,6 +65,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
     if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
         if player.hand.value <= 17:
             hit(deck, player.hand)
+            update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -71,11 +75,29 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
 
     if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
         if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
+
             player.playing = False
             return False
 
+            if deck.deck[len(deck.deck) - 1].rank == 'Ace':
+                if player.hand.value + 1 <= 21:
+                    hit(deck, player.hand)
+                    update_card_stat(player.hand.new_card)
+                    player.cards_played += 1
+                    return True
+
+                else:
+                    player.playing = False
+                    return False
+
+            else:
+                player.playing = False
+                return False
+
+
         else:
             hit(deck, player.hand)
+            update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -117,6 +139,22 @@ def update_cards(player):
         # db.commit()
 
         query = "UPDATE users SET cards_used = cards_used + 1 where username = '{}'".format(player)
+        c.execute(query)
+        db.commit()
+
+    except sql.Error as e:
+        print("sth wrong with update")
+
+def update_card_stat(name):
+    try:
+        db = sql.connect('database.db')  # łączymy się do bazy
+        c = db.cursor()  # dodajemy kursor
+
+        # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
+        # c.execute(query)
+        # db.commit()
+
+        query = "UPDATE cards SET sum = sum + 1 where name = '{}'".format(name)
         c.execute(query)
         db.commit()
 

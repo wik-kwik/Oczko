@@ -267,7 +267,7 @@ class rankingForm(object):
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
 
-            query = "SELECT sum, path from cards order by sum limit 5"
+            query = "SELECT sum, path from cards order by sum desc limit 5"
             c.execute(query)
             db.commit()
             sum = c.fetchall()
@@ -320,9 +320,9 @@ class rankingForm(object):
             db.commit()
             winrate = c.fetchall()
 
-            self.easyWinrate.setText(str(winrate[0][0]) + "%")
-            self.mediumWinrate.setText(str(winrate[1][0]) + "%")
-            self.hardWinrate.setText(str(winrate[2][0]) + "%")
+            self.easyWinrate.setText(str(round(winrate[0][0])) + "%")
+            self.mediumWinrate.setText(str(round(winrate[1][0])) + "%")
+            self.hardWinrate.setText(str(round(winrate[2][0])) + "%")
 
 
         except sql.Error as e:

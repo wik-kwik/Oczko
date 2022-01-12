@@ -152,6 +152,12 @@ class FrontendLogic:
                 print(winner.name)
                 self.update_games_won(winner.name)
                 self.add_coins(self.total_bet / len(self.winners), winner.name)
+                if winner.type == "ceasy":
+                    self.update_ai_wins(1)
+                if winner.type == "cmedium":
+                    self.update_ai_wins(2)
+                if winner.type == "chard":
+                    self.update_ai_wins(3)
 
             for loser in self.losers:
                 self.delete_coins(self.total_bet / len(self.players), loser.name)
@@ -161,11 +167,11 @@ class FrontendLogic:
                 self.update_winrate(player.name)
                 self.update_games(player.name)
                 if player.type == "ceasy":
-                    pass
+                    self.update_ai_games(1)
                 if player.type == "cmedium":
-                    pass
+                    self.update_ai_games(2)
                 if player.type == "chard":
-                    pass
+                    self.update_ai_games(3)
 
             return True
         else:
@@ -259,6 +265,36 @@ class FrontendLogic:
             c.execute("INSERT INTO replays (players, moves) VALUES (?,?)", (players, moves))
             # c.execute(query)
             db.commit()
+            print(c.fetchall())
+
+        except sql.Error as e:
+            print("sth wrong with update")
+
+    def update_ai_games(self, level):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "UPDATE games_ai SET games_played = games_played + 1 where level = {}".format(level)
+            query2 = "UPDATE games_ai SET win_rate = (CAST(games_won AS FLOAT) / CAST(games_played AS FLOAT) * 100) where level = {}".format(
+                level)
+            c.execute(query)
+            c.execute(query2)
+            db.commit()
+            print(c.fetchall())
+
+        except sql.Error as e:
+            print("sth wrong with update")
+
+    def update_ai_wins(self, level):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "UPDATE games_ai SET games_won = games_won + 1 where level = {}".format(level)
+            c.execute(query)
+            db.commit()
+
             print(c.fetchall())
 
         except sql.Error as e:
