@@ -2,10 +2,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import menu
 import replayBoard
+import sqlite3 as sql
+import re
 
 class historyForm(object):
     def __init__(self, language):
         self.language = language
+        self.playersdb = []
+        self.movesdb = []
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -25,6 +29,15 @@ class historyForm(object):
         self.gamesComboBox.setObjectName("gamesComboBox")
         self.gamesComboBox.addItem("")
         self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+        self.gamesComboBox.addItem("")
+
         self.playButton = QtWidgets.QPushButton(Form)
         self.playButton.setGeometry(QtCore.QRect(390, 400, 131, 131))
         self.playButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
@@ -43,7 +56,11 @@ class historyForm(object):
         self.closeButton.clicked.connect(self.returnToMenu)
 
         self.playButton.clicked.connect(Form.close)
+        self.playButton.clicked.connect(self.check_data)
         self.playButton.clicked.connect(self.show_replay)
+
+        for i in range(0,10):
+            self.get_replay(i)
 
         # Obsługa języków
         if self.language == 1:
@@ -54,8 +71,6 @@ class historyForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Games history"))
-        self.gamesComboBox.setItemText(0, _translate("Form", "CHUJ"))
-        self.gamesComboBox.setItemText(1, _translate("Form", "CUHJ2"))
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()
@@ -65,6 +80,40 @@ class historyForm(object):
 
     def show_replay(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = replayBoard.replayBoardForm(self.language, True)
+        self.ui = replayBoard.replayBoardForm(self.language, True, self.playersdb, self.movesdb)
         self.ui.setupUi(self.window)
         self.window.show()
+
+    def check_data(self):
+        for i in range(0,10):
+            if self.gamesComboBox.currentIndex() == i:
+                self.get_replay(i)
+
+    def get_replay(self, id):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            c.execute("SELECT id, players, moves FROM replays order by id DESC limit 10")
+
+            db.commit()
+
+            result = c.fetchall()
+            a = result[id][2]
+
+            b = re.split('[^A-Z0-9]\S', a)
+            self.movesdb = list(filter(lambda a: a != '', b))
+
+
+            a = result[id][1]
+
+
+            b = re.split('[^A-Za-z0-9\s]', a)
+            self.playersdb = list(filter(lambda a: a != '' and a != ' ', b))
+
+
+            self.gamesComboBox.setItemText(id, "game=" + str(id) + " " + str(self.playersdb))
+
+
+        except sql.Error as e:
+            print("sth wrong with update")

@@ -10,13 +10,19 @@ from boardLabels import BoardLabels
 import summary
 from Game_Logic.convert_methods import Convert
 from replayLogic import ReplayLogic
+import gameHistory
 
 
 class replayBoardForm(object):
-    def __init__(self, language, replay_bool):
+    def __init__(self, language, replay_bool, playersdb, movesdb):
         self.language = language
         self.replay_bool = replay_bool
-        self.replay = [['Computer Easy1', 'Computer Medium2', 'Computer Hard3'], ['SAC6C4S5C8C2', '1S', '2HS4', '3S', '2HH5', '3HCA', '2S']]
+        self.playersdb = playersdb
+        self.movesdb = movesdb
+        # self.replay = [['Computer Hard1', 'Computer Hard2', 'Computer Hard3', 'Computer Hard4'], ['D3D2H2C7S5H3D2H5', '1S', '2S', '3S', '4S', '1S', '2S', '3S', '4S', '1S', '4S', '1S']]
+        # self.replay = [['Computer Easy1', 'Computer Medium2', 'Computer Hard3'], ['SAC6C4S5C8C2', '1S', '2HS4', '3S', '2HH5', '3HCA', '2S']]
+        self.replay = [self.playersdb, self.movesdb]
+        print(self.replay)
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT skin from settings"

@@ -139,6 +139,15 @@ class FrontendLogic:
             self.winners = blackjack.add_points(self.players)
             self.losers = list(set(self.players) - set(self.winners))
             self.replay.add_round_to_game_replay()
+            print(self.replay.replay[0])
+            print(self.replay.replay[1])
+            players = str(self.replay.replay[0])
+            moves = str(self.replay.replay[1])
+            print(players)
+            print(moves)
+            self.add_replay(players, moves)
+            # self.siema()
+
             self.stop_time = time.time()
             self.temp = self.stop_time-self.start_time
             self.minutes = float(self.temp / 60)
@@ -245,3 +254,29 @@ class FrontendLogic:
 
         except sql.Error as e:
             print("sth wrong with update")
+
+    def add_replay(self, players, moves):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            c.execute("INSERT INTO replays (players, moves) VALUES (?,?)", (players, moves))
+            # c.execute(query)
+            db.commit()
+            print(c.fetchall())
+
+        except sql.Error as e:
+            print("sth wrong with update")
+
+    # def siema(self):
+    #     try:
+    #         db = sql.connect('database.db')  # łączymy się do bazy
+    #         c = db.cursor()  # dodajemy kursor
+    #
+    #         c.execute("SELECT id from replays")
+    #         # c.execute(query)
+    #         db.commit()
+    #         print(c.fetchall())
+    #
+    #     except sql.Error as e:
+    #         print("sth wrong with update")
