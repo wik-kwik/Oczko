@@ -14,7 +14,7 @@ import Game_Logic.blackjack as blackjack
 
 
 class boardForm(object):
-    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel, input):
+    def __init__(self, language, playersNumber, computersNumber, betting, numberOfPlayer, gameLevel, computerOneLevel, computerTwoLevel, computerThreeLevel, computerFourLevel, input, replay_bool):
         self.language = language
         self.playersNumber = playersNumber
         self.computersNumber = computersNumber
@@ -25,6 +25,7 @@ class boardForm(object):
         self.computerTwoLevel = computerTwoLevel
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
+        self.replay_bool = replay_bool
         self.input = input
         self.total_bet = 0
         db = sql.connect('database.db')  # łączymy się do bazy
@@ -705,7 +706,6 @@ class boardForm(object):
 
     def round_over(self):
         self.frontend_logic.winners = blackjack.add_points(self.frontend_logic.players)
-        print(self.frontend_logic.replay.replay)
         self.game_ends()
 
     def game_ends(self):

@@ -13,8 +13,9 @@ from replayLogic import ReplayLogic
 
 
 class replayBoardForm(object):
-    def __init__(self, language):
+    def __init__(self, language, replay_bool):
         self.language = language
+        self.replay_bool = replay_bool
         self.replay = [['Computer Easy1', 'Computer Medium2', 'Computer Hard3'], ['SAC6C4S5C8C2', '1S', '2HS4', '3S', '2HH5', '3HCA', '2S']]
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor

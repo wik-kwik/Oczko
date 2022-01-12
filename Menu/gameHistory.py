@@ -65,6 +65,6 @@ class historyForm(object):
 
     def show_replay(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = replayBoard.replayBoardForm(self.language)
+        self.ui = replayBoard.replayBoardForm(self.language, True)
         self.ui.setupUi(self.window)
         self.window.show()

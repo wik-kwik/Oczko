@@ -51,25 +51,21 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
     if player.type == "ceasy":  # easy (losowe decyzje)
         ask = bool(random.getrandbits(1))
         if ask is True and player.hand.value < 21:
-            print(player.name + " hits.")
             hit(deck, player.hand)
             player.cards_played += 1
             return True
 
         else:
-            print(player.name + " stands.")
             player.playing = False
             return False
 
     if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
         if player.hand.value <= 17:
-            print(player.name + " hits.")
             hit(deck, player.hand)
             player.cards_played += 1
             return True
 
         else:
-            print(player.name + " stands.")
             player.playing = False
             return False
 
@@ -77,23 +73,19 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
         if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
             if deck.deck[len(deck.deck) - 1].rank == 'Ace':
                 if player.hand.value + 1 <= 21:
-                    print(player.name + " hits.")
                     hit(deck, player.hand)
                     player.cards_played += 1
                     return True
 
                 else:
-                    print(player.name + " stands.")
                     player.playing = False
                     return False
 
             else:
-                print(player.name + " stands.")
                 player.playing = False
                 return False
 
         else:
-            print(player.name + " hits.")
             hit(deck, player.hand)
             player.cards_played += 1
             return False
@@ -125,6 +117,7 @@ def add_points(players):  # dodawanie punktow po rundzie
 
     return players_max
 
+
 def update_cards(player):
     try:
         db = sql.connect('database.db')  # łączymy się do bazy
@@ -140,95 +133,3 @@ def update_cards(player):
 
     except sql.Error as e:
         print("sth wrong with update")
-
-
-# deck = Deck()  # stworzenie talii
-# deck.shuffle_cards()
-
-# number_of_players = 4
-
-# player1 = Player("siema1", "player", 1)     # gracz
-# player2 = Player("siema2", "ceasy", 2)      # komputer latwy
-# player3 = Player("siema3", "cmedium", 3)    # komputer sredni
-# player4 = Player("siema4", "chard", 4)      # komputer trudny
-
-# players = [player1, player2, player3, player4]
-
-# replay = Replay()
-# replay.add_players(players)
-# print("Welcome to Blackjack!")
-
-
-# while len(deck.deck) > number_of_players * 2:
-#     if playing:
-#         playing_round = True
-
-#         player1.start_round(deck)
-#         player2.start_round(deck)
-#         player3.start_round(deck)
-#         player4.start_round(deck)
-
-#         round_number = 1
-
-#         replay.add_first_hands(players)
-
-#         while playing_round:  # round loop
-#             for player in players:
-#                 print("Playing: " + player.name + " value: " + str(player.hand.value))
-#                 if player.playing is True:
-#                     decision = hit_or_stand(deck, player)
-#                     replay.add_move(decision, player.player_number, player.hand.new_card)
-#                     print("value: " + str(player.hand.value))
-#                     if len(deck.deck) == 0:
-#                         playing = False
-#                         playing_round = False
-#                         break
-
-#             playing_round = check_if_round_over(players)
-
-#         round_number += 1
-#         replay.add_round_to_game_replay()
-#         add_points(players)
-
-#     else:
-#         break
-
-# odczytywanie zapisu z replaya
-
-# replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S'],
-# ['S4CTSASKH6HTH4H9', '1S', '2S', '3HDK', '4S', '3S', '4S']]
-# players = []
-# number_of_players = len(replay[0])
-# convert = Convert()
-
-# for player in replay[0]:
-#     player, player_number = player[:-1], player[-1]
-#     player_number = int(player_number)
-
-#     players.append(Player(player, "replay", player_number))
-
-# i = 1
-# while i < len(replay):
-#     aux = number_of_players - 1
-#     first_hands = replay[i][0]
-#     while first_hands != "":
-#         first_hands, card = first_hands[:-2], first_hands[-2:]
-#         players[aux].hand = Hand()
-#         hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
-#         first_hands, card = first_hands[:-2], first_hands[-2:]
-#         hit_on_replays(convert.convert_string_to_card(card), players[aux].hand)
-#         aux = aux - 1
-
-#     j = 1
-#     while j < len(replay[i]):
-#         player = players[int(replay[i][j][0]) - 1]
-#         if replay[i][j][1] == "H":
-#             card = replay[i][j][-2:]
-#             hit_on_replays(convert.convert_string_to_card(card), players[int(replay[i][j][0]) - 1].hand)
-
-#         if replay[i][j][1] == "S":
-#             pass
-
-#         j += 1
-
-#     i += 1

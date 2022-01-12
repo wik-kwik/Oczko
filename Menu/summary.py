@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import board
+import replayBoard
 import menu
 
 
@@ -185,7 +186,13 @@ class summaryForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.playButton.clicked.connect(self.play_again)
+        if self.board.replay_bool is True:
+            self.replayButton.setVisible(False)
+            self.playButton.clicked.connect(self.play_replay_again)
+
+        else:
+            self.playButton.clicked.connect(self.play_again)
+
         self.playButton.clicked.connect(Form.close)
 
         self.backButton.clicked.connect(self.return_to_menu)
@@ -254,7 +261,13 @@ class summaryForm(object):
         self.window = QtWidgets.QMainWindow()
         self.ui = board.boardForm(self.board.language, self.board.playersNumber, self.board.computersNumber, self.board.betting,
                                   self.board.numberOfPlayer, self.board.gameLevel, self.board.computerOneLevel, self.board.computerTwoLevel, 
-                                  self.board.computerThreeLevel, self.board.computerFourLevel, self.board.input)
+                                  self.board.computerThreeLevel, self.board.computerFourLevel, self.board.input, False)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def play_replay_again(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = replayBoard.replayBoardForm(self.language, True)
         self.ui.setupUi(self.window)
         self.window.show()
 

@@ -1734,7 +1734,8 @@ class usersForm(object):
     def openBoard(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting,
-                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)
+                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, 
+                                  self.computerThreeLevel, self.computerFourLevel, self.input, False)
         self.ui.setupUi(self.window)
         self.window.show()
         # boardLabels = BoardLabels(self)

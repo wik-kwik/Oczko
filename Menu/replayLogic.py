@@ -50,10 +50,15 @@ class ReplayLogic:
         if self.replay[1][self.aux_for_check][1] == "S":
             self.go_to_next_move()
 
+        self.aux_for_check += 1
+
     def go_to_next_move(self):
         if self.aux_for_check < len(self.replay[1]) - 1:
-            self.aux_for_check += 1
-            QtCore.QTimer.singleShot(1000, self.make_a_move)
+            QtCore.QTimer.singleShot(2000, self.make_a_move)
+
+        else:
+            self.winnners = blackjack.add_points(self.players)
+            self.board.game_ends()
 
     def show_cards_on_replay(self):
         for i in range(len(self.players)):
