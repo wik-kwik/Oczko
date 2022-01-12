@@ -118,9 +118,6 @@ def update_cards(player):
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
 
-        # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
-        # c.execute(query)
-        # db.commit()
 
         query = "UPDATE users SET cards_used = cards_used + 1 where username = '{}'".format(player)
         c.execute(query)
@@ -133,10 +130,6 @@ def update_card_stat(name):
     try:
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
-
-        # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
-        # c.execute(query)
-        # db.commit()
 
         query = "UPDATE cards SET sum = sum + 1 where name = '{}'".format(name)
         c.execute(query)

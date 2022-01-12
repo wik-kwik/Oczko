@@ -34,7 +34,5 @@ class Replay:  # powtorki
             move += "S"
             self.round_replay.append(move)
 
-        # print(self.replay)
-
     def add_round_to_game_replay(self):
         self.replay.append(self.round_replay)

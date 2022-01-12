@@ -3,7 +3,7 @@ from .card import Card
 from .cards import Cards
 
 
-class Deck:  # talia kart ugulem
+class Deck:
     def __init__(self):
         self.deck = []  # lista, ktora wypelnimy kartami i otrzymamy talie kart
         self.cards = Cards()
@@ -17,7 +17,7 @@ class Deck:  # talia kart ugulem
             deck_comp += '\n' + card.__str__()
         return 'The deck has: ' + deck_comp
 
-    def shuffle_cards(self):  # wiadomo co, wiadomo kogo
+    def shuffle_cards(self):
         random.shuffle(self.deck)
 
     def deal(self):  # wybieranie karty z talii
