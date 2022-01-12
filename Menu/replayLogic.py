@@ -3,25 +3,23 @@ from Game_Logic.hand import Hand
 from Game_Logic.convert_methods import Convert
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
-import time
+from PyQt5 import QtCore
+from Game_Logic.player import Player
 
-from Menu.Game_Logic.player import Player
 
-
-class FrontendLogic:
+class ReplayLogic:
     def __init__(self, replayBoard):
         self.board = replayBoard
         self.replay = replayBoard.replay
         self.players = replayBoard.players
+        self.boardLabels = replayBoard.boardLabels
         self.number_of_players = len(self.players)
         self.winners = []
-        self.conver = Convert()
+        self.convert = Convert()
 
     def start_game(self):
         self.current_player_index = 0
         self.current_player = self.players[self.current_player_index]
-        self.reset_card_png()
-        self.set_player_labels()
 
         aux = self.number_of_players - 1
         first_hands = self.replay[1][0]
@@ -35,24 +33,30 @@ class FrontendLogic:
 
         self.show_cards_on_replay()
 
-        j = 1
-        while j < len(self.replay[1]):
-            player = self.players[int(self.replay[1][j][0]) - 1]
-            if self.replay[1][j][1] == "H":
-                card = self.replay[1][j][-2:]
-                blackjack.hit_on_replays(self.convert.convert_string_to_card(card), self.players[int(self.replay[1][j][0]) - 1].hand)
-                self.show_cards_on_replay()
-
-            if self.replay[1][j][1] == "S":
-                pass
-
-            j += 1
+        self.aux_for_check = 1
+        QtCore.QTimer.singleShot(1000, self.make_a_move)
 
         self.winnners = blackjack.add_points(self.players)
         self.board.game_ends()
 
+    def make_a_move(self):
+        print(self.aux_for_check)
+        if self.replay[1][self.aux_for_check][1] == "H":
+            card = self.replay[1][self.aux_for_check][-2:]
+            blackjack.hit_on_replays(self.convert.convert_string_to_card(card), self.players[int(self.replay[1][self.aux_for_check][0]) - 1].hand)
+            self.show_cards_on_replay()
+            self.go_to_next_move()
+
+        if self.replay[1][self.aux_for_check][1] == "S":
+            self.go_to_next_move()
+
+    def go_to_next_move(self):
+        if self.aux_for_check < len(self.replay[1]) - 1:
+            self.aux_for_check += 1
+            QtCore.QTimer.singleShot(1000, self.make_a_move)
+
     def show_cards_on_replay(self):
         for i in range(len(self.players)):
-            for j in range(len(self.boardLabels.labels[i].hand.cards)):
-                aux_path = "image: url(:/images/" + self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
-                self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet(aux_path)
+            for j in range(len(self.players[i].hand.cards)):
+                aux_path = "image: url(:/images/" + self.players[i].hand.cards[j].rank.lower() + "_of_" + self.players[i].hand.cards[j].suit.lower() + ".png);"
+                self.board.boardLabels.labels[i][j].setStyleSheet(aux_path)

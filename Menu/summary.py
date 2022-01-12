@@ -191,21 +191,12 @@ class summaryForm(object):
         self.backButton.clicked.connect(self.return_to_menu)
         self.backButton.clicked.connect(Form.close)
 
-        if len(self.board.frontend_logic.winners) > 1:
+        if len(self.board.frontend_logic.winners) > 1 or len(self.board.frontend_logic.winners) == 0:
             self.winnerNickname.setVisible(False)
             if self.language == 1:
                 self.backgroundLabel.setStyleSheet("image: url(:/images/summaryTieBackground.png);")
             if self.language == 2:
                 self.backgroundLabel.setStyleSheet("image: url(:/images/summaryTieBackgroundPL.png);")
-
-        elif len(self.board.frontend_logic.winners) == 0:
-            self.winnerNickname.setText("No winners")
-            # Obsługa języków
-            if self.language == 1:
-                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackground.png);")
-            if self.language == 2:
-                self.backgroundLabel.setStyleSheet("image: url(:/images/summaryBackgroundPL.png);")
-
 
         else:
             self.winnerNickname.setText(self.board.frontend_logic.winners[0].name)

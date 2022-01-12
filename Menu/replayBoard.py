@@ -9,12 +9,13 @@ import playerChange
 from boardLabels import BoardLabels
 import summary
 from Game_Logic.convert_methods import Convert
+from replayLogic import ReplayLogic
 
 
 class replayBoardForm(object):
     def __init__(self, language):
         self.language = language
-        self.replay = [['siema11', 'siema22', 'siema33', 'siema44'], ['DTC5C8CAHKD8S8C7', '1S', '2HC4', '3S', '4S', '2HHJ', '2HCJ', '2S']]
+        self.replay = [['Computer Easy1', 'Computer Medium2', 'Computer Hard3'], ['SAC6C4S5C8C2', '1S', '2HS4', '3S', '2HH5', '3HCA', '2S']]
         db = sql.connect('database.db')  # łączymy się do bazy
         c = db.cursor()  # dodajemy kursor
         query = "SELECT skin from settings"
@@ -53,16 +54,6 @@ class replayBoardForm(object):
         self.playerOneLabel.setText("")
         self.playerOneLabel.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.playerOneLabel.setObjectName("playerOneLabel")
-        self.coinsIcon = QtWidgets.QLabel(replayBoardForm)
-        self.coinsIcon.setGeometry(QtCore.QRect(710, 750, 71, 81))
-        self.coinsIcon.setStyleSheet("image: url(:/images/coins.png);")
-        self.coinsIcon.setText("")
-        self.coinsIcon.setObjectName("coinsIcon")
-        self.walletIcon = QtWidgets.QLabel(replayBoardForm)
-        self.walletIcon.setGeometry(QtCore.QRect(1490, 820, 51, 51))
-        self.walletIcon.setStyleSheet("image: url(:/images/wallet.png);")
-        self.walletIcon.setText("")
-        self.walletIcon.setObjectName("walletIcon")
         self.menuStripe = QtWidgets.QLabel(replayBoardForm)
         self.menuStripe.setGeometry(QtCore.QRect(1470, 0, 251, 941))
         self.menuStripe.setStyleSheet("background-color:rgba(0, 0, 0, 100);")
@@ -385,13 +376,11 @@ class replayBoardForm(object):
         self.playerOneCard_1.raise_()
         self.playerOneLabel.raise_()
         self.menuStripe.raise_()
-        self.walletIcon.raise_()
         self.logoLabel.raise_()
         self.balanceText.raise_()
         self.balanceLabel.raise_()
         self.timerLabel.raise_()
         self.toWinLabel.raise_()
-        self.coinsIcon.raise_()
         self.prizeLabel.raise_()
 
         self.playerTwoLabel.raise_()
@@ -459,7 +448,7 @@ class replayBoardForm(object):
         self.boardLabels = BoardLabels(self)
         self.players = []
 
-        players = []
+        self.players = []
         self.number_of_players = len(self.replay[0])
         self.convert = Convert()
         player_number_aux = 1
@@ -467,9 +456,12 @@ class replayBoardForm(object):
             player, player_number = player[:-1], player[-1]
             player_number = int(player_number)
 
-            players.append(Player(player, "replay", player_number))
+            self.players.append(Player(player, "replay", player_number, self.boardLabels.labels[player_number_aux - 1]))
             self.get_player_label(player_number_aux).setText(player)
             player_number_aux += 1
+
+        self.frontend_logic = ReplayLogic(self)
+        self.frontend_logic.start_game()
 
         # Ustawianie kart w zaleznosci od ilosci graczy
         if self.number_of_players == 2:

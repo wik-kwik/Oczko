@@ -705,6 +705,7 @@ class boardForm(object):
 
     def round_over(self):
         self.frontend_logic.winners = blackjack.add_points(self.frontend_logic.players)
+        print(self.frontend_logic.replay.replay)
         self.game_ends()
 
     def game_ends(self):
@@ -795,8 +796,6 @@ class boardForm(object):
 
         except sql.Error as e:
             print("huj")
-
-
 
     def returnToMenu(self):
         try:
