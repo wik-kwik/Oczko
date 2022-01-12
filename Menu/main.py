@@ -57,13 +57,13 @@ def main():
 
         # db.commit()
 
-        # query = "DELETE FROM logged_users"
-        # c.execute(query)
+        query = "DELETE FROM logged_users"
+        c.execute(query)
         c.execute("UPDATE levels SET level = 0")
         db.commit()
 
     except sql.Error as e:
-        print("xd")
+        print("error")
 
     sys.exit(app.exec_())
 

@@ -238,7 +238,6 @@ class loginForm(object):
 
             c.execute(
                 "UPDATE logged_users SET id = {} WHERE id = 0".format(user_id))
-            # "INSERT INTO logged_users (id,username,password) VALUES (?,?,?)", (0, self.username, self.password))
             db.commit()
 
         except sql.Error as e:

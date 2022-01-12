@@ -576,11 +576,6 @@ class boardForm(object):
         self.closeButton.clicked.connect(self.timer.stop)
         self.returnButton.clicked.connect(self.timer.stop)
 
-        # # dodanie graczy do planszy
-        # # players.append(Player("*name*", "*type*", *player_number*)) type reference in ..Blackjack.player Player class
-        # player = Player ("XXD", "XXD ", 1)
-
-
         # Ustawianie kart w zaleznosci od ilosci graczy
         if self.playersNumber + self.computersNumber == 2:
 
@@ -795,7 +790,7 @@ class boardForm(object):
             return result[1]
 
         except sql.Error as e:
-            print("huj")
+            print("error")
 
     def returnToMenu(self):
         try:

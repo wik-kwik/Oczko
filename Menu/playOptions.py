@@ -407,8 +407,6 @@ class playOptionsForm(object):
             self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
             self.nextButton.setVisible(True)
 
-        # self.betsVisibility()
-
     def proceed(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)

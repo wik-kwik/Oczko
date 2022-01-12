@@ -58,7 +58,6 @@ class FrontendLogic:
 
         self.current_player = self.players[self.current_player_index]
         self.board.change_player(decision)
-        # print(self.current_player)
 
     def clicked_hit(self):
         decision = 'hit'
@@ -117,8 +116,6 @@ class FrontendLogic:
         for i in range(len(self.current_player.hand.cards)):
             aux_path = "image: url(:/images/" + self.current_player.hand.cards[i].rank.lower() + "_of_" + self.current_player.hand.cards[i].suit.lower() + ".png);"
             self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet(aux_path)
-            # print(aux_path)
-            # self.board.boardLabels.labels[self.current_player_index][i].setStyleSheet("image: url(:/images/ace_of_clubs.png);")
 
     def reset_card_png(self):
         for i in range(len(self.players)):
@@ -142,7 +139,6 @@ class FrontendLogic:
             players = str(self.replay.replay[0])
             moves = str(self.replay.replay[1])
             self.add_replay(players, moves)
-            # self.siema()
 
             self.stop_time = time.time()
             self.temp = self.stop_time-self.start_time
@@ -159,13 +155,12 @@ class FrontendLogic:
                 if winner.type == "chard":
                     self.update_ai_wins(3)
 
-            for loser in self.losers:
-                self.delete_coins(self.total_bet / len(self.players), loser.name)
 
             for player in self.players:
                 self.update_time(self.minutes, player.name)
                 self.update_winrate(player.name)
                 self.update_games(player.name)
+                self.delete_coins(self.total_bet / len(self.players), player.name)
                 if player.type == "ceasy":
                     self.update_ai_games(1)
                 if player.type == "cmedium":
@@ -181,10 +176,6 @@ class FrontendLogic:
         try:
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
-
-            # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
-            # c.execute(query)
-            # db.commit()
 
             query = "UPDATE users SET time_spent = time_spent + {} where username = '{}'".format(minutes, player)
             c.execute(query)
@@ -209,10 +200,6 @@ class FrontendLogic:
         try:
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
-
-            # query = "SELECT user_id, username, password, games_played, win_rate, time_spent, cards_used, coins from users"
-            # c.execute(query)
-            # db.commit()
 
             query = "UPDATE users SET games_won = games_won + 1 where username = '{}'".format(player)
             c.execute(query)
@@ -263,7 +250,6 @@ class FrontendLogic:
             c = db.cursor()  # dodajemy kursor
 
             c.execute("INSERT INTO replays (players, moves) VALUES (?,?)", (players, moves))
-            # c.execute(query)
             db.commit()
             print(c.fetchall())
 
@@ -299,16 +285,3 @@ class FrontendLogic:
 
         except sql.Error as e:
             print("sth wrong with update")
-
-    # def siema(self):
-    #     try:
-    #         db = sql.connect('database.db')  # łączymy się do bazy
-    #         c = db.cursor()  # dodajemy kursor
-    #
-    #         c.execute("SELECT id from replays")
-    #         # c.execute(query)
-    #         db.commit()
-    #         print(c.fetchall())
-    #
-    #     except sql.Error as e:
-    #         print("sth wrong with update")

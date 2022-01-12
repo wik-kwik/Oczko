@@ -160,7 +160,7 @@ class settingsForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def set_skin(self, skin):
         try:
@@ -183,7 +183,7 @@ class settingsForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def check_deck(self):
         try:
@@ -199,7 +199,7 @@ class settingsForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def check_skin(self):
         try:
@@ -215,7 +215,7 @@ class settingsForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()

@@ -243,24 +243,7 @@ class rankingForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.playerOneNickname.setText(_translate("Form", "dupa"))
-        self.playerOneWinrate.setText(_translate("Form", "33%"))
-        self.playerTwoNickname.setText(_translate("Form", "kwikwi"))
-        self.playerTwoWinrate.setText(_translate("Form", "33%"))
-        self.playerThreeNickname.setText(_translate("Form", "kwikwi"))
-        self.playerFourNickname.setText(_translate("Form", "kwikwi"))
-        self.playerFiveNickname.setText(_translate("Form", "kwikwi"))
-        self.playerThreeWinrate.setText(_translate("Form", "33%"))
-        self.playerFourWinrate.setText(_translate("Form", "33%"))
-        self.playerFiveWinrate.setText(_translate("Form", "33%"))
-        # self.easyWinrate.setText(_translate("Form", "200%"))
-        # self.mediumWinrate.setText(_translate("Form", "200%"))
-        # self.hardWinrate.setText(_translate("Form", "200%"))
-        self.cardOneCounter.setText(_translate("Form", "18"))
-        self.cardTwoCounter.setText(_translate("Form", "6969"))
-        self.cardThreeCounter.setText(_translate("Form", "6969"))
-        self.cardFourCounter.setText(_translate("Form", "2"))
-        self.cardFiveCounter.setText(_translate("Form", "1"))
+
 
     def show_data(self):
         try:
@@ -326,7 +309,7 @@ class rankingForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def siema(self):
         try:
@@ -408,7 +391,7 @@ class rankingForm(object):
             print(c.fetchone()[0])
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def returnToMenu(self):
         self.window = QtWidgets.QMainWindow()

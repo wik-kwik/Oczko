@@ -1500,8 +1500,6 @@ class usersForm(object):
 
         self.settings()
 
-
-
     def mediumLevel(self):
         self.gameLevel = 2
         self.update_leveldb(5, 2)
@@ -1572,7 +1570,7 @@ class usersForm(object):
             self.playerOneNickname.setText(self.set_username(1))
 
         else:
-            print("xd")
+            print("")
 
     def second_player(self):
         result = self.assign_player(2)
@@ -1588,7 +1586,7 @@ class usersForm(object):
 
             self.playerTwoNickname.setText(self.set_username(2))
         else:
-            print("xd")
+            print("")
 
     def third_player(self):
         result = self.assign_player(3)
@@ -1604,7 +1602,7 @@ class usersForm(object):
             self.playerThreeNickname.setText(self.set_username(3))
 
         else:
-            print("xd")
+            print("")
 
     def fourth_player(self):
         result = self.assign_player(4)
@@ -1621,7 +1619,7 @@ class usersForm(object):
             self.playerFourNickname.setText(self.set_username(4))
 
         else:
-            print("xd")
+            print("")
 
     # Nadanie użytkownikowi nazwy po zalogowaniu
     def set_username(self, user_id):
@@ -1640,7 +1638,7 @@ class usersForm(object):
                 return "-"
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def assign_player(self, user_id):
         try:
@@ -1654,7 +1652,7 @@ class usersForm(object):
             return result
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
     def update_leveldb(self, level_id, level):
         try:
@@ -1682,7 +1680,7 @@ class usersForm(object):
 
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
 
     def settings(self):
@@ -1738,8 +1736,6 @@ class usersForm(object):
                                   self.computerThreeLevel, self.computerFourLevel, self.input, False)
         self.ui.setupUi(self.window)
         self.window.show()
-        # boardLabels = BoardLabels(self)
-        # self.popups.append(self.window)
 
     def show_betting(self):
         if self.betting == 1:
@@ -1757,11 +1753,11 @@ class usersForm(object):
 
     # Wylogowywanie poszczególnych graczy
     def logout_one(self):
-        print("siema")
+
 
         self.numberOfPlayer.remove(1)
         self.loggedUsers.remove(1)
-        print(self.numberOfPlayer)
+
         self.delete_user(1)
 
         self.playerOneRegister.setVisible(True)
@@ -1770,11 +1766,10 @@ class usersForm(object):
         self.nextButton.setVisible(False)
 
     def logout_two(self):
-        print("siema")
 
         self.numberOfPlayer.remove(2)
         self.loggedUsers.remove(2)
-        print(self.numberOfPlayer)
+
         self.delete_user(2)
 
         self.playerTwoRegister.setVisible(True)
@@ -1783,11 +1778,11 @@ class usersForm(object):
         self.nextButton.setVisible(False)
 
     def logout_three(self):
-        print("siema")
+
 
         self.numberOfPlayer.remove(3)
         self.loggedUsers.remove(3)
-        print(self.numberOfPlayer)
+
         self.delete_user(3)
 
         self.playerThreeRegister.setVisible(True)
@@ -1796,11 +1791,9 @@ class usersForm(object):
         self.nextButton.setVisible(False)
 
     def logout_four(self):
-        print("siema")
 
         self.numberOfPlayer.remove(4)
         self.loggedUsers.remove(4)
-        print(self.numberOfPlayer)
         self.delete_user(4)
 
         self.playerFourRegister.setVisible(True)
@@ -1818,4 +1811,4 @@ class usersForm(object):
             db.commit()
 
         except sql.Error as e:
-            print("xd")
+            print("error")

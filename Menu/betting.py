@@ -27,7 +27,6 @@ class bettingForm(object):
         self.computerThreeLevel = computerThreeLevel
         self.computerFourLevel = computerFourLevel
         self.input = 0
-        self.siema = 0
 
 
     def setupUi(self, Form):
@@ -166,29 +165,7 @@ class bettingForm(object):
             self.playerFourWallet.setText(str(self.set_wallet(4)))
 
         self.playButton.clicked.connect(self.play)
-        # self.playButton.clicked.connect(Form.close)
         self.xdButton.clicked.connect(Form.close)
-        print(self.siema)
-
-
-
-        Form.hide()
-
-        # if self.input == 1:
-        #     self.playButton.clicked.connect(Form.close)
-        # self.play()
-        # if self.xdButton.isChecked is True:
-        #     self.xdButton.clicked.connect(Form.close)
-
-        # if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
-        #     self.warningLabel.setText("<3")
-        # else:
-        #     pass
-
-        # self.close()if self.abc == 1:
-        if self.input > self.set_wallet(1) or self.input > self.set_wallet(2) or self.input < 1:
-            Form.close()
-
 
 
 
@@ -205,7 +182,7 @@ class bettingForm(object):
             return result[1]
 
         except sql.Error as e:
-            print("huj")
+            print("error")
 
     def set_wallet(self,user_id):
         try:
@@ -227,13 +204,6 @@ class bettingForm(object):
             self.input = str(self.betInput.text())
             self.input = int(self.input)
 
-        # Poniższy "if" jest niepotrzebny, ponieważ gracz nie może grać sam na pieniądze. W razie późniejszych zmian tylko zakomentowany
-
-        # if len(self.numberOfPlayer) == 1:
-        #     if self.input > self.set_wallet(1):
-        #         self.warningLabel.setText("kogo")
-        #     else:
-        #         self.openBoard()
 
             if len(self.numberOfPlayer) == 2:
                 if self.input == "":
@@ -250,7 +220,6 @@ class bettingForm(object):
                         or self.input > self.set_wallet(3) or self.input < 1:
                     self.warningLabel.setText("Invalid value")
                 else:
-                    self.siema = 1
                     self.openBoard()
             elif len(self.numberOfPlayer) == 4:
                 if self.input == "":
@@ -259,10 +228,9 @@ class bettingForm(object):
                         or self.input > self.set_wallet(3) or self.input > self.set_wallet(4) or self.input < 1:
                     self.warningLabel.setText("Invalid value")
                 else:
-                    self.siema = 1
                     self.openBoard()
         except ValueError as e:
-            print("xd")
+            print("error")
 
 
     def refresh_betting(self):
@@ -274,16 +242,13 @@ class bettingForm(object):
         self.window.show()
 
 
-
-
-
     def openBoard(self):
 
         self.playButton.setEnabled(False)
         self.xdButton.click()
         self.window = QtWidgets.QMainWindow()
         self.ui = board.boardForm(self.language, self.playersNumber, self.computersNumber, self.betting,
-                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input)
+                                  self.numberOfPlayer, self.gameLevel, self.computerOneLevel, self.computerTwoLevel, self.computerThreeLevel, self.computerFourLevel, self.input, False)
         self.ui.setupUi(self.window)
         self.window.show()
 

@@ -108,12 +108,6 @@ class accountForm(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Account"))
-        # self.winsLabel.setText(_translate("Form", "69%"))
-        # self.gamesLabel.setText(_translate("Form", "2"))
-        # self.cardsLabel.setText(_translate("Form", "12"))
-        # self.minutesLabel.setText(_translate("Form", "21"))
-        # self.walletLabel.setText(_translate("Form", "1241"))
-        # self.usernameLabel.setText(_translate("Form", "niknejm"))
 
     def show_data(self):
         try:
@@ -125,7 +119,6 @@ class accountForm(object):
             db.commit()
             result = c.fetchone()
 
-            id = result[0]
             username = result[1]
             coins = str(result[2])
             games_played = str(result[3])
@@ -141,7 +134,7 @@ class accountForm(object):
             self.cardsLabel.setText(cards_used)
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
 
     def returnToMenu(self):
@@ -154,7 +147,7 @@ class accountForm(object):
             db.commit()
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
