@@ -36,11 +36,7 @@ class ReplayLogic:
         self.aux_for_check = 1
         QtCore.QTimer.singleShot(1000, self.make_a_move)
 
-        self.winnners = blackjack.add_points(self.players)
-        self.board.game_ends()
-
     def make_a_move(self):
-        print(self.aux_for_check)
         if self.replay[1][self.aux_for_check][1] == "H":
             card = self.replay[1][self.aux_for_check][-2:]
             blackjack.hit_on_replays(self.convert.convert_string_to_card(card), self.players[int(self.replay[1][self.aux_for_check][0]) - 1].hand)
@@ -57,7 +53,7 @@ class ReplayLogic:
             QtCore.QTimer.singleShot(2000, self.make_a_move)
 
         else:
-            self.winnners = blackjack.add_points(self.players)
+            self.winners = blackjack.add_points(self.players)
             self.board.game_ends()
 
     def show_cards_on_replay(self):
