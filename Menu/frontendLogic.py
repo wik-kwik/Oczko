@@ -139,12 +139,8 @@ class FrontendLogic:
             self.winners = blackjack.add_points(self.players)
             self.losers = list(set(self.players) - set(self.winners))
             self.replay.add_round_to_game_replay()
-            print(self.replay.replay[0])
-            print(self.replay.replay[1])
             players = str(self.replay.replay[0])
             moves = str(self.replay.replay[1])
-            print(players)
-            print(moves)
             self.add_replay(players, moves)
             # self.siema()
 
