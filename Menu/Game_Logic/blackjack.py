@@ -71,24 +71,13 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
 
     if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
         if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
-            if deck.deck[len(deck.deck) - 1].rank == 'Ace':
-                if player.hand.value + 1 <= 21:
-                    hit(deck, player.hand)
-                    player.cards_played += 1
-                    return True
-
-                else:
-                    player.playing = False
-                    return False
-
-            else:
-                player.playing = False
-                return False
+            player.playing = False
+            return False
 
         else:
             hit(deck, player.hand)
             player.cards_played += 1
-            return False
+            return True
 
 
 def check_if_round_over(players):  # sprawdzenie czy wszyscy gracze skonczyli runde
