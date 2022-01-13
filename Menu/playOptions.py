@@ -231,7 +231,7 @@ class playOptionsForm(object):
         self.nextButton.clicked.connect(self.proceed)
         self.nextButton.clicked.connect(Form.close)
 
-
+        self.nextButton.setEnabled(False)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -347,6 +347,7 @@ class playOptionsForm(object):
         self.noChipsIcon.setStyleSheet("image: url(:/images/noChipsInactive.png);")
         self.optionsSettings()
 
+
     def noBets(self):
         self.betting = 0
         self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
@@ -365,6 +366,9 @@ class playOptionsForm(object):
             elif self.betting == 0:
                 self.chipsIcon.setStyleSheet("image: url(:/images/chipsInactive.png);")
                 self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+            else:
+                self.noChipsIcon.setStyleSheet("image: url(:/images/noChips.png);")
+                self.chipsIcon.setStyleSheet("image: url(:/images/chips.png);")
 
         elif self.computersNumber >= 1:
             self.betting = 0
@@ -383,29 +387,39 @@ class playOptionsForm(object):
 
     # Kontrola zastosowanych opcji - wyświetla warningi i uniemożliwia przejście dalej
     def optionsSettings(self):
-        self.betsVisibility()
 
+        self.betsVisibility()
         if self.playersNumber + self.computersNumber > 4:
             self.warningType = 1
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
+            self.nextButton.setEnabled(False)
             self.warning()
 
         elif self.playersNumber + self.computersNumber < 2:
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
+            self.nextButton.setEnabled(False)
+
 
         elif self.computersNumber == 0 and (self.betting != 0 and self.betting != 1):
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
+            self.nextButton.setEnabled(False)
+
 
         elif self.computersNumber == -1 or self.playersNumber == -1:
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
+            self.nextButton.setEnabled(False)
+
 
         else:
             self.nextIcon.setStyleSheet("image: url(:/images/next.png);")
             self.nextButton.setVisible(True)
+            self.nextButton.setEnabled(True)
+
+
 
     def proceed(self):
         self.window = QtWidgets.QMainWindow()
