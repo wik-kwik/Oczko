@@ -75,7 +75,6 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
 
     if player.type == "chard":  # hard (podglada jaka karta bedzie nastepna)
         if player.hand.value + values[deck.deck[len(deck.deck) - 1].rank] > 21:
-
             player.playing = False
             return False
 

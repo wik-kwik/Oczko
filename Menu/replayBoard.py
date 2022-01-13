@@ -453,7 +453,6 @@ class replayBoardForm(object):
 
         self.board = replayBoardForm
         self.boardLabels = BoardLabels(self)
-        self.players = []
 
         self.players = []
         self.number_of_players = len(self.replay[0])
@@ -539,6 +538,16 @@ class replayBoardForm(object):
         self.ui.setupUi(self.window)
         self.window.show()
         self.board.close()
+
+    def show_user_points(self):
+        self.playerOnePoints.setText(str(self.players[0].hand.value))
+        self.playerTwoPoints.setText(str(self.players[1].hand.value))
+
+        if self.players[2]:
+            self.playerThreePoints.setText(str(self.players[1].hand.value))
+
+        if self.players[3]:
+            self.playerFourPoints.setText(str(self.players[1].hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:

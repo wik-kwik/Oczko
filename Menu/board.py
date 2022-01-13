@@ -667,13 +667,15 @@ class boardForm(object):
             self.window.show()
             self.frontend_logic.reset_card_png()
 
-        if self.frontend_logic.current_player.type != "player":
+        if self.frontend_logic.current_player.type != "player" and decision != 'hit':
             QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
 
     def hit_logic(self):
         self.window.show()
         self.frontend_logic.set_player_labels()
         self.frontend_logic.reset_card_png()
+        if self.frontend_logic.current_player.type != "player":
+            QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
 
     def close_window_for_ai(self):
         self.window.close()

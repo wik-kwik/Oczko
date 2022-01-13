@@ -54,6 +54,12 @@ class bustForm(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        if self.board.frontend_logic.current_player.type != "player":
+            self.playButton.setVisible(False)
+
+        else:
+            self.playButton.setVisible(True)
+
         self.playButton.clicked.connect(Form.close)
 
         # Obsługa języków

@@ -3,7 +3,7 @@ from Game_Logic.replay import Replay
 from Game_Logic.deck import Deck
 import Game_Logic.blackjack as blackjack
 import sqlite3 as sql
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 import bustPopout
 
 
@@ -97,6 +97,8 @@ class FrontendLogic:
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
 
         if decision_bool is True:
+            decision = 'hit'
+
             if self.current_player.hand.value >= 21:
                 self.current_player.playing = False
 
@@ -105,12 +107,23 @@ class FrontendLogic:
                 self.ui = bustPopout.bustForm(self.board, self.current_player.name)
                 self.ui.setupUi(self.window)
                 self.window.show()
+                QtCore.QTimer.singleShot(1000, self.window.close)
+
+            self.set_player_labels()
+            self.board.show_user_points()
+
+        else:
+            decision = 'stand'
 
         if self.check_if_round_over() is True:
             self.board.round_over()
 
         else:
-            self.player_change("")
+            if decision == 'hit':
+                self.set_player_labels()
+                self.board.show_user_points()
+
+            self.player_change(decision)
 
     def set_player_labels(self):
         for i in range(len(self.current_player.hand.cards)):
