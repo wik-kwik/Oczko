@@ -544,10 +544,10 @@ class replayBoardForm(object):
         self.playerTwoPoints.setText(str(self.players[1].hand.value))
 
         if len(self.players) == 3:
-            self.playerThreePoints.setText(str(self.players[1].hand.value))
+            self.playerThreePoints.setText(str(self.players[2].hand.value))
 
         if len(self.players) == 4:
-            self.playerFourPoints.setText(str(self.players[1].hand.value))
+            self.playerFourPoints.setText(str(self.players[3].hand.value))
 
     def get_player_label(self, player_number):
         if player_number == 1:
