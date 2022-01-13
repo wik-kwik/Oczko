@@ -198,11 +198,11 @@ class summaryForm(object):
 
         else:
             self.playButton.clicked.connect(self.play_again)
-            self.replayButton.clicked.connect(self.history)
-            self.replayButton.clicked.connect(Form.close)
+
 
         self.playButton.clicked.connect(Form.close)
-
+        self.replayButton.clicked.connect(self.history)
+        self.replayButton.clicked.connect(Form.close)
         self.backButton.clicked.connect(self.return_to_menu)
         self.backButton.clicked.connect(Form.close)
 
