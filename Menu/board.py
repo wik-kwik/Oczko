@@ -369,16 +369,6 @@ class boardForm(object):
         self.playerFourCard_10.setStyleSheet("")
         self.playerFourCard_10.setText("")
         self.playerFourCard_10.setObjectName("playerFourCard_10")
-        self.returnIcon = QtWidgets.QLabel(boardForm)
-        self.returnIcon.setGeometry(QtCore.QRect(50, 10, 31, 31))
-        self.returnIcon.setStyleSheet("border-image: url(:/images/return.png);")
-        self.returnIcon.setText("")
-        self.returnIcon.setObjectName("returnIcon")
-        self.returnButton = QtWidgets.QPushButton(boardForm)
-        self.returnButton.setGeometry(QtCore.QRect(50, 10, 31, 31))
-        self.returnButton.setStyleSheet("QPushButton { background-color: transparent; border: 0px };")
-        self.returnButton.setText("")
-        self.returnButton.setObjectName("returnButton")
         self.closeLabel = QtWidgets.QLabel(boardForm)
         self.closeLabel.setGeometry(QtCore.QRect(20, 4, 21, 41))
         font = QtGui.QFont()
@@ -513,8 +503,6 @@ class boardForm(object):
         self.playerFourCard_8.raise_()
         self.playerFourCard_9.raise_()
         self.playerFourCard_10.raise_()
-        self.returnIcon.raise_()
-        self.returnButton.raise_()
         self.closeLabel.raise_()
         self.closeButton.raise_()
 
@@ -529,12 +517,11 @@ class boardForm(object):
         self.closeButton.clicked.connect(boardForm.close)
         self.closeButton.clicked.connect(self.returnToMenu)
 
-        self.returnButton.clicked.connect(boardForm.close)
-        self.returnButton.clicked.connect(self.returnToUsers)
         self.hitButton.clicked.connect(self.hit)
         self.standButton.clicked.connect(self.stand)
 
         self.board = boardForm
+        self.playing = True
 
         if self.betting == 0:
             self.prizeLabel.setVisible(False)
@@ -574,7 +561,6 @@ class boardForm(object):
         self.playerOnePoints.setText(str(self.frontend_logic.current_player.hand.value))
 
         self.closeButton.clicked.connect(self.timer.stop)
-        self.returnButton.clicked.connect(self.timer.stop)
 
         # Ustawianie kart w zaleznosci od ilosci graczy
         if self.playersNumber + self.computersNumber == 2:
@@ -658,27 +644,28 @@ class boardForm(object):
         self.timer.stop()
         self.hitButton.setEnabled(False)
         self.standButton.setEnabled(False)
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playerChange.changeForm(self)
-        self.ui.setupUi(self.window)
-        if decision == 'hit':
-            QtCore.QTimer.singleShot(1500, self.hit_logic)
-        else:
-            self.window.show()
-            self.frontend_logic.reset_card_png()
+        if self.playing is True:
+            self.change_window = QtWidgets.QMainWindow()
+            self.ui = playerChange.changeForm(self)
+            self.ui.setupUi(self.change_window)
+            if decision == 'hit':
+                QtCore.QTimer.singleShot(1500, self.hit_logic)
+            else:
+                self.change_window.show()
+                self.frontend_logic.reset_card_png()
 
-        if self.frontend_logic.current_player.type != "player" and decision != 'hit':
-            QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
+            if self.frontend_logic.current_player.type != "player" and decision != 'hit':
+                QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
 
     def hit_logic(self):
-        self.window.show()
+        self.change_window.show()
         self.frontend_logic.set_player_labels()
         self.frontend_logic.reset_card_png()
         if self.frontend_logic.current_player.type != "player":
             QtCore.QTimer.singleShot(1500, self.close_window_for_ai)
 
     def close_window_for_ai(self):
-        self.window.close()
+        self.change_window.close()
         self.reset_timer()
         self.timer.start()
         self.frontend_logic.set_player_labels()
@@ -795,6 +782,8 @@ class boardForm(object):
             print("error")
 
     def returnToMenu(self):
+        self.playing = False
+        self.change_window.close()
         try:
             db = sql.connect('database.db')  # łączymy się do bazy
             c = db.cursor()  # dodajemy kursor
@@ -809,12 +798,6 @@ class boardForm(object):
 
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-    def returnToUsers(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = playUsers.usersForm(self.language, self.playersNumber, self.computersNumber, self.betting)
         self.ui.setupUi(self.window)
         self.window.show()
 

@@ -15,19 +15,6 @@ values = cards.values
 playing = True  # sprawdzanie, czy pilka nadal w grze
 
 
-def take_bet(chips):  # wez coinsy od gracza
-    while True:
-        try:
-            chips.bet = int(input("How many chips would you like to bet?: "))
-        except ValueError:
-            print("Please type in a number: ")
-        else:
-            if chips.bet > chips.total:
-                print("Your bet can't exceed 1000!")
-            else:
-                break
-
-
 def hit(deck, hand):
     hand.add_card(deck.deal())
 
