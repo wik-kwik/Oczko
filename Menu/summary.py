@@ -13,6 +13,7 @@ import board
 import replayBoard
 import menu
 import gameHistory
+import sqlite3 as sql
 
 
 class summaryForm(object):
@@ -198,6 +199,17 @@ class summaryForm(object):
 
         else:
             self.playButton.clicked.connect(self.play_again)
+            try:
+                db = sql.connect('database.db')  # łączymy się do bazy
+                c = db.cursor()  # dodajemy kursor
+
+                query = "DELETE FROM logged_users"
+                c.execute(query)
+                c.execute("UPDATE levels SET level = 0")
+                db.commit()
+
+            except sql.Error as e:
+                print("error")
 
 
         self.playButton.clicked.connect(Form.close)
