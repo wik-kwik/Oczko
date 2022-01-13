@@ -194,7 +194,6 @@ class settingsForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result)
             return result[0]
 
 
@@ -210,7 +209,6 @@ class settingsForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result)
             return result[0]
 
 

@@ -388,7 +388,6 @@ class rankingForm(object):
     #
     #
             db.commit()
-            print(c.fetchone()[0])
 
         except sql.Error as e:
             print("error")

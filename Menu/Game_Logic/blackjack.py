@@ -40,13 +40,14 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
     if player.type == "player":
         if decision == 'hit':
             hit(deck, player.hand)
-            print(player.hand.new_card)
-            update_card_stat(player.hand.new_card)
+            # update_card_stat(player.hand.new_card)
             player.cards_played += 1
             update_cards(player.name)
             return True
 
         elif decision == 'stand':
+            update_cards(player.name)
+            update_cards(player.name)
             player.playing = False
             return False
 
@@ -54,7 +55,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
         ask = bool(random.getrandbits(1))
         if ask is True and player.hand.value < 21:
             hit(deck, player.hand)
-            update_card_stat(player.hand.new_card)
+            # update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -65,7 +66,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
     if player.type == "cmedium":  # medium (bierze karte gdy value reki <= 17)
         if player.hand.value <= 17:
             hit(deck, player.hand)
-            update_card_stat(player.hand.new_card)
+            # update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -80,7 +81,7 @@ def hit_or_stand(deck, player, decision):  # zapytaj gracza, czy chce podbijac d
 
         else:
             hit(deck, player.hand)
-            update_card_stat(player.hand.new_card)
+            # update_card_stat(player.hand.new_card)
             player.cards_played += 1
             return True
 
@@ -125,14 +126,4 @@ def update_cards(player):
     except sql.Error as e:
         print("sth wrong with update")
 
-def update_card_stat(name):
-    try:
-        db = sql.connect('database.db')  # łączymy się do bazy
-        c = db.cursor()  # dodajemy kursor
 
-        query = "UPDATE cards SET sum = sum + 1 where name = '{}'".format(name)
-        c.execute(query)
-        db.commit()
-
-    except sql.Error as e:
-        print("sth wrong with update")

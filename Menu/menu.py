@@ -17,6 +17,7 @@ import playOptions
 import ranking
 import rules, login
 import settings
+import sqlite3 as sql
 
 
 class menuForm(object):
@@ -251,6 +252,18 @@ class menuForm(object):
         self.rankButton.clicked.connect(self.rank)
         self.historyButton.clicked.connect(Form.close)
         self.historyButton.clicked.connect(self.history)
+
+        try: # clean database from logged_users
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "DELETE FROM logged_users where id != 5 "
+            c.execute(query)
+            c.execute("UPDATE levels SET level = 0")
+            db.commit()
+
+        except sql.Error as e:
+            print("error")
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

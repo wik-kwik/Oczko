@@ -222,7 +222,6 @@ class registerForm(object):
                         "INSERT INTO users (username,password,games_played,games_won,win_rate,time_spent,cards_used,coins) VALUES (?,?,?,?,?,?,?,?)",
                         data)
                     db.commit()
-                    print("Data has been inserted")
                     self.statusLabel.setStyleSheet("color: rgb(51, 204, 51);")
                     if self.language == 1:
                         self.statusLabel.setText("You have been registered!")
@@ -232,7 +231,6 @@ class registerForm(object):
 
                     c.execute("SELECT * FROM users")
 
-                    print(c.fetchall())
                     db.commit()
                     db.close()
 

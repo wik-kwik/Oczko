@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import board
 import replayBoard
 import menu
+import gameHistory
 
 
 class summaryForm(object):
@@ -21,7 +22,7 @@ class summaryForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(698, 458)
+        Form.resize(608, 458)
         Form.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         Form.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.backgroundLabel = QtWidgets.QLabel(Form)
@@ -188,10 +189,17 @@ class summaryForm(object):
 
         if self.board.replay_bool is True:
             self.replayButton.setVisible(False)
+            if self.language == 1:
+                self.playButton.setText("HISTORY")
+            elif self.language == 2:
+                self.playButton.setText("HISTORIA")
+
             self.playButton.clicked.connect(self.play_replay_again)
 
         else:
             self.playButton.clicked.connect(self.play_again)
+            self.replayButton.clicked.connect(self.history)
+            self.replayButton.clicked.connect(Form.close)
 
         self.playButton.clicked.connect(Form.close)
 
@@ -241,11 +249,11 @@ class summaryForm(object):
         if self.language == 1:
             self.playButton.setText(_translate("Form", "PLAY AGAIN"))
             self.replayButton.setText(_translate("Form", "REPLAY"))
-            self.backButton.setText(_translate("Form", "BACK TO MENU"))
+            self.backButton.setText(_translate("Form", "MENU"))
         if self.language == 2:
             self.playButton.setText(_translate("Form", "GRAJ DALEJ"))
             self.replayButton.setText(_translate("Form", "ODWTÓRZ"))
-            self.backButton.setText(_translate("Form", "WRÓĆ DO MENU"))
+            self.backButton.setText(_translate("Form", "MENU"))
 
         self.winnerNickname.setText(_translate("Form", ""))
         self.playerOneNickname.setText(_translate("Form", ""))
@@ -267,7 +275,13 @@ class summaryForm(object):
 
     def play_replay_again(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = replayBoard.replayBoardForm(self.language, True)
+        self.ui = gameHistory.historyForm(self.language)
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def history(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = gameHistory.historyForm(self.language)
         self.ui.setupUi(self.window)
         self.window.show()
 

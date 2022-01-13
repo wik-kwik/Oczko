@@ -805,7 +805,7 @@ class boardForm(object):
             db.commit()
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
         self.window = QtWidgets.QMainWindow()
         self.ui = menu.menuForm(self.language)

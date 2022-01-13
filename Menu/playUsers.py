@@ -511,6 +511,7 @@ class usersForm(object):
         # Przygotowanie okna w zależności od ilości userów
         if self.playersNumber == 0:
             self.zeroPlayers()
+            self.disable_game_level()
         if self.playersNumber == 1:
             self.onePlayer()
         if self.playersNumber == 2:
@@ -579,7 +580,7 @@ class usersForm(object):
             db.commit()
 
         except sql.Error as e:
-            print("xd")
+            print("error")
 
         self.window = QtWidgets.QMainWindow()
         self.ui = playOptions.playOptionsForm(self.language)
@@ -1221,6 +1222,9 @@ class usersForm(object):
         elif self.check_level(4) == 3:
             self.compFourHardLevel()
 
+
+
+
     # Wygaszanie nieużywanych opcji + przypisywanie poziomów do zmiennych
 
     # Poziomy pierwszego komputera
@@ -1553,13 +1557,42 @@ class usersForm(object):
                                                 "border: 0px;")
         self.settings()
 
+    def disable_game_level(self):
+        self.easyGameButton.setEnabled(False)
+        self.mediumGameButton.setEnabled(False)
+        self.hardGameButton.setEnabled(False)
+        if self.language == 1:
+            self.hardLabel.setStyleSheet("image: url(:/images/hardTimingInactive.png);")
+            self.hardGameButton.setStyleSheet("image: url(:/images/hardInactive.png);\n"
+                                              "border: 0px;")
+
+            self.easyLabel.setStyleSheet("image: url(:/images/easyTimingInactive.png);")
+            self.easyGameButton.setStyleSheet("image: url(:/images/easyInactive.png);\n"
+                                              "border: 0px;")
+
+            self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactive.png);")
+            self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactive.png);\n"
+                                                "border: 0px;")
+        if self.language == 2:
+            self.hardLabel.setStyleSheet("image: url(:/images/hardTimingInactivePL.png);")
+            self.hardGameButton.setStyleSheet("image: url(:/images/hardInactivePL.png);\n"
+                                              "border: 0px;")
+
+            self.easyLabel.setStyleSheet("image: url(:/images/easyTimingInactivePL.png);")
+            self.easyGameButton.setStyleSheet("image: url(:/images/easyInactivePL.png);\n"
+                                              "border: 0px;")
+
+            self.mediumLabel.setStyleSheet("image: url(:/images/mediumTimingInactivePL.png);")
+            self.mediumGameButton.setStyleSheet("image: url(:/images/mediumInactivePL.png);\n"
+                                                "border: 0px;")
+
     def first_player(self):
 
         result = self.assign_player(1)
 
-        print("1")
+
         self.numberOfPlayer.append(1)
-        print(self.numberOfPlayer)
+
 
         if result is not None:
             self.loggedUsers.append(1)
@@ -1569,15 +1602,11 @@ class usersForm(object):
 
             self.playerOneNickname.setText(self.set_username(1))
 
-        else:
-            print("")
-
     def second_player(self):
         result = self.assign_player(2)
 
-        print("2")
+
         self.numberOfPlayer.append(2)
-        print(self.numberOfPlayer)
 
         if result is not None:
             self.loggedUsers.append(2)
@@ -1585,14 +1614,12 @@ class usersForm(object):
             self.playerTwoRegister.setVisible(False)
 
             self.playerTwoNickname.setText(self.set_username(2))
-        else:
-            print("")
+
 
     def third_player(self):
         result = self.assign_player(3)
-        print("3")
+
         self.numberOfPlayer.append(3)
-        print(self.numberOfPlayer)
 
         if result is not None:
             self.loggedUsers.append(3)
@@ -1601,15 +1628,13 @@ class usersForm(object):
 
             self.playerThreeNickname.setText(self.set_username(3))
 
-        else:
-            print("")
 
     def fourth_player(self):
         result = self.assign_player(4)
 
-        print("4")
+
         self.numberOfPlayer.append(4)
-        print(self.numberOfPlayer)
+
 
         if result is not None:
             self.loggedUsers.append(4)
@@ -1618,8 +1643,6 @@ class usersForm(object):
 
             self.playerFourNickname.setText(self.set_username(4))
 
-        else:
-            print("")
 
     # Nadanie użytkownikowi nazwy po zalogowaniu
     def set_username(self, user_id):
@@ -1675,7 +1698,6 @@ class usersForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result)
             return result[0]
 
 
@@ -1708,7 +1730,7 @@ class usersForm(object):
         elif self.computersNumber == 4 and (self.check_level(1) == 0 or self.check_level(2) == 0 or self.check_level(3) == 0 or self.check_level(4) == 0):
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
-        elif self.gameLevel == 0 and self.check_level(5) == 0:
+        elif self.gameLevel == 0 and self.check_level(5) == 0 and self.playersNumber != 0:
             self.nextIcon.setStyleSheet("image: url(:/images/nextInactive.png);")
             self.nextButton.setVisible(False)
         else:

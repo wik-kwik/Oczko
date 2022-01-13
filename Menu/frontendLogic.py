@@ -65,6 +65,8 @@ class FrontendLogic:
         self.replay.add_move(decision_bool, self.current_player.player_number, self.current_player.hand.new_card)
 
         if self.current_player.hand.value >= 21:
+            blackjack.update_cards(self.current_player.name)
+            blackjack.update_cards(self.current_player.name)
             self.current_player.playing = False
 
         if self.current_player.hand.value > 21 and self.check_if_round_over() is False:
@@ -101,6 +103,7 @@ class FrontendLogic:
 
             if self.current_player.hand.value >= 21:
                 self.current_player.playing = False
+
 
             if self.current_player.hand.value > 21 and self.check_if_round_over() is False:
                 self.window = QtWidgets.QMainWindow()
@@ -157,18 +160,6 @@ class FrontendLogic:
             self.temp = self.stop_time-self.start_time
             self.minutes = float(self.temp / 60)
 
-            for winner in self.winners:
-                print(winner.name)
-                self.update_games_won(winner.name)
-                self.add_coins(self.total_bet / len(self.winners), winner.name)
-                if winner.type == "ceasy":
-                    self.update_ai_wins(1)
-                if winner.type == "cmedium":
-                    self.update_ai_wins(2)
-                if winner.type == "chard":
-                    self.update_ai_wins(3)
-
-
             for player in self.players:
                 self.update_time(self.minutes, player.name)
                 self.update_winrate(player.name)
@@ -180,6 +171,20 @@ class FrontendLogic:
                     self.update_ai_games(2)
                 if player.type == "chard":
                     self.update_ai_games(3)
+
+            for winner in self.winners:
+                self.update_games_won(winner.name)
+                self.update_winrate(winner.name)
+                self.add_coins(self.total_bet / len(self.winners), winner.name)
+                if winner.type == "ceasy":
+                    self.update_ai_wins(1)
+                if winner.type == "cmedium":
+                    self.update_ai_wins(2)
+                if winner.type == "chard":
+                    self.update_ai_wins(3)
+
+
+
 
             return True
         else:
@@ -264,7 +269,6 @@ class FrontendLogic:
 
             c.execute("INSERT INTO replays (players, moves) VALUES (?,?)", (players, moves))
             db.commit()
-            print(c.fetchall())
 
         except sql.Error as e:
             print("sth wrong with update")
@@ -280,7 +284,6 @@ class FrontendLogic:
             c.execute(query)
             c.execute(query2)
             db.commit()
-            print(c.fetchall())
 
         except sql.Error as e:
             print("sth wrong with update")
@@ -294,7 +297,6 @@ class FrontendLogic:
             c.execute(query)
             db.commit()
 
-            print(c.fetchall())
 
         except sql.Error as e:
             print("sth wrong with update")

@@ -215,7 +215,6 @@ class loginForm(object):
                         self.update_db(self.numberOfPlayer[-1])
                     else:
                         self.update_db(5)
-                        print("5")
                         self.closeButton.clicked.connect(self.account)
 
                 except sql.Error as e:

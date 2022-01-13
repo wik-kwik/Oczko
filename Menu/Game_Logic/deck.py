@@ -1,6 +1,7 @@
 import random
 from .card import Card
 from .cards import Cards
+import sqlite3 as sql
 
 
 class Deck:
@@ -22,4 +23,17 @@ class Deck:
 
     def deal(self):  # wybieranie karty z talii
         single_card = self.deck.pop()
+        self.update_card_stat(single_card)
         return single_card
+
+    def update_card_stat(self, name):
+        try:
+            db = sql.connect('database.db')  # łączymy się do bazy
+            c = db.cursor()  # dodajemy kursor
+
+            query = "UPDATE cards SET sum = sum + 1 where name = '{}'".format(name)
+            c.execute(query)
+            db.commit()
+
+        except sql.Error as e:
+            print("sth wrong with update")

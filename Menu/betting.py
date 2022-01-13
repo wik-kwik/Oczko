@@ -178,7 +178,6 @@ class bettingForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result[1])
             return result[1]
 
         except sql.Error as e:
@@ -193,7 +192,6 @@ class bettingForm(object):
             c.execute(query)
             db.commit()
             result = c.fetchone()
-            print(result[2])
             return result[2]
 
         except sql.Error as e:
