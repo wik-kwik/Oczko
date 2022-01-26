@@ -543,7 +543,7 @@ class replayBoardForm(object):
         self.playerOnePoints.setText(str(self.players[0].hand.value))
         self.playerTwoPoints.setText(str(self.players[1].hand.value))
 
-        if len(self.players) == 3:
+        if len(self.players) >= 3:
             self.playerThreePoints.setText(str(self.players[2].hand.value))
 
         if len(self.players) == 4:
