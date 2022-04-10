@@ -6,5 +6,5 @@ pip install pyqt5
 Dokumentacja znajduje się w folderze "Dokumentacja".
 
 
-https://user-images.githubusercontent.com/67471556/162636596-d2182df8-c787-4052-95c0-c34217139691.mp4
+https://user-images.githubusercontent.com/67471556/162636648-b4f8b464-cbc2-442a-a83f-3c119a2ccac8.mp4
 
